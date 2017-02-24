@@ -1,0 +1,29 @@
+.Icon-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.Icon-box{
+    font-size: 12px;
+    flex:0 1 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:5px;
+    padding: 5px;
+    border: solid 1px lightgray;
+    border-radius: 3px;
+}
+
+.buttons-line{
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-wrapper{
+    padding: 5px;
+}

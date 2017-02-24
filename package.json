@@ -1,0 +1,49 @@
+{
+  "name": "react-parts",
+  "version": "0.0.1",
+  "description": "React parts for apps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rusya13/react-parts.git"
+  },
+  "main": "index.js",
+  "keywords": [
+    "react",
+    "parts",
+    "forms",
+    "inputs"
+  ],
+  "author": "Santon",
+  "license": "GNU",
+  "scripts": {
+    "build": "gulp build",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "ghp": "build-storybook -c .storybook -o docs"
+  },
+  "dependencies": {
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
+  },
+  "devDependencies": {
+    "@kadira/react-storybook-addon-info": "^3.3.0",
+    "@kadira/storybook": "^2.35.3",
+    "@kadira/storybook-addon-knobs": "^1.7.1",
+    "@kadira/storybook-addon-options": "^1.0.1",
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "css-loader": "^0.26.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-watch": "^4.3.11",
+    "json-loader": "^0.5.4",
+    "raw-loader": "^0.5.1",
+    "storybook-host": "^1.0.14",
+    "storybook-readme": "^1.3.0",
+    "style-loader": "^0.13.1"
+  }
+}
