@@ -1,3 +1,7 @@
+body{
+    font-family: "Lato", "Avenir", sans-serif;
+}
+
 .Icon-wrapper{
     display: flex;
     flex-wrap: wrap;
@@ -19,9 +23,57 @@
     border-radius: 3px;
 }
 
-.buttons-line{
+.reactParts__form{
     display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border: 1px solid #E6E8EB;
+    border-radius: 3px;
+    padding: 20px;
+
+
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.3);
+
+}
+
+.reactParts__form-row{
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
+}
+
+.reactParts__form-group-label{
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.reactParts__form .reactParts__form-group-label:first-child{
+
+    margin-top: 0;
+}
+
+.reactParts__form-footer{
+    display: flex;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+.reactParts__form-footer > * {
+    margin-right: 10px;
+}
+
+.reactParts__form-footer > *:last-child{
+    margin-right: 0;
+}
+
+.reactParts__form-row .col{
+    flex: 1;
+    margin-right: 10px;
+}
+
+
+.reactParts__form-row .col:last-child{
+    margin-right: 0;
 }
 
 .button-wrapper{

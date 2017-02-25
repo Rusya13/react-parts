@@ -10,7 +10,7 @@ export class ButtonController extends React.Component {
     buttonsByBrand(){
         let buttons=[];
         for (let brand in Button.brands){
-            buttons.push(<div className="button-wrapper"><Button caption={brand} brand={brand}/></div>);
+            buttons.push(<div key={brand} className="button-wrapper"><Button caption={brand} brand={brand}/></div>);
         }
         return buttons
     }

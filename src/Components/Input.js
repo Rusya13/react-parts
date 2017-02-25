@@ -1,20 +1,19 @@
+/* @flow */
 import React from "react";
-import { Icon } from "./Icon";
-
 
 //TODO input with suggest
 
-export class Input extends React.Component {
+export class Input extends React.Component{
 
     constructor( props ) {
         super( props );
         this.cancelFocus = this.cancelFocus.bind( this );
         this.takeFocus   = this.takeFocus.bind( this );
         this.onKeyUp     = this.onKeyUp.bind( this );
-        this.keypress    = this.keypress.bind( this );
         this.change      = this.change.bind( this );
         this.focusOn     = this.focusOn.bind( this );
         this.focusOff    = this.focusOff.bind( this );
+
         this.state       = {
             defaultValue:     this.props.value,
             focus:            this.props.autoFocus,
@@ -33,110 +32,82 @@ export class Input extends React.Component {
     };
 
 
-    onKeyUp( e ) {
+    onKeyUp( e: Event ) {
         if ( this.props.onKeyUp ) this.props.onKeyUp( e );
     };
 
-    keypress( e ) {
-        // max length check
-        if ( this.props.maxLength && e.target.value.length + 1 > this.props.maxLength ) {
-            e.returnValue = false;
-            if ( e.preventDefault ) e.preventDefault();
+
+    change( e:Event ) {
+        let value = e.target.value;
+        if ( value.length > this.props.limit ) {
+            value = value.slice( 0, this.props.limit );
         }
-        if ( !this.props.validation || !this.props.validation.typing )
-            return this.props.keypress ? this.props.keypress( e ) : null;
-        if ( this.props.keypress ) this.props.keypress( e );
-        this.props.validation.typing( e );
-    };
-
-    change( e ) {
-        //this.caret = e.target.selectionStart + 1 - (e.target.value.length-this.props.value.length);
-
-        if ( e.target.value.length > this.props.limit ) {
-            e.target.value = e.target.value.slice( 0, this.props.limit );
-        }
-
-        this.state.freeSpaceCounter =
-            e.target.value.length > this.props.limit / 2
-                ? this.props.limit - e.target.value.length
-                : null;
-
-        this.setState( { value: e.target.value } );
-        let v = e.target.value,
-            obj;
-
+        let obj;
         switch ( this.props.castTo ) {
             case 'number':
-                v = Number( v );
+                value = Number( value );
                 break;
         }
 
         if ( this.props.name ) {
             obj                    = {};
-            obj[ this.props.name ] = v;
-
+            obj[ this.props.name ] = value;
         } else {
-            obj = v;
+            obj = value;
         }
+        if ( this.props.onChange ) this.props.onChange( obj );
 
-        if ( this.props.onChange ) this.props.onChange( obj, { validate: this.props.validate, name: this.props.name } );
-        this.render();
     };
 
     focusOn() {
-        this.setState( { focus: true } );
-        if ( this.refs[ 'inp' ] ) this.refs[ 'inp' ].focus();
         if ( this.props.onFocus ) this.props.onFocus();
     };
 
     focusOff() {
-        this.setState( { focus: false } );
+
         if ( this.props.onBlur ) this.props.onBlur();
     };
 
-    componentWillReceiveProps( newProps ) {
-        this.setState( { defaultValue: newProps.value } );
-    };
+    //componentWillReceiveProps( newProps ) {
+    //    //this.setState( { defaultValue: newProps.value } );
+    //};
 
     render() {
-        let InputSimpleClassName = "control-input",
-            value                = 'value' in this.props ? this.props.value : this.state.value,
-            dataState            = (this.state.focus) ? 'active' : 'fade';
+
+        let valid = this.props.valid;
+        console.log("Input render", valid);
+        let validLabel=null;
+        if (valid !== undefined && valid !== null){
+            if (valid){
+                validLabel = <div className="reactParts__input-valid"></div>;
+            } else {
+                validLabel = <div className="reactParts__input-valid false"></div>;
+            }
+        }
 
 
+        let InputSimpleClassName = "reactParts__input";
         if ( this.props.className ) InputSimpleClassName += ` ${this.props.className}`;
-        if ( this.props.size ) InputSimpleClassName += ` control-input--${this.props.size}`;
-
-        if ( this.props.valid === false ) dataState = 'not-valid';
-        if ( this.props.valid === true ) dataState = 'valid';
-
-
-        //if(this.refs['inp']) this.refs['inp'].setSelectionRange(this.caret,this.caret);
-
         return (
-            <span className="control-input-wrap">
+            <div className="reactParts__input-wrap">
+                {this.props.label && <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
 			    <input className={InputSimpleClassName}
-                       data-state={dataState}
+                       id={this.props.name}
                        type={this.props.type}
                        autoFocus={this.props.autoFocus}
                        disabled={!!this.props.disabled}
                        placeholder={this.props.placeholder}
                        onChange={this.change}
                        onKeyUp={this.onKeyUp}
-                       onKeyPress={this.keypress}
-                       value={value}
+                       value={this.props.value}
                        defaultValue={this.props.defaultValue}
                        onFocus={this.focusOn}
                        onBlur={this.focusOff}
                        readOnly={!!this.props.readOnly}
                        ref='inp'
                 />
-                {this.state.freeSpaceCounter !== null &&
-                <span className="control-input-free-counter">
-					    {this.state.freeSpaceCounter}
-				    </span>
-                }
-			</span>
+                {validLabel}
+			</div>
         );
     };
 }
@@ -147,7 +118,7 @@ Input.propTypes = {
     onFocus:     React.PropTypes.func,
     onBlur:      React.PropTypes.func,
     keypress:    React.PropTypes.func,
-    name:        React.PropTypes.string,
+    name:        React.PropTypes.string.isRequired,
     placeholder: React.PropTypes.string,
     autoFocus:   React.PropTypes.bool,
     readOnly:    React.PropTypes.any,
@@ -161,7 +132,8 @@ Input.propTypes = {
         React.PropTypes.number
     ] ),
     castTo: React.PropTypes.oneOf(["number"]),
-    size:        React.PropTypes.oneOf( [ 'small' ] )
+    label:React.PropTypes.string,
+    valid:React.PropTypes.bool
 };
 
 Input.defaultProps = {
@@ -170,6 +142,6 @@ Input.defaultProps = {
     readonly: false,
     validate: true,
     limit:    50,
-    type:     'text'
-
+    type:     'text',
+    label: null
 };

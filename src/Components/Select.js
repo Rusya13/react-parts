@@ -25,15 +25,13 @@ export class Select extends React.Component {
     }
 
     selectItem( item ) {
-        let newSelected = this.props.selected.slice();
+        let newSelected;
         if (!this.props.multiSelect){
-            if (item.key === this.props.selected[0]){
-
-            } else {
-                newSelected[0] = item.key;
-            }
+            newSelected = item.key;
             this.setState({stateList:false})
         } else {
+
+            newSelected = this.props.selected.slice();
             newSelected.push(item.key);
         }
         let c={};
@@ -69,7 +67,11 @@ export class Select extends React.Component {
     };
 
     cancelSelected() {
-        let newSelected = [];
+        let newSelected=null;
+        if (this.props.multiSelect){
+            newSelected = [];
+        }
+
         let c ={};
         c[this.props.name] = newSelected;
         this.props.onChange && this.props.onChange(c);
@@ -80,7 +82,9 @@ export class Select extends React.Component {
 
         let newList=[];
         if (this.props.multiSelect){
+
             list.forEach(item=>{
+                console.log("Select some", this.props.selected );
                 let check = this.props.selected.some(i=>{
                     return i === item.key
                 });
@@ -88,7 +92,7 @@ export class Select extends React.Component {
                 if (!check){
                     newList.push(
                         <li key={item.key}
-                            className="control-dropdown__item"
+                            className="reactParts__select-list-item"
                             onClick={this.selectItem.bind( this, item )}>
                             {item.value}
                         </li>)
@@ -97,34 +101,36 @@ export class Select extends React.Component {
         } else {
             newList = list.map(selItem =>{
                 console.log("Select ", selItem, this.props.selected);
-                if (selItem.key === this.props.selected[0]){
+                if (selItem.key === this.props.selected){
                     return  <li key={selItem.key}
-                                className="control-dropdown__item--selected"
+                                className="reactParts__select-list-item selected"
                                 onClick={this.selectItem.bind( this, selItem )}>
                         {selItem.value}
                     </li>
                 } else {
                     return   <li key={selItem.key}
-                                 className="control-dropdown__item"
+                                 className="reactParts__select-list-item"
                                  onClick={this.selectItem.bind( this, selItem )}>
                         {selItem.value}
                     </li>
                 }
             })
         }
-        return (newList.length !== 0)? newList: <li key="empty"> Empty list</li>
+        return (newList.length !== 0)? newList: <li className="reactParts__select-list-item empty" key="empty"> Empty list</li>
     }
 
     renderItems(){
-        if (this.props.selected.length===0){
-            return null
-        }
+
         if ( this.props.multiSelect ) {
+            console.log("Select renderItems this.props.multiSelect", this.props.multiSelect);
+            if (this.props.selected.length===0){
+                return null
+            }
             return this.props.selected.map( ( selKey, i ) => {
 
                 let selItem = this.props.list.filter(ij=>ij.key === selKey)[0];
                 return (
-                    <div className="control-select-box__item" key={i}>
+                    <div className="reactParts__select-box-item" key={i}>
                         {selItem.value} <Icon name="remove_circle" size={16}
                                               className="control-select-box__item-remove break"
                                               onClick={this.removeItem.bind( this, selKey)}/>
@@ -132,31 +138,42 @@ export class Select extends React.Component {
                 )
             } );
         }   else {
-                let selItem = this.props.list.filter(i=>i.key === this.props.selected[0])[0];
-                return  <div className="control-select-box__selected">{selItem.value}</div>
+            console.log("Select renderItems", this.props.selected);
+            if (!this.props.selected){
+                return null
+            }
+                let selItem = this.props.list.filter(i=>i.key === this.props.selected)[0];
+            console.log("Select renderItems", selItem);
+                return  <div className="reactParts__select-selected">{selItem.value}</div>
         }
     }
 
     render() {
-        let selectClassName         = 'control-select';
+        let selectClassName         = (this.props.multiSelect)?'reactParts__select multi':'reactParts__select';
         let arrowIconName           = 'keyboard_arrow_down';
+        if (this.props.disabled){
+            selectClassName += " disabled";
+        }
         let placeholder, list, cancel;
 
-        if ( !this.props.selected || !this.props.selected.length ) {
-            placeholder = <div className="control-select-box__placeholder">{this.props.placeholder}</div>
+        if ( !this.props.selected ||
+            (this.props.multiSelect &&
+            this.props.selected.length === 0 )) {
+            placeholder = <div className="reactParts__select-placeholder">{this.props.placeholder}</div>
         } else {
-            cancel = this.props.cancel && <Icon name="cancel" className="control-select-box__cancel break" size={18}
+            cancel = this.props.cancel && <Icon name="cancel" className="reactParts__select__cancel" size={18}
                                                     onClick={this.cancelSelected}/>;
         }
         if ( this.state.stateList ) {
-            list          = <ul className="control-dropdown">{this.renderList()}</ul>;
+            list          = <ul className="reactParts__select-list">{this.renderList()}</ul>;
             arrowIconName = 'keyboard_arrow_up';
         }
 
         return (
-            <div className={selectClassName}>
-                <div className="control-select-box" onClick={this.toggleList}>
-                    {placeholder} {this.renderItems()} {cancel} <Icon name={arrowIconName} className="control-select-box__arrow"
+            <div className="reactParts__select-wrap">
+                {this.props.label && <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
+                <div className={selectClassName} onClick={this.toggleList}>
+                    {placeholder} {this.renderItems()} {cancel} <Icon name={arrowIconName} className="reactParts__select__arrow"
                                                             size={24}/>
                 </div>
                 {list}
@@ -173,7 +190,7 @@ Select.propTypes = {
     name:        React.PropTypes.string,
     multiSelect: React.PropTypes.bool,
     list:        React.PropTypes.oneOfType( [ React.PropTypes.array, React.PropTypes.object ] ),
-    selected:    React.PropTypes.array
+    selected:    React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.string, React.PropTypes.number])
 };
 
 Select.defaultProps = {
