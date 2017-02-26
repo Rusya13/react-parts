@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from '../dist';
+import { Button, ButtonProps } from '../dist/Components/Button/Button';
 
 export class ButtonController extends React.Component {
 
@@ -7,18 +7,10 @@ export class ButtonController extends React.Component {
         super( props );
     }
 
-    buttonsByBrand(){
-        let buttons=[];
-        for (let brand in Button.brands){
-            buttons.push(<div key={brand} className="button-wrapper"><Button caption={brand} brand={brand}/></div>);
-        }
-        return buttons
-    }
-
     render() {
         return (
             <div className="buttons-line">
-                {this.buttonsByBrand()}
+                <div className="button-wrapper"><Button brand="default"/></div>
             </div>
         )
     }
