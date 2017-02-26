@@ -5,8 +5,6 @@ import { Icon } from "./Icon";
 //TODO remove Icon dependency
 
 
-
-
 export class Select extends React.Component {
 
     constructor( props ) {
@@ -26,25 +24,25 @@ export class Select extends React.Component {
 
     selectItem( item ) {
         let newSelected;
-        if (!this.props.multiSelect){
+        if ( !this.props.multiSelect ) {
             newSelected = item.key;
-            this.setState({stateList:false})
+            this.setState( { stateList: false } )
         } else {
 
             newSelected = this.props.selected.slice();
-            newSelected.push(item.key);
+            newSelected.push( item.key );
         }
-        let c={};
-        c[this.props.name] = newSelected;
-        this.props.onChange && this.props.onChange(c);
+        let c                = {};
+        c[ this.props.name ] = newSelected;
+        this.props.onChange && this.props.onChange( c );
     };
 
     removeItem( item ) {
-        console.log("Select removeItem", item, this.props.selected);
-        let newSelected = this.props.selected.filter(selItem=>selItem !== item);
-        let c ={};
-        c[this.props.name] = newSelected;
-        this.props.onChange && this.props.onChange(c);
+        //console.log("Select removeItem", item, this.props.selected);
+        let newSelected      = this.props.selected.filter( selItem => selItem !== item );
+        let c                = {};
+        c[ this.props.name ] = newSelected;
+        this.props.onChange && this.props.onChange( c );
 
     };
 
@@ -56,113 +54,119 @@ export class Select extends React.Component {
     };
 
     toggleList( event ) {
+        console.log( "Select toggleList" );
+        document.addEventListener("click", this.closeList, false);
         if ( this.props.disabled ) return;
         if ( event.target.classList.contains( "break" ) || event.target.parentNode.classList.contains( "break" ) ) return;
 
         this.setState( { stateList: !this.state.stateList } );
+
     };
 
     closeList() {
+        console.log("Select closeList");
+
         this.setState( { stateList: false } );
+        document.removeEventListener( "click", this.closeList, false);
     };
 
     cancelSelected() {
-        let newSelected=null;
-        if (this.props.multiSelect){
+        let newSelected = null;
+        if ( this.props.multiSelect ) {
             newSelected = [];
         }
 
-        let c ={};
-        c[this.props.name] = newSelected;
-        this.props.onChange && this.props.onChange(c);
+        let c                = {};
+        c[ this.props.name ] = newSelected;
+        this.props.onChange && this.props.onChange( c );
     };
 
-    renderList(){
+    renderList() {
         let list = this.props.list;
 
-        let newList=[];
-        if (this.props.multiSelect){
+        let newList = [];
+        if ( this.props.multiSelect ) {
 
-            list.forEach(item=>{
-                console.log("Select some", this.props.selected );
-                let check = this.props.selected.some(i=>{
+            list.forEach( item => {
+                let check = this.props.selected.some( i => {
                     return i === item.key
-                });
-                console.log("Select check", check);
-                if (!check){
+                } );
+
+                if ( !check ) {
                     newList.push(
                         <li key={item.key}
                             className="reactParts__select-list-item"
                             onClick={this.selectItem.bind( this, item )}>
                             {item.value}
-                        </li>)
+                        </li> )
                 }
-            })
+            } )
         } else {
-            newList = list.map(selItem =>{
-                console.log("Select ", selItem, this.props.selected);
-                if (selItem.key === this.props.selected){
-                    return  <li key={selItem.key}
-                                className="reactParts__select-list-item selected"
-                                onClick={this.selectItem.bind( this, selItem )}>
+            newList = list.map( selItem => {
+                console.log( "Select ", selItem, this.props.selected );
+                if ( selItem.key === this.props.selected ) {
+                    return <li key={selItem.key}
+                               className="reactParts__select-list-item selected"
+                               onClick={this.selectItem.bind( this, selItem )}>
                         {selItem.value}
                     </li>
                 } else {
-                    return   <li key={selItem.key}
-                                 className="reactParts__select-list-item"
-                                 onClick={this.selectItem.bind( this, selItem )}>
+                    return <li key={selItem.key}
+                               className="reactParts__select-list-item"
+                               onClick={this.selectItem.bind( this, selItem )}>
                         {selItem.value}
                     </li>
                 }
-            })
+            } )
         }
-        return (newList.length !== 0)? newList: <li className="reactParts__select-list-item empty" key="empty"> Empty list</li>
+        return (newList.length !== 0) ? newList :
+            <li className="reactParts__select-list-item empty" key="empty"> Empty list</li>
     }
 
-    renderItems(){
+    renderItems() {
 
         if ( this.props.multiSelect ) {
-            console.log("Select renderItems this.props.multiSelect", this.props.multiSelect);
-            if (this.props.selected.length===0){
+            //console.log("Select renderItems this.props.multiSelect", this.props.multiSelect);
+            if ( this.props.selected.length === 0 ) {
                 return null
             }
             return this.props.selected.map( ( selKey, i ) => {
 
-                let selItem = this.props.list.filter(ij=>ij.key === selKey)[0];
+                let selItem = this.props.list.filter( ij => ij.key === selKey )[ 0 ];
                 return (
                     <div className="reactParts__select-box-item" key={i}>
                         {selItem.value} <Icon name="remove_circle" size={16}
                                               className="control-select-box__item-remove break"
-                                              onClick={this.removeItem.bind( this, selKey)}/>
+                                              onClick={this.removeItem.bind( this, selKey )}/>
                     </div>
                 )
             } );
-        }   else {
-            console.log("Select renderItems", this.props.selected);
-            if (!this.props.selected){
+        } else {
+
+            if ( !this.props.selected ) {
                 return null
             }
-                let selItem = this.props.list.filter(i=>i.key === this.props.selected)[0];
-            console.log("Select renderItems", selItem);
-                return  <div className="reactParts__select-selected">{selItem.value}</div>
+            let selItem = this.props.list.filter( i => i.key === this.props.selected )[ 0 ];
+
+            return <div className="reactParts__select-selected">{selItem.value}</div>
         }
     }
 
     render() {
-        let selectClassName         = (this.props.multiSelect)?'reactParts__select multi':'reactParts__select';
-        let arrowIconName           = 'keyboard_arrow_down';
-        if (this.props.disabled){
+        let selectClassName = (this.props.multiSelect) ? 'reactParts__select multi' : 'reactParts__select';
+        let arrowIconName   = 'keyboard_arrow_down';
+        if ( this.props.disabled ) {
             selectClassName += " disabled";
         }
         let placeholder, list, cancel;
 
         if ( !this.props.selected ||
             (this.props.multiSelect &&
-            this.props.selected.length === 0 )) {
+            this.props.selected.length === 0 ) ) {
             placeholder = <div className="reactParts__select-placeholder">{this.props.placeholder}</div>
         } else {
             cancel = this.props.cancel && <Icon name="cancel" className="reactParts__select__cancel" size={18}
-                                                    onClick={this.cancelSelected}/>;
+                                                onClick={this.cancelSelected}/>;
         }
         if ( this.state.stateList ) {
             list          = <ul className="reactParts__select-list">{this.renderList()}</ul>;
@@ -171,10 +175,12 @@ export class Select extends React.Component {
 
         return (
             <div className="reactParts__select-wrap">
-                {this.props.label && <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
+                {this.props.label &&
+                <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
                 <div className={selectClassName} onClick={this.toggleList}>
-                    {placeholder} {this.renderItems()} {cancel} <Icon name={arrowIconName} className="reactParts__select__arrow"
-                                                            size={24}/>
+                    {placeholder} {this.renderItems()} {cancel} <Icon name={arrowIconName}
+                                                                      className="reactParts__select__arrow"
+                                                                      size={24}/>
                 </div>
                 {list}
             </div>
@@ -184,13 +190,13 @@ export class Select extends React.Component {
 
 Select.propTypes = {
     cancel:      React.PropTypes.bool,
-    onChange:   React.PropTypes.func,
+    onChange:    React.PropTypes.func,
     disabled:    React.PropTypes.any,
     placeholder: React.PropTypes.string,
     name:        React.PropTypes.string,
     multiSelect: React.PropTypes.bool,
     list:        React.PropTypes.oneOfType( [ React.PropTypes.array, React.PropTypes.object ] ),
-    selected:    React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.string, React.PropTypes.number])
+    selected:    React.PropTypes.oneOfType( [ React.PropTypes.array, React.PropTypes.string, React.PropTypes.number ] )
 };
 
 Select.defaultProps = {
@@ -198,5 +204,5 @@ Select.defaultProps = {
     stateList:   false,
     placeholder: 'Выберите из списка',
     cancel:      true,
-    selected: []
+    selected:    []
 };

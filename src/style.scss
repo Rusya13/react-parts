@@ -1001,10 +1001,10 @@ $input-border-color-focus: 	$brand-primary;
   border: 1px solid #E6E8EB;
   border-radius: 2px;
   &.multi{
-    padding: 4px 45px 4px 8px;
+    padding: 4px 45px 2px 8px;
 
     .reactParts__select-placeholder{
-      padding: 4px 0 4px 0;
+      padding: 4px 0 6px 0;
     }
   }
 
@@ -1036,6 +1036,7 @@ $input-border-color-focus: 	$brand-primary;
 
   //margin: 2px 24px 2px 2px;
   margin-right: 5px;
+  margin-bottom: 2px;
   padding: 4px;
 
   div {

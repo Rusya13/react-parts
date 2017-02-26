@@ -23,7 +23,7 @@ export class SelectController extends React.Component {
     }
 
     render() {
-        console.log("Select render");
+        //console.log("Select render");
         let list = [
             {key:1, value:"First selection"},
             {key:2, value:"Second selection"},
