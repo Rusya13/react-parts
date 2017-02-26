@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon } from '../dist';
+import { Icon } from '../dist/Components/Icon/Icon';
 
 
 export class IconsController extends React.Component {
@@ -7,18 +7,12 @@ export class IconsController extends React.Component {
         super( props );
     }
 
-    names(){
-        let names = [];
-        for (let name in Icon.names){
-            names.push(<div key={name} className="Icon-box"><Icon name={name} key={name}/><div>{name}</div></div>);
-        }
-        return names
-    }
+
 
     render() {
         return (
             <div className="Icon-wrapper">
-                { this.names()}
+                <div key={Math.random()} className="Icon-box"><Icon width={24} height={24} name="star"/><div>star</div></div>
             </div>
 
         )

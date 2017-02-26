@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonProps } from '../dist/Components/Button/Button';
+import { Button } from '../dist/Components/Button/Button';
 
 export class ButtonController extends React.Component {
 
@@ -10,7 +10,12 @@ export class ButtonController extends React.Component {
     render() {
         return (
             <div className="buttons-line">
-                <div className="button-wrapper"><Button brand="default"/></div>
+                <div className="button-wrapper"><Button brand="default" caption="Default button"/></div>
+                <div className="button-wrapper"><Button brand="success" caption="success button"/></div>
+                <div className="button-wrapper"><Button brand="danger" caption="danger button"/></div>
+                <div className="button-wrapper"><Button brand="warning" caption="warning button"/></div>
+                <div className="button-wrapper"><Button brand="primary" caption="primary button"/></div>
+                <div className="button-wrapper"><Button brand="light" caption="light button"/></div>
             </div>
         )
     }
