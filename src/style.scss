@@ -4,6 +4,7 @@ ul, menu, dir {
 }
 
 
+
 // Variables
 // Colors
 
@@ -807,5 +808,6 @@ $input-border-color-focus: 	$brand-primary;
 
 @import "Components/Button/Button";
 @import "Components/Select/Select";
+@import "Components/MultiSelect/MultiSelect";
 @import "Components/Input/Input";
 

@@ -1,20 +1,26 @@
-import * as  React from "react";
-import {Button, ButtonBrand} from "../Button/Button";
-import {ReactChild} from "react";
+/* @flow */
 
-export class SubmitFormProps {
-    onSubmit?: () => void;
-    onCancel?: ()=> void;
-    submitLabel: string = "Сохранить";
+import React from "react";
+import {Button} from "../Button/Button";
+
+
+interface SubmitFormProps {
+    onSubmit: () => void;
+    onCancel: ()=> void;
+    submitLabel: string;
     body: any;
-    submitBrand: ButtonBrand = "warning";
+    submitBrand: ButtonBrand;
 }
 
 interface SubmitFormState {
     error?: string | null;
 }
 
-export class SubmitForm extends React.Component <SubmitFormProps, SubmitFormState> {
+export class SubmitForm extends React.Component  {
+
+    state:{
+        error: ?string
+    };
 
     constructor(props: SubmitFormProps) {
         super(props);
@@ -35,7 +41,7 @@ export class SubmitForm extends React.Component <SubmitFormProps, SubmitFormStat
         }
     }
 
-    onCancelHandler(e:React.SyntheticEvent<any>) {
+    onCancelHandler(e:any) {
         console.log("SubmitForm onCancelHandler", e);
         this.props.onCancel && this.props.onCancel();
     }

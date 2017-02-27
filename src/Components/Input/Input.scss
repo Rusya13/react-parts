@@ -72,3 +72,54 @@
 .reactParts__input-valid.false{
   background: red;
 }
+
+.reactParts__input-suggest-list{
+  position: absolute;
+  right: 0;
+  left:0;
+  z-index: 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 195px; /* 5 items */
+  margin-top: -2px;
+  list-style: none;
+  background: #fff;
+  //border-top: 1px solid $control-gray;
+  border-bottom: 1px solid $input-border-color-focus;
+  border-left: 1px solid $input-border-color-focus;
+  border-right: 1px solid $input-border-color-focus;
+  //border-bottom: 1px solid $control-gray;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+
+}
+
+.reactParts__input-suggest-list-system-item{
+  font-size: 0.813rem;
+  background: #d2d6db;
+  padding: 5px 8px;
+}
+
+.reactParts__input-suggest-list-item{
+  font-size: 0.813rem;
+  padding: 8px 8px;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  border-left: 1px solid #e6e8eb;
+  border-right: 1px solid #e6e8eb;
+  border-bottom: 1px solid #e6e8eb;
+  &:hover{
+    background: #e6e8eb;
+  }
+
+  &:last-child{
+    border-bottom: none;
+  }
+  &.empty{
+    text-align: center;
+    cursor: auto;
+    &:hover{
+      background: none;
+    }
+  }
+}

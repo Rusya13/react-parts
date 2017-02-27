@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Input, Select } from "../dist";
+import { Button, Input, Select, MultiSelect } from "../dist";
 
 
 export class InputController extends React.Component {
@@ -7,7 +7,7 @@ export class InputController extends React.Component {
     constructor( props ) {
         super( props );
         this.state = {
-            email:     "rusya13@gmail.com",
+            email:     "",
             password:  "",
             name:      "Ruslan",
             last_name: "Osipov",
@@ -19,6 +19,7 @@ export class InputController extends React.Component {
 
 
     onChangeHandler( obj ) {
+        console.log("onChange", obj);
         this.setState( obj )
     }
 
@@ -30,6 +31,9 @@ export class InputController extends React.Component {
         this.setState( { editMode: true } )
     }
 
+    suggestProvider(){
+        return [{key:"1", value:"test1"}, {key:"2", value:"test2"}]
+    }
 
     render() {
         let genderList = [
@@ -61,9 +65,10 @@ export class InputController extends React.Component {
                             value={this.state.email}
                             name="email"
                             placeholder="Type something.."
-                            disabled={!this.state.editMode}
+                            readOnly={!this.state.editMode}
                             valid={null}
                             label="Email"
+                            suggest={this.suggestProvider()}
                             onChange={this.onChangeHandler.bind( this )}
                         />
                     </div>
@@ -78,7 +83,7 @@ export class InputController extends React.Component {
                             size="small"
                             label="Password"
                             valid={true}
-                            disabled={!this.state.editMode}
+                            readOnly={!this.state.editMode}
                             onChange={this.onChangeHandler.bind( this )}
                         />
                     </div>
@@ -98,21 +103,19 @@ export class InputController extends React.Component {
                             cancel={true}
                             label="Gender"
                             readOnly={!this.state.editMode}
-                            multiSelect={false}
                             selected={this.state.gender}
                             onChange={this.onChangeHandler.bind( this )}
 
                         />
                     </div>
                     <div className="col">
-                        <Select
+                        <MultiSelect
                             list={langList}
                             placeholder="select"
                             name="languages"
                             cancel={true}
                             label="Languages"
                             readOnly={!this.state.editMode}
-                            multiSelect={true}
                             selected={this.state.languages}
                             onChange={this.onChangeHandler.bind( this )}
 
@@ -128,7 +131,7 @@ export class InputController extends React.Component {
                             value={this.state.name}
                             name="name"
                             placeholder="Type something.."
-                            disabled={!this.state.editMode}
+                            readOnly={!this.state.editMode}
                             valid={null}
                             label="Name"
                             onChange={this.onChangeHandler.bind( this )}
@@ -137,11 +140,10 @@ export class InputController extends React.Component {
                     <div className="col">
                         <Input
                             type="text"
-                            autoFocus={true}
                             value={this.state.last_name}
                             name="last_name"
                             placeholder="Type something.."
-                            disabled={!this.state.editMode}
+                            readOnly={!this.state.editMode}
                             valid={null}
                             label="Last name"
                             onChange={this.onChangeHandler.bind( this )}

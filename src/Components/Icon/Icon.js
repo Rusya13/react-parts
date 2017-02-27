@@ -1,17 +1,22 @@
+/* @flow */
+
+
 import * as React from "react";
 
 
-export class IconProps {
-    hidden?: boolean;
-    name?: string = "star";
-    fill?: string;
-    width?: number = 24;
-    height?: number = 24;
-    className?: string;
-    onClick?: (event: Event) => void;
+export interface IconProps {
+    hidden: ?boolean;
+    name: string;
+    fill: ?string;
+    width: number;
+    height: number;
+    className: ?string;
+    onClick: ?(event: Event) => void;
 }
 
-export class Icon extends React.Component< IconProps, {}> {
+class Icon extends React.Component {
+
+    props:IconProps;
 
     constructor(props: IconProps) {
         super(props);
@@ -617,3 +622,15 @@ export class Icon extends React.Component< IconProps, {}> {
         )
     };
 }
+
+Icon.propTypes =  {
+    hidden: React.PropTypes.bool,
+    name: React.PropTypes.string.isRequired,
+    fill: React.PropTypes.string,
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
+    className: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+};
+
+export {Icon};

@@ -1,6 +1,6 @@
-import * as React from "react";
+/* @flow */
 
-import {Icon} from "../Icon/Icon";
+import React from "react";
 
 
 export type ButtonBrand = 'success' | 'warning' | 'danger' | 'primary' | 'default' | 'light';
@@ -15,15 +15,13 @@ export interface ButtonProps {
     hidden?: boolean;
     id?: string;
     size?: string;
-    iconFill?: string;
     className?: string;
-    iconName?: string;
-    iconWidth?: number;
-    iconHeight?: number;
 }
 
 
-export class Button extends React.Component<ButtonProps, {}> {
+export class Button extends React.Component {
+
+    props:ButtonProps;
 
     constructor(props:ButtonProps){
         super(props)
@@ -36,22 +34,11 @@ export class Button extends React.Component<ButtonProps, {}> {
 
     render() {
         let props:ButtonProps = this.props;
-
         if (props.hidden) return null;
-
-        let className = 'btn', isIconExist = props.iconName;
+        let className = 'btn';
         if (props.brand) className += ` btn-${props.brand}`;
         if (props.size) className += ` btn-${props.size}`;
         if (props.className) className += ` ${props.className}`;
-        if (props.iconName || isIconExist) className += ` btn-icon`;
-
-        let icon = isIconExist ?
-            <Icon
-                name={props.iconName}
-                width={props.iconWidth}
-                height={props.iconHeight}
-                fill={props.iconFill}
-            /> : null;
 
         return (
             <button type={this.props.type}
@@ -59,7 +46,7 @@ export class Button extends React.Component<ButtonProps, {}> {
                     onClick={this.onClick.bind(this)}
                     disabled={props.disabled}
                     id={props.id}>
-                {icon}{props.caption}
+                {props.caption}
             </button>
         )
     };

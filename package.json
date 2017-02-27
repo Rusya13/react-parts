@@ -17,6 +17,8 @@
   "license": "GNU",
   "scripts": {
     "build": "gulp build",
+    "dev": "gulp dev; ",
+    "dev_story": "npm run build && (npm run storybook & npm run dev)",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "ghp": "build-storybook -c .storybook -o docs"
   },
