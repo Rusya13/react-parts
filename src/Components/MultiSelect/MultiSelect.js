@@ -2,9 +2,6 @@
 import React from "react";
 
 
-//TODO close list on global click
-//TODO remove Icon dependency
-
 
 interface ReturnObject {
     [key: string]: Selected;

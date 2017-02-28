@@ -1,8 +1,10 @@
 import React from "react";
 import { Select } from '../dist';
+import { MultiSelect } from "../dist";
 
 
-//TODO try dynamic list with async request
+//TODO make active
+//TODO valid
 
 export class SelectController extends React.Component {
 
@@ -44,7 +46,7 @@ export class SelectController extends React.Component {
                     />
                 </div>
                 <div className="reactParts__form-row">
-                    <Select
+                    <MultiSelect
                         list={list}
                         placeholder="multiselect"
                         name="testMultiSelect"

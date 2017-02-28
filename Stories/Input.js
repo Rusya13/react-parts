@@ -1,23 +1,33 @@
 /* @flow */
 import React from "react";
-import { Button, Input, Select, MultiSelect } from "../dist";
+import { Button, Input, MultiSelect, Select } from "../dist";
+import {DadataProvider} from './DadataProvider';
+
+
+
 
 
 export class InputController extends React.Component {
-    state:{
-        email:string,
-        password:  string,
-        name:      string,
+    state: {
+        email: string,
+        address: string,
+        password: string,
+        name: string,
         last_name: string,
-        gender:    number,
+        gender: number,
         languages: Array<number>,
-        editMode:  boolean,
+        editMode: boolean,
     };
 
-    constructor( props:any ) {
+
+    suggestDadataProvider: Object;
+
+
+    constructor( props: any ) {
         super( props );
         this.state = {
             email:     "",
+            address:   "",
             password:  "",
             name:      "Ruslan",
             last_name: "Osipov",
@@ -25,11 +35,14 @@ export class InputController extends React.Component {
             languages: [],
             editMode:  true
         }
+
+        this.suggestDadataProvider = new DadataProvider();
+
     }
 
 
-    onChangeHandler( obj:Object ) {
-        console.log("onChange", obj);
+    onChangeHandler( obj: Object ) {
+        console.log( "onChange", obj );
         this.setState( obj )
     }
 
@@ -41,31 +54,26 @@ export class InputController extends React.Component {
         this.setState( { editMode: true } )
     }
 
-    suggestProvider(value:string){
-        if (value.length > 2 ){
-            return [{key:"1", value:"test1 sdafsadf asdf asdf asdf asdf"}, {key:"2", value:"test2"}]
+
+    async requestDadataProvider( value: string ) {
+        if ( value.length > 2 ) {
+            try {
+                let res = await this.suggestDadataProvider.request( value );
+                console.log( "Input suggestProvider", res.suggestions );
+                return res.suggestions
+
+            } catch (e){
+                return undefined
+            }
+
         } else {
             return undefined
         }
-
-
     }
 
+
+
     render() {
-        let genderList = [
-            { key: 1, value: "Male" },
-            { key: 2, value: "Female" }
-
-        ];
-
-        let langList = [
-            { key: 1, value: "JavaScript" },
-            { key: 2, value: "Python" },
-            { key: 3, value: "Swift" },
-            { key: 4, value: "Java" },
-            { key: 5, value: "Ruby" },
-            { key: 6, value: "PHP" },
-        ];
 
         return (
             <div className="reactParts__form">
@@ -82,91 +90,32 @@ export class InputController extends React.Component {
                             name="email"
                             placeholder="Type something.."
                             readOnly={!this.state.editMode}
-                            valid={null}
+                            valid={false}
                             label="Email"
-                            suggest={this.suggestProvider}
                             //autocomplete={true}
                             onChange={this.onChangeHandler.bind( this )}
                         />
                     </div>
                 </div>
-                <div className="reactParts__form-row">
-                    {/*<div className="col" style={{ flex: "0 1 50%" }}>*/}
-                        {/*<Input*/}
-                            {/*type="password"*/}
-                            {/*value={this.state.password}*/}
-                            {/*name="password"*/}
-                            {/*placeholder="password"*/}
-                            {/*size="small"*/}
-                            {/*label="Password"*/}
-                            {/*valid={true}*/}
-                            {/*readOnly={!this.state.editMode}*/}
-                            {/*onChange={this.onChangeHandler.bind( this )}*/}
-                        {/*/>*/}
-                    {/*</div>*/}
-                </div>
-
-
-                <div className="reactParts__form-group-label">
-                    User information
-                </div>
 
                 <div className="reactParts__form-row">
-                    <div className="col">
-                        <Select
-                            list={genderList}
-                            placeholder="select"
-                            name="gender"
-                            cancel={true}
-                            label="Gender"
+                    <div className="col" style={{ flex: "0 1 50%" }}>
+                        <Input
+                            type="text"
+                            autoFocus={true}
+                            value={this.state.address}
+                            name="address"
+                            placeholder="Type something.."
                             readOnly={!this.state.editMode}
-                            selected={this.state.gender}
+                            valid={false}
+                            label="Address"
+                            suggest={this.requestDadataProvider.bind( this )}
+                            //autocomplete={true}
                             onChange={this.onChangeHandler.bind( this )}
-
-                        />
-                    </div>
-                    <div className="col">
-                        <MultiSelect
-                            list={langList}
-                            placeholder="select"
-                            name="languages"
-                            cancel={true}
-                            label="Languages"
-                            readOnly={!this.state.editMode}
-                            selected={this.state.languages}
-                            onChange={this.onChangeHandler.bind( this )}
-
                         />
                     </div>
                 </div>
 
-                <div className="reactParts__form-row">
-                    {/*<div className="col">*/}
-                        {/*<Input*/}
-                            {/*type="text"*/}
-                            {/*autoFocus={true}*/}
-                            {/*value={this.state.name}*/}
-                            {/*name="name"*/}
-                            {/*placeholder="Type something.."*/}
-                            {/*readOnly={!this.state.editMode}*/}
-                            {/*valid={null}*/}
-                            {/*label="Name"*/}
-                            {/*onChange={this.onChangeHandler.bind( this )}*/}
-                        {/*/>*/}
-                    {/*</div>*/}
-                    {/*<div className="col">*/}
-                        {/*<Input*/}
-                            {/*type="text"*/}
-                            {/*value={this.state.last_name}*/}
-                            {/*name="last_name"*/}
-                            {/*placeholder="Type something.."*/}
-                            {/*readOnly={!this.state.editMode}*/}
-                            {/*valid={null}*/}
-                            {/*label="Last name"*/}
-                            {/*onChange={this.onChangeHandler.bind( this )}*/}
-                        {/*/>*/}
-                    {/*</div>*/}
-                </div>
                 <div className="reactParts__form-footer">
 
                     <Button caption="Cancel" brand="default" onClick={this.cancelHandler.bind( this )}/>

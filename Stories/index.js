@@ -8,6 +8,9 @@ import {ButtonController} from './Button';
 import {InputController} from './Input';
 import {IconsController} from './Icon';
 import {SelectController} from './Select';
+import {AuthForm} from './AuthForm'
+import {UserProfileForm} from './UserProfileForm'
+
 
 const stories = storiesOf('React-parts', module);
 
@@ -39,9 +42,17 @@ stories.add('Icon', () => {
 });
 
 
+stories.add('AuthForm', () => {
+    return (
+        <AuthForm/>
+    )
+});
 
-
-
+stories.add('UserProfileForm', () => {
+    return (
+        <UserProfileForm/>
+    )
+});
 
 
 

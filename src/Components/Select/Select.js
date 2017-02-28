@@ -1,11 +1,6 @@
 /* @flow */
 import * as React from "react";
 
-
-//TODO close list on global click
-//TODO remove Icon dependency
-
-
 interface ReturnObject {
     [key: string]: Selected | null;
 }
@@ -120,10 +115,15 @@ export class Select extends React.Component {
     }
 
     renderItems() {
-        if (!this.props.selected) {
+
+        let selected = this.props.selected;
+
+        console.log("Select renderItems", selected);
+        if (!selected) {
             return null
         }
         let selItem = this.props.list.filter(i => i.key === this.props.selected)[0];
+        console.log("Select renderItems", selItem);
         return <div className="reactParts__select-selected">{selItem.value}</div>
 
     }

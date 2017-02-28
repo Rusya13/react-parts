@@ -1,4 +1,5 @@
 .reactParts__input-wrap{
+  text-align: left;
   position: relative;
   display: block;
   vertical-align: baseline;
@@ -15,6 +16,7 @@
   margin-bottom: 4px;
   font-size: 13px;
   letter-spacing: 0.3px;
+  text-align: left;
 }
 
 .reactParts__input {
@@ -80,7 +82,7 @@
   z-index: 10;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 195px; /* 5 items */
+  max-height: 500px;
   margin-top: -2px;
   list-style: none;
   background: #fff;

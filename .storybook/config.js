@@ -1,13 +1,13 @@
-import { configure, setAddon } from '@kadira/storybook';
+import { configure, storybook,  setAddon } from '@kadira/storybook';
 import { setOptions } from '@kadira/storybook-addon-options';
 
 
 setOptions({
     name: 'React-parts',
-    url: 'https://github.com/kadirahq/storybook-addon-options',
+    url: 'https://github.com/rusya13/react-parts',
     goFullScreen: false,
     showLeftPanel: true,
-    showDownPanel: false,
+    showDownPanel: true,
     showSearchBox: false,
     downPanelInRight: false,
     sortStoriesByKind: false,

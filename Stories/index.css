@@ -26,7 +26,7 @@ body{
 .reactParts__form{
     display: flex;
     flex-direction: column;
-    margin: 10px;
+
     border: 1px solid #E6E8EB;
     border-radius: 3px;
     padding: 20px;
@@ -40,6 +40,7 @@ body{
 }
 
 .reactParts__form-group-label{
+    text-align: left;
     font-weight: 600;
     font-size: 14px;
     margin-top: 20px;

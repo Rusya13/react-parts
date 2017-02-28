@@ -16,8 +16,8 @@ interface ListObject {
 
 type OnChangeReturnObject = ReturnObject | number | string;
 
- class InputProps {
-    suggest: (value:string) => Array<ListObject>;
+interface InputProps {
+    suggest: (value:string | number) => Promise<any>;
     onChange: (o: OnChangeReturnObject) => void;
     onKeyUp: (e:any) => void;
     onKeyDown: (e:any) => void;
@@ -29,7 +29,7 @@ type OnChangeReturnObject = ReturnObject | number | string;
     autoFocus: boolean ;
     readOnly: boolean ;
     disabled: boolean ;
-    type: string ;
+    type: string;
     valid: boolean;
     limit: number;
     className: string;
@@ -52,13 +52,19 @@ export class Input extends React.Component {
     _OnGlobalClickHandler:()=>void;
     state:{
         isSuggestOpen: boolean,
-        pointSelect:number
+        pointSelect:number,
+        suggest:Array<any>
+    };
+
+    static defaultProps : {
+        type: string
     };
 
     constructor(props: InputProps) {
         super(props);
         this._OnGlobalClickHandler = this._OnGlobalClickHandler.bind(this);
         this.state = {
+            suggest: [],
             isSuggestOpen: false,
             pointSelect:-1
         };
@@ -86,17 +92,17 @@ export class Input extends React.Component {
         let currentPosition:number = this.state.pointSelect;
         let newPosition:number = -1;
         if (key === 'ArrowDown'){
-            console.log("Input setNewPosition down");
-            if (currentPosition === this.props.suggest(this.input.value).length-1){
+            //console.log("Input setNewPosition down");
+            if (currentPosition === this.state.suggest.length-1){
                 newPosition = 0;
             } else {
                 newPosition = currentPosition + 1;
             }
         }
         if (key === 'ArrowUp'){
-            console.log("Input setNewPosition up");
+            //console.log("Input setNewPosition up");
             if (currentPosition === 0){
-                newPosition = this.props.suggest(this.input.value).length-1;
+                newPosition = this.state.suggest.length-1;
             } else {
                 newPosition = currentPosition - 1;
             }
@@ -106,8 +112,10 @@ export class Input extends React.Component {
     }
 
     onKeyDown(e:any){
-        console.log("Input onKeyDown", e.key);
-        let suggest = this.props.suggest(this.input.value);
+        let startPos = this.input.selectionStart;
+
+        //console.log("Input onKeyDown", startPos);
+        let suggest = this.state.suggest;
         if (e.key==='ArrowDown'
             && !this.state.isSuggestOpen
             && suggest
@@ -118,15 +126,16 @@ export class Input extends React.Component {
             switch(e.key){
                 case 'ArrowDown':
                 case 'ArrowUp':
+                    this.input.selectionStart = startPos;
                     this.setNewPosition(e.key);
                     break;
                 case 'Enter':
-                    let item = this.props.suggest(this.input.value)[this.state.pointSelect];
+                    let item = this.state.suggest[this.state.pointSelect];
                     this.state.pointSelect = -1;
                     this.selectFromSuggestions(item);
                     break;
                 case 'Escape':
-                    this.setState({isSuggestOpen:false, pointSelect:-1});
+                    this.setState({isSuggestOpen:false});
                     break;
                 default:
 
@@ -164,7 +173,17 @@ export class Input extends React.Component {
         if (this.state.selected !== value && this.props.suggest){
             this.setState({isSuggestOpen:true})
         }
+        if (this.props.suggest) this.updateSuggest(value)
     };
+
+    updateSuggest(value:string | number){
+        this.props.suggest(value).then(res=>{
+            if (res){
+                this.setState({suggest:res})
+            }
+
+        })
+    }
 
 
 
@@ -203,18 +222,19 @@ export class Input extends React.Component {
         if (this.props.onChange) this.props.onChange(obj);
          //this.input.focus();
         this.setState({isSuggestOpen:false});
-
+        this.updateSuggest(item.value)
          //this.input.blur();
     }
 
-    renderSuggestionsList(suggest:Array<ListObject>){
+    renderSuggestionsList(){
+        let suggest = this.state.suggest;
         let className="reactParts__input-suggest-list-item";
-
+        //console.log("Input renderSuggestionsList", suggest);
 
         if (suggest instanceof Array !== true) return null;
         let list:Array<any> = suggest.map((item:ListObject, i:number)=>{
             return   <li
-                key={item.key}
+                key={i}
                 onClick={this.selectFromSuggestions.bind(this, item)}
                 className={className + ((i === this.state.pointSelect)?" selected":"")}
             >
@@ -231,7 +251,7 @@ export class Input extends React.Component {
         let InputSimpleClassName = "reactParts__input";
         let valid = this.props.valid;
 
-        //console.log("Input render", this.props.suggest);
+        //console.log("Input render", this.props.type);
         if (valid !== undefined && valid !== null) {
             if (valid) {
                 InputSimpleClassName += " valid"
@@ -264,8 +284,8 @@ export class Input extends React.Component {
                            onBlur={this.focusOff.bind(this)}
                            ref={(input) => {this.input = input;}}
                         />,
-                        this.state.isSuggestOpen && this.props.suggest(this.input.value) && <ul key="suggest" className="reactParts__input-suggest-list">
-                            {this.renderSuggestionsList(this.props.suggest(this.input.value))}
+                        this.state.isSuggestOpen && (this.state.suggest.length>1) && <ul key="suggest" className="reactParts__input-suggest-list">
+                            {this.renderSuggestionsList()}
                         </ul>
                     ]
 
@@ -274,6 +294,11 @@ export class Input extends React.Component {
         );
     };
 }
+
+Input.defaultProps={
+    type:"number"
+
+};
 
 Input.propTypes = {
     suggest: React.PropTypes.func,
@@ -297,3 +322,4 @@ Input.propTypes = {
     label: React.PropTypes.string,
     autocomplete:React.PropTypes.bool
 };
+
