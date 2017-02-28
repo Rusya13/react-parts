@@ -9,7 +9,7 @@ interface SubmitFormProps {
     onCancel: ()=> void;
     submitLabel: string;
     body: any;
-    submitBrand: ButtonBrand;
+    submitBrand: string;
 }
 
 interface SubmitFormState {
@@ -31,7 +31,7 @@ export class SubmitForm extends React.Component  {
     }
 
 
-    async onSubmit() {
+    async onSubmit() :any {
         try {
             this.props.onSubmit && await this.props.onSubmit();
         }

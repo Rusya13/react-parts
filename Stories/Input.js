@@ -1,10 +1,20 @@
+/* @flow */
 import React from "react";
 import { Button, Input, Select, MultiSelect } from "../dist";
 
 
 export class InputController extends React.Component {
+    state:{
+        email:string,
+        password:  string,
+        name:      string,
+        last_name: string,
+        gender:    number,
+        languages: Array<number>,
+        editMode:  boolean,
+    };
 
-    constructor( props ) {
+    constructor( props:any ) {
         super( props );
         this.state = {
             email:     "",
@@ -18,7 +28,7 @@ export class InputController extends React.Component {
     }
 
 
-    onChangeHandler( obj ) {
+    onChangeHandler( obj:Object ) {
         console.log("onChange", obj);
         this.setState( obj )
     }
@@ -31,8 +41,14 @@ export class InputController extends React.Component {
         this.setState( { editMode: true } )
     }
 
-    suggestProvider(){
-        return [{key:"1", value:"test1"}, {key:"2", value:"test2"}]
+    suggestProvider(value:string){
+        if (value.length > 2 ){
+            return [{key:"1", value:"test1 sdafsadf asdf asdf asdf asdf"}, {key:"2", value:"test2"}]
+        } else {
+            return undefined
+        }
+
+
     }
 
     render() {
@@ -68,25 +84,26 @@ export class InputController extends React.Component {
                             readOnly={!this.state.editMode}
                             valid={null}
                             label="Email"
-                            suggest={this.suggestProvider()}
+                            suggest={this.suggestProvider}
+                            //autocomplete={true}
                             onChange={this.onChangeHandler.bind( this )}
                         />
                     </div>
                 </div>
                 <div className="reactParts__form-row">
-                    <div className="col" style={{ flex: "0 1 50%" }}>
-                        <Input
-                            type="password"
-                            value={this.state.password}
-                            name="password"
-                            placeholder="password"
-                            size="small"
-                            label="Password"
-                            valid={true}
-                            readOnly={!this.state.editMode}
-                            onChange={this.onChangeHandler.bind( this )}
-                        />
-                    </div>
+                    {/*<div className="col" style={{ flex: "0 1 50%" }}>*/}
+                        {/*<Input*/}
+                            {/*type="password"*/}
+                            {/*value={this.state.password}*/}
+                            {/*name="password"*/}
+                            {/*placeholder="password"*/}
+                            {/*size="small"*/}
+                            {/*label="Password"*/}
+                            {/*valid={true}*/}
+                            {/*readOnly={!this.state.editMode}*/}
+                            {/*onChange={this.onChangeHandler.bind( this )}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
                 </div>
 
 
@@ -124,31 +141,31 @@ export class InputController extends React.Component {
                 </div>
 
                 <div className="reactParts__form-row">
-                    <div className="col">
-                        <Input
-                            type="text"
-                            autoFocus={true}
-                            value={this.state.name}
-                            name="name"
-                            placeholder="Type something.."
-                            readOnly={!this.state.editMode}
-                            valid={null}
-                            label="Name"
-                            onChange={this.onChangeHandler.bind( this )}
-                        />
-                    </div>
-                    <div className="col">
-                        <Input
-                            type="text"
-                            value={this.state.last_name}
-                            name="last_name"
-                            placeholder="Type something.."
-                            readOnly={!this.state.editMode}
-                            valid={null}
-                            label="Last name"
-                            onChange={this.onChangeHandler.bind( this )}
-                        />
-                    </div>
+                    {/*<div className="col">*/}
+                        {/*<Input*/}
+                            {/*type="text"*/}
+                            {/*autoFocus={true}*/}
+                            {/*value={this.state.name}*/}
+                            {/*name="name"*/}
+                            {/*placeholder="Type something.."*/}
+                            {/*readOnly={!this.state.editMode}*/}
+                            {/*valid={null}*/}
+                            {/*label="Name"*/}
+                            {/*onChange={this.onChangeHandler.bind( this )}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
+                    {/*<div className="col">*/}
+                        {/*<Input*/}
+                            {/*type="text"*/}
+                            {/*value={this.state.last_name}*/}
+                            {/*name="last_name"*/}
+                            {/*placeholder="Type something.."*/}
+                            {/*readOnly={!this.state.editMode}*/}
+                            {/*valid={null}*/}
+                            {/*label="Last name"*/}
+                            {/*onChange={this.onChangeHandler.bind( this )}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
                 </div>
                 <div className="reactParts__form-footer">
 

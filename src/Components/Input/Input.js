@@ -17,9 +17,10 @@ interface ListObject {
 type OnChangeReturnObject = ReturnObject | number | string;
 
  class InputProps {
-    suggest: Array<ListObject>;
+    suggest: (value:string) => Array<ListObject>;
     onChange: (o: OnChangeReturnObject) => void;
     onKeyUp: (e:any) => void;
+    onKeyDown: (e:any) => void;
     onFocus: () => void;
     onBlur: () => void;
     keypress: () => void;
@@ -35,40 +36,105 @@ type OnChangeReturnObject = ReturnObject | number | string;
     value: InputValue;
     castTo: string;
     label: string;
+    autocomplete:boolean;
 }
 
 
 
 
 
-interface InputState{
-    isSuggestOpen:boolean;
-    selected:string | number;
-}
 
 
 export class Input extends React.Component {
 
     input:HTMLInputElement;
     props: InputProps;
+    _OnGlobalClickHandler:()=>void;
     state:{
         isSuggestOpen: boolean,
-        selected:string | number
+        pointSelect:number
     };
 
     constructor(props: InputProps) {
         super(props);
-
+        this._OnGlobalClickHandler = this._OnGlobalClickHandler.bind(this);
         this.state = {
             isSuggestOpen: false,
-            selected:""
+            pointSelect:-1
         };
+    }
+
+    componentDidMount(){
+        if (this.props.suggest){
+            document.addEventListener("click", this._OnGlobalClickHandler);
+        }
+
+    }
+
+
+    componentWillUnmount(){
+        if (this.props.suggest){
+            document.removeEventListener("click", this._OnGlobalClickHandler);
+        }
     }
 
     onKeyUp(e:any) {
         if (this.props.onKeyUp) this.props.onKeyUp(e);
     };
 
+    setNewPosition(key:string){
+        let currentPosition:number = this.state.pointSelect;
+        let newPosition:number = -1;
+        if (key === 'ArrowDown'){
+            console.log("Input setNewPosition down");
+            if (currentPosition === this.props.suggest(this.input.value).length-1){
+                newPosition = 0;
+            } else {
+                newPosition = currentPosition + 1;
+            }
+        }
+        if (key === 'ArrowUp'){
+            console.log("Input setNewPosition up");
+            if (currentPosition === 0){
+                newPosition = this.props.suggest(this.input.value).length-1;
+            } else {
+                newPosition = currentPosition - 1;
+            }
+        }
+
+        this.setState({pointSelect:newPosition})
+    }
+
+    onKeyDown(e:any){
+        console.log("Input onKeyDown", e.key);
+        let suggest = this.props.suggest(this.input.value);
+        if (e.key==='ArrowDown'
+            && !this.state.isSuggestOpen
+            && suggest
+            && suggest.length >0){
+            this.setState({isSuggestOpen:true});
+        }
+        if (this.state.isSuggestOpen){
+            switch(e.key){
+                case 'ArrowDown':
+                case 'ArrowUp':
+                    this.setNewPosition(e.key);
+                    break;
+                case 'Enter':
+                    let item = this.props.suggest(this.input.value)[this.state.pointSelect];
+                    this.state.pointSelect = -1;
+                    this.selectFromSuggestions(item);
+                    break;
+                case 'Escape':
+                    this.setState({isSuggestOpen:false, pointSelect:-1});
+                    break;
+                default:
+
+            }
+        }
+
+        this.props.onKeyDown && this.props.onKeyDown(e);
+    }
 
     _createReturnObject(name:string, value:string | number) : ReturnObject{
         let object:Object = {};
@@ -100,29 +166,31 @@ export class Input extends React.Component {
         }
     };
 
+
+
+
     focusOn(e:any) {
-        console.log("focus", this.state.selected);
-        if (this.props.suggest){
+        if (this.props.suggest && this.props.suggest(this.input && this.input.value || "")){
             if (this.input){
                 this.setState({isSuggestOpen:true});
             }
-
-
         }
         if (this.props.onFocus) this.props.onFocus();
     };
 
     focusOff(e:any) {
-
-        console.log("cancel focus",this.input);
-
         if (this.props.onBlur) this.props.onBlur();
-        this.setState({selected:"", isSuggestOpen:false});
-
     };
 
+    _OnGlobalClickHandler(e:any){
+        let target = e.target;
+        if(this.state.isSuggestOpen){
+            if(this.input !== target) this.setState({isSuggestOpen:false});
+        }
+    }
+
      selectFromSuggestions(item:ListObject){
-        this.input.focus();
+
         console.log("select", item);
         let obj: OnChangeReturnObject;
         let name = this.props.name;
@@ -133,13 +201,23 @@ export class Input extends React.Component {
             obj = item.value;
         }
         if (this.props.onChange) this.props.onChange(obj);
-        this.setState({isSuggestOpen:false, selected:item.value});
+         //this.input.focus();
+        this.setState({isSuggestOpen:false});
+
+         //this.input.blur();
     }
 
     renderSuggestionsList(suggest:Array<ListObject>){
+        let className="reactParts__input-suggest-list-item";
 
-        let list:Array<any> = suggest.map(item=>{
-            return   <li key={item.key} onClick={this.selectFromSuggestions.bind(this, item)} className="reactParts__input-suggest-list-item">
+
+        if (suggest instanceof Array !== true) return null;
+        let list:Array<any> = suggest.map((item:ListObject, i:number)=>{
+            return   <li
+                key={item.key}
+                onClick={this.selectFromSuggestions.bind(this, item)}
+                className={className + ((i === this.state.pointSelect)?" selected":"")}
+            >
                 {item.value}
             </li>
         });
@@ -153,7 +231,7 @@ export class Input extends React.Component {
         let InputSimpleClassName = "reactParts__input";
         let valid = this.props.valid;
 
-        console.log("Input render", this.props.suggest);
+        //console.log("Input render", this.props.suggest);
         if (valid !== undefined && valid !== null) {
             if (valid) {
                 InputSimpleClassName += " valid"
@@ -172,6 +250,7 @@ export class Input extends React.Component {
                     [
                         <input className={InputSimpleClassName}
                            key="input"
+                           autoComplete={(this.props.suggest)?"off":(this.props.autocomplete)?"on":"off"}
                            id={this.props.name}
                            type={this.props.type}
                            autoFocus={this.props.autoFocus}
@@ -179,13 +258,14 @@ export class Input extends React.Component {
                            placeholder={this.props.placeholder}
                            onChange={this.onChangeHandler.bind(this)}
                            onKeyUp={this.onKeyUp.bind(this)}
+                           onKeyDown={this.onKeyDown.bind(this)}
                            value={this.props.value}
                            onFocus={this.focusOn.bind(this)}
                            onBlur={this.focusOff.bind(this)}
                            ref={(input) => {this.input = input;}}
                         />,
-                        this.state.isSuggestOpen && this.props.suggest && <ul key="suggest" className="reactParts__input-suggest-list">
-                            {this.renderSuggestionsList(this.props.suggest)}
+                        this.state.isSuggestOpen && this.props.suggest(this.input.value) && <ul key="suggest" className="reactParts__input-suggest-list">
+                            {this.renderSuggestionsList(this.props.suggest(this.input.value))}
                         </ul>
                     ]
 
@@ -196,9 +276,10 @@ export class Input extends React.Component {
 }
 
 Input.propTypes = {
-    suggest: React.PropTypes.array,
+    suggest: React.PropTypes.func,
     onChange: React.PropTypes.func.isRequired,
     onKeyUp: React.PropTypes.func,
+    onKeyDown: React.PropTypes.func,
     onFocus: React.PropTypes.func,
     onBlur: React.PropTypes.func,
     keypress: React.PropTypes.func,
@@ -214,4 +295,5 @@ Input.propTypes = {
     value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
     castTo: React.PropTypes.string,
     label: React.PropTypes.string,
+    autocomplete:React.PropTypes.bool
 };
