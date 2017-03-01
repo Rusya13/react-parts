@@ -8,6 +8,8 @@ import {ButtonController} from './Button';
 import {InputController} from './Input';
 import {IconsController} from './Icon';
 import {SelectController} from './Select';
+import {RadioController} from './Radio';
+
 import {AuthForm} from './AuthForm'
 import {UserProfileForm} from './UserProfileForm'
 
@@ -41,6 +43,11 @@ stories.add('Icon', () => {
     )
 });
 
+stories.add('Radio', () => {
+    return (
+        <RadioController/>
+    )
+});
 
 stories.add('AuthForm', () => {
     return (

@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import { Button, Input, MultiSelect, Select } from "../dist";
+import { Button, Input, MultiSelect, RadioGroup } from "../dist";
 
 export class UserProfileForm extends React.Component {
 
@@ -15,7 +15,6 @@ export class UserProfileForm extends React.Component {
     };
 
 
-
     constructor( props: any ) {
         super( props );
         this.state = {
@@ -23,7 +22,7 @@ export class UserProfileForm extends React.Component {
             address:   "",
             name:      "Ruslan",
             last_name: "Osipov",
-            gender:    1,
+            gender:    "Male",
             languages: [],
             editMode:  true
         }
@@ -47,8 +46,8 @@ export class UserProfileForm extends React.Component {
 
     render() {
         let genderList = [
-            { key: 1, value: "Male" },
-            { key: 2, value: "Female" }
+            { label: "Male", value: "Male" },
+            { label: "Female", value: "Female" }
         ];
 
         let langList = [
@@ -72,7 +71,7 @@ export class UserProfileForm extends React.Component {
 
 
                         <div className="row">
-                            <div className="col-xs-12 col-sm-6" >
+                            <div className="col-xs-12 col-sm-6">
                                 <Input
                                     type="text"
                                     autoFocus={true}
@@ -88,7 +87,7 @@ export class UserProfileForm extends React.Component {
                         </div>
 
                         <div className="row">
-                            <div className="col-xs-12 col-sm-6" >
+                            <div className="col-xs-12 col-sm-6">
                                 <Input
                                     type="text"
                                     autoFocus={true}
@@ -112,17 +111,24 @@ export class UserProfileForm extends React.Component {
 
                         <div className="row">
                             <div className="col-xs-12 col-sm-6">
-                                <Select
-                                    list={genderList}
-                                    placeholder="select"
-                                    name="gender"
-                                    cancel={true}
-                                    label="Gender"
-                                    readOnly={!this.state.editMode}
-                                    selected={this.state.gender}
+                                <RadioGroup
+                                    direction="horizontal"
                                     onChange={this.onChangeHandler.bind( this )}
-
+                                    options={genderList}
+                                    name="gender" label="Gender" checked={this.state.gender}
+                                    readOnly={!this.state.editMode}
                                 />
+                                {/*<Select*/}
+                                {/*list={genderList}*/}
+                                {/*placeholder="select"*/}
+                                {/*name="gender"*/}
+                                {/*cancel={true}*/}
+                                {/*label="Gender"*/}
+                                {/*readOnly={!this.state.editMode}*/}
+                                {/*selected={this.state.gender}*/}
+                                {/*onChange={this.onChangeHandler.bind( this )}*/}
+
+                                {/*/>*/}
                             </div>
                             <div className="col-xs-12 col-sm-6">
                                 <MultiSelect

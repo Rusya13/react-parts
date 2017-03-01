@@ -17,6 +17,7 @@ interface ListObject {
 type OnChangeReturnObject = ReturnObject | number | string;
 
 interface InputProps {
+    addControls: () => Array<any>;
     suggest: (value:string | number) => Promise<any>;
     onChange: (o: OnChangeReturnObject) => void;
     onKeyUp: (e:any) => void;
@@ -247,6 +248,13 @@ export class Input extends React.Component {
         return list;
     }
 
+    renderControls(){
+        return this.props.addControls().map(item=>{
+            return <div className="reactParts__input-addControls-item" key={Math.random()}>{item.title}</div>
+        })
+    }
+
+
     render() {
         let InputSimpleClassName = "reactParts__input";
         let valid = this.props.valid;
@@ -284,7 +292,9 @@ export class Input extends React.Component {
                            onBlur={this.focusOff.bind(this)}
                            ref={(input) => {this.input = input;}}
                         />,
-                        this.state.isSuggestOpen && (this.state.suggest.length>1) && <ul key="suggest" className="reactParts__input-suggest-list">
+                        this.props.addControls && (this.props.addControls().length> 0) &&
+                            <div key="addControls" className="reactParts__input-addControls">{this.renderControls()}</div>,
+                        this.state.isSuggestOpen && (this.state.suggest.length>0) && <ul key="suggest" className="reactParts__input-suggest-list">
                             {this.renderSuggestionsList()}
                         </ul>
                     ]
@@ -301,6 +311,7 @@ Input.defaultProps={
 };
 
 Input.propTypes = {
+    addControls: React.PropTypes.func,
     suggest: React.PropTypes.func,
     onChange: React.PropTypes.func.isRequired,
     onKeyUp: React.PropTypes.func,

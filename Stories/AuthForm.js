@@ -92,6 +92,7 @@ export class AuthForm extends React.Component {
                         <div className="row center-xs">
                             <div className="col-xs-12" >
                                 <Input
+                                    addControls={()=>[{title:"Свободный режим"}, {title:"Добавить"}]}
                                     type="text"
                                     autoFocus={true}
                                     value={this.model.get("email")}
