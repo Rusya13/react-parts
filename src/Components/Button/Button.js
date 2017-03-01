@@ -51,3 +51,15 @@ export class Button extends React.Component {
         )
     };
 }
+
+Button.propTypes ={
+    brand: React.PropTypes.string,
+    type: React.PropTypes.string,
+    caption: React.PropTypes.string.isRequired,
+    onClick: React.PropTypes.func.isRequired,
+    disabled: React.PropTypes.bool,
+    hidden: React.PropTypes.bool,
+    id: React.PropTypes.string,
+    size: React.PropTypes.string,
+    className: React.PropTypes.string,
+}

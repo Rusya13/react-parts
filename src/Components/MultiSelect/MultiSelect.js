@@ -92,7 +92,7 @@ export class MultiSelect extends React.Component {
 
     closeList(event:any) {
         console.log("MultiSelect closeList", event.target);
-        if (event.target.classList && event.target.classList.contains("break") || event.target.parentNode.classList && event.target.parentNode.classList.contains("break")) return;
+        if (event.target.classList && event.target.classList.contains("break") || event.target.parentNode && event.target.parentNode.classList && event.target.parentNode.classList.contains("break")) return;
         console.log("Select closeList");
         this.setState({stateList: false});
         document.removeEventListener("click", this.closeList, false);

@@ -19,13 +19,13 @@ export class AuthForm extends React.Component {
 
     model:Model;
 
-
     constructor( props: any ) {
         super( props );
         window.form = this;
         this.model = new Auth();
+
+        //this.model.setAttributes();
         this.model.observeAttributes({email:"", password:"", editMode:true});
-        //this.model.setAttributes({email:"", password:"", editMode:true});
         //this.model.makeReactive("email");
         this.model.observe(['email', 'password', 'editMode'], ()=>this.forceUpdate())
     }
@@ -84,11 +84,11 @@ export class AuthForm extends React.Component {
 
 
     render() {
+        console.log("AuthForm render", this.model.isAttributesChanged(), this.model.attributes, this.model.defaultAttributes);
         return (
             <div className="row center-xs middle-xs">
                 <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <div className="reactParts__form">
-
                         <div className="row center-xs">
                             <div className="col-xs-12" >
                                 <Input
@@ -123,7 +123,7 @@ export class AuthForm extends React.Component {
                         <div className="row end-xs">
                             <div className="col-xs-12 reactParts__form-footer">
                                 <Button caption="Cancel" brand="default" onClick={this.cancelHandler.bind( this )}/>
-                                <Button caption="Submit" brand="primary" onClick={this.submitHandler.bind( this )}/>
+                                <Button disabled={this.model.isAttributesChanged()} caption="Submit" brand="primary" onClick={this.submitHandler.bind( this )}/>
                             </div>
                         </div>
                     </div>
