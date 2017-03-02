@@ -100,20 +100,20 @@
   position: absolute;
   top: 0;
   right: 0;
-  color:#fff;
+  color:#377df3;
   font-size: 12px;
-  font-weight: 200;
+  font-weight: 400;
   display: flex;
   justify-content: flex-end;
   &-item{
-    padding: 1px 7px 2px;
-    border-radius: 10px;
-    background: #62a8ea;
+    //padding: 1px 7px 2px;
+    //border-radius: 10px;
+    //background: #62a8ea;
     margin-left: 10px;
     cursor: pointer;
-    &:hover{
-      color: #fff;
-    }
+    //&:hover{
+    //  color: #fff;
+    //}
   }
 }
 

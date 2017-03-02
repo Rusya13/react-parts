@@ -271,6 +271,7 @@ export class Input extends React.Component {
         if (this.props.className) InputSimpleClassName += ` ${this.props.className}`;
         return (
             <div className="reactParts__input-wrap">
+
                 {this.props.label &&
                 <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?

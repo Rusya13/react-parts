@@ -1,13 +1,13 @@
 import React from "react";
-import { CheckBoxGroup } from '../dist/Components/CheckBoxGroup/CheckBoxGroup';
+import { CheckBox, CheckBoxGroup }  from '../dist/index';
 import {Model} from './Model/Model';
 
 export class CheckBoxController extends React.Component {
 
     constructor( props ) {
         super( props );
-        this.model = new Model({test: [2]},{reactive:true});
-        this.model.observe(['test'], ()=>this.forceUpdate())
+        this.model = new Model({gender_male: false, gender_female:true, smoke:true},{reactive:true});
+        this.model.observe(['test', 'smoke', 'gender_male', 'gender_female'], ()=>this.forceUpdate())
     }
 
     onChange(e){
@@ -17,17 +17,22 @@ export class CheckBoxController extends React.Component {
     }
 
     render() {
-        console.log("CheckBoxController render", this.model);
+        //console.log("CheckBoxController render", this.model);
         return (
             <div>
                 <CheckBoxGroup
-                    direction="vertical"
+                    direction="horizontal"
                     label="Test label"
-                    name="test"
-                    options={[{label:"Male", value:1}, {label:"Female", value:2}]}
+                    options={
+                        [
+                            {label:"Male", name:"gender_male", checked:this.model.get("gender_male"), disabled:true},
+                            {label:"Female", name:"gender_female", checked:this.model.get("gender_female")}
+                        ]
+                    }
                     onChange={this.onChange.bind(this)}
-                    checked={this.model.get("test")}
+
                 />
+                <CheckBox onClickHandler={this.onChange.bind(this)} name="smoke" label="Non-smoking" checked={this.model.get("smoke")}/>
             </div>
 
         )

@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import { Button, Input, MultiSelect, RadioGroup } from "../dist";
+import { Button, Input, MultiSelect, RadioGroup, CheckBoxGroup } from "../dist";
 
 export class UserProfileForm extends React.Component {
 
@@ -110,9 +110,9 @@ export class UserProfileForm extends React.Component {
 
 
                         <div className="row">
-                            <div className="col-xs-12 col-sm-6">
+                            <div className="col-xs-12 col-sm-4">
                                 <RadioGroup
-                                    direction="vertical"
+                                    direction="horizontal"
                                     onChange={this.onChangeHandler.bind( this )}
                                     options={genderList}
                                     name="gender" label="Gender" checked={this.state.gender}
@@ -130,7 +130,16 @@ export class UserProfileForm extends React.Component {
 
                                 {/*/>*/}
                             </div>
-                            <div className="col-xs-12 col-sm-6">
+                            <div className="col-xs-12 col-sm-4">
+                                <CheckBoxGroup label="Check"
+                                               options={[
+                                                   {label:"Male",
+                                                       name:"gender_male",
+                                                       checked:true,
+                                                       disabled:false}]
+                                               }/>
+                            </div>
+                            <div className="col-xs-12 col-sm-4">
                                 <MultiSelect
                                     list={langList}
                                     placeholder="select"

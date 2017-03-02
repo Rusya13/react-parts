@@ -7,28 +7,30 @@ export class CheckBoxGroup extends React.Component {
     props: {
         direction: ?("vertical" | "horizontal"),
         readOnly?:boolean,
-        name: ?string,
         options: Array<any>,
         onChange: () => void,
         checked: ?Array<any>,
         label: ?string
     };
 
-    onChange( value: string | number ) {
-        console.log( "RadioGroup onChange", value );
-        let o: Object        = {};
-        o[ this.props.name ] = value;
+    onChange( o:Object ) {
+
         this.props.onChange( o )
+    }
+
+    isChecked(value:number | string){
+        return this.props.checked && this.props.checked.some(item=>item===value)
     }
 
     renderOptions() {
         return this.props.options.map( ( option, index ) => {
             return <CheckBox
-                checked={option.value === this.props.checked}
+                checked={option.checked}
                 onClickHandler={this.onChange.bind( this )}
                 key={index}
-                value={option.value}
                 label={option.label}
+                name={option.name}
+                disabled={option.disabled}
             />
         } )
 
@@ -65,7 +67,6 @@ CheckBoxGroup.propTypes = {
     direction: React.PropTypes.oneOf(["vertical", "horizontal"]),
     readOnly: React.PropTypes.bool,
     label:    React.PropTypes.string,
-    name:     React.PropTypes.string.isRequired,
     options:  React.PropTypes.array.isRequired,
     onChange: React.PropTypes.func.isRequired,
     checked:  React.PropTypes.array
