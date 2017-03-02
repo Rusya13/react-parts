@@ -8,14 +8,27 @@ class Auth extends Model {
 
     constructor(props){
         super(props);
-        this
+
     }
 
     attributes = {
         email:"",
         password:"",
-        editMode:true
+        editMode:true,
     };
+
+    observable = {
+        password:"",
+        editMode:true,
+    };
+
+    computed={
+        fullEmail:()=>{
+            return this.get("email") + "@gmail.com"
+        }
+    }
+
+
 
 }
 
@@ -35,7 +48,8 @@ export class AuthForm extends React.Component {
         window.form = this;
         this.model = new Auth();
         this.model.observeAttributes();
-        this.model.observe(['password', 'editMode', 'email'], ()=>this.forceUpdate())
+        this.model.observe(['password', 'editMode', 'fullEmail'], ()=>this.forceUpdate())
+        this.model.observe(['email'], null)
     }
 
 
@@ -53,48 +67,12 @@ export class AuthForm extends React.Component {
         this.model.set({editMode:true})
     }
 
-    getForm (){
-        return [
-            {el:"col", class:"center-xs", children:[
-                {
-                    el:Input,
-                    wrapClass:"col-xs-12",
-                    props:{
-                        type:"text",
-                        autoFocus:true,
-                        value:this.model.get("s"),
-                        name:"email",
-                        placeholder:"Type something..",
-                        readOnly:!this.model.get("editMode"),
-                        valid:false,
-                        label:"Email",
-                        onChange:this.onChangeHandler.bind( this ),
-                    }
-                },
-                {
-                    el:Input,
-                    wrapClass:"col-xs-12",
-                    visible:true,
-                    props:{
-                        type:"password",
-                        value:this.model.get("password"),
-                        name:"password",
-                        placeholder:"Type something..",
-                        readOnly:!this.model.get("editMode"),
-                        valid:false,
-                        label:"Password",
-                        onChange:this.onChangeHandler.bind( this ),
-                    }
-                },
-            ] }
-        ];
-    }
     onAddControlsClickHandler(name:string){
         console.log("AuthForm onAddControlsClickHandler", name);
     }
 
     render() {
-        console.log("AuthForm render", this.model.attributes);
+        console.log("AuthForm render", this.model);
         return (
             <div className="row center-xs middle-xs">
                 <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -134,11 +112,21 @@ export class AuthForm extends React.Component {
                                     value={this.model.get("password")}
                                     name="password"
                                     placeholder="password"
-                                    size="small"
+
                                     label="Password"
                                     valid={true}
                                     readOnly={!this.model.get("editMode")}
                                     onChange={this.onChangeHandler.bind( this )}
+                                />
+                            </div>
+                        </div>
+                        <div className="row center-xs">
+                            <div className="col-xs-12">
+                                <Input
+                                    value={this.model.get("fullEmail")}
+                                    name="fullEmail"
+                                    label="Full Email"
+                                    readOnly={true}
                                 />
                             </div>
                         </div>

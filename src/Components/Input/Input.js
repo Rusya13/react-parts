@@ -1,5 +1,9 @@
 /* @flow */
 
+
+// TODO add Cancel input
+
+
 import  React from "react";
 
 
@@ -57,11 +61,6 @@ export class Input extends React.Component {
         pointSelect:number,
         suggest:Array<any>
     };
-
-    static defaultProps : {
-        type: string
-    };
-
     constructor(props: InputProps) {
         super(props);
         this._OnGlobalClickHandler = this._OnGlobalClickHandler.bind(this);
@@ -114,7 +113,7 @@ export class Input extends React.Component {
     }
 
     onKeyDown(e:any){
-        let startPos = this.input.selectionStart;
+        //let startPos = this.input.selectionStart;
 
         //console.log("Input onKeyDown", startPos);
         let suggest = this.state.suggest;
@@ -128,7 +127,7 @@ export class Input extends React.Component {
             switch(e.key){
                 case 'ArrowDown':
                 case 'ArrowUp':
-                    this.input.selectionStart = startPos;
+                    //this.input.selectionStart = startPos;
                     this.setNewPosition(e.key);
                     break;
                 case 'Enter':
@@ -308,7 +307,7 @@ export class Input extends React.Component {
 }
 
 Input.defaultProps={
-    type:"number"
+    type:"string"
 
 };
 

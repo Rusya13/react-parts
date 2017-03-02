@@ -12,6 +12,7 @@ import {CheckBoxController} from './CheckBox';
 
 import {AuthForm} from './AuthForm'
 import {UserProfileForm} from './UserProfileForm'
+import {TodoList} from './TodoList'
 
 
 const stories = storiesOf('React-parts', module);
@@ -61,6 +62,11 @@ stories.add('UserProfileForm', () => {
     )
 });
 
+stories.add('TodoList', () => {
+    return (
+        <TodoList/>
+    )
+});
 
 
 

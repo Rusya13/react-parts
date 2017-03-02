@@ -34,7 +34,7 @@ export class CheckBox extends React.Component{
 }
 
 CheckBox.propTypes ={
-    name: React.PropTypes.string,
+    name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     label:React.PropTypes.string,
     checked:React.PropTypes.bool,
     disabled: React.PropTypes.bool,
