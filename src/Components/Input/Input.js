@@ -19,6 +19,7 @@ type OnChangeReturnObject = ReturnObject | number | string;
 interface InputProps {
     addControls: () => Array<any>;
     suggest: (value:string | number) => Promise<any>;
+    suggestText: ?string;
     onChange: (o: OnChangeReturnObject) => void;
     onKeyUp: (e:any) => void;
     onKeyDown: (e:any) => void;
@@ -242,15 +243,15 @@ export class Input extends React.Component {
                 {item.value}
             </li>
         });
-        list.unshift(<li key="pop" className="reactParts__input-suggest-list-system-item">
-            Выберите элемент или продолжите ввод
+        this.props.suggestText && list.unshift(<li key="pop" className="reactParts__input-suggest-list-system-item">
+            {this.props.suggestText}
         </li>);
         return list;
     }
 
     renderControls(){
         return this.props.addControls().map(item=>{
-            return <div className="reactParts__input-addControls-item" key={Math.random()}>{item.title}</div>
+            return <div className="reactParts__input-addControls-item" onClick={item.onClickHandler && item.onClickHandler.bind(this, item.name)} key={Math.random()}>{item.title}</div>
         })
     }
 
@@ -314,6 +315,7 @@ Input.defaultProps={
 Input.propTypes = {
     addControls: React.PropTypes.func,
     suggest: React.PropTypes.func,
+    suggestText: React.PropTypes.string,
     onChange: React.PropTypes.func.isRequired,
     onKeyUp: React.PropTypes.func,
     onKeyDown: React.PropTypes.func,

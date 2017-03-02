@@ -1,6 +1,7 @@
 /* @flow */
 import React from "react";
 import { Button, Input, MultiSelect, RadioGroup, CheckBoxGroup } from "../dist";
+import {Model} from './Model/Model';
 
 export class UserProfileForm extends React.Component {
 
@@ -14,33 +15,38 @@ export class UserProfileForm extends React.Component {
         editMode: boolean,
     };
 
-
+    model:Model;
     constructor( props: any ) {
         super( props );
-        this.state = {
+        this.model= new Model({
             email:     "",
             address:   "",
-            name:      "Ruslan",
-            last_name: "Osipov",
+            name:      "John",
+            last_name: "Smith",
             gender:    "Male",
             languages: [],
-            editMode:  true
-        }
-
+            editMode:  true,
+            school:false,
+            university:true,
+            college: false
+        }, {reactive:true});
+        this.model.observe(
+            ['email', 'address', 'name', 'last_name','gender', 'languages', 'editMode', 'school', 'university', 'college'],
+            ()=>this.forceUpdate())
     }
 
 
     onChangeHandler( obj: Object ) {
         console.log( "onChange", obj );
-        this.setState( obj )
+        this.model.set( obj )
     }
 
     submitHandler() {
-        this.setState( { editMode: false } )
+        this.model.set({editMode: false})
     }
 
     cancelHandler() {
-        this.setState( { editMode: true } )
+        this.model.set( { editMode: true } )
     }
 
 
@@ -75,10 +81,10 @@ export class UserProfileForm extends React.Component {
                                 <Input
                                     type="text"
                                     autoFocus={true}
-                                    value={this.state.email}
+                                    value={this.model.get("email")}
                                     name="email"
                                     placeholder="Type something.."
-                                    readOnly={!this.state.editMode}
+                                    readOnly={!this.model.get("editMode")}
                                     valid={false}
                                     label="Email"
                                     onChange={this.onChangeHandler.bind( this )}
@@ -91,13 +97,12 @@ export class UserProfileForm extends React.Component {
                                 <Input
                                     type="text"
                                     autoFocus={true}
-                                    value={this.state.address}
+                                    value={this.model.get("address")}
                                     name="address"
                                     placeholder="Type something.."
-                                    readOnly={!this.state.editMode}
+                                    readOnly={!this.model.get("editMode")}
                                     valid={false}
                                     label="Address"
-                                    //autocomplete={true}
                                     onChange={this.onChangeHandler.bind( this )}
                                 />
                             </div>
@@ -115,29 +120,28 @@ export class UserProfileForm extends React.Component {
                                     direction="horizontal"
                                     onChange={this.onChangeHandler.bind( this )}
                                     options={genderList}
-                                    name="gender" label="Gender" checked={this.state.gender}
-                                    readOnly={!this.state.editMode}
+                                    name="gender" label="Gender" checked={this.model.get("gender")}
+                                    readOnly={!this.model.get("editMode")}
                                 />
-                                {/*<Select*/}
-                                {/*list={genderList}*/}
-                                {/*placeholder="select"*/}
-                                {/*name="gender"*/}
-                                {/*cancel={true}*/}
-                                {/*label="Gender"*/}
-                                {/*readOnly={!this.state.editMode}*/}
-                                {/*selected={this.state.gender}*/}
-                                {/*onChange={this.onChangeHandler.bind( this )}*/}
-
-                                {/*/>*/}
                             </div>
                             <div className="col-xs-12 col-sm-4">
-                                <CheckBoxGroup label="Check"
+                                <CheckBoxGroup label="Education"
+                                               readOnly={!this.model.get("editMode")}
                                                options={[
-                                                   {label:"Male",
-                                                       name:"gender_male",
-                                                       checked:true,
-                                                       disabled:false}]
-                                               }/>
+                                                   {label:"School",
+                                                       name:"school",
+                                                       checked:this.model.get("school"),
+                                                       disabled:false},
+                                                   {label:"College",
+                                                       name:"college",
+                                                       checked:this.model.get("college"),
+                                                       disabled:false},
+                                                   {label:"University",
+                                                       name:"university",
+                                                       checked:this.model.get("university"),
+                                                       disabled:false}]}
+                                                onChange={this.onChangeHandler.bind(this)}
+                                />
                             </div>
                             <div className="col-xs-12 col-sm-4">
                                 <MultiSelect
@@ -146,8 +150,8 @@ export class UserProfileForm extends React.Component {
                                     name="languages"
                                     cancel={true}
                                     label="Languages"
-                                    readOnly={!this.state.editMode}
-                                    selected={this.state.languages}
+                                    readOnly={!this.model.get("editMode")}
+                                    selected={this.model.get("languages")}
                                     onChange={this.onChangeHandler.bind( this )}
                                 />
                             </div>
@@ -158,10 +162,10 @@ export class UserProfileForm extends React.Component {
                                 <Input
                                     type="text"
                                     autoFocus={true}
-                                    value={this.state.name}
+                                    value={this.model.get("name")}
                                     name="name"
                                     placeholder="Type something.."
-                                    readOnly={!this.state.editMode}
+                                    readOnly={!this.model.get("editMode")}
                                     valid={null}
                                     label="Name"
                                     onChange={this.onChangeHandler.bind( this )}
@@ -170,10 +174,10 @@ export class UserProfileForm extends React.Component {
                             <div className="col-xs-12 col-sm-6">
                                 <Input
                                     type="text"
-                                    value={this.state.last_name}
+                                    value={this.model.get("last_name")}
                                     name="last_name"
                                     placeholder="Type something.."
-                                    readOnly={!this.state.editMode}
+                                    readOnly={!this.model.get("editMode")}
                                     valid={null}
                                     label="Last name"
                                     onChange={this.onChangeHandler.bind( this )}

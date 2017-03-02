@@ -22,10 +22,10 @@ export class AuthForm extends React.Component {
     constructor( props: any ) {
         super( props );
         window.form = this;
-        this.model = new Auth();
+        this.model = new Auth({email:"", password:"", editMode:true}, {reactive:true});
 
         //this.model.setAttributes();
-        this.model.observeAttributes({email:"", password:"", editMode:true});
+        //this.model.observeAttributes();
         //this.model.makeReactive("email");
         this.model.observe(['email', 'password', 'editMode'], ()=>this.forceUpdate())
     }
@@ -82,6 +82,9 @@ export class AuthForm extends React.Component {
         ];
     }
 
+    onAddControlsClickHandler(name:string){
+        console.log("AuthForm onAddControlsClickHandler", name);
+    }
 
     render() {
         console.log("AuthForm render", this.model.isAttributesChanged(), this.model.attributes, this.model.defaultAttributes);
@@ -92,7 +95,12 @@ export class AuthForm extends React.Component {
                         <div className="row center-xs">
                             <div className="col-xs-12" >
                                 <Input
-                                    addControls={()=>[{title:"Свободный режим"}, {title:"Добавить"}]}
+                                    addControls={()=>[
+                                        {
+                                            title:"Registration",
+                                            name:"registration",
+                                            onClickHandler:this.onAddControlsClickHandler
+                                        }]}
                                     type="text"
                                     autoFocus={true}
                                     value={this.model.get("email")}
@@ -108,6 +116,13 @@ export class AuthForm extends React.Component {
                         <div className="row center-xs">
                             <div className="col-xs-12">
                                 <Input
+                                    addControls={()=>[
+                                        {
+                                            title:"Forgot password",
+                                            name:"forgot",
+                                            onClickHandler:this.onAddControlsClickHandler
+                                        }
+                                    ]}
                                     type="password"
                                     value={this.model.get("password")}
                                     name="password"

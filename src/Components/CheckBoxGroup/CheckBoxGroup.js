@@ -37,7 +37,13 @@ export class CheckBoxGroup extends React.Component {
     }
 
     getChecked(){
-        return this.props.options.filter(item=>item.value === this.props.checked).pop().label
+        let arr =[];
+        this.props.options.filter(item=>item.checked).forEach(option=>{
+            if (arr.length > 0) arr.push(", ");
+            arr.push(option.label)
+
+        });
+        return arr
     }
 
     render() {

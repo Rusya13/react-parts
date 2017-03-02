@@ -78,7 +78,7 @@ export class InputController extends React.Component {
         return (
             <div className="reactParts__form">
                 <div className="reactParts__form-group-label">
-                    Autentification
+                    Address
                 </div>
 
                 <div className="reactParts__form-row">
@@ -108,10 +108,11 @@ export class InputController extends React.Component {
                             placeholder="Type something.."
                             readOnly={!this.state.editMode}
                             valid={false}
-                            label="Address"
+                            label="Address (with async suggest Russian only)"
                             suggest={this.requestDadataProvider.bind( this )}
                             //autocomplete={true}
                             onChange={this.onChangeHandler.bind( this )}
+                            suggestText="Select address or continue typing"
                         />
                     </div>
                 </div>

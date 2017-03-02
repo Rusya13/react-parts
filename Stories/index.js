@@ -6,7 +6,6 @@ import '../dist/style.css';
 
 import {ButtonController} from './Button';
 import {InputController} from './Input';
-import {IconsController} from './Icon';
 import {SelectController} from './Select';
 import {RadioController} from './Radio';
 import {CheckBoxController} from './CheckBox';
@@ -37,12 +36,6 @@ stories.add('Select', () => {
     )
 });
 
-
-stories.add('Icon', () => {
-    return (
-        <IconsController/>
-    )
-});
 
 stories.add('Radio', () => {
     return (
