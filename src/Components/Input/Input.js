@@ -20,7 +20,7 @@ interface InputProps {
     addControls: () => Array<any>;
     suggest: (value:string | number) => Promise<any>;
     suggestText: ?string;
-    onChange: (o: OnChangeReturnObject) => void;
+    onChange: ?(o: OnChangeReturnObject) => void;
     onKeyUp: (e:any) => void;
     onKeyDown: (e:any) => void;
     onFocus: () => void;
@@ -316,7 +316,7 @@ Input.propTypes = {
     addControls: React.PropTypes.func,
     suggest: React.PropTypes.func,
     suggestText: React.PropTypes.string,
-    onChange: React.PropTypes.func.isRequired,
+    onChange: React.PropTypes.func,
     onKeyUp: React.PropTypes.func,
     onKeyDown: React.PropTypes.func,
     onFocus: React.PropTypes.func,

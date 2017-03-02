@@ -6,12 +6,23 @@ import {Model} from './Model/Model';
 
 class Auth extends Model {
 
+    constructor(props){
+        super(props);
+        this
+    }
+
+    attributes = {
+        email:"",
+        password:"",
+        editMode:true
+    };
+
 }
 
 
 export class AuthForm extends React.Component {
 
-    state: {
+    static state: {
         email: string,
         password: string,
         editMode: boolean,
@@ -22,19 +33,16 @@ export class AuthForm extends React.Component {
     constructor( props: any ) {
         super( props );
         window.form = this;
-        this.model = new Auth({email:"", password:"", editMode:true}, {reactive:true});
-
-        //this.model.setAttributes();
-        //this.model.observeAttributes();
-        //this.model.makeReactive("email");
-        this.model.observe(['email', 'password', 'editMode'], ()=>this.forceUpdate())
+        this.model = new Auth();
+        this.model.observeAttributes();
+        this.model.observe(['password', 'editMode', 'email'], ()=>this.forceUpdate())
     }
 
 
     onChangeHandler( obj: Object ) {
-        console.log( "onChange", obj );
+        //console.log( "onChange", obj );
         this.model.set(obj);
-        console.log("AuthForm onChangeHandler", this.model);
+        //console.log("AuthForm onChangeHandler", this.model);
     }
 
     submitHandler() {
@@ -54,7 +62,7 @@ export class AuthForm extends React.Component {
                     props:{
                         type:"text",
                         autoFocus:true,
-                        value:this.model.get("email"),
+                        value:this.model.get("s"),
                         name:"email",
                         placeholder:"Type something..",
                         readOnly:!this.model.get("editMode"),
@@ -77,17 +85,16 @@ export class AuthForm extends React.Component {
                         label:"Password",
                         onChange:this.onChangeHandler.bind( this ),
                     }
-                }
+                },
             ] }
         ];
     }
-
     onAddControlsClickHandler(name:string){
         console.log("AuthForm onAddControlsClickHandler", name);
     }
 
     render() {
-        console.log("AuthForm render", this.model.isAttributesChanged(), this.model.attributes, this.model.defaultAttributes);
+        console.log("AuthForm render", this.model.attributes);
         return (
             <div className="row center-xs middle-xs">
                 <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -135,7 +142,6 @@ export class AuthForm extends React.Component {
                                 />
                             </div>
                         </div>
-
                         <div className="row end-xs">
                             <div className="col-xs-12 reactParts__form-footer">
                                 <Button caption="Cancel" brand="default" onClick={this.cancelHandler.bind( this )}/>

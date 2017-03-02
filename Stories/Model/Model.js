@@ -2,14 +2,18 @@
 
 import {equal} from './CompareObject';
 
+
+
 export class Model {
     signals:Object;
     attributes:Object;
     defaultAttributes:Object;
+    computed:Object;
 
     constructor(object:?Object, options:?Object){
         this.attributes={};
         this.signals={};
+        this.computed = {};
         if (object){
             if (options && options.reactive){
                 this.observeAttributes(object)
@@ -43,6 +47,7 @@ export class Model {
         Object.defineProperty(this.attributes, key, {
             enumerable:true,
             get(){
+
                 return val
             },
             set(newVal){
@@ -51,10 +56,12 @@ export class Model {
                 that.notify(key)
             }
         });
-        //console.log("Model makeReactive", this.attributes);
     };
 
-    observeAttributes(object:Object){
+    observeAttributes(object:?Object){
+        if (!object) {
+            object = this.attributes;
+        }
         this.setDefaultAttributes(object);
         for (let key in object){
             if (object.hasOwnProperty(key)){
@@ -87,8 +94,5 @@ export class Model {
     isAttributesChanged(){
         return equal(this.attributes, this.defaultAttributes)
     }
-
-
-
 
 }
