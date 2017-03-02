@@ -9,7 +9,7 @@ export class UserProfileForm extends React.Component {
         address: string,
         name: string,
         last_name: string,
-        gender: number,
+        gender: string,
         languages: Array<number>,
         editMode: boolean,
     };
@@ -112,7 +112,7 @@ export class UserProfileForm extends React.Component {
                         <div className="row">
                             <div className="col-xs-12 col-sm-6">
                                 <RadioGroup
-                                    direction="horizontal"
+                                    direction="vertical"
                                     onChange={this.onChangeHandler.bind( this )}
                                     options={genderList}
                                     name="gender" label="Gender" checked={this.state.gender}

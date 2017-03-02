@@ -9,6 +9,7 @@ import {InputController} from './Input';
 import {IconsController} from './Icon';
 import {SelectController} from './Select';
 import {RadioController} from './Radio';
+import {CheckBoxController} from './CheckBox';
 
 import {AuthForm} from './AuthForm'
 import {UserProfileForm} from './UserProfileForm'
@@ -46,6 +47,12 @@ stories.add('Icon', () => {
 stories.add('Radio', () => {
     return (
         <RadioController/>
+    )
+});
+
+stories.add('CheckBox', () => {
+    return (
+        <CheckBoxController/>
     )
 });
 

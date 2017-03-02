@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 import { Button, Input, MultiSelect, Select } from "../dist";
-import {Model} from './Model';
+import {Model} from './Model/Model';
 
 
 class Auth extends Model {

@@ -6,3 +6,5 @@ export {MultiSelect} from './Components/MultiSelect/MultiSelect';
 export {SubmitForm} from './Components/SubmitForm/SubmitForm';
 export {Radio} from './Components/Radio/Radio';
 export {RadioGroup} from './Components/RadioGroup/RadioGroup';
+import {CheckBox} from './Components/CheckBox/CheckBox';
+import {CheckBoxGroup} from './Components/CheckBoxGroup/CheckBoxGroup';

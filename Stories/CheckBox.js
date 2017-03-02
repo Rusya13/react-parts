@@ -1,27 +1,27 @@
 import React from "react";
-import { Radio } from '../dist/Components/Radio/Radio';
-import { RadioGroup } from '../dist/Components/RadioGroup/RadioGroup';
+import { CheckBoxGroup } from '../dist/Components/CheckBoxGroup/CheckBoxGroup';
 import {Model} from './Model/Model';
 
-export class RadioController extends React.Component {
+export class CheckBoxController extends React.Component {
 
     constructor( props ) {
         super( props );
-        this.model = new Model({test: 2},{reactive:true});
+        this.model = new Model({test: [2]},{reactive:true});
         this.model.observe(['test'], ()=>this.forceUpdate())
     }
 
     onChange(e){
-        console.log("Radio onChange", e);
+        console.log("CheckBoxController onChange", e);
         this.model.set(e)
 
     }
 
     render() {
-        console.log("Radio render", this.model);
+        console.log("CheckBoxController render", this.model);
         return (
             <div>
-                <RadioGroup
+                <CheckBoxGroup
+                    direction="vertical"
                     label="Test label"
                     name="test"
                     options={[{label:"Male", value:1}, {label:"Female", value:2}]}
