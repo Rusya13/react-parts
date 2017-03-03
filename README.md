@@ -1,7 +1,8 @@
 # react-parts
-react-parts
 
-## Intallation
+Component library for ReactJS
+
+## Installation
 
 ```npm install```
 
