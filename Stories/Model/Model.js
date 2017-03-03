@@ -10,19 +10,20 @@ export class Model {
     defaultAttributes:?Object;
     computed:?Object;
     computedObjects:?Object;
-    constructor(object:?Object, options:?Object){
+    constructor(object:?Object, options:?boolean){
         this.attributes={};
         this.signals={};
         this.computed = {};
         this.computedObjects = {};
-        if (object){
-            if (options && options.reactive){
-                this.observeAttributes(object)
-            } else {
-                this.setAttributes(object)
-            }
-
+        if (options){
+            // observable
+            this.observeAttributes(object)
+        } else {
+            //  не observable
+            this.setAttributes(object)
         }
+
+
     }
 
 
@@ -43,7 +44,10 @@ export class Model {
 
     // здесь исполняются сигналы по ключу поля (и observer и computed )
     notify(signal:string, computed:boolean){
+        // проверяем есть ли на данный атрибут сигналы
         if(!this.signals[signal] || this.signals[signal].length < 1) return;
+
+        // проходим по каждому сигналу
         this.signals[signal].forEach((signalHandler) => {
             // перед исполнением сигнала проверить
             // какие computed свойства должны отреагировать
@@ -61,27 +65,39 @@ export class Model {
         })
     }
 
-    makeReactive=(key:string, obj:Object = this.attributes)=>{
+
+    // и ставим слушатель на set и get
+    makeReactive=(key:string, obj:Object)=>{
+
         let val = obj[key];
         let that = this;
         Object.defineProperty(this.attributes, key, {
             enumerable:true,
             get(){
+                // узнаем какие аттрибуты запрашивает computed
                 that.checkFunc(null, "call", key);
+
                 return val
             },
             set(newVal){
                 val = newVal;
+
+                // передаем событие в observer
                 that.notify(key)
             }
         });
     };
 
+
+    // делаем аттрибуты observable
     observeAttributes(object:?Object){
         if (!object) {
             object = this.attributes;
         }
+        // копируем исходные значения
         this.setDefaultAttributes(object);
+
+        // проходим по каждому аттрибуту
         for (let key in object){
             if (object.hasOwnProperty(key)){
                 this.makeReactive(key, object)
@@ -142,6 +158,9 @@ export class Model {
 
     //Get
     get(key:string){
+
+
+        // если хотим получить computed
         if (this.computed && this.computed[key]){
             // подписать свойство на обновление (set) Observable
             // начать запись
@@ -151,6 +170,8 @@ export class Model {
             // закончить запись
             this.checkFunc(key, "end");
             //console.log("Model get total", this.computedObjects);
+
+            // возвращаем значение
             return func
         }
         return this.attributes[key]

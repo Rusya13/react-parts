@@ -17,22 +17,23 @@ export class CheckBoxController extends React.Component {
     }
 
     render() {
-        //console.log("CheckBoxController render", this.model);
         return (
             <div>
                 <CheckBoxGroup
-                    direction="horizontal"
+                    direction="vertical"
                     label="Test label"
                     options={
                         [
-                            {label:"Male", name:"gender_male", checked:this.model.get("gender_male"), disabled:true},
+                            {label:"Male", name:"gender_male", checked:this.model.get("gender_male"), disabled:false},
+                            {label:"Female", name:"gender_female", checked:this.model.get("gender_female")},
                             {label:"Female", name:"gender_female", checked:this.model.get("gender_female")}
                         ]
                     }
+                    type="button"
                     onChange={this.onChange.bind(this)}
 
                 />
-                <CheckBox onClickHandler={this.onChange.bind(this)} name="smoke" label="Non-smoking" checked={this.model.get("smoke")}/>
+                <CheckBox disabled={false} onClickHandler={this.onChange.bind(this)} name="smoke" label="Non-smoking" checked={this.model.get("smoke")} type="button"/>
             </div>
 
         )

@@ -6,20 +6,21 @@ export class CheckBoxGroup extends React.Component {
 
     props: {
         direction: ?("vertical" | "horizontal"),
-        readOnly?:boolean,
+        readOnly?: boolean,
         options: Array<any>,
         onChange: () => void,
         checked: ?Array<any>,
-        label: ?string
+        label: ?string,
+        type: ?string
     };
 
-    onChange( o:Object ) {
+    onChange( o: Object ) {
 
         this.props.onChange( o )
     }
 
-    isChecked(value:number | string){
-        return this.props.checked && this.props.checked.some(item=>item===value)
+    isChecked( value: number | string ) {
+        return this.props.checked && this.props.checked.some( item => item === value )
     }
 
     renderOptions() {
@@ -31,36 +32,41 @@ export class CheckBoxGroup extends React.Component {
                 label={option.label}
                 name={option.name}
                 disabled={option.disabled}
+                type={this.props.type}
             />
         } )
 
     }
 
-    getChecked(){
-        let arr =[];
-        this.props.options.filter(item=>item.checked).forEach(option=>{
-            if (arr.length > 0) arr.push(", ");
-            arr.push(option.label)
+    getChecked() {
+        let arr = [];
+        this.props.options.filter( item => item.checked ).forEach( option => {
+            if ( arr.length > 0 ) arr.push( ", " );
+            arr.push( option.label )
 
-        });
+        } );
         return arr
     }
 
     render() {
         //console.log( "RadioGroup render" );
-        let className="reactParts__checkbox-group";
-        if (this.props.direction === "vertical"){
-            className += " vertical"
-        }
+        let className = "reactParts__checkbox-group";
+        //if ( this.props.direction === "vertical" ) {
+        //    className += " vertical"
+        //}
 
         return (
-            <div className="reactParts__radio-group-wrap">
+            <div className={"reactParts__checkbox-group-wrap "+
+            ((this.props.type === "button") ? " button" : "") +
+            ((this.props.direction === "vertical" && this.props.type !== "button")? " vertical ":"")
+
+            }>
                 {this.props.label &&
-                <label className="reactParts__label" >{this.props.label}</label>}
+                <label className="reactParts__label">{this.props.label}</label>}
                 <div className={className}>
                     {(this.props.readOnly)
-                        ?this.getChecked()
-                        :this.renderOptions()
+                        ? this.getChecked()
+                        : this.renderOptions()
                     }
                 </div>
 
@@ -70,10 +76,11 @@ export class CheckBoxGroup extends React.Component {
 }
 
 CheckBoxGroup.propTypes = {
-    direction: React.PropTypes.oneOf(["vertical", "horizontal"]),
-    readOnly: React.PropTypes.bool,
-    label:    React.PropTypes.string,
-    options:  React.PropTypes.array.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    checked:  React.PropTypes.array
+    direction: React.PropTypes.oneOf( [ "vertical", "horizontal" ] ),
+    readOnly:  React.PropTypes.bool,
+    label:     React.PropTypes.string,
+    options:   React.PropTypes.array.isRequired,
+    onChange:  React.PropTypes.func.isRequired,
+    checked:   React.PropTypes.array,
+    type:      React.PropTypes.oneOf( [ "normal", "buttons" ] )
 };

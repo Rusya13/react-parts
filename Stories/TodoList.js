@@ -16,11 +16,23 @@ class Item extends Model {
 }
 
 
+
+function observable(target, key, descriptor  ) {
+    //const origFn = descriptor.value.bind(target);
+    console.log("TodoList observable", target);
+    console.log("TodoList observable", key);
+    console.log("TodoList observable", descriptor);
+
+
+}
+
+
+
+
 class Todo extends Model {
 
-
     attributes = {
-        todo:    [] = [],
+        todo:[] = [],
         newTodo: "",
         filter:  ""
     };
@@ -52,7 +64,6 @@ class Todo extends Model {
                 }
             }
         } );
-
         this.set( { todo: this.get( "todo" ) } );
         //console.log("TodoList makeDone", this);
     }
@@ -66,7 +77,8 @@ class Todo extends Model {
     addNewTodo() {
         let arr     = this.get( "todo" );
         let newTodo = this.get( "newTodo" );
-        arr.push( new Item( { label: newTodo, done: false, id: Date.now() } ) );
+        arr.push( new Item( { label: newTodo, done: false, id: Date.now() }, true ) );
+
         this.set( { todo: arr } );
         this.set( { newTodo: "" } );
     }
@@ -83,15 +95,21 @@ export class TodoList extends React.Component {
     constructor( props ) {
         super( props );
         this.todo = new Todo();
-        this.todo.observeAttributes();
+        //this.todo.observeAttributes();
         this.todo.observe(
             [
                 "todo",
+                "unDoneTodo",
                 "filteredTodo",
                 "newTodo",
                 "filter",
                 "doneTodo"
-            ], () => this.forceUpdate() )
+            ], () => this.forceUpdate() );
+        //this.todo.observe("todo", null)
+        this.todo.observe("filter", ()=>this.log())
+    }
+    log(){
+        console.log("TodoList log");
     }
 
     onChangeHandler( obj ) {
@@ -118,7 +136,7 @@ export class TodoList extends React.Component {
     }
 
     render() {
-        //console.log("TodoList render", todo);
+        //console.log("TodoList render", this.todo);
         return (
             <div className="row center-xs middle-xs">
                 <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">

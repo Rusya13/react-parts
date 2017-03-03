@@ -29,7 +29,7 @@ export class UserProfileForm extends React.Component {
             school:false,
             university:true,
             college: false
-        }, {reactive:true});
+        }, true);
         this.model.observe(
             ['email', 'address', 'name', 'last_name','gender', 'languages', 'editMode', 'school', 'university', 'college'],
             ()=>this.forceUpdate())
