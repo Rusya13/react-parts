@@ -5,11 +5,11 @@ import {equal} from './CompareObject';
 
 
 export class Model {
-    signals:Object;
+    signals:?Object;
     attributes:Object;
-    defaultAttributes:Object;
-    computed:Object;
-    computedObjects:Object;
+    defaultAttributes:?Object;
+    computed:?Object;
+    computedObjects:?Object;
     constructor(object:?Object, options:?Object){
         this.attributes={};
         this.signals={};

@@ -14,6 +14,8 @@ import {AuthForm} from './AuthForm'
 import {UserProfileForm} from './UserProfileForm'
 import {TodoList} from './TodoList'
 
+import './Styles/flexboxgrid.css';
+
 
 const stories = storiesOf('React-parts', module);
 

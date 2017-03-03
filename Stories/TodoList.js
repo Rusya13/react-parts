@@ -4,42 +4,55 @@ import { CheckBoxGroup, Input } from "../dist";
 import { Model } from "./Model/Model";
 import { Button } from "../src/Components/Button/Button";
 
+
+class Item extends Model {
+    makeDone() {
+        this.set( { done: true } )
+    }
+
+    makeUnDone() {
+        this.set( { done: false } )
+    }
+}
+
+
 class Todo extends Model {
 
 
     attributes = {
-        todo:    [] = [
-            { label: "Make observable", done: true, id: 0 },
-            { label: "Make computed", done: false, id: 1 }
-        ],
+        todo:    [] = [],
         newTodo: "",
         filter:  ""
     };
 
-    computed = {
+    computed: Object = {
         filteredTodo: () => {
             let matchesFilter = new RegExp( this.get( "filter" ), "i" );
             return this.get( "todo" ).filter( item => {
-                return !this.get( "filter" ) || matchesFilter.test( item.label )
+                return !this.get( "filter" ) || matchesFilter.test( item.get("label") )
             } );
-
         },
         doneTodo:     () => {
-            return this.get( "todo" ).filter( item => item.done ) || [];
+            return this.get( "todo" ).filter( item => item.get("done") ) || [];
         },
         unDoneTodo:   () => {
-            return this.get( "todo" ).filter( item => !item.done ) || [];
+            return this.get( "todo" ).filter( item => !item.get("done") ) || [];
         }
-    }
+    };
 
     makeDone( obj: Object ) {
         let itemId = Object.keys( obj )[ 0 ];
         let value  = obj[ itemId ];
         this.get( "todo" ).forEach( item => {
-            if ( Number( itemId ) === item.id ) {
-                item.done = value
+            if ( Number( itemId ) === item.get("id") ) {
+                if(value){
+                    item.makeDone()
+                } else {
+                    item.makeUnDone()
+                }
             }
         } );
+
         this.set( { todo: this.get( "todo" ) } );
         //console.log("TodoList makeDone", this);
     }
@@ -53,53 +66,59 @@ class Todo extends Model {
     addNewTodo() {
         let arr     = this.get( "todo" );
         let newTodo = this.get( "newTodo" );
-        arr.push( { label: newTodo, done: false, id: Math.random() } );
+        arr.push( new Item( { label: newTodo, done: false, id: Date.now() } ) );
         this.set( { todo: arr } );
         this.set( { newTodo: "" } );
     }
 
 }
 
-let todo = new Todo();
-todo.observeAttributes();
+
+
+
 
 
 export class TodoList extends React.Component {
 
     constructor( props ) {
         super( props );
-        todo.observe( [ "todo", "filteredTodo", "newTodo", "filter", "doneTodo" ], () => this.forceUpdate() )
-        //todo.observe( [ "todo" ], null)
-
+        this.todo = new Todo();
+        this.todo.observeAttributes();
+        this.todo.observe(
+            [
+                "todo",
+                "filteredTodo",
+                "newTodo",
+                "filter",
+                "doneTodo"
+            ], () => this.forceUpdate() )
     }
 
     onChangeHandler( obj ) {
-        //console.log( "TodoList onChangeHandler", obj );
-        todo.makeDone( obj )
+        this.todo.makeDone( obj )
 
     }
 
     onInputChange( obj ) {
-        //console.log( "TodoList onInputChange", obj );
-        todo.set( obj )
+        this.todo.set( obj )
     }
 
     onEnterNewTodo( e ) {
         if ( e.key === "Enter" ) {
-            todo.addNewTodo()
+            this.todo.addNewTodo()
         }
     }
 
     onInputFilterChange( obj ) {
-        todo.set( obj )
+        this.todo.set( obj )
     }
 
     onClickDone() {
-        todo.clearDone()
+        this.todo.clearDone()
     }
 
     render() {
-        console.log( "TodoList render", todo );
+        //console.log("TodoList render", todo);
         return (
             <div className="row center-xs middle-xs">
                 <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -107,7 +126,7 @@ export class TodoList extends React.Component {
                         <Input
                             label="New task:"
                             name="newTodo"
-                            value={todo.get( "newTodo" )}
+                            value={this.todo.get( "newTodo" )}
                             onChange={this.onInputChange.bind( this )}
                             onKeyDown={this.onEnterNewTodo.bind( this )}
 
@@ -115,18 +134,18 @@ export class TodoList extends React.Component {
                         <Input
                             label="Filter"
                             name="filter"
-                            value={todo.get( "filter" )}
+                            value={this.todo.get( "filter" )}
                             onChange={this.onInputFilterChange.bind( this )}
 
                         />
                         <CheckBoxGroup
                             label="Tasks:"
                             direction="vertical"
-                            options={todo.get( "filteredTodo" ).map( item => {
-                                return { label: item.label, name: item.id, checked: item.done }
+                            options={this.todo.get( "filteredTodo" ).map( item => {
+                                return { label: item.get("label"), name: item.get("id"), checked: item.get("done") }
                             } )}
                             onChange={this.onChangeHandler.bind( this )}/>
-                        <Button caption="Clear done" brand="success" disabled={todo.get( "doneTodo" ).length === 0}
+                        <Button caption="Clear done" brand="success" disabled={this.todo.get( "doneTodo" ).length === 0}
                                 onClick={this.onClickDone.bind( this )}/>
 
                     </div>
