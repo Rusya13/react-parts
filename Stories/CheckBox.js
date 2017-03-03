@@ -21,12 +21,11 @@ export class CheckBoxController extends React.Component {
             <div>
                 <CheckBoxGroup
                     direction="vertical"
-                    label="Test label"
                     options={
                         [
-                            {label:"Male", name:"gender_male", checked:this.model.get("gender_male"), disabled:false},
+                            {label:"Male", name:"gender_male", checked:this.model.get("gender_male"), disabled:true},
                             {label:"Female", name:"gender_female", checked:this.model.get("gender_female")},
-                            {label:"Female", name:"gender_female", checked:this.model.get("gender_female")}
+                            {label:"Female", name:"gender_female", checked:true, disabled:true}
                         ]
                     }
                     type="button"

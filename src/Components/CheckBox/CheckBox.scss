@@ -59,42 +59,45 @@
 
   &.button.checked{
     border: solid 1px #e6e8eb;
-    background-color: #fff;
-    box-shadow: inset 0 1px 5px rgba(0,0,0,.125);
+    border-left: 1px solid #e6e8eb;
+    background-color: #377df3;
+    //box-shadow: inset 0 1px 5px rgba(0,0,0,.125);
     .reactParts__checkbox-label{
-      color: #212121;
+      color: #fff;
     }
   }
   &.button.checked.disabled{
 
     border: solid 1px #e6e8eb;
-    background-color: #e6e8eb;
-
+    background-color: #377df3;
+    opacity: 0.6;
     .reactParts__checkbox-label {
-      //color: #fff;
+      color: #fff;
+      opacity: 0.8;
     }
 
   }
 
   &.button.disabled{
     cursor: not-allowed;
-    border: solid 1px #377df3;
-    background-color: #377df3;
-    color: #212121;
-    opacity: 0.5;
+    border: solid 1px #e6e8eb;
+    background-color: #fff;
+    .reactParts__checkbox-label{
+      opacity: 0.5;
+    }
   }
 
   &.button {
 
-    border-radius: $btn-border-radius;
+    border-radius: 2px;
     padding: 8px 10px;
     font-size: 14px;
 
-    background-color: #377df3;
+    background-color: #fff;
     cursor: pointer;
     outline: none;
     white-space: nowrap;
-    border: 1px solid #377df3;
+    border: 1px solid #e6e8eb;
 
 
 
@@ -106,20 +109,10 @@
     }
     .reactParts__checkbox-label{
       margin:0;
-      color: #fff;
+      color: #212121;
     }
 
-    &[disabled] {
-      background-color: #f3f7f9;
-      border-color: #f3f7f9;
-      color: #a3afb7;
 
-      &:hover {
-        background-color: #f3f7f9;
-        border-color: #f3f7f9;
-        color: #a3afb7;
-      }
-    }
   }
 
 

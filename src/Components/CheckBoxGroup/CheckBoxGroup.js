@@ -35,7 +35,6 @@ export class CheckBoxGroup extends React.Component {
                 type={this.props.type}
             />
         } )
-
     }
 
     getChecked() {
@@ -43,22 +42,16 @@ export class CheckBoxGroup extends React.Component {
         this.props.options.filter( item => item.checked ).forEach( option => {
             if ( arr.length > 0 ) arr.push( ", " );
             arr.push( option.label )
-
         } );
         return arr
     }
 
     render() {
-        //console.log( "RadioGroup render" );
         let className = "reactParts__checkbox-group";
-        //if ( this.props.direction === "vertical" ) {
-        //    className += " vertical"
-        //}
-
         return (
-            <div className={"reactParts__checkbox-group-wrap "+
+            <div className={"reactParts__checkbox-group-wrap " +
             ((this.props.type === "button") ? " button" : "") +
-            ((this.props.direction === "vertical" && this.props.type !== "button")? " vertical ":"")
+            ((this.props.direction === "vertical" && this.props.type !== "button") ? " vertical " : "")
 
             }>
                 {this.props.label &&
@@ -82,5 +75,5 @@ CheckBoxGroup.propTypes = {
     options:   React.PropTypes.array.isRequired,
     onChange:  React.PropTypes.func.isRequired,
     checked:   React.PropTypes.array,
-    type:      React.PropTypes.oneOf( [ "normal", "buttons" ] )
+    type:      React.PropTypes.oneOf( [ "normal", "button" ] )
 };

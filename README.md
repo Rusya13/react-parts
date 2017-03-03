@@ -12,7 +12,15 @@ Component library for ReactJS
 
 Open localhost:9001 and Enjoy
 
-## Last release
+## Last releases
+
+### v0.0.3
+
+#### Fixes
+
+- CheckBoxGroup styles
+- CheckBox styles
+
 
 ### v0.0.2
 
