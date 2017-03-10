@@ -12,7 +12,8 @@ export class SelectController extends React.Component {
         super( props );
         this.state={
             testMultiSelect:[1],
-            testSelect:2
+            testSelect: null,
+            testSearch: null,
         }
     }
 
@@ -24,40 +25,115 @@ export class SelectController extends React.Component {
         this.setState(ob);
     }
 
+    list(searchValue){
+        return [
+            {firstName:"Den", id:1, value:"1 "+ searchValue + " First selection"},
+            {firstName:"Mark", id:2, value:"2 "+ searchValue + " Second selection"},
+            {firstName:"Gala", id:3, value:"3 "+ searchValue + " super long selection"},
+            {firstName:"Anna", id:4, value:"4 "+ searchValue + " First selection"},
+            {firstName:"Daria", id:5, value:"5 "+ searchValue + " Second selection"},
+            {firstName:"Elena", id:6, value:"6 "+ searchValue + " super long selection"},
+            {firstName:"Irina", id:7, value:"7 "+ searchValue + " First selection"},
+            {firstName:"Mary", id:8, value:"8 "+ searchValue + " Second selection"},
+            {firstName:"Scooter", id:9, value:"9 "+ searchValue + " super long selection"},
+            {firstName:"Boris", id:10, value:"10 "+ searchValue + " First selection"},
+            {firstName:"John", id:11, value:"11 "+ searchValue + " Second selection"},
+            {firstName:"Lexy", id:12, value:"12 "+ searchValue + " super long selection"}
+        ];
+    }
+
+    async listProvider(searchValue){
+        console.log("Select listProvider", searchValue);
+        return await this.list( searchValue)
+
+
+    }
+
+    listItemRender(item, i, list){
+        return <div>
+            {item.key} {item.firstName} {item.value} {i}
+        </div>
+    }
+
+    inputRender(item){
+        console.log("Select inputRender", item);
+        return <div style={{display:"flex", flexDirection:"column"}}>
+            <div>
+                {item && "Name:"+ item.firstName}
+            </div>
+            <div>
+                {item && "Name:"+ item.firstName}
+            </div>
+        </div>
+    }
+
     render() {
         //console.log("Select render");
         let list = [
-            {key:1, value:"First selection"},
-            {key:2, value:"Second selection"},
-            {key:3, value:"super long selection"}
+            {firstName:"Den", key:1, value:"1 First selection"},
+            {firstName:"Mark", key:2, value:"2 Second selection"},
+            {firstName:"Gala", key:3, value:"3 super long selection"},
+            {firstName:"Anna", key:4, value:"4 First selection"},
+            {firstName:"Daria", key:5, value:"5 Second selection"},
+            {firstName:"Elena", key:6, value:"6 super long selection"},
+            {firstName:"Irina", key:7, value:"7 First selection"},
+            {firstName:"Mary", key:8, value:"8 Second selection"},
+            {firstName:"Scooter", key:9, value:"9 super long selection"},
+            {firstName:"Boris", key:10, value:"10 First selection"},
+            {firstName:"John", key:11, value:"11 Second selection"},
+            {firstName:"Lexy", key:12, value:"12 super long selection"}
             ];
         return (
             <div className="reactParts__form">
-                <div className="reactParts__form-row">
-                    <Select
-                        list={list}
-                        placeholder="select"
-                        name="testSelect"
-                        cancel={true}
+                <div className="row">
+                    <div className="col-xs-3">
+                        <Select
+                            list={list}
+                            placeholder="select"
+                            name="testSelect"
+                            cancel={true}
+                            uniqueKey="key"
+                            selected={this.state.testSelect}
+                            onChange={this.onChange.bind(this)}
+                            noResultsText="No more elements in the list. Try to change the search request.."
+                            labelKey="firstName"
+                        />
+                    </div>
 
-                        selected={this.state.testSelect}
-                        onChange={this.onChange.bind(this)}
-
-                    />
                 </div>
-                <div className="reactParts__form-row">
-                    <MultiSelect
-                        list={list}
-                        placeholder="multiselect"
-                        name="testMultiSelect"
-                        cancel={true}
-                        multiSelect={true}
-                        onChange={this.onChange.bind(this)}
-                        selected={this.state.testMultiSelect}
-                    />
+                <div className="row">
+                    <div className="col-xs-3">
+                        <MultiSelect
+                            list={list}
+                            placeholder="multiselect"
+                            name="testMultiSelect"
+                            cancel={true}
+                            multiSelect={true}
+                            onChange={this.onChange.bind(this)}
+                            selected={this.state.testMultiSelect}
+                        />
+                    </div>
                 </div>
 
+                <div className="row">
+                    <div className="col-xs-3">
+                        <Select
+                            list={this.listProvider.bind(this)}
+                            placeholder="select"
+                            name="testSearch"
+                            cancel={true}
+                            label = "With search"
+                            selected={this.state.testSearch}
+                            onChange={this.onChange.bind(this)}
+                            uniqueKey="id"
+                            labelKey="firstName"
+                            listItemRender={this.listItemRender.bind(this)}
+                            inputRender={this.inputRender.bind(this)}
 
+                        />
+                    </div>
+
+                </div>
             </div>
         )
     }

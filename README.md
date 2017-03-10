@@ -14,6 +14,23 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+### v0.0.4
+
+#### New Features
+
+##### Select
+
+- onChange now returns an item instead of value of "key" field
+- noResultsText
+- list can be async
+- keyboard works in the list
+- custom listItemRender
+- custom inputRender
+- uniqueKey (id by default)
+- labelKey (value by default)
+
+
 ### v0.0.3
 
 #### Fixes
@@ -32,3 +49,8 @@ Open localhost:9001 and Enjoy
 #### Fixes
 
 - CheckBoxGroup styles
+
+
+## TODO
+
+- scroll list when use keyboard in the list
