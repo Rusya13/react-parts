@@ -15,7 +15,7 @@ export class RadioGroup extends React.Component {
     };
 
     onChange( value: string | number ) {
-        console.log( "RadioGroup onChange", value );
+        //console.log( "RadioGroup onChange", value );
         let o: Object        = {};
         o[ this.props.name ] = value;
         this.props.onChange( o )

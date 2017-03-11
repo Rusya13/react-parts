@@ -66,7 +66,7 @@ export class Select extends React.Component {
 
 
     selectItem( item: ListObject ) {
-        console.log("Select selectItem", item);
+        //console.log("Select selectItem", item);
         this.setState( { stateList: false } );
 
 
@@ -84,7 +84,7 @@ export class Select extends React.Component {
 
     openList() {
         if(this.state.stateList) return
-        console.log( "Select openList" );
+        //console.log( "Select openList" );
         if ( this.props.disabled ) return;
 
         if ( !Array.isArray( this.props.list ) ) {
@@ -224,10 +224,10 @@ export class Select extends React.Component {
     }
 
     onChangeInputSearch( e ) {
-        console.log( "Select onChangeInputSearch", this.searchInput.value );
+        //console.log( "Select onChangeInputSearch", this.searchInput.value );
         if ( !Array.isArray( this.props.list ) ) {
             this.props.list( this.searchInput.value ).then( res => {
-                console.log( "Select onChangeInputSearch", res );
+                //console.log( "Select onChangeInputSearch", res );
                 this.setState( { list: res } )
             } )
 

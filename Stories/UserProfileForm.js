@@ -88,6 +88,7 @@ export class UserProfileForm extends React.Component {
                                     valid={false}
                                     label="Email"
                                     onChange={this.onChangeHandler.bind( this )}
+                                    cancel={true}
                                 />
                             </div>
                         </div>
@@ -104,6 +105,7 @@ export class UserProfileForm extends React.Component {
                                     valid={false}
                                     label="Address"
                                     onChange={this.onChangeHandler.bind( this )}
+                                    cancel={true}
                                 />
                             </div>
                         </div>
@@ -169,6 +171,7 @@ export class UserProfileForm extends React.Component {
                                     valid={null}
                                     label="Name"
                                     onChange={this.onChangeHandler.bind( this )}
+
                                 />
                             </div>
                             <div className="col-xs-12 col-sm-6">
@@ -181,6 +184,7 @@ export class UserProfileForm extends React.Component {
                                     valid={null}
                                     label="Last name"
                                     onChange={this.onChangeHandler.bind( this )}
+
                                 />
                             </div>
                         </div>

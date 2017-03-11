@@ -38,6 +38,9 @@
     top:10px;
     right: 10px;
   }
+  &.cancel{
+    padding: 8px 28px 8px 8px;
+  }
 
 }
 
@@ -147,4 +150,13 @@
     background: #62a8ea;
     color: #fff;
   }
+}
+
+.reactParts__input__cancel{
+  position: absolute;
+  right: 9px;
+
+  bottom: 9px;
+
+  fill: #B3C3C7;
 }

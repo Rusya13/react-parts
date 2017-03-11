@@ -42,7 +42,7 @@ export class InputController extends React.Component {
 
 
     onChangeHandler( obj: Object ) {
-        console.log( "onChange", obj );
+        //console.log( "onChange", obj );
         this.setState( obj )
     }
 
@@ -59,7 +59,7 @@ export class InputController extends React.Component {
         if ( value.length > 1 ) {
             try {
                 let res = await this.suggestDadataProvider.request( value );
-                console.log( "Input suggestProvider", res.suggestions );
+                //console.log( "Input suggestProvider", res.suggestions );
                 return res.suggestions
 
             } catch (e){
@@ -115,6 +115,7 @@ export class InputController extends React.Component {
                             onChange={this.onChangeHandler.bind( this )}
                             suggestText="Select address or continue typing"
                             tabIndex={1}
+                            cancel={true}
                         />
                     </div>
                 </div>

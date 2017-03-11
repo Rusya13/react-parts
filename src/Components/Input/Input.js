@@ -43,6 +43,7 @@ interface InputProps {
     label: string;
     autocomplete:boolean;
     tabIndex:?number;
+    cancel:?boolean;
 }
 
 
@@ -264,10 +265,17 @@ export class Input extends React.Component {
             return <div className="reactParts__input-addControls-item" onClick={item.onClickHandler && item.onClickHandler.bind(this, item.name)} key={Math.random()}>{item.title}</div>
         })
     }
-
+    cancelSelected() {
+        let newSelected             = "";
+        this.state.suggest = [];
+        let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
+        this.props.onChange && this.props.onChange( c );
+    };
 
     render() {
         let InputSimpleClassName = "reactParts__input";
+        if (this.props.cancel) InputSimpleClassName += " cancel";
+
         let valid = this.props.valid;
 
         //console.log("Input render", this.props.type);
@@ -278,6 +286,13 @@ export class Input extends React.Component {
                 InputSimpleClassName += " invalid"
             }
         }
+        let cancel = this.props.cancel &&
+            <svg onClick={this.cancelSelected.bind( this )} width="18" height="18" viewBox="0 0 24 24"
+                 className="icon reactParts__input__cancel" key="cancel">
+                <path
+                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z">
+                </path>
+            </svg>;
 
         if (this.props.className) InputSimpleClassName += ` ${this.props.className}`;
         return (
@@ -305,6 +320,7 @@ export class Input extends React.Component {
                            ref={(input) => {this.input = input;}}
                            tabIndex={this.props.tabIndex}
                         />,
+                        cancel,
                         this.props.addControls && (this.props.addControls().length> 0) &&
                             <div key="addControls" className="reactParts__input-addControls">{this.renderControls()}</div>,
                         this.state.isSuggestOpen && (this.state.suggest.length>0) && <ul ref={( ul ) => {this.ul = ul}} key="suggest" className="reactParts__input-suggest-list">
@@ -345,6 +361,7 @@ Input.propTypes = {
     castTo: React.PropTypes.string,
     label: React.PropTypes.string,
     autocomplete:React.PropTypes.bool,
-    tabIndex:React.PropTypes.number
+    tabIndex:React.PropTypes.number,
+    cancel: React.PropTypes.bool
 };
 

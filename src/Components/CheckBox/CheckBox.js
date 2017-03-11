@@ -21,7 +21,7 @@ export class CheckBox extends React.Component {
     }
 
     render() {
-        console.log("CheckBox render", this.props.type);
+        //console.log("CheckBox render", this.props.type);
         return (
             <label
                 className={"reactParts__checkbox-wrap " + ((this.props.checked) ? " checked " : "")+ ((this.props.type === "button") ? " button" : "") + ((this.props.disabled) ? " disabled" : "")}>

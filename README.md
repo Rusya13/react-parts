@@ -38,6 +38,7 @@ Open localhost:9001 and Enjoy
 - remove suggestText
 - list scrolls when use arrows
 - added tabIndex
+- add cancel
 
 ### v0.0.3
 
