@@ -56,7 +56,7 @@ export class InputController extends React.Component {
 
 
     async requestDadataProvider( value: string ) {
-        if ( value.length > 2 ) {
+        if ( value.length > 1 ) {
             try {
                 let res = await this.suggestDadataProvider.request( value );
                 console.log( "Input suggestProvider", res.suggestions );
@@ -85,7 +85,7 @@ export class InputController extends React.Component {
                     <div className="col" style={{ flex: "0 1 50%" }}>
                         <Input
                             type="text"
-                            autoFocus={true}
+                            //autoFocus={true}
                             value={this.state.email}
                             name="email"
                             placeholder="Type something.."
@@ -94,6 +94,7 @@ export class InputController extends React.Component {
                             label="Email"
                             //autocomplete={true}
                             onChange={this.onChangeHandler.bind( this )}
+                            tabIndex={2}
                         />
                     </div>
                 </div>
@@ -102,7 +103,7 @@ export class InputController extends React.Component {
                     <div className="col" style={{ flex: "0 1 50%" }}>
                         <Input
                             type="text"
-                            autoFocus={true}
+                            //autoFocus={true}
                             value={this.state.address}
                             name="address"
                             placeholder="Type something.."
@@ -113,6 +114,7 @@ export class InputController extends React.Component {
                             //autocomplete={true}
                             onChange={this.onChangeHandler.bind( this )}
                             suggestText="Select address or continue typing"
+                            tabIndex={1}
                         />
                     </div>
                 </div>

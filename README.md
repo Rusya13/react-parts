@@ -33,6 +33,12 @@ Open localhost:9001 and Enjoy
 - list scrolls when use arrows
 - added tabIndex
 
+##### Input
+
+- remove suggestText
+- list scrolls when use arrows
+- added tabIndex
+
 ### v0.0.3
 
 #### Fixes

@@ -17,7 +17,7 @@ export class DadataProvider {
                     'Content-Type':  'application/json',
                     'Authorization': 'Token ' + this.api_key
                 },
-                body:    JSON.stringify( { query: input, count: 5 } )
+                body:    JSON.stringify( { query: input, count: 10 } )
             } )
         .then( response => {
             //console.log("Input response", response);

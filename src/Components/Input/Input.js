@@ -23,7 +23,6 @@ type OnChangeReturnObject = ReturnObject | number | string;
 interface InputProps {
     addControls: () => Array<any>;
     suggest: (value:string | number) => Promise<any>;
-    suggestText: ?string;
     onChange: ?(o: OnChangeReturnObject) => void;
     onKeyUp: (e:any) => void;
     onKeyDown: (e:any) => void;
@@ -43,6 +42,7 @@ interface InputProps {
     castTo: string;
     label: string;
     autocomplete:boolean;
+    tabIndex:?number;
 }
 
 
@@ -102,12 +102,25 @@ export class Input extends React.Component {
         }
         if (key === 'ArrowUp'){
             //console.log("Input setNewPosition up");
-            if (currentPosition === 0){
+            if ( currentPosition === 0 || currentPosition === -1 ){
                 newPosition = this.state.suggest.length-1;
             } else {
                 newPosition = currentPosition - 1;
             }
         }
+
+        let ul: Element = this.ul;
+        let pointed;
+        if ( ul.children && ul.children.length > 0 ) {
+            pointed = ul.children[ newPosition ];
+            if ( pointed.offsetTop >= (ul.offsetHeight + ul.scrollTop) ) {
+                ul.scrollTop = pointed.offsetTop - ul.offsetHeight + pointed.offsetHeight
+            }
+            if ( pointed.offsetTop <= ul.scrollTop ) {
+                ul.scrollTop = pointed.offsetTop;
+            }
+        }
+
 
         this.setState({pointSelect:newPosition})
     }
@@ -242,9 +255,7 @@ export class Input extends React.Component {
                 {item.value}
             </li>
         });
-        this.props.suggestText && list.unshift(<li key="pop" className="reactParts__input-suggest-list-system-item">
-            {this.props.suggestText}
-        </li>);
+
         return list;
     }
 
@@ -292,10 +303,11 @@ export class Input extends React.Component {
                            onFocus={this.focusOn.bind(this)}
                            onBlur={this.focusOff.bind(this)}
                            ref={(input) => {this.input = input;}}
+                           tabIndex={this.props.tabIndex}
                         />,
                         this.props.addControls && (this.props.addControls().length> 0) &&
                             <div key="addControls" className="reactParts__input-addControls">{this.renderControls()}</div>,
-                        this.state.isSuggestOpen && (this.state.suggest.length>0) && <ul key="suggest" className="reactParts__input-suggest-list">
+                        this.state.isSuggestOpen && (this.state.suggest.length>0) && <ul ref={( ul ) => {this.ul = ul}} key="suggest" className="reactParts__input-suggest-list">
                             {this.renderSuggestionsList()}
                         </ul>
                     ]
@@ -314,7 +326,6 @@ Input.defaultProps={
 Input.propTypes = {
     addControls: React.PropTypes.func,
     suggest: React.PropTypes.func,
-    suggestText: React.PropTypes.string,
     onChange: React.PropTypes.func,
     onKeyUp: React.PropTypes.func,
     onKeyDown: React.PropTypes.func,
@@ -333,6 +344,7 @@ Input.propTypes = {
     value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
     castTo: React.PropTypes.string,
     label: React.PropTypes.string,
-    autocomplete:React.PropTypes.bool
+    autocomplete:React.PropTypes.bool,
+    tabIndex:React.PropTypes.number
 };
 
