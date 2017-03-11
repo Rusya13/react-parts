@@ -28,8 +28,9 @@ class SelectProps {
     uniqueKey: string;
     labelKey: string;
     listItemRender: ( obj: Object, i: number, list: Array<any> ) => any;
-    inputRender: ( obj: Object) => any;
-    noResultsText:?string
+    inputRender: ( obj: Object ) => any;
+    noResultsText: ?string;
+    onKeyDown:(e:KeyboardEvent, value:string)=>void;
 }
 
 export class Select extends React.Component {
@@ -86,7 +87,7 @@ export class Select extends React.Component {
         if ( this.props.disabled ) return;
         if ( !Array.isArray( this.props.list ) ) {
             this.props.list().then( res => {
-                console.log( "Select res", res );
+                //console.log( "Select res", res );
                 this.setState( { list: res } )
             } )
         }
@@ -97,6 +98,7 @@ export class Select extends React.Component {
     closeList() {
         console.log( "Select closeList" );
         document.removeEventListener( "click", this.closeList );
+        if ( this.searchInput ) this.searchInput.value = "";
         this.setState( { stateList: false } );
     };
 
@@ -108,18 +110,12 @@ export class Select extends React.Component {
 
     renderList() {
         let list = this.state.list;
-        //console.log( "Select renderList", list );
-
         if ( Array.isArray( this.props.list ) && this.searchInput ) {
             list = list.filter( item => {
                 return item[ this.props.labelKey ].includes( this.searchInput.value )
             } )
         }
-
         let newList = list.map( ( selItem, i, list ) => {
-            //console.log( "Select selItem", selItem, selItem[this.props.uniqueKey], this.props.selected && this.props.selected[ this.props.uniqueKey ]);
-
-
             return <li key={selItem[ this.props.uniqueKey ]}
                        className={"reactParts__select-list-item" + (( selItem[ this.props.uniqueKey ] === (this.props.selected && this.props.selected[ this.props.uniqueKey ] )) ? " selected" : "")
                        + ((i === this.state.pointSelect) ? " pointed" : "")
@@ -128,7 +124,6 @@ export class Select extends React.Component {
                 {(this.props.listItemRender) ? this.props.listItemRender( selItem, i, list ) : selItem[ this.props.labelKey ]}
             </li>
         } );
-
         return (newList.length !== 0) ? newList :
             <li className="reactParts__select-list-item empty" key="empty">{this.props.noResultsText}</li>
     }
@@ -137,8 +132,8 @@ export class Select extends React.Component {
     setNewPosition( key: string ) {
         let currentPosition: number = this.state.pointSelect;
         let newPosition: number     = -1;
+
         if ( key === 'ArrowDown' ) {
-            //console.log("Input setNewPosition down");
             if ( currentPosition === this.state.list.length - 1 ) {
                 newPosition = 0;
             } else {
@@ -146,32 +141,40 @@ export class Select extends React.Component {
             }
         }
         if ( key === 'ArrowUp' ) {
-            //console.log("Input setNewPosition up");
-            if ( currentPosition === 0 ) {
+            if ( currentPosition === 0 || currentPosition === -1 ) {
                 newPosition = this.state.list.length - 1;
             } else {
                 newPosition = currentPosition - 1;
             }
         }
-
+        let ul: Element = this.ul;
+        let pointed;
+        if ( ul.children && ul.children.length > 0 ) {
+            pointed = ul.children[ newPosition ];
+            if ( pointed.offsetTop >= (ul.offsetHeight + ul.scrollTop) ) {
+                ul.scrollTop = pointed.offsetTop - ul.offsetHeight + pointed.offsetHeight
+            }
+            if ( pointed.offsetTop <= ul.scrollTop ) {
+                ul.scrollTop = pointed.offsetTop;
+            }
+        }
         this.setState( { pointSelect: newPosition } )
     }
 
     onKeyDown( e: KeyboardEvent ) {
-
-        //console.log("Input onKeyDown", startPos);
-        let list = this.state.list;
-
+        if (this.props.onKeyDown) this.props.onKeyDown(e, this.searchInput.value);
         switch ( e.key ) {
             case 'ArrowDown':
             case 'ArrowUp':
-                //this.input.selectionStart = startPos;
                 this.setNewPosition( e.key );
                 break;
             case 'Enter':
-                let item               = this.state.list[ this.state.pointSelect ];
-                this.state.pointSelect = -1;
-                this.selectItem( item );
+                if ( this.state.pointSelect !== -1 ) {
+                    let item               = this.state.list[ this.state.pointSelect ];
+                    this.state.pointSelect = -1;
+                    this.selectItem( item );
+
+                }
                 this.closeList();
                 break;
             case 'Escape':
@@ -179,29 +182,28 @@ export class Select extends React.Component {
                 break;
             default:
         }
+
+
+
     }
 
 
     renderInput() {
         let selItem = this.props.selected;
 
-
-
-
         let input = <input autoFocus={true} ref={( input ) => {this.searchInput = input;}}
                            onKeyDown={this.onKeyDown.bind( this )}
                            className="reactParts__select-input" onChange={this.onChangeInputSearch.bind( this )}/>;
 
-
         return <div
             className="reactParts__select-selected">{
-                (this.searchInput && this.searchInput.value)
-                    ? null
-                    :(
-                        (this.props.inputRender)
-                            ? this.props.inputRender(selItem)
-                            :(selItem && selItem[ this.props.labelKey ])
-                ) } {(this.state.stateList) ? input : null}</div>
+            (this.searchInput && this.searchInput.value)
+                ? null
+                : (
+                (this.props.inputRender)
+                    ? this.props.inputRender( selItem )
+                    : (selItem && selItem[ this.props.labelKey ])
+            ) } {(this.state.stateList) ? input : null}</div>
     }
 
     onChangeInputSearch( e ) {
@@ -214,11 +216,12 @@ export class Select extends React.Component {
 
         }
         this.setState( { showInput: true } )
-
     }
 
 
     render() {
+
+
         let selectClassName = 'reactParts__select';
         if ( this.state.stateList ) {
             selectClassName += ' focus';
@@ -239,7 +242,7 @@ export class Select extends React.Component {
                 </svg>;
         }
         if ( this.state.stateList ) {
-            list = <ul className="reactParts__select-list">{this.renderList()}</ul>;
+            list = <ul ref={( ul ) => {this.ul = ul}} className="reactParts__select-list">{this.renderList()}</ul>;
         }
 
         return (
@@ -278,7 +281,8 @@ Select.propTypes = {
     labelKey:       React.PropTypes.string,
     listItemRender: React.PropTypes.func,
     inputRender:    React.PropTypes.func,
-    noResultsText: React.PropTypes.string
+    noResultsText:  React.PropTypes.string,
+    onKeyDown:      React.PropTypes.func
 }
 
 Select.defaultProps = {
@@ -295,5 +299,6 @@ Select.defaultProps = {
     labelKey:       "value",
     listItemRender: null,
     inputRender:    null,
-    noResultsText: "Nothing to show"
+    noResultsText:  "Nothing to show",
+    onKeyDown:      null
 }

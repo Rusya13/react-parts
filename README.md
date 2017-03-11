@@ -29,7 +29,8 @@ Open localhost:9001 and Enjoy
 - custom inputRender
 - uniqueKey (id by default)
 - labelKey (value by default)
-
+- onKeyDown event with (e:KeyboardEvent, value: SearchInput.value)
+- list scrolls when use arrows
 
 ### v0.0.3
 
@@ -53,4 +54,4 @@ Open localhost:9001 and Enjoy
 
 ## TODO
 
-- scroll list when use keyboard in the list
+

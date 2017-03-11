@@ -25,6 +25,8 @@ export class SelectController extends React.Component {
         this.setState(ob);
     }
 
+
+
     list(searchValue){
         return [
             {firstName:"Den", id:1, value:"1 "+ searchValue + " First selection"},
@@ -56,7 +58,7 @@ export class SelectController extends React.Component {
     }
 
     inputRender(item){
-        console.log("Select inputRender", item);
+        //console.log("Select inputRender", item);
         return <div style={{display:"flex", flexDirection:"column"}}>
             <div>
                 {item && "Name:"+ item.firstName}
@@ -65,6 +67,13 @@ export class SelectController extends React.Component {
                 {item && "Name:"+ item.firstName}
             </div>
         </div>
+    }
+
+    keyDownHandler(e:KeyboardEvent, value:string){
+        if (e.key==="Enter"){
+            console.log("Select keyDownHandler", value);
+
+        }
     }
 
     render() {
@@ -128,7 +137,7 @@ export class SelectController extends React.Component {
                             uniqueKey="id"
                             labelKey="firstName"
                             listItemRender={this.listItemRender.bind(this)}
-                            inputRender={this.inputRender.bind(this)}
+                            onKeyDown={this.keyDownHandler.bind(this)}
 
                         />
                     </div>
