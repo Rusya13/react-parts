@@ -31,6 +31,7 @@ Open localhost:9001 and Enjoy
 - labelKey (value by default)
 - onKeyDown event with (e:KeyboardEvent, value: SearchInput.value)
 - list scrolls when use arrows
+- added tabIndex
 
 ### v0.0.3
 

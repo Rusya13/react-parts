@@ -106,6 +106,7 @@ export class SelectController extends React.Component {
                             onChange={this.onChange.bind(this)}
                             noResultsText="No more elements in the list. Try to change the search request.."
                             labelKey="firstName"
+                            tabIndex={2}
                         />
                     </div>
 
@@ -138,7 +139,7 @@ export class SelectController extends React.Component {
                             labelKey="firstName"
                             listItemRender={this.listItemRender.bind(this)}
                             onKeyDown={this.keyDownHandler.bind(this)}
-
+                            tabIndex={1}
                         />
                     </div>
 

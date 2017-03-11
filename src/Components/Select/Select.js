@@ -31,6 +31,7 @@ class SelectProps {
     inputRender: ( obj: Object ) => any;
     noResultsText: ?string;
     onKeyDown:(e:KeyboardEvent, value:string)=>void;
+    tabIndex:?number;
 }
 
 export class Select extends React.Component {
@@ -65,6 +66,7 @@ export class Select extends React.Component {
 
 
     selectItem( item: ListObject ) {
+        console.log("Select selectItem", item);
         this.setState( { stateList: false } );
 
 
@@ -75,16 +77,16 @@ export class Select extends React.Component {
         this.props.onChange && this.props.onChange( c );
     };
 
-    onGlobalClick( e: any ) {
-        console.log( "Select onGlobalClick", e );
-        if ( this.state.stateList ) {
-            this.closeList();
-        }
-    };
+    onClickHandler(){
+        this.searchInput.focus()
+    }
 
-    openList( event: any ) {
+
+    openList() {
+        if(this.state.stateList) return
         console.log( "Select openList" );
         if ( this.props.disabled ) return;
+
         if ( !Array.isArray( this.props.list ) ) {
             this.props.list().then( res => {
                 //console.log( "Select res", res );
@@ -92,13 +94,15 @@ export class Select extends React.Component {
             } )
         }
         this.setState( { stateList: true } );
-        document.addEventListener( "click", this.closeList );
+
     };
 
+
+
     closeList() {
-        console.log( "Select closeList" );
-        document.removeEventListener( "click", this.closeList );
+
         if ( this.searchInput ) this.searchInput.value = "";
+        this.searchInput.blur();
         this.setState( { stateList: false } );
     };
 
@@ -120,7 +124,7 @@ export class Select extends React.Component {
                        className={"reactParts__select-list-item" + (( selItem[ this.props.uniqueKey ] === (this.props.selected && this.props.selected[ this.props.uniqueKey ] )) ? " selected" : "")
                        + ((i === this.state.pointSelect) ? " pointed" : "")
                        }
-                       onClick={this.selectItem.bind( this, selItem )}>
+                       onMouseDown={this.selectItem.bind( this, selItem )}>
                 {(this.props.listItemRender) ? this.props.listItemRender( selItem, i, list ) : selItem[ this.props.labelKey ]}
             </li>
         } );
@@ -188,11 +192,24 @@ export class Select extends React.Component {
     }
 
 
+    onInputBlur(){
+
+        this.closeList()
+    }
+
+    onInputFocus(e:Event){
+       if (this.state.stateList) return
+        this.openList()
+    }
+
     renderInput() {
         let selItem = this.props.selected;
 
-        let input = <input autoFocus={true} ref={( input ) => {this.searchInput = input;}}
+        let input = <input ref={( input ) => {this.searchInput = input;}}
+                           tabIndex={this.props.tabIndex}
                            onKeyDown={this.onKeyDown.bind( this )}
+                           onBlur={this.onInputBlur.bind(this)}
+                           onFocus={this.onInputFocus.bind(this)}
                            className="reactParts__select-input" onChange={this.onChangeInputSearch.bind( this )}/>;
 
         return <div
@@ -203,7 +220,10 @@ export class Select extends React.Component {
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
                     : (selItem && selItem[ this.props.labelKey ])
-            ) } {(this.state.stateList) ? input : null}</div>
+            ) }
+            {input}
+            {/*{(this.state.stateList) ? input : null}*/}
+            </div>
     }
 
     onChangeInputSearch( e ) {
@@ -251,7 +271,7 @@ export class Select extends React.Component {
                 <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?
                     <div className="reactParts__select-selected">{this.props.selected[ this.props.labelKey ]}</div> :
-                    <div className={selectClassName} onClick={this.openList.bind( this )}>
+                    <div className={selectClassName} onClick={this.onClickHandler.bind( this )}>
                         {placeholder}
                         {this.renderInput()}
                         {cancel}
@@ -282,7 +302,8 @@ Select.propTypes = {
     listItemRender: React.PropTypes.func,
     inputRender:    React.PropTypes.func,
     noResultsText:  React.PropTypes.string,
-    onKeyDown:      React.PropTypes.func
+    onKeyDown:      React.PropTypes.func,
+    tabIndex: React.PropTypes.number
 }
 
 Select.defaultProps = {
@@ -300,5 +321,6 @@ Select.defaultProps = {
     listItemRender: null,
     inputRender:    null,
     noResultsText:  "Nothing to show",
-    onKeyDown:      null
+    onKeyDown:      null,
+
 }
