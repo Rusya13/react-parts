@@ -31,8 +31,9 @@ class MultiSelectProps {
     onKeyDown: ( e: KeyboardEvent ) => void;
     labelKey: ?string;
     uniqueKey: ?string;
-    addControls:()=>Array<any>;
+    addControls: () => Array<any>;
     listItemRender: ( obj: Object, i: number, list: Array<any> ) => any;
+    inputItemRender: ( ) => any;
 }
 
 export class MultiSelect extends React.Component {
@@ -62,10 +63,12 @@ export class MultiSelect extends React.Component {
     }
 
 
-    renderControls(){
-        return this.props.addControls().map(item=>{
-            return <div className="reactParts__multi-select-addControls-item" onClick={item.onClickHandler && item.onClickHandler.bind(this, item.name)} key={Math.random()}>{item.title}</div>
-        })
+    renderControls() {
+        return this.props.addControls().map( item => {
+            return <div className="reactParts__multi-select-addControls-item"
+                        onClick={item.onClickHandler && item.onClickHandler.bind( this, item.name )}
+                        key={Math.random()}>{item.title}</div>
+        } )
     }
 
     selectItem( item: ListObject ) {
@@ -80,8 +83,8 @@ export class MultiSelect extends React.Component {
     };
 
     removeItem( item: Object ) {
-        //console.log("Select removeItem", item, this.props.selected);
-        if ( this.props.selected instanceof Array ) {
+        console.log("Select removeItem", item);
+        if ( Array.isArray(this.props.selected) ) {
             let newSelected             = this.props.selected.filter( selItem => selItem[ this.props.uniqueKey ] !== item[ this.props.uniqueKey ] );
             let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
             this.props.onChange && this.props.onChange( c );
@@ -153,9 +156,15 @@ export class MultiSelect extends React.Component {
                 return null
             }
             return this.props.selected.map( ( selItem: Object, i: number ) => {
+                if (this.props.inputItemRender){
+                    return this.props.inputItemRender(selItem, i, this.removeItem.bind(this))
+                }
                 return (
                     <div className="reactParts__multi-select-box-item" key={i}>
-                        {selItem[ this.props.labelKey ]}
+                        <span className="reactParts__multi-select-box-item-value">
+                              {selItem[ this.props.labelKey ]}
+                        </span>
+
                         <svg onClick={this.removeItem.bind( this, selItem )} width="16" height="16" viewBox="0 0 24 24"
                              className="reactParts__multi-select-box-item-remove break">
                             <path
@@ -293,8 +302,9 @@ export class MultiSelect extends React.Component {
         }
         let placeholder, list, cancel, addControls;
 
-        if (this.props.addControls && (this.props.addControls().length> 0) ){
-            addControls = <div key="addControls" className="reactParts__multi-select-addControls">{this.renderControls()}</div>;
+        if ( this.props.addControls && (this.props.addControls().length > 0) ) {
+            addControls =
+                <div key="addControls" className="reactParts__multi-select-addControls">{this.renderControls()}</div>;
         }
 
         let input = <input ref={( input ) => {this.searchInput = input;}}
@@ -351,21 +361,22 @@ export class MultiSelect extends React.Component {
 
 
 MultiSelect.propTypes = {
-    readOnly:    React.PropTypes.bool,
-    cancel:      React.PropTypes.bool,
-    onChange:    React.PropTypes.func,
-    disabled:    React.PropTypes.bool,
-    placeholder: React.PropTypes.string,
-    name:        React.PropTypes.string,
-    list:        React.PropTypes.array,
-    selected:    React.PropTypes.array,
-    label:       React.PropTypes.string,
-    tabIndex:    React.PropTypes.bool,
-    onKeyDown:   React.PropTypes.func,
-    uniqueKey:   React.PropTypes.string,
-    labelKey:    React.PropTypes.string,
-    addControls: React.PropTypes.func,
-    listItemRender: React.PropTypes.func,
+    readOnly:       React.PropTypes.bool,
+    cancel:         React.PropTypes.bool,
+    onChange:       React.PropTypes.func,
+    disabled:        React.PropTypes.bool,
+    placeholder:     React.PropTypes.string,
+    name:            React.PropTypes.string,
+    list:            React.PropTypes.array,
+    selected:        React.PropTypes.array,
+    label:           React.PropTypes.string,
+    tabIndex:        React.PropTypes.bool,
+    onKeyDown:       React.PropTypes.func,
+    uniqueKey:       React.PropTypes.string,
+    labelKey:        React.PropTypes.string,
+    addControls:     React.PropTypes.func,
+    listItemRender:  React.PropTypes.func,
+    inputItemRender: React.PropTypes.func
 };
 
 MultiSelect.defaultProps = {

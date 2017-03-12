@@ -28,6 +28,7 @@ Open localhost:9001 and Enjoy
 - addControls
 - added tabIndex
 - custom listItemRender
+- custom inputItemRender
 - added tabIndex
 - add cancel
 

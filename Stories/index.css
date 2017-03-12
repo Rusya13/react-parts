@@ -87,3 +87,31 @@ body{
 .button-wrapper{
     padding: 5px;
 }
+
+.reactParts__multi-select-box-custom-item{
+    border: 1px solid rgba(0, 126, 255, 0.24);
+    color: #007eff;
+    border-radius: 2px;
+    margin-left: 3px;
+    position: relative;
+    margin-top: 3px;
+    background: #ebf5ff;
+    display: inline-block;
+
+}
+.reactParts__multi-select-box-custom-item-remove {
+    fill:#007eff;
+    cursor: pointer;
+    margin:auto;
+    /*right: 5px;*/
+
+}
+.reactParts__multi-select-box-custom-item-value{
+    display: table-cell;
+    padding: 3px 5px 3px 5px;
+}
+.reactParts__multi-select-box-custom-item-icon{
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3px;
+}

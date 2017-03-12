@@ -24,12 +24,13 @@
   color: #1b2733;
   margin: 0;
   width: 100%;
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   outline: none;
   box-sizing: border-box;
   border: 1px solid #E6E8EB;
   border-radius: 2px;
-  padding: 4px 45px 2px 8px;
+  padding: 4px 50px 2px 8px;
 
   .reactParts__multi-select-placeholder{
     padding: 4px 0 6px 0;
@@ -76,6 +77,7 @@
     margin-bottom: -4px;
     fill: $control-text;
     cursor: pointer;
+
   }
 }
 
@@ -157,9 +159,9 @@
 .reactParts__multi-select-input{
   //position: absolute;
   display: inline-block;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  /* left: 0; */
+  /* top: 0; */
+  /* bottom: 0; */
   font-size: 14px;
   letter-spacing: 0.3px;
   color: #1b2733;
@@ -167,6 +169,7 @@
   outline: none;
   border: none;
   padding: 5px 8px 5px 0;
+  margin-left: 3px;
 }
 
 .reactParts__multi-select-addControls{
