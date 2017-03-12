@@ -30,8 +30,9 @@ class SelectProps {
     listItemRender: ( obj: Object, i: number, list: Array<any> ) => any;
     inputRender: ( obj: Object ) => any;
     noResultsText: ?string;
-    onKeyDown:(e:KeyboardEvent, value:string)=>void;
-    tabIndex:?number;
+    onKeyDown: ( e: KeyboardEvent, value: string ) => void;
+    tabIndex: ?number;
+    addControls:()=>Array<any>;
 }
 
 export class Select extends React.Component {
@@ -52,7 +53,7 @@ export class Select extends React.Component {
 
         this.state = {
             stateList:   false,
-            showInput:   false,
+            //showInput:   false,
             list:        (Array.isArray( props.list )) ? props.list : [],
             pointSelect: -1
         };
@@ -77,26 +78,29 @@ export class Select extends React.Component {
         this.props.onChange && this.props.onChange( c );
     };
 
-    onClickHandler(){
+    onClickHandler() {
         this.searchInput.focus()
     }
 
 
+    renderControls(){
+        return this.props.addControls().map(item=>{
+            return <div className="reactParts__select-addControls-item" onClick={item.onClickHandler && item.onClickHandler.bind(this, item.name)} key={Math.random()}>{item.title}</div>
+        })
+    }
+
     openList() {
-        if(this.state.stateList) return
-        //console.log( "Select openList" );
+        if ( this.state.stateList ) return;
         if ( this.props.disabled ) return;
 
         if ( !Array.isArray( this.props.list ) ) {
             this.props.list().then( res => {
-                //console.log( "Select res", res );
                 this.setState( { list: res } )
             } )
         }
         this.setState( { stateList: true } );
 
     };
-
 
 
     closeList() {
@@ -113,10 +117,13 @@ export class Select extends React.Component {
     };
 
     renderList() {
-        let list = this.state.list;
+        let list          = this.state.list;
+        let matchesFilter = new RegExp( this.searchInput.value, "i" );
+
         if ( Array.isArray( this.props.list ) && this.searchInput ) {
             list = list.filter( item => {
-                return item[ this.props.labelKey ].includes( this.searchInput.value )
+
+                return !this.searchInput.value || matchesFilter.test( item[ this.props.labelKey ] )
             } )
         }
         let newList = list.map( ( selItem, i, list ) => {
@@ -166,7 +173,7 @@ export class Select extends React.Component {
     }
 
     onKeyDown( e: KeyboardEvent ) {
-        if (this.props.onKeyDown) this.props.onKeyDown(e, this.searchInput.value);
+        if ( this.props.onKeyDown ) this.props.onKeyDown( e, this.searchInput.value );
         switch ( e.key ) {
             case 'ArrowDown':
             case 'ArrowUp':
@@ -189,13 +196,13 @@ export class Select extends React.Component {
     }
 
 
-    onInputBlur(){
+    onInputBlur() {
 
         this.closeList()
     }
 
-    onInputFocus(e:Event){
-       if (this.state.stateList) return
+    onInputFocus( e: Event ) {
+        if ( this.state.stateList ) return
         this.openList()
     }
 
@@ -205,8 +212,8 @@ export class Select extends React.Component {
         let input = <input ref={( input ) => {this.searchInput = input;}}
                            tabIndex={this.props.tabIndex}
                            onKeyDown={this.onKeyDown.bind( this )}
-                           onBlur={this.onInputBlur.bind(this)}
-                           onFocus={this.onInputFocus.bind(this)}
+                           onBlur={this.onInputBlur.bind( this )}
+                           onFocus={this.onInputFocus.bind( this )}
                            className="reactParts__select-input" onChange={this.onChangeInputSearch.bind( this )}/>;
 
         return <div
@@ -220,7 +227,7 @@ export class Select extends React.Component {
             ) }
             {input}
             {/*{(this.state.stateList) ? input : null}*/}
-            </div>
+        </div>
     }
 
     onChangeInputSearch( e ) {
@@ -230,9 +237,10 @@ export class Select extends React.Component {
                 //console.log( "Select onChangeInputSearch", res );
                 this.setState( { list: res } )
             } )
-
+        } else {
+            this.forceUpdate()
         }
-        this.setState( { showInput: true } )
+
     }
 
 
@@ -243,7 +251,12 @@ export class Select extends React.Component {
         if ( this.state.stateList ) {
             selectClassName += ' focus';
         }
-        let placeholder, list, cancel;
+        let placeholder, list, cancel, addControls;
+
+        if (this.props.addControls && (this.props.addControls().length> 0) ){
+            addControls = <div key="addControls" className="reactParts__select-addControls">{this.renderControls()}</div>;
+        }
+
 
         if ( !this.props.selected && (!this.searchInput || (this.searchInput && this.searchInput.value.length === 0 )) ) {
             placeholder = <div className="reactParts__select-placeholder">{this.props.placeholder}</div>
@@ -264,6 +277,7 @@ export class Select extends React.Component {
 
         return (
             <div ref={( input ) => {this.input = input;}} className="reactParts__select-wrap">
+                {addControls}
                 {this.props.label &&
                 <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?
@@ -272,6 +286,7 @@ export class Select extends React.Component {
                         {placeholder}
                         {this.renderInput()}
                         {cancel}
+
                         <svg width="24" height="24" viewBox="0 0 24 24" className="icon reactParts__select__arrow">
                             <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z">
                             </path>
@@ -300,7 +315,8 @@ Select.propTypes = {
     inputRender:    React.PropTypes.func,
     noResultsText:  React.PropTypes.string,
     onKeyDown:      React.PropTypes.func,
-    tabIndex: React.PropTypes.number
+    tabIndex:       React.PropTypes.number,
+    addControls:    React.PropTypes.func,
 }
 
 Select.defaultProps = {
@@ -319,5 +335,5 @@ Select.defaultProps = {
     inputRender:    null,
     noResultsText:  "Nothing to show",
     onKeyDown:      null,
-
+    addControls:    null,
 }

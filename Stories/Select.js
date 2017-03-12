@@ -11,7 +11,7 @@ export class SelectController extends React.Component {
     constructor( props ) {
         super( props );
         this.state={
-            testMultiSelect:[1],
+            testMultiSelect:[{firstName:"Anna", key:4, value:"4 First selection"}],
             testSelect: null,
             testSearch: null,
         }
@@ -75,6 +75,9 @@ export class SelectController extends React.Component {
 
         }
     }
+    onAddControlsClickHandler(){
+        console.log("Select onAddControlsClickHandler");
+    }
 
     render() {
         //console.log("Select render");
@@ -97,6 +100,13 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-3">
                         <Select
+                            label="Label"
+                            addControls={()=>[
+                                {
+                                    title:"Registration",
+                                    name:"registration",
+                                    onClickHandler:this.onAddControlsClickHandler
+                                }]}
                             list={list}
                             placeholder="select"
                             name="testSelect"
@@ -114,6 +124,13 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-3">
                         <MultiSelect
+                            label="Label"
+                            addControls={()=>[
+                                {
+                                    title:"Registration",
+                                    name:"registration",
+                                    onClickHandler:this.onAddControlsClickHandler
+                                }]}
                             list={list}
                             placeholder="multiselect"
                             name="testMultiSelect"
@@ -121,6 +138,9 @@ export class SelectController extends React.Component {
                             multiSelect={true}
                             onChange={this.onChange.bind(this)}
                             selected={this.state.testMultiSelect}
+                            labelKey="firstName"
+                            uniqueKey="key"
+                            listItemRender={this.listItemRender.bind(this)}
                         />
                     </div>
                 </div>

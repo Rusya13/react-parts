@@ -152,6 +152,7 @@ export class UserProfileForm extends React.Component {
                                     name="languages"
                                     cancel={true}
                                     label="Languages"
+                                    uniqueKey="key"
                                     readOnly={!this.model.get("editMode")}
                                     selected={this.model.get("languages")}
                                     onChange={this.onChangeHandler.bind( this )}

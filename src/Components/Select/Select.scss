@@ -158,3 +158,18 @@
   border: none;
   padding-left: 8px;
 }
+
+.reactParts__select-addControls{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color:#377df3;
+  font-size: 12px;
+  font-weight: 400;
+  display: flex;
+  justify-content: flex-end;
+  &-item{
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}

@@ -19,6 +19,18 @@ Open localhost:9001 and Enjoy
 
 #### New Features
 
+##### MultiSelect
+
+- list can be async
+- keyboard works in the list
+- uniqueKey (id by default)
+- labelKey (value by default)
+- addControls
+- added tabIndex
+- custom listItemRender
+- added tabIndex
+- add cancel
+
 ##### Select
 
 - onChange now returns an item instead of value of "key" field
@@ -32,6 +44,7 @@ Open localhost:9001 and Enjoy
 - onKeyDown event with (e:KeyboardEvent, value: SearchInput.value)
 - list scrolls when use arrows
 - added tabIndex
+- addControls
 
 ##### Input
 
