@@ -162,6 +162,7 @@ export class SelectController extends React.Component {
                             uniqueKey="key"
                             listItemRender={this.listItemRender.bind( this )}
                             inputItemRender={this.customItemMultiSelect}
+                            tabIndex={3}
                         />
                     </div>
                 </div>

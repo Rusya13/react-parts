@@ -14,6 +14,13 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.0.5
+
+#### Fixes
+
+- SubmitForm removed
+- fixed tabIndex in MultiSelect
+
 
 ### v0.0.4
 

@@ -27,7 +27,7 @@ class MultiSelectProps {
     list: Array<ListObject>;
     selected: Selected;
     label: string;
-    tabIndex: ?boolean;
+    tabIndex: ?number;
     onKeyDown: ( e: KeyboardEvent ) => void;
     labelKey: ?string;
     uniqueKey: ?string;
@@ -370,7 +370,7 @@ MultiSelect.propTypes = {
     list:            React.PropTypes.array,
     selected:        React.PropTypes.array,
     label:           React.PropTypes.string,
-    tabIndex:        React.PropTypes.bool,
+    tabIndex:        React.PropTypes.number,
     onKeyDown:       React.PropTypes.func,
     uniqueKey:       React.PropTypes.string,
     labelKey:        React.PropTypes.string,
