@@ -1,5 +1,6 @@
 import React from "react";
-import { MultiSelect, Select, SelectAsync } from "../dist";
+import { MultiSelect, Select, SelectAsync, MultiSelectAsync } from "../dist";
+
 
 
 //TODO make active
@@ -11,10 +12,11 @@ export class SelectController extends React.Component {
         super( props );
         this.listProvider = this.listProvider.bind(this);
         this.state = {
-            testMultiSelect: [ { firstName: "Anna", key: 4, value: "4 First selection" } ],
+            testMultiSelect: [ 4, 5 ],
             testSelect:      3,
             testSelectAsync: null,
             testSearch:      null,
+            testMultiSelectAsync:      null,
         }
     }
 
@@ -48,6 +50,7 @@ export class SelectController extends React.Component {
         list = list.filter( item => {
             return !searchValue || matchesFilter.test( item.firstName )
         } );
+        console.log("Select list", list);
         return list
     }
 
@@ -80,7 +83,7 @@ export class SelectController extends React.Component {
         return (
             <div className="reactParts__multi-select-box-custom-item" key={index}>
                 <div className="reactParts__multi-select-box-custom-item-value">
-                    {item.firstName}
+                    {item}
                 </div>
                 <div className="reactParts__multi-select-box-custom-item-icon">
                     <svg onClick={() => {
@@ -163,13 +166,7 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-4">
                         <MultiSelect
-                            label="Label"
-                            addControls={() => [
-                                {
-                                    title:          "Registration",
-                                    name:           "registration",
-                                    onClickHandler: this.onAddControlsClickHandler
-                                } ]}
+                            label="Multiselect"
                             list={list}
                             placeholder="multiselect"
                             name="testMultiSelect"
@@ -179,13 +176,28 @@ export class SelectController extends React.Component {
                             selected={this.state.testMultiSelect}
                             labelKey="firstName"
                             uniqueKey="key"
-                            listItemRender={this.listItemRender.bind( this )}s
-                            inputItemRender={this.customItemMultiSelect}
+                            listItemRender={this.listItemRender.bind( this )}
                             tabIndex={3}
                         />
                     </div>
                 </div>
-
+                <div className="row">
+                    <div className="col-xs-4">
+                        <MultiSelectAsync
+                            label="MultiselectAsync"
+                            list={this.listProvider}
+                            placeholder="multiselect"
+                            name="testMultiSelectAsync"
+                            cancel={true}
+                            multiSelect={true}
+                            onChange={this.onChange.bind( this )}
+                            selected={this.state.testMultiSelectAsync}
+                            labelKey="firstName"
+                            listItemRender={this.listItemRender.bind( this )}
+                            tabIndex={3}
+                        />
+                    </div>
+                </div>
             </div>
         )
     }

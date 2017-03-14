@@ -32,7 +32,7 @@ class SelectProps {
     noResultsText: ?string;
     onKeyDown: ( e: KeyboardEvent, value: string ) => void;
     tabIndex: ?number;
-    addControls:()=>Array<any>;
+    addControls: () => Array<any>;
 }
 
 export class Select extends React.Component {
@@ -67,7 +67,7 @@ export class Select extends React.Component {
 
     selectItem( item: ListObject ) {
         this.setState( { stateList: false } );
-        let c: OnChangeReturnObject = this._createReturnObject( this.props.name, item[this.props.uniqueKey] );
+        let c: OnChangeReturnObject = this._createReturnObject( this.props.name, item[ this.props.uniqueKey ] );
         this.props.onChange && this.props.onChange( c );
     };
 
@@ -75,10 +75,12 @@ export class Select extends React.Component {
         this.searchInput.focus()
     }
 
-    renderControls(){
-        return this.props.addControls().map(item=>{
-            return <div className="reactParts__select-addControls-item" onClick={item.onClickHandler && item.onClickHandler.bind(this, item.name)} key={Math.random()}>{item.title}</div>
-        })
+    renderControls() {
+        return this.props.addControls().map( item => {
+            return <div className="reactParts__select-addControls-item"
+                        onClick={item.onClickHandler && item.onClickHandler.bind( this, item.name )}
+                        key={Math.random()}>{item.title}</div>
+        } )
     }
 
     openList() {
@@ -124,12 +126,26 @@ export class Select extends React.Component {
     }
 
 
+    clearedList() {
+
+        let matchesFilter = new RegExp( this.searchInput.value, "i" );
+
+
+        let list: Array<ListObject> = this.state.list;
+
+        return list.filter( item => {
+            return !this.searchInput.value || matchesFilter.test( item[ this.props.labelKey ] )
+        } );
+
+
+    }
+
     setNewPosition( key: string ) {
         let currentPosition: number = this.state.pointSelect;
         let newPosition: number     = -1;
 
         if ( key === 'ArrowDown' ) {
-            if ( currentPosition === this.state.list.length - 1 ) {
+            if ( currentPosition === this.clearedList().length - 1 ) {
                 newPosition = 0;
             } else {
                 newPosition = currentPosition + 1;
@@ -137,7 +153,7 @@ export class Select extends React.Component {
         }
         if ( key === 'ArrowUp' ) {
             if ( currentPosition === 0 || currentPosition === -1 ) {
-                newPosition = this.state.list.length - 1;
+                newPosition = this.clearedList().length - 1;
             } else {
                 newPosition = currentPosition - 1;
             }
@@ -146,7 +162,8 @@ export class Select extends React.Component {
         let pointed;
         if ( ul.children && ul.children.length > 0 ) {
             pointed = ul.children[ newPosition ];
-            console.log("Select setNewPosition", pointed, newPosition);
+
+            console.log( "Select setNewPosition", pointed, newPosition );
             if ( pointed.offsetTop >= (ul.offsetHeight + ul.scrollTop) ) {
                 ul.scrollTop = pointed.offsetTop - ul.offsetHeight + pointed.offsetHeight
             }
@@ -167,11 +184,7 @@ export class Select extends React.Component {
             case 'Enter':
                 if ( this.state.pointSelect !== -1 ) {
 
-                    let matchesFilter = new RegExp( this.searchInput.value, "i" );
-                    let list = this.state.list.filter( item => {
-                        return !this.searchInput.value || matchesFilter.test( item[ this.props.labelKey ] )
-                    } );
-                    let item               = list[ this.state.pointSelect ];
+                    let item = this.clearedList()[ this.state.pointSelect ];
 
 
                     this.state.pointSelect = -1;
@@ -226,10 +239,10 @@ export class Select extends React.Component {
         this.forceUpdate()
     }
 
-    getSelected(){
-        let item = this.props.list.filter(item=>item[this.props.uniqueKey] === this.props.selected)[0];
-        console.log("Select getSelected", item);
-        return item[this.props.labelKey]
+    getSelected() {
+        let item = this.props.list.filter( item => item[ this.props.uniqueKey ] === this.props.selected )[ 0 ];
+        console.log( "Select getSelected", item );
+        return item[ this.props.labelKey ]
     }
 
 
@@ -242,8 +255,9 @@ export class Select extends React.Component {
         }
         let placeholder, list, cancel, addControls;
 
-        if (this.props.addControls && (this.props.addControls().length> 0) ){
-            addControls = <div key="addControls" className="reactParts__select-addControls">{this.renderControls()}</div>;
+        if ( this.props.addControls && (this.props.addControls().length > 0) ) {
+            addControls =
+                <div key="addControls" className="reactParts__select-addControls">{this.renderControls()}</div>;
         }
 
 
@@ -296,7 +310,7 @@ Select.propTypes = {
     placeholder:    React.PropTypes.string,
     name:           React.PropTypes.string,
     list:           React.PropTypes.array.isRequired,
-    selected:       React.PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string]),
+    selected:       React.PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string ] ),
     label:          React.PropTypes.string,
     uniqueKey:      React.PropTypes.string,
     labelKey:       React.PropTypes.string,

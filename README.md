@@ -26,6 +26,8 @@ Open localhost:9001 and Enjoy
 
 - Select now is static
 - add new component SelectAsync - only with dynamic list (async function)
+- add new component MultiSelectAsync - only with dynamic list (async function)
+
 
 
 
