@@ -1,5 +1,5 @@
 import React from "react";
-import { MultiSelect, Select } from "../dist";
+import { MultiSelect, Select, SelectAsync } from "../dist";
 
 
 //TODO make active
@@ -9,9 +9,11 @@ export class SelectController extends React.Component {
 
     constructor( props ) {
         super( props );
+        this.listProvider = this.listProvider.bind(this);
         this.state = {
             testMultiSelect: [ { firstName: "Anna", key: 4, value: "4 First selection" } ],
-            testSelect:      null,
+            testSelect:      3,
+            testSelectAsync: null,
             testSearch:      null,
         }
     }
@@ -26,7 +28,9 @@ export class SelectController extends React.Component {
 
 
     list( searchValue ) {
-        return [
+        console.log("Select list");
+        let matchesFilter = new RegExp( searchValue, "i" );
+        let list =[
             { firstName: "Den", id: 1, value: "1 " + searchValue + " First selection" },
             { firstName: "Mark", id: 2, value: "2 " + searchValue + " Second selection" },
             { firstName: "Gala", id: 3, value: "3 " + searchValue + " super long selection" },
@@ -40,6 +44,11 @@ export class SelectController extends React.Component {
             { firstName: "John", id: 11, value: "11 " + searchValue + " Second selection" },
             { firstName: "Lexy", id: 12, value: "12 " + searchValue + " super long selection" }
         ];
+
+        list = list.filter( item => {
+            return !searchValue || matchesFilter.test( item.firstName )
+        } );
+        return list
     }
 
     async listProvider( searchValue ) {
@@ -120,13 +129,7 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-3">
                         <Select
-                            label="Label"
-                            addControls={() => [
-                                {
-                                    title:          "Registration",
-                                    name:           "registration",
-                                    onClickHandler: this.onAddControlsClickHandler
-                                } ]}
+                            label="Select"
                             list={list}
                             placeholder="select"
                             name="testSelect"
@@ -134,7 +137,23 @@ export class SelectController extends React.Component {
                             uniqueKey="key"
                             selected={this.state.testSelect}
                             onChange={this.onChange.bind( this )}
-                            noResultsText="No more elements in the list. Try to change the search request.."
+                            labelKey="firstName"
+                            tabIndex={1}
+                        />
+                    </div>
+
+                </div>
+                <div className="row">
+                    <div className="col-xs-3">
+                        <SelectAsync
+                            label="SelectAsync"
+                            list={this.listProvider}
+                            placeholder="select"
+                            name="testSelectAsync"
+                            cancel={true}
+
+                            selected={this.state.testSelectAsync}
+                            onChange={this.onChange.bind( this )}
                             labelKey="firstName"
                             tabIndex={2}
                         />
@@ -160,32 +179,13 @@ export class SelectController extends React.Component {
                             selected={this.state.testMultiSelect}
                             labelKey="firstName"
                             uniqueKey="key"
-                            listItemRender={this.listItemRender.bind( this )}
+                            listItemRender={this.listItemRender.bind( this )}s
                             inputItemRender={this.customItemMultiSelect}
                             tabIndex={3}
                         />
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-xs-3">
-                        <Select
-                            list={this.listProvider.bind( this )}
-                            placeholder="select"
-                            name="testSearch"
-                            cancel={true}
-                            label="With search"
-                            selected={this.state.testSearch}
-                            onChange={this.onChange.bind( this )}
-                            uniqueKey="id"
-                            labelKey="firstName"
-                            listItemRender={this.listItemRender.bind( this )}
-                            onKeyDown={this.keyDownHandler.bind( this )}
-                            tabIndex={1}
-                        />
-                    </div>
-
-                </div>
             </div>
         )
     }

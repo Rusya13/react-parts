@@ -14,6 +14,21 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.0.6
+
+#### Fixes
+
+##### Select
+
+- fixed keyboard select
+
+#### New Features
+
+- Select now is static
+- add new component SelectAsync - only with dynamic list (async function)
+
+
+
 ### v0.0.5
 
 #### Fixes

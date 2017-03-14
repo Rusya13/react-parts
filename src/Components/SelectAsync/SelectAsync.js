@@ -35,7 +35,7 @@ class SelectProps {
     addControls:()=>Array<any>;
 }
 
-export class Select extends React.Component {
+export class SelectAsync extends React.Component {
 
     props: SelectProps;
     input: Element;
@@ -53,8 +53,7 @@ export class Select extends React.Component {
 
         this.state = {
             stateList:   false,
-            //showInput:   false,
-            list:        (Array.isArray( props.list )) ? props.list : [],
+            list:        [],
             pointSelect: -1
         };
     }
@@ -65,15 +64,23 @@ export class Select extends React.Component {
         return object
     }
 
+
     selectItem( item: ListObject ) {
+        //console.log("Select selectItem", item);
         this.setState( { stateList: false } );
-        let c: OnChangeReturnObject = this._createReturnObject( this.props.name, item[this.props.uniqueKey] );
+
+
+        //let newSelected: Selected = item.key;
+
+
+        let c: OnChangeReturnObject = this._createReturnObject( this.props.name, item );
         this.props.onChange && this.props.onChange( c );
     };
 
     onClickHandler() {
         this.searchInput.focus()
     }
+
 
     renderControls(){
         return this.props.addControls().map(item=>{
@@ -84,11 +91,20 @@ export class Select extends React.Component {
     openList() {
         if ( this.state.stateList ) return;
         if ( this.props.disabled ) return;
+
+
+        this.props.list().then( res => {
+            console.log("SelectAsync res", res);
+            this.setState( { list: res } )
+        } );
+
         this.setState( { stateList: true } );
+
     };
 
 
     closeList() {
+
         if ( this.searchInput ) this.searchInput.value = "";
         this.searchInput.blur();
         this.setState( { stateList: false } );
@@ -102,13 +118,6 @@ export class Select extends React.Component {
 
     renderList() {
         let list          = this.state.list;
-        let matchesFilter = new RegExp( this.searchInput.value, "i" );
-
-        if ( Array.isArray( this.state.list ) && this.searchInput ) {
-            list = list.filter( item => {
-                return !this.searchInput.value || matchesFilter.test( item[ this.props.labelKey ] )
-            } )
-        }
 
         let newList = list.map( ( selItem, i, list ) => {
             return <li key={selItem[ this.props.uniqueKey ]}
@@ -146,7 +155,6 @@ export class Select extends React.Component {
         let pointed;
         if ( ul.children && ul.children.length > 0 ) {
             pointed = ul.children[ newPosition ];
-            console.log("Select setNewPosition", pointed, newPosition);
             if ( pointed.offsetTop >= (ul.offsetHeight + ul.scrollTop) ) {
                 ul.scrollTop = pointed.offsetTop - ul.offsetHeight + pointed.offsetHeight
             }
@@ -166,14 +174,7 @@ export class Select extends React.Component {
                 break;
             case 'Enter':
                 if ( this.state.pointSelect !== -1 ) {
-
-                    let matchesFilter = new RegExp( this.searchInput.value, "i" );
-                    let list = this.state.list.filter( item => {
-                        return !this.searchInput.value || matchesFilter.test( item[ this.props.labelKey ] )
-                    } );
-                    let item               = list[ this.state.pointSelect ];
-
-
+                    let item               = this.state.list[ this.state.pointSelect ];
                     this.state.pointSelect = -1;
                     this.selectItem( item );
 
@@ -194,7 +195,7 @@ export class Select extends React.Component {
     }
 
     onInputFocus( e: Event ) {
-        if ( this.state.stateList ) return;
+        if ( this.state.stateList ) return
         this.openList()
     }
 
@@ -215,21 +216,20 @@ export class Select extends React.Component {
                 : (
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
-                    : (selItem && this.getSelected())
+                    : (selItem && selItem[ this.props.labelKey ])
             ) }
             {input}
+            {/*{(this.state.stateList) ? input : null}*/}
         </div>
     }
 
     onChangeInputSearch( e ) {
         //console.log( "Select onChangeInputSearch", this.searchInput.value );
-        this.forceUpdate()
-    }
+        this.props.list( this.searchInput.value ).then( res => {
+            //console.log( "Select onChangeInputSearch", res );
+            this.setState( { list: res } )
+        } )
 
-    getSelected(){
-        let item = this.props.list.filter(item=>item[this.props.uniqueKey] === this.props.selected)[0];
-        console.log("Select getSelected", item);
-        return item[this.props.labelKey]
     }
 
 
@@ -270,7 +270,7 @@ export class Select extends React.Component {
                 {this.props.label &&
                 <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?
-                    <div className="reactParts__select-selected">{this.getSelected()}</div> :
+                    <div className="reactParts__select-selected">{this.props.selected[ this.props.labelKey ]}</div> :
                     <div className={selectClassName} onClick={this.onClickHandler.bind( this )}>
                         {placeholder}
                         {this.renderInput()}
@@ -288,15 +288,15 @@ export class Select extends React.Component {
     };
 }
 
-Select.propTypes = {
+SelectAsync.propTypes = {
     readOnly:       React.PropTypes.bool,
     cancel:         React.PropTypes.bool,
     onChange:       React.PropTypes.func,
     disabled:       React.PropTypes.bool,
     placeholder:    React.PropTypes.string,
     name:           React.PropTypes.string,
-    list:           React.PropTypes.array.isRequired,
-    selected:       React.PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string]),
+    list:           React.PropTypes.func.isRequired,
+    selected:       React.PropTypes.object,
     label:          React.PropTypes.string,
     uniqueKey:      React.PropTypes.string,
     labelKey:       React.PropTypes.string,
@@ -308,7 +308,7 @@ Select.propTypes = {
     addControls:    React.PropTypes.func,
 }
 
-Select.defaultProps = {
+SelectAsync.defaultProps = {
     readOnly:       false,
     cancel:         true,
     onChange:       null,
