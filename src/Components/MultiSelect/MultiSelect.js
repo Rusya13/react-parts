@@ -136,7 +136,7 @@ export class MultiSelect extends React.Component {
 
         let newList = clearedList.map( ( listItem, index ) => {
             return (
-                <li key={listItem.key}
+                <li key={listItem[this.props.uniqueKey]}
                     className={"reactParts__multi-select-list-item break" + ((index === this.state.pointSelect) ? " pointed" : "")}
                     onMouseDown={this.selectItem.bind( this, listItem )}>
                     {(this.props.listItemRender) ? this.props.listItemRender( listItem, index, clearedList ) : listItem[ this.props.labelKey ]}

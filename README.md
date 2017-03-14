@@ -14,6 +14,23 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+### v0.0.8
+
+#### Fixes
+
+##### Select
+
+- fixed li key
+
+### v0.0.7
+
+#### Fixes
+
+##### Select
+
+- fixed delete item
+
 ### v0.0.6
 
 #### Fixes
