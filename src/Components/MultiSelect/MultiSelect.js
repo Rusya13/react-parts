@@ -85,7 +85,7 @@ export class MultiSelect extends React.Component {
     removeItem( item: Object ) {
         console.log("Select removeItem", item);
         if ( Array.isArray(this.props.selected) ) {
-            let newSelected             = this.props.selected.filter( selItem => selItem !== item[ this.props.uniqueKey ] );
+            let newSelected             = this.props.selected.filter( selItem => selItem !== item );
             let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
             this.props.onChange && this.props.onChange( c );
         }

@@ -16,7 +16,8 @@ export class SelectController extends React.Component {
             testSelect:      3,
             testSelectAsync: null,
             testSearch:      null,
-            testMultiSelectAsync:      null,
+            testMultiSelectAsync:      [{ firstName: "Gala", id: 3, value: "3  super long selection" },
+                { firstName: "Anna", id: 4, value: "4  First selection" }],
         }
     }
 
@@ -189,7 +190,7 @@ export class SelectController extends React.Component {
                             placeholder="multiselect"
                             name="testMultiSelectAsync"
                             cancel={true}
-                            multiSelect={true}
+
                             onChange={this.onChange.bind( this )}
                             selected={this.state.testMultiSelectAsync}
                             labelKey="firstName"
