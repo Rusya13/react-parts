@@ -14,6 +14,22 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.0.9
+
+#### Fixes
+
+- width:100%
+- no wrap in Select
+
+
+#### New Features
+
+##### Input
+
+- prefix added
+
+
+
 
 ### v0.0.8
 

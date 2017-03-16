@@ -20,7 +20,7 @@ export class CheckBoxController extends React.Component {
         return (
             <div>
                 <CheckBoxGroup
-                    direction="vertical"
+                    direction="horizontal"
                     options={
                         [
                             {label:"Male", name:"gender_male", checked:this.model.get("gender_male"), disabled:true},
@@ -30,7 +30,6 @@ export class CheckBoxController extends React.Component {
                     }
                     type="button"
                     onChange={this.onChange.bind(this)}
-
                 />
                 <CheckBox disabled={false} onClickHandler={this.onChange.bind(this)} name="smoke" label="Non-smoking" checked={this.model.get("smoke")} type="button"/>
             </div>

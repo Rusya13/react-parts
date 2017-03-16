@@ -117,7 +117,7 @@ export class SelectController extends React.Component {
         let list = [
             { firstName: "Den", key: 1, value: "1 First selection" },
             { firstName: "Mark", key: 2, value: "2 Second selection" },
-            { firstName: "Gala", key: 3, value: "3 super long selection" },
+            { firstName: "Galadsad asdsadfasdf ", key: 3, value: "3 super long selection" },
             { firstName: "Anna", key: 4, value: "4 First selection" },
             { firstName: "Daria", key: 5, value: "5 Second selection" },
             { firstName: "Elena", key: 6, value: "6 super long selection" },
@@ -131,7 +131,7 @@ export class SelectController extends React.Component {
         return (
             <div className="reactParts__form">
                 <div className="row">
-                    <div className="col-xs-3">
+                    <div className="col-xs-1">
                         <Select
                             label="Select"
                             list={list}
@@ -183,7 +183,7 @@ export class SelectController extends React.Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-xs-4">
+                    <div className="col-xs-2">
                         <MultiSelectAsync
                             label="MultiselectAsync"
                             list={this.listProvider}

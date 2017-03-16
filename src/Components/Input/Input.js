@@ -44,6 +44,7 @@ interface InputProps {
     autocomplete:boolean;
     tabIndex:?number;
     cancel:?boolean;
+    prefix:?string;
 }
 
 
@@ -295,14 +296,16 @@ export class Input extends React.Component {
             </svg>;
 
         if (this.props.className) InputSimpleClassName += ` ${this.props.className}`;
+        if (this.props.prefix) InputSimpleClassName += ` prefix`;
         return (
-            <div className="reactParts__input-wrap">
+            <div className={"reactParts__input-wrap"+((this.props.prefix)?" prefix":"")}>
 
                 {this.props.label &&
                 <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?
                     this.props.value :
                     [
+                        (this.props.prefix)?<div className="reactParts__input-prefix">{this.props.prefix}</div>:null,
                         <input className={InputSimpleClassName}
                            key="input"
                            autoComplete={(this.props.suggest)?"off":(this.props.autocomplete)?"on":"off"}
@@ -362,6 +365,7 @@ Input.propTypes = {
     label: React.PropTypes.string,
     autocomplete:React.PropTypes.bool,
     tabIndex:React.PropTypes.number,
-    cancel: React.PropTypes.bool
+    cancel: React.PropTypes.bool,
+    prefix:React.PropTypes.string
 };
 

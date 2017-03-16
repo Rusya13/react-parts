@@ -228,7 +228,7 @@ export class Select extends React.Component {
                 : (
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
-                    : (selItem && this.getSelected())
+                    : <div className="reactParts__select-selected-span">{(selItem && this.getSelected())}</div>
             ) }
             {input}
         </div>

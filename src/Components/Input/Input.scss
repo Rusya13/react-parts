@@ -1,15 +1,18 @@
-.reactParts__input-wrap{
+.reactParts__input-wrap {
   text-align: left;
   position: relative;
   display: block;
   vertical-align: baseline;
   font-size: 100%;
+  width: 100%;
   box-sizing: border-box;
   margin: 10px 0;
+  &.prefix {
+    display: flex;
+  }
 }
 
-
-.reactParts__label{
+.reactParts__label {
   height: 18px;
   color: #637282;
   display: block;
@@ -33,55 +36,57 @@
   border-radius: 2px;
   position: relative;
   &.valid:before {
-    content:"*";
+    content: "*";
     position: absolute;
-    top:10px;
+    top: 10px;
     right: 10px;
   }
-  &.cancel{
+  &.cancel {
     padding: 8px 28px 8px 8px;
   }
 
+  &.prefix {
+    border-radius: 0 2px 2px 0;
+  }
+
 }
 
-.reactParts__input::placeholder{
+.reactParts__input::placeholder {
   font-size: 0.9rem;
 }
 
-.reactParts__input:focus{
+.reactParts__input:focus {
   border-color: $input-border-color-focus;
 }
 
-.reactParts__input:disabled{
+.reactParts__input:disabled {
   border-color: transparent;
   padding: 8px 18px 8px 0;
 
 }
 
-.reactParts__input:disabled::placeholder{
+.reactParts__input:disabled::placeholder {
   color: transparent;
 }
 
-.reactParts__input-valid{
+.reactParts__input-valid {
   position: absolute;
   right: 6px;
-  bottom:22px;
+  bottom: 22px;
   width: 4px;
   height: 4px;
   border-radius: 2px;
   background: green;
 }
 
-
-
-.reactParts__input-valid.false{
+.reactParts__input-valid.false {
   background: red;
 }
 
-.reactParts__input-suggest-list{
+.reactParts__input-suggest-list {
   position: absolute;
   right: 0;
-  left:0;
+  left: 0;
   z-index: 10;
   overflow-y: auto;
   overflow-x: hidden;
@@ -95,20 +100,20 @@
   border-right: 1px solid $input-border-color-focus;
   //border-bottom: 1px solid $control-gray;
   border-radius: 0 0 3px 3px;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 
 }
 
-.reactParts__input-addControls{
+.reactParts__input-addControls {
   position: absolute;
   top: 0;
   right: 0;
-  color:#377df3;
+  color: #377df3;
   font-size: 12px;
   font-weight: 400;
   display: flex;
   justify-content: flex-end;
-  &-item{
+  &-item {
     //padding: 1px 7px 2px;
     //border-radius: 10px;
     //background: #62a8ea;
@@ -120,43 +125,53 @@
   }
 }
 
-.reactParts__input-suggest-list-system-item{
+.reactParts__input-suggest-list-system-item {
   font-size: 0.813rem;
   background: #d2d6db;
   padding: 5px 8px;
 }
 
-.reactParts__input-suggest-list-item{
+.reactParts__input-suggest-list-item {
   font-size: 0.813rem;
   padding: 8px 8px;
   cursor: pointer;
   overflow-wrap: break-word;
   border-bottom: 1px solid #e6e8eb;
-  &:hover{
+  &:hover {
     background: #e6e8eb;
   }
 
-  &:last-child{
+  &:last-child {
     border-bottom: none;
   }
-  &.empty{
+  &.empty {
     text-align: center;
     cursor: auto;
-    &:hover{
+    &:hover {
       background: none;
     }
   }
-  &.selected{
+  &.selected {
     background: #62a8ea;
     color: #fff;
   }
 }
 
-.reactParts__input__cancel{
+.reactParts__input__cancel {
   position: absolute;
   right: 9px;
 
   bottom: 9px;
 
   fill: #B3C3C7;
+}
+
+.reactParts__input-prefix {
+  font-weight: 200;
+  border: 1px solid #E6E8EB;
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  padding: 6px;
+  color: #97a8be;
+  background-color: #fbfdff;
 }

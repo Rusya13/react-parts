@@ -82,7 +82,25 @@ export class InputController extends React.Component {
                 </div>
 
                 <div className="reactParts__form-row">
-                    <div className="col" style={{ flex: "0 1 50%" }}>
+                    <div className="col" >
+                        <Input
+                            type="text"
+                            //autoFocus={true}
+                            value={this.state.email}
+                            name="email"
+                            placeholder="Type something.."
+                            readOnly={!this.state.editMode}
+                            valid={false}
+                            prefix="From"
+                            //autocomplete={true}
+                            onChange={this.onChangeHandler.bind( this )}
+                            tabIndex={3}
+                        />
+                    </div>
+                </div>
+
+                <div className="reactParts__form-row">
+                    <div className="col" >
                         <Input
                             type="text"
                             //autoFocus={true}
@@ -100,7 +118,7 @@ export class InputController extends React.Component {
                 </div>
 
                 <div className="reactParts__form-row">
-                    <div className="col" style={{ flex: "0 1 50%" }}>
+                    <div className="col" >
                         <Input
                             type="text"
                             //autoFocus={true}

@@ -6,6 +6,7 @@
   font-size: 100%;
   box-sizing: border-box;
   margin: 10px 0;
+  width: 100%;
 }
 
 .reactParts__select{
@@ -172,4 +173,10 @@
     margin-left: 10px;
     cursor: pointer;
   }
+}
+
+.reactParts__select-selected-span{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
