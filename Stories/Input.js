@@ -82,7 +82,7 @@ export class InputController extends React.Component {
                 </div>
 
                 <div className="reactParts__form-row">
-                    <div className="col" >
+                    <div className="col-xs-3" >
                         <Input
                             type="text"
                             //autoFocus={true}

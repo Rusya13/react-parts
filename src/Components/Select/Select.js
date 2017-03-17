@@ -12,7 +12,7 @@ interface ListObject {
     key: string;
 }
 
-type Selected = string | number | null;
+type Selected = string | number | boolean | null;
 
 
 class SelectProps {
@@ -162,8 +162,6 @@ export class Select extends React.Component {
         let pointed;
         if ( ul.children && ul.children.length > 0 ) {
             pointed = ul.children[ newPosition ];
-
-            console.log( "Select setNewPosition", pointed, newPosition );
             if ( pointed.offsetTop >= (ul.offsetHeight + ul.scrollTop) ) {
                 ul.scrollTop = pointed.offsetTop - ul.offsetHeight + pointed.offsetHeight
             }
@@ -228,27 +226,23 @@ export class Select extends React.Component {
                 : (
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
-                    : <div className="reactParts__select-selected-span">{(selItem && this.getSelected())}</div>
+                    : <div className="reactParts__select-selected-span">{((selItem !== null && selItem !== undefined) && this.getSelected())}</div>
             ) }
             {input}
         </div>
     }
 
-    onChangeInputSearch( e ) {
-        //console.log( "Select onChangeInputSearch", this.searchInput.value );
+    onChangeInputSearch(  ) {
         this.forceUpdate()
     }
 
     getSelected() {
         let item = this.props.list.filter( item => item[ this.props.uniqueKey ] === this.props.selected )[ 0 ];
-        console.log( "Select getSelected", item );
         return item[ this.props.labelKey ]
     }
 
 
     render() {
-
-
         let selectClassName = 'reactParts__select';
         if ( this.state.stateList ) {
             selectClassName += ' focus';
@@ -261,11 +255,11 @@ export class Select extends React.Component {
         }
 
 
-        if ( !this.props.selected && (!this.searchInput || (this.searchInput && this.searchInput.value.length === 0 )) ) {
+        if ( (this.props.selected ===null || this.props.selected ===undefined) && (!this.searchInput || (this.searchInput && this.searchInput.value.length === 0 )) ) {
             placeholder = <div className="reactParts__select-placeholder">{this.props.placeholder}</div>
         }
 
-        if ( this.props.selected ) {
+        if ( this.props.selected !== null && this.props.selected !== undefined ) {
             cancel = this.props.cancel &&
                 <svg onClick={this.cancelSelected.bind( this )} width="18" height="18" viewBox="0 0 24 24"
                      className="icon reactParts__select__cancel">
@@ -310,7 +304,7 @@ Select.propTypes = {
     placeholder:    React.PropTypes.string,
     name:           React.PropTypes.string,
     list:           React.PropTypes.array.isRequired,
-    selected:       React.PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string ] ),
+    selected:       React.PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string, React.PropTypes.bool ] ),
     label:          React.PropTypes.string,
     uniqueKey:      React.PropTypes.string,
     labelKey:       React.PropTypes.string,

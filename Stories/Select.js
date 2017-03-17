@@ -15,6 +15,7 @@ export class SelectController extends React.Component {
             testMultiSelect: [ 4, 5 ],
             testSelect:      3,
             testSelectAsync: null,
+            testBool: null,
             testSearch:      null,
             testMultiSelectAsync:      [{ firstName: "Gala", id: 3, value: "3  super long selection" },
                 { firstName: "Anna", id: 4, value: "4  First selection" }],
@@ -113,7 +114,7 @@ export class SelectController extends React.Component {
     }
 
     render() {
-        //console.log("Select render");
+        console.log("Select render", this.state.testBool);
         let list = [
             { firstName: "Den", key: 1, value: "1 First selection" },
             { firstName: "Mark", key: 2, value: "2 Second selection" },
@@ -128,77 +129,98 @@ export class SelectController extends React.Component {
             { firstName: "John", key: 11, value: "11 Second selection" },
             { firstName: "Lexy", key: 12, value: "12 super long selection" }
         ];
+
+        let boolList= [
+            {id:true, value:"Yes"},
+            {id:false, value:"No"},
+        ]
+
         return (
             <div className="reactParts__form">
                 <div className="row">
                     <div className="col-xs-1">
                         <Select
-                            label="Select"
-                            list={list}
+                            label="Select boolean"
+                            list={boolList}
                             placeholder="select"
-                            name="testSelect"
+                            name="testBool"
                             cancel={true}
-                            uniqueKey="key"
-                            selected={this.state.testSelect}
+                            selected={this.state.testBool}
                             onChange={this.onChange.bind( this )}
-                            labelKey="firstName"
                             tabIndex={1}
                         />
                     </div>
 
                 </div>
-                <div className="row">
-                    <div className="col-xs-3">
-                        <SelectAsync
-                            label="SelectAsync"
-                            list={this.listProvider}
-                            placeholder="select"
-                            name="testSelectAsync"
-                            cancel={true}
+                {/*<div className="row">*/}
+                    {/*<div className="col-xs-1">*/}
+                        {/*<Select*/}
+                            {/*label="Select"*/}
+                            {/*list={list}*/}
+                            {/*placeholder="select"*/}
+                            {/*name="testSelect"*/}
+                            {/*cancel={true}*/}
+                            {/*uniqueKey="key"*/}
+                            {/*selected={this.state.testSelect}*/}
+                            {/*onChange={this.onChange.bind( this )}*/}
+                            {/*labelKey="firstName"*/}
+                            {/*tabIndex={2}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
 
-                            selected={this.state.testSelectAsync}
-                            onChange={this.onChange.bind( this )}
-                            labelKey="firstName"
-                            tabIndex={2}
-                        />
-                    </div>
+                {/*</div>*/}
+                {/*<div className="row">*/}
+                    {/*<div className="col-xs-3">*/}
+                        {/*<SelectAsync*/}
+                            {/*label="SelectAsync"*/}
+                            {/*list={this.listProvider}*/}
+                            {/*placeholder="select"*/}
+                            {/*name="testSelectAsync"*/}
+                            {/*cancel={true}*/}
 
-                </div>
-                <div className="row">
-                    <div className="col-xs-4">
-                        <MultiSelect
-                            label="Multiselect"
-                            list={list}
-                            placeholder="multiselect"
-                            name="testMultiSelect"
-                            cancel={true}
-                            multiSelect={true}
-                            onChange={this.onChange.bind( this )}
-                            selected={this.state.testMultiSelect}
-                            labelKey="firstName"
-                            uniqueKey="key"
-                            listItemRender={this.listItemRender.bind( this )}
-                            tabIndex={3}
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-xs-2">
-                        <MultiSelectAsync
-                            label="MultiselectAsync"
-                            list={this.listProvider}
-                            placeholder="multiselect"
-                            name="testMultiSelectAsync"
-                            cancel={true}
+                            {/*selected={this.state.testSelectAsync}*/}
+                            {/*onChange={this.onChange.bind( this )}*/}
+                            {/*labelKey="firstName"*/}
+                            {/*tabIndex={3}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
 
-                            onChange={this.onChange.bind( this )}
-                            selected={this.state.testMultiSelectAsync}
-                            labelKey="firstName"
-                            listItemRender={this.listItemRender.bind( this )}
-                            tabIndex={3}
-                        />
-                    </div>
-                </div>
+                {/*</div>*/}
+                {/*<div className="row">*/}
+                    {/*<div className="col-xs-4">*/}
+                        {/*<MultiSelect*/}
+                            {/*label="Multiselect"*/}
+                            {/*list={list}*/}
+                            {/*placeholder="multiselect"*/}
+                            {/*name="testMultiSelect"*/}
+                            {/*cancel={true}*/}
+                            {/*multiSelect={true}*/}
+                            {/*onChange={this.onChange.bind( this )}*/}
+                            {/*selected={this.state.testMultiSelect}*/}
+                            {/*labelKey="firstName"*/}
+                            {/*uniqueKey="key"*/}
+                            {/*listItemRender={this.listItemRender.bind( this )}*/}
+                            {/*tabIndex={4}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+                {/*<div className="row">*/}
+                    {/*<div className="col-xs-2">*/}
+                        {/*<MultiSelectAsync*/}
+                            {/*label="MultiselectAsync"*/}
+                            {/*list={this.listProvider}*/}
+                            {/*placeholder="multiselect"*/}
+                            {/*name="testMultiSelectAsync"*/}
+                            {/*cancel={true}*/}
+
+                            {/*onChange={this.onChange.bind( this )}*/}
+                            {/*selected={this.state.testMultiSelectAsync}*/}
+                            {/*labelKey="firstName"*/}
+                            {/*listItemRender={this.listItemRender.bind( this )}*/}
+                            {/*tabIndex={5}*/}
+                        {/*/>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
             </div>
         )
     }

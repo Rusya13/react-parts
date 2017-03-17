@@ -14,6 +14,22 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+
+### v0.0.10
+
+
+#### Fixes
+
+#### Input
+
+- key="prefix"
+
+##### Select
+
+- fixed boolean id
+
+
 ### v0.0.9
 
 #### Fixes

@@ -305,7 +305,7 @@ export class Input extends React.Component {
                 {(this.props.readOnly) ?
                     this.props.value :
                     [
-                        (this.props.prefix)?<div className="reactParts__input-prefix">{this.props.prefix}</div>:null,
+                        (this.props.prefix)?<div key="prefix" className="reactParts__input-prefix">{this.props.prefix}</div>:null,
                         <input className={InputSimpleClassName}
                            key="input"
                            autoComplete={(this.props.suggest)?"off":(this.props.autocomplete)?"on":"off"}
