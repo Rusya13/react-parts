@@ -146,12 +146,15 @@
     border-top-color: #e6e8eb;
     background: #42bf89;
     color: #fff;
+    height: 100%;
   }
 
   &.pointed{
     background: #c9e0eb;
+    height: 100%;
     &.selected{
       background: #6097d7;
+      height: 100%;
     }
 
   }
