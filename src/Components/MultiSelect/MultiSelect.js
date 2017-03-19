@@ -33,7 +33,8 @@ class MultiSelectProps {
     uniqueKey: ?string;
     addControls: () => Array<any>;
     listItemRender: ( obj: Object, i: number, list: Array<any> ) => any;
-    inputItemRender: ( ) => any;
+    inputItemRender: () => any;
+    autoFocus: ?boolean;
 }
 
 export class MultiSelect extends React.Component {
@@ -73,9 +74,9 @@ export class MultiSelect extends React.Component {
 
     selectItem( item: ListObject ) {
 
-        if ( Array.isArray(this.props.selected)) {
+        if ( Array.isArray( this.props.selected ) ) {
             let newSelected: Selected = this.props.selected.slice();
-            newSelected.push( item[this.props.uniqueKey] );
+            newSelected.push( item[ this.props.uniqueKey ] );
             let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
             console.log( "MultiSelect selectItem", c );
             this.props.onChange && this.props.onChange( c );
@@ -83,8 +84,8 @@ export class MultiSelect extends React.Component {
     };
 
     removeItem( item: Object ) {
-        console.log("Select removeItem", item);
-        if ( Array.isArray(this.props.selected) ) {
+        console.log( "Select removeItem", item );
+        if ( Array.isArray( this.props.selected ) ) {
             let newSelected             = this.props.selected.filter( selItem => selItem !== item );
             let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
             this.props.onChange && this.props.onChange( c );
@@ -136,7 +137,7 @@ export class MultiSelect extends React.Component {
 
         let newList = clearedList.map( ( listItem, index ) => {
             return (
-                <li key={listItem[this.props.uniqueKey]}
+                <li key={listItem[ this.props.uniqueKey ]}
                     className={"reactParts__multi-select-list-item break" + ((index === this.state.pointSelect) ? " pointed" : "")}
                     onMouseDown={this.selectItem.bind( this, listItem )}>
                     {(this.props.listItemRender) ? this.props.listItemRender( listItem, index, clearedList ) : listItem[ this.props.labelKey ]}
@@ -149,27 +150,27 @@ export class MultiSelect extends React.Component {
     }
 
 
-    getSelected(i){
-        let item = this.props.list.filter(item=>item[this.props.uniqueKey] === i)[0];
-        console.log("Select getSelected", item);
-        return item[this.props.labelKey]
+    getSelected( i ) {
+        let item = this.props.list.filter( item => item[ this.props.uniqueKey ] === i )[ 0 ];
+        console.log( "Select getSelected", item );
+        return item[ this.props.labelKey ]
     }
 
     renderItems() {
-        if ( Array.isArray(this.props.selected)) {
+        if ( Array.isArray( this.props.selected ) ) {
             //console.log("Select renderItems this.props.multiSelect", this.props.multiSelect);
 
             if ( this.props.selected.length === 0 ) {
                 return null
             }
             return this.props.selected.map( ( selItem: number | string, i: number ) => {
-                if (this.props.inputItemRender){
-                    return this.props.inputItemRender(selItem, i, this.removeItem.bind(this))
+                if ( this.props.inputItemRender ) {
+                    return this.props.inputItemRender( selItem, i, this.removeItem.bind( this ) )
                 }
                 return (
                     <div className="reactParts__multi-select-box-item" key={i}>
                         <span className="reactParts__multi-select-box-item-value">
-                              { this.getSelected(selItem)}
+                              { this.getSelected( selItem )}
                         </span>
 
                         <svg onClick={this.removeItem.bind( this, selItem )} width="16" height="16" viewBox="0 0 24 24"
@@ -185,7 +186,7 @@ export class MultiSelect extends React.Component {
     }
 
     onChangeInputSearch() {
-       this.forceUpdate()
+        this.forceUpdate()
     }
 
 
@@ -244,7 +245,7 @@ export class MultiSelect extends React.Component {
                 this.closeList();
                 break;
             case 'Backspace':
-                if (this.searchInput.value === ""){
+                if ( this.searchInput.value === "" ) {
                     this.removeLastSelected();
                 }
 
@@ -284,7 +285,7 @@ export class MultiSelect extends React.Component {
 
 
         let list: Array<ListObject> = this.state.list;
-        let filteredList =  list.filter( item => {
+        let filteredList            = list.filter( item => {
             if ( Array.isArray( this.props.selected ) ) {
                 return this.props.selected.every( i => {
                     return i !== item[ this.props.uniqueKey ]
@@ -294,7 +295,7 @@ export class MultiSelect extends React.Component {
             }
 
         } );
-        return  filteredList.filter( item => {
+        return filteredList.filter( item => {
             return !this.searchInput.value || matchesFilter.test( item[ this.props.labelKey ] )
         } );
 
@@ -320,6 +321,7 @@ export class MultiSelect extends React.Component {
         }
 
         let input = <input ref={( input ) => {this.searchInput = input;}}
+                           autoFocus={this.props.autoFocus}
                            tabIndex={this.props.tabIndex}
                            placeholder={this.props.placeholder}
                            onKeyDown={this.onKeyDown.bind( this )}
@@ -328,7 +330,7 @@ export class MultiSelect extends React.Component {
                            className="reactParts__multi-select-input"
                            onChange={this.onChangeInputSearch.bind( this )}/>;
 
-        if ( this.props.selected){
+        if ( this.props.selected ) {
             cancel = this.props.cancel &&
                 <svg onClick={this.cancelSelected.bind( this )} width="18" height="18" viewBox="0 0 24 24"
                      className="reactParts__multi-select__cancel">
@@ -369,9 +371,9 @@ export class MultiSelect extends React.Component {
 
 
 MultiSelect.propTypes = {
-    readOnly:       React.PropTypes.bool,
-    cancel:         React.PropTypes.bool,
-    onChange:       React.PropTypes.func,
+    readOnly:        React.PropTypes.bool,
+    cancel:          React.PropTypes.bool,
+    onChange:        React.PropTypes.func,
     disabled:        React.PropTypes.bool,
     placeholder:     React.PropTypes.string,
     name:            React.PropTypes.string,
@@ -384,10 +386,12 @@ MultiSelect.propTypes = {
     labelKey:        React.PropTypes.string,
     addControls:     React.PropTypes.func,
     listItemRender:  React.PropTypes.func,
-    inputItemRender: React.PropTypes.func
+    inputItemRender: React.PropTypes.func,
+    autoFocus:       React.PropTypes.bool
 };
 
 MultiSelect.defaultProps = {
     uniqueKey: "id",
     labelKey:  "value",
+    autoFocus: false
 }

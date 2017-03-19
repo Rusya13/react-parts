@@ -14,6 +14,17 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+### v0.0.14
+
+#### New Features
+
+##### Input, Select, SelectAsync, MultiSelect, MultiSelectAsync
+
+- autoFocus property added
+
+
+
 ### v0.0.13
 
 #### New Features

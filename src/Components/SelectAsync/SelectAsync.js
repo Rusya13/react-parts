@@ -33,6 +33,7 @@ class SelectProps {
     onKeyDown: ( e: KeyboardEvent, value: string ) => void;
     tabIndex: ?number;
     addControls:()=>Array<any>;
+    autoFocus:?boolean;
 }
 
 export class SelectAsync extends React.Component {
@@ -204,6 +205,7 @@ export class SelectAsync extends React.Component {
 
         let input = <input ref={( input ) => {this.searchInput = input;}}
                            tabIndex={this.props.tabIndex}
+                           autoFocus={this.props.autoFocus}
                            onKeyDown={this.onKeyDown.bind( this )}
                            onBlur={this.onInputBlur.bind( this )}
                            onFocus={this.onInputFocus.bind( this )}
@@ -306,6 +308,7 @@ SelectAsync.propTypes = {
     onKeyDown:      React.PropTypes.func,
     tabIndex:       React.PropTypes.number,
     addControls:    React.PropTypes.func,
+    autoFocus:      React.PropTypes.bool
 }
 
 SelectAsync.defaultProps = {
@@ -325,4 +328,5 @@ SelectAsync.defaultProps = {
     noResultsText:  "Nothing to show",
     onKeyDown:      null,
     addControls:    null,
+    autoFocus:      false
 }

@@ -24,7 +24,7 @@ class MultiSelectProps {
     disabled: boolean;
     placeholder: string;
     name: string;
-    list: (v:?string)=> void;
+    list: ( v: ?string ) => void;
     selected: Selected;
     label: string;
     tabIndex: ?number;
@@ -33,7 +33,8 @@ class MultiSelectProps {
     uniqueKey: ?string;
     addControls: () => Array<any>;
     listItemRender: ( obj: Object, i: number, list: Array<any> ) => any;
-    inputItemRender: ( ) => any;
+    inputItemRender: () => any;
+    autoFocus: ?boolean;
 }
 
 export class MultiSelectAsync extends React.Component {
@@ -72,9 +73,9 @@ export class MultiSelectAsync extends React.Component {
     }
 
     selectItem( item: ListObject ) {
-        console.log("MultiSelectAsync selectItem", this.props.selected);
-        let selected =  this.props.selected;
-        if ( !Array.isArray(selected)) {
+        console.log( "MultiSelectAsync selectItem", this.props.selected );
+        let selected = this.props.selected;
+        if ( !Array.isArray( selected ) ) {
             selected = []
         }
         let newSelected: Selected = selected.slice();
@@ -86,8 +87,8 @@ export class MultiSelectAsync extends React.Component {
     };
 
     removeItem( item: Object ) {
-        console.log("Select removeItem", item);
-        if ( Array.isArray(this.props.selected) ) {
+        console.log( "Select removeItem", item );
+        if ( Array.isArray( this.props.selected ) ) {
             let newSelected             = this.props.selected.filter( selItem => selItem[ this.props.uniqueKey ] !== item[ this.props.uniqueKey ] );
             let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
             this.props.onChange && this.props.onChange( c );
@@ -132,11 +133,11 @@ export class MultiSelectAsync extends React.Component {
     };
 
     renderList() {
-        let clearedList   = this.clearedList();
+        let clearedList = this.clearedList();
 
         let newList = clearedList.map( ( listItem, index ) => {
             return (
-                <li key={listItem[this.props.uniqueKey]}
+                <li key={listItem[ this.props.uniqueKey ]}
                     className={"reactParts__multi-select-list-item break" + ((index === this.state.pointSelect) ? " pointed" : "")}
                     onMouseDown={this.selectItem.bind( this, listItem )}>
                     {(this.props.listItemRender) ? this.props.listItemRender( listItem, index, clearedList ) : listItem[ this.props.labelKey ]}
@@ -149,15 +150,15 @@ export class MultiSelectAsync extends React.Component {
     }
 
     renderItems() {
-        if ( Array.isArray(this.props.selected) ) {
+        if ( Array.isArray( this.props.selected ) ) {
             //console.log("Select renderItems this.props.multiSelect", this.props.multiSelect);
 
             if ( this.props.selected.length === 0 ) {
                 return null
             }
             return this.props.selected.map( ( selItem: Object, i: number ) => {
-                if (this.props.inputItemRender){
-                    return this.props.inputItemRender(selItem, i, this.removeItem.bind(this))
+                if ( this.props.inputItemRender ) {
+                    return this.props.inputItemRender( selItem, i, this.removeItem.bind( this ) )
                 }
                 return (
                     <div className="reactParts__multi-select-box-item" key={i}>
@@ -183,7 +184,6 @@ export class MultiSelectAsync extends React.Component {
             this.setState( { list: res } )
         } );
     }
-
 
 
     setNewPosition( key: string ) {
@@ -229,9 +229,9 @@ export class MultiSelectAsync extends React.Component {
                 break;
             case 'Enter':
                 if ( this.state.pointSelect !== -1 ) {
-                    console.log("MultiSelectAsync onKeyDown", this.state.pointSelect);
-                    let item               = this.clearedList()[ this.state.pointSelect ];
-                    console.log("MultiSelectAsync onKeyDown", item);
+                    console.log( "MultiSelectAsync onKeyDown", this.state.pointSelect );
+                    let item = this.clearedList()[ this.state.pointSelect ];
+                    console.log( "MultiSelectAsync onKeyDown", item );
                     this.state.pointSelect = -1;
                     this.selectItem( item );
 
@@ -242,7 +242,7 @@ export class MultiSelectAsync extends React.Component {
                 this.closeList();
                 break;
             case 'Backspace':
-                if (this.searchInput.value === ""){
+                if ( this.searchInput.value === "" ) {
                     this.removeLastSelected();
                 }
                 break;
@@ -306,6 +306,7 @@ export class MultiSelectAsync extends React.Component {
         }
 
         let input = <input ref={( input ) => {this.searchInput = input;}}
+                           autoFocus={this.props.autoFocus}
                            tabIndex={this.props.tabIndex}
                            placeholder={this.props.placeholder}
                            onKeyDown={this.onKeyDown.bind( this )}
@@ -355,9 +356,9 @@ export class MultiSelectAsync extends React.Component {
 
 
 MultiSelectAsync.propTypes = {
-    readOnly:       React.PropTypes.bool,
-    cancel:         React.PropTypes.bool,
-    onChange:       React.PropTypes.func,
+    readOnly:        React.PropTypes.bool,
+    cancel:          React.PropTypes.bool,
+    onChange:        React.PropTypes.func,
     disabled:        React.PropTypes.bool,
     placeholder:     React.PropTypes.string,
     name:            React.PropTypes.string,
@@ -370,11 +371,13 @@ MultiSelectAsync.propTypes = {
     labelKey:        React.PropTypes.string,
     addControls:     React.PropTypes.func,
     listItemRender:  React.PropTypes.func,
-    inputItemRender: React.PropTypes.func
+    inputItemRender: React.PropTypes.func,
+    autoFocus:       React.PropTypes.bool
 };
 
 MultiSelectAsync.defaultProps = {
     uniqueKey: "id",
     labelKey:  "value",
-    selected: []
+    selected:  [],
+    autoFocus: false
 }

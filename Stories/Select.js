@@ -140,6 +140,7 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-1">
                         <Select
+                            autoFocus={true}
                             label="Select boolean"
                             list={boolList}
                             placeholder="select"

@@ -33,6 +33,7 @@ class SelectProps {
     onKeyDown: ( e: KeyboardEvent, value: string ) => void;
     tabIndex: ?number;
     addControls: () => Array<any>;
+    autoFocus:?boolean;
 }
 
 export class Select extends React.Component {
@@ -213,6 +214,7 @@ export class Select extends React.Component {
         let selItem = this.props.selected;
 
         let input = <input ref={( input ) => {this.searchInput = input;}}
+                           autoFocus={this.props.autoFocus}
                            tabIndex={this.props.tabIndex}
                            onKeyDown={this.onKeyDown.bind( this )}
                            onBlur={this.onInputBlur.bind( this )}
@@ -226,13 +228,14 @@ export class Select extends React.Component {
                 : (
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
-                    : <div className="reactParts__select-selected-span">{((selItem !== null && selItem !== undefined) && this.getSelected())}</div>
+                    : <div
+                    className="reactParts__select-selected-span">{((selItem !== null && selItem !== undefined) && this.getSelected())}</div>
             ) }
             {input}
         </div>
     }
 
-    onChangeInputSearch(  ) {
+    onChangeInputSearch() {
         this.forceUpdate()
     }
 
@@ -255,7 +258,7 @@ export class Select extends React.Component {
         }
 
 
-        if ( (this.props.selected ===null || this.props.selected ===undefined) && (!this.searchInput || (this.searchInput && this.searchInput.value.length === 0 )) ) {
+        if ( (this.props.selected === null || this.props.selected === undefined) && (!this.searchInput || (this.searchInput && this.searchInput.value.length === 0 )) ) {
             placeholder = <div className="reactParts__select-placeholder">{this.props.placeholder}</div>
         }
 
@@ -314,6 +317,7 @@ Select.propTypes = {
     onKeyDown:      React.PropTypes.func,
     tabIndex:       React.PropTypes.number,
     addControls:    React.PropTypes.func,
+    autoFocus:      React.PropTypes.bool
 }
 
 Select.defaultProps = {
@@ -333,4 +337,5 @@ Select.defaultProps = {
     noResultsText:  "Nothing to show",
     onKeyDown:      null,
     addControls:    null,
+    autoFocus:      false
 }
