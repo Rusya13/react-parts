@@ -236,7 +236,7 @@ export class Input extends React.Component {
         } else {
             obj = item.value;
         }
-        if (this.props.onChange) this.props.onChange(obj);
+        if (this.props.onChange) this.props.onChange(obj, item);
          //this.input.focus();
         this.setState({isSuggestOpen:false});
         this.updateSuggest(item.value)

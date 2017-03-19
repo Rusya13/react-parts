@@ -68,7 +68,7 @@ export class Select extends React.Component {
     selectItem( item: ListObject ) {
         this.setState( { stateList: false } );
         let c: OnChangeReturnObject = this._createReturnObject( this.props.name, item[ this.props.uniqueKey ] );
-        this.props.onChange && this.props.onChange( c );
+        this.props.onChange && this.props.onChange( c, item );
     };
 
     onClickHandler() {

@@ -74,7 +74,7 @@ export class SelectAsync extends React.Component {
 
 
         let c: OnChangeReturnObject = this._createReturnObject( this.props.name, item );
-        this.props.onChange && this.props.onChange( c );
+        this.props.onChange && this.props.onChange( c, item );
     };
 
     onClickHandler() {

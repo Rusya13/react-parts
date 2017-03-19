@@ -14,6 +14,16 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.0.13
+
+#### New Features
+
+##### Input, Select, SelectAsync
+
+- in callback "onChange" added item as second argument
+
+
+
 ### v0.0.12
 
 #### Fixes

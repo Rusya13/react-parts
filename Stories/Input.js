@@ -41,8 +41,8 @@ export class InputController extends React.Component {
     }
 
 
-    onChangeHandler( obj: Object ) {
-        //console.log( "onChange", obj );
+    onChangeHandler( obj: Object, item ) {
+        console.log( "onChange", obj, item );
         this.setState( obj )
     }
 
