@@ -14,6 +14,14 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.0.11
+
+#### New Features
+
+##### Input
+
+- listItemRender added
+
 
 
 ### v0.0.10

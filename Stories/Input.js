@@ -72,6 +72,12 @@ export class InputController extends React.Component {
     }
 
 
+    customSuggestItemRender(item, i, list){
+        return <div>
+            {item.value} test
+        </div>
+    }
+
 
     render() {
 
@@ -133,6 +139,7 @@ export class InputController extends React.Component {
                             onChange={this.onChangeHandler.bind( this )}
                             suggestText="Select address or continue typing"
                             tabIndex={1}
+                            listItemRender={this.customSuggestItemRender.bind(this)}
                             cancel={true}
                         />
                     </div>

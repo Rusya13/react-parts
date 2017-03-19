@@ -45,6 +45,7 @@ interface InputProps {
     tabIndex:?number;
     cancel:?boolean;
     prefix:?string;
+    listItemRender: ( obj: Object, i: number, list: Array<any> ) => any;
 }
 
 
@@ -254,7 +255,7 @@ export class Input extends React.Component {
                 onClick={this.selectFromSuggestions.bind(this, item)}
                 className={className + ((i === this.state.pointSelect)?" selected":"")}
             >
-                {item.value}
+                {(this.props.listItemRender) ? this.props.listItemRender( item, i, suggest ): item.value}
             </li>
         });
 
@@ -366,6 +367,7 @@ Input.propTypes = {
     autocomplete:React.PropTypes.bool,
     tabIndex:React.PropTypes.number,
     cancel: React.PropTypes.bool,
-    prefix:React.PropTypes.string
+    prefix:React.PropTypes.string,
+    listItemRender: React.PropTypes.func,
 };
 
