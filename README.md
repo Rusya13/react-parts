@@ -14,6 +14,12 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.0.15
+
+##### Input
+
+- value = "" if null or undefined
+
 
 ### v0.0.14
 

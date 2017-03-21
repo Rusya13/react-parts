@@ -7,15 +7,16 @@ import {Model} from './Model/Model';
 class Auth extends Model {
 
     constructor(props){
-        super(props);
+        let attributes = {
+            email:"",
+            password:"",
+            editMode:true,
+        };
+        super(attributes, true);
 
     }
 
-    attributes = {
-        email:"",
-        password:"",
-        editMode:true,
-    };
+
 
     observable = {
         password:"",
@@ -47,7 +48,7 @@ export class AuthForm extends React.Component {
         super( props );
         window.form = this;
         this.model = new Auth();
-        this.model.observeAttributes();
+        window.model = this.model;
         this.model.observe(['password', 'editMode', 'fullEmail'], ()=>this.forceUpdate())
         this.model.observe(['email'], null)
     }

@@ -31,11 +31,16 @@ function observable(target, key, descriptor  ) {
 
 class Todo extends Model {
 
-    attributes = {
-        todo:[] = [],
-        newTodo: "",
-        filter:  ""
-    };
+    constructor(){
+       let  attributes = {
+           todo:[] = [],
+           newTodo: "",
+           filter:  ""
+       };
+       super (attributes, true)
+    }
+
+
 
     computed: Object = {
         filteredTodo: () => {
@@ -95,7 +100,7 @@ export class TodoList extends React.Component {
     constructor( props ) {
         super( props );
         this.todo = new Todo();
-        //this.todo.observeAttributes();
+
         this.todo.observe(
             [
                 "todo",
@@ -105,7 +110,7 @@ export class TodoList extends React.Component {
                 "filter",
                 "doneTodo"
             ], () => this.forceUpdate() );
-        //this.todo.observe("todo", null)
+
         this.todo.observe("filter", ()=>this.log())
     }
     log(){

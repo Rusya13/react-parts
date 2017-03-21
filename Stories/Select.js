@@ -13,7 +13,7 @@ export class SelectController extends React.Component {
         this.listProvider = this.listProvider.bind(this);
         this.state = {
             testMultiSelect: [ 4, 5 ],
-            testSelect:      3,
+            testSelect:      null,
             testSelectAsync: null,
             testBool: null,
             testSearch:      null,
@@ -137,39 +137,39 @@ export class SelectController extends React.Component {
 
         return (
             <div className="reactParts__form">
-                <div className="row">
-                    <div className="col-xs-1">
-                        <Select
-                            autoFocus={true}
-                            label="Select boolean"
-                            list={boolList}
-                            placeholder="select"
-                            name="testBool"
-                            cancel={true}
-                            selected={this.state.testBool}
-                            onChange={this.onChange.bind( this )}
-                            tabIndex={1}
-                        />
-                    </div>
-
-                </div>
                 {/*<div className="row">*/}
                     {/*<div className="col-xs-1">*/}
                         {/*<Select*/}
-                            {/*label="Select"*/}
-                            {/*list={list}*/}
+                            {/*autoFocus={true}*/}
+                            {/*label="Select boolean"*/}
+                            {/*list={boolList}*/}
                             {/*placeholder="select"*/}
-                            {/*name="testSelect"*/}
+                            {/*name="testBool"*/}
                             {/*cancel={true}*/}
-                            {/*uniqueKey="key"*/}
-                            {/*selected={this.state.testSelect}*/}
+                            {/*selected={this.state.testBool}*/}
                             {/*onChange={this.onChange.bind( this )}*/}
-                            {/*labelKey="firstName"*/}
-                            {/*tabIndex={2}*/}
+                            {/*tabIndex={1}*/}
                         {/*/>*/}
                     {/*</div>*/}
 
                 {/*</div>*/}
+                <div className="row">
+                    <div className="col-xs-1">
+                        <Select
+                            label="Select"
+                            list={list}
+                            placeholder="select"
+                            name="testSelect"
+                            cancel={true}
+                            uniqueKey="key"
+                            selected={this.state.testSelect}
+                            onChange={this.onChange.bind( this )}
+                            labelKey="firstName"
+                            tabIndex={2}
+                        />
+                    </div>
+
+                </div>
                 {/*<div className="row">*/}
                     {/*<div className="col-xs-3">*/}
                         {/*<SelectAsync*/}
