@@ -14,6 +14,14 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.1.3
+
+##### Input
+
+- close suggest on Tab
+- fixed crash on Enter with not selected item from suggest list
+
+
 ### v0.1.2
 
 ##### Input

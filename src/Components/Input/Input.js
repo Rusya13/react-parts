@@ -96,7 +96,6 @@ export class Input extends React.Component {
         let currentPosition:number = this.state.pointSelect;
         let newPosition:number = -1;
         if (key === 'ArrowDown'){
-            //console.log("Input setNewPosition down");
             if (currentPosition === this.state.suggest.length-1){
                 newPosition = 0;
             } else {
@@ -104,7 +103,7 @@ export class Input extends React.Component {
             }
         }
         if (key === 'ArrowUp'){
-            //console.log("Input setNewPosition up");
+
             if ( currentPosition === 0 || currentPosition === -1 ){
                 newPosition = this.state.suggest.length-1;
             } else {
@@ -129,9 +128,6 @@ export class Input extends React.Component {
     }
 
     onKeyDown(e:any){
-        //let startPos = this.input.selectionStart;
-
-        //console.log("Input onKeyDown", startPos);
         let suggest = this.state.suggest;
         if (e.key==='ArrowDown'
             && !this.state.isSuggestOpen
@@ -154,6 +150,8 @@ export class Input extends React.Component {
                 case 'Escape':
                     this.setState({isSuggestOpen:false});
                     break;
+                case 'Tab':
+                    this.setState({isSuggestOpen:false});
                 default:
 
             }
@@ -213,9 +211,9 @@ export class Input extends React.Component {
     };
 
     focusOff(e:any) {
-        if (this.state.isSuggestOpen){
-            this.setState({isSuggestOpen:false})
-        }
+        //if (this.state.isSuggestOpen){
+        //    this.setState({isSuggestOpen:false})
+        //}
         if (this.props.onBlur) this.props.onBlur();
     };
 
@@ -228,27 +226,31 @@ export class Input extends React.Component {
 
      selectFromSuggestions(item:ListObject){
 
-        console.log("select", item);
-        let obj: OnChangeReturnObject;
-        let name = this.props.name;
+        if (item){
+            let obj: OnChangeReturnObject;
+            let name = this.props.name;
 
-        if (name) {
-            obj = this._createReturnObject(name, item.value)
-        } else {
-            obj = item.value;
+            if (name) {
+                obj = this._createReturnObject(name, item.value)
+            } else {
+                obj = item.value;
+            }
+            if (this.props.onChange) this.props.onChange(obj, item);
+            if (this.props.onSelectFromSuggest) this.props.onSelectFromSuggest(obj, item);
+            this.updateSuggest(item.value)
         }
-        if (this.props.onChange) this.props.onChange(obj, item);
-        if (this.props.onSelectFromSuggest) this.props.onSelectFromSuggest(obj, item);
-         //this.input.focus();
-        this.setState({isSuggestOpen:false});
-        this.updateSuggest(item.value)
-         //this.input.blur();
+         this.setState({isSuggestOpen:false});
+
+
+
+
+
+
     }
 
     renderSuggestionsList(){
         let suggest = this.state.suggest;
         let className="reactParts__input-suggest-list-item";
-        //console.log("Input renderSuggestionsList", suggest);
 
         if (suggest instanceof Array !== true) return null;
         let list:Array<any> = suggest.map((item:ListObject, i:number)=>{
@@ -279,10 +281,7 @@ export class Input extends React.Component {
     render() {
         let InputSimpleClassName = "reactParts__input";
         if (this.props.cancel) InputSimpleClassName += " cancel";
-
         let valid = this.props.valid;
-
-        //console.log("Input render", this.props.type);
         if (valid !== undefined && valid !== null) {
             if (valid) {
                 InputSimpleClassName += " valid"
