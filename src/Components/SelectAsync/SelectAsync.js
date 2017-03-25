@@ -34,6 +34,7 @@ class SelectProps {
     tabIndex: ?number;
     addControls:()=>Array<any>;
     autoFocus:?boolean;
+    showFullValue:?boolean;
 }
 
 export class SelectAsync extends React.Component {
@@ -119,6 +120,7 @@ export class SelectAsync extends React.Component {
 
     renderList() {
         let list          = this.state.list;
+        if (!list) return null
 
         let newList = list.map( ( selItem, i, list ) => {
             return <li key={selItem[ this.props.uniqueKey ]}
@@ -218,15 +220,15 @@ export class SelectAsync extends React.Component {
                 : (
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
-                    : (selItem && selItem[ this.props.labelKey ])
+                    : ((selItem !== null && selItem !== undefined) && <div className={(this.props.showFullValue)?"":"reactParts__select-selected-span"}>{selItem[ this.props.labelKey ]}</div>)
             ) }
             {input}
-            {/*{(this.state.stateList) ? input : null}*/}
         </div>
     }
 
     onChangeInputSearch( e ) {
         //console.log( "Select onChangeInputSearch", this.searchInput.value );
+        this.setState({pointSelect:-1});
         this.props.list( this.searchInput.value ).then( res => {
             //console.log( "Select onChangeInputSearch", res );
             this.setState( { list: res } )
@@ -308,7 +310,8 @@ SelectAsync.propTypes = {
     onKeyDown:      React.PropTypes.func,
     tabIndex:       React.PropTypes.number,
     addControls:    React.PropTypes.func,
-    autoFocus:      React.PropTypes.bool
+    autoFocus:      React.PropTypes.bool,
+    showFullValue: React.PropTypes.bool
 }
 
 SelectAsync.defaultProps = {
@@ -328,5 +331,6 @@ SelectAsync.defaultProps = {
     noResultsText:  "Nothing to show",
     onKeyDown:      null,
     addControls:    null,
-    autoFocus:      false
+    autoFocus:      false,
+    showFullValue: false
 }

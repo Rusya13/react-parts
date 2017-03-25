@@ -34,6 +34,7 @@ class SelectProps {
     tabIndex: ?number;
     addControls: () => Array<any>;
     autoFocus:?boolean;
+    showFullValue:?boolean;
 }
 
 export class Select extends React.Component {
@@ -228,20 +229,26 @@ export class Select extends React.Component {
                 : (
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
-                    : <div
-                    className="reactParts__select-selected-span">{((selItem !== null && selItem !== undefined) && this.getSelected())}</div>
+                    :((selItem !== null && selItem !== undefined) && <div className={(this.props.showFullValue)?"":"reactParts__select-selected-span"}>{this.getSelected()}</div>)
             ) }
             {input}
         </div>
     }
 
     onChangeInputSearch() {
-        this.forceUpdate()
+        this.setState({pointSelect:-1});
     }
 
     getSelected() {
-        let item = this.props.list.filter( item => item[ this.props.uniqueKey ] === this.props.selected )[ 0 ];
-        return item[ this.props.labelKey ]
+        let item = undefined;
+        let filteredItems = this.props.list.filter( item => item[ this.props.uniqueKey ] === this.props.selected );
+        if (filteredItems.length>0){
+            item = filteredItems[0];
+            return item[ this.props.labelKey ]
+        } else {
+            return item
+        }
+
     }
 
 
@@ -258,11 +265,11 @@ export class Select extends React.Component {
         }
 
 
-        if ( (this.props.selected === null || this.props.selected === undefined) && (!this.searchInput || (this.searchInput && this.searchInput.value.length === 0 )) ) {
+        if ( (this.getSelected() === undefined ) && (!this.searchInput || (this.searchInput && this.searchInput.value.length === 0 )) ) {
             placeholder = <div className="reactParts__select-placeholder">{this.props.placeholder}</div>
         }
 
-        if ( this.props.selected !== null && this.props.selected !== undefined ) {
+        if ( this.getSelected() !== undefined ) {
             cancel = this.props.cancel &&
                 <svg onClick={this.cancelSelected.bind( this )} width="18" height="18" viewBox="0 0 24 24"
                      className="icon reactParts__select__cancel">
@@ -317,7 +324,8 @@ Select.propTypes = {
     onKeyDown:      React.PropTypes.func,
     tabIndex:       React.PropTypes.number,
     addControls:    React.PropTypes.func,
-    autoFocus:      React.PropTypes.bool
+    autoFocus:      React.PropTypes.bool,
+    showFullValue: React.PropTypes.bool
 }
 
 Select.defaultProps = {
@@ -337,5 +345,6 @@ Select.defaultProps = {
     noResultsText:  "Nothing to show",
     onKeyDown:      null,
     addControls:    null,
-    autoFocus:      false
+    autoFocus:      false,
+    showFullValue: false
 }

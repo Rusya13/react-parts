@@ -28,7 +28,7 @@ export class CheckBoxController extends React.Component {
                             {label:"Female", name:"gender_female", checked:true, disabled:true}
                         ]
                     }
-                    type="button"
+
                     onChange={this.onChange.bind(this)}
                 />
                 <CheckBox disabled={false} onClickHandler={this.onChange.bind(this)} name="smoke" label="Non-smoking" checked={this.model.get("smoke")} type="button"/>

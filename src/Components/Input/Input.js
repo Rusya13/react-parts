@@ -39,13 +39,13 @@ interface InputProps {
     limit: number;
     className: string;
     value: InputValue;
-    castTo: string;
     label: string;
     autocomplete:boolean;
     tabIndex:?number;
     cancel:?boolean;
     prefix:?string;
     listItemRender: ( obj: Object, i: number, list: Array<any> ) => any;
+    onSelectFromSuggest:?()=>void;
 }
 
 
@@ -175,10 +175,8 @@ export class Input extends React.Component {
             value = (typeof value === "string")?value.slice(0, this.props.limit): value;
         }
         let obj: OnChangeReturnObject;
-        switch (this.props.castTo) {
-            case 'number':
-                value = Number(value);
-                break;
+        if (this.props.type === "number"){
+            value = Number(value);
         }
         let name = this.props.name;
         if (name) {
@@ -237,6 +235,7 @@ export class Input extends React.Component {
             obj = item.value;
         }
         if (this.props.onChange) this.props.onChange(obj, item);
+        if (this.props.onSelectFromSuggest) this.props.onSelectFromSuggest(obj, item);
          //this.input.focus();
         this.setState({isSuggestOpen:false});
         this.updateSuggest(item.value)
@@ -361,13 +360,13 @@ Input.propTypes = {
     valid: React.PropTypes.bool,
     limit: React.PropTypes.number,
     className: React.PropTypes.string,
-    value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
-    castTo: React.PropTypes.string,
+    value: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     label: React.PropTypes.string,
     autocomplete:React.PropTypes.bool,
     tabIndex:React.PropTypes.number,
     cancel: React.PropTypes.bool,
     prefix:React.PropTypes.string,
     listItemRender: React.PropTypes.func,
+    onSelectFromSuggest:React.PropTypes.func
 };
 

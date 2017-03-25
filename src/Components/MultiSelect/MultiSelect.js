@@ -79,6 +79,7 @@ export class MultiSelect extends React.Component {
             newSelected.push( item[ this.props.uniqueKey ] );
             let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
             console.log( "MultiSelect selectItem", c );
+            this.searchInput.value = "";
             this.props.onChange && this.props.onChange( c );
         }
     };
@@ -186,7 +187,7 @@ export class MultiSelect extends React.Component {
     }
 
     onChangeInputSearch() {
-        this.forceUpdate()
+        this.setState({pointSelect:-1});
     }
 
 

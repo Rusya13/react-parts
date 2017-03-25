@@ -82,6 +82,8 @@ export class MultiSelectAsync extends React.Component {
         newSelected.push( item );
         let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
         console.log( "MultiSelect selectItem", c );
+        this.searchInput.value = "";
+        this.onChangeInputSearch();
         this.props.onChange && this.props.onChange( c );
 
     };
@@ -179,6 +181,7 @@ export class MultiSelectAsync extends React.Component {
     }
 
     onChangeInputSearch() {
+        this.setState({pointSelect:-1});
         this.props.list( this.searchInput.value ).then( res => {
 
             this.setState( { list: res } )

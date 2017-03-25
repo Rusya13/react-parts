@@ -14,6 +14,38 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+
+### v0.1.0
+
+- all inputs have height = 34px
+
+##### Input
+
+- new prop: onSelectFromSuggest
+- prop castTo deprecated
+- autocast to number if type === number
+- prop value is no more required
+
+##### MultiSelect, MultiSelectAsync
+
+- keyboard error fixed
+- clear input after select
+
+##### Select
+
+- new prop showFullValue
+- keyboard error fixed
+- selected now safe
+
+##### SelectAsync
+
+- new prop showFullValue
+- keyboard error fixed
+- safe renderList
+
+
+
 ### v0.0.15
 
 ##### Input

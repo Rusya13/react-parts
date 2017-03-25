@@ -78,6 +78,10 @@ export class InputController extends React.Component {
         </div>
     }
 
+    selectFromSuggest(o, item){
+        console.log("Input selectFromSuggest", o, item);
+    }
+
 
     render() {
 
@@ -90,7 +94,7 @@ export class InputController extends React.Component {
                 <div className="reactParts__form-row">
                     <div className="col-xs-3" >
                         <Input
-                            type="text"
+                            type="number"
                             //autoFocus={true}
                             value={this.state.email}
                             name="email"
@@ -141,6 +145,7 @@ export class InputController extends React.Component {
                             tabIndex={1}
                             listItemRender={this.customSuggestItemRender.bind(this)}
                             cancel={true}
+                            onSelectFromSuggest={this.selectFromSuggest.bind(this)}
                         />
                     </div>
                 </div>
