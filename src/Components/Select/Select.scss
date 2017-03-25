@@ -22,7 +22,7 @@
   border: 1px solid #E6E8EB;
   border-radius: 2px;
   position: relative;
-
+  min-height: 34px;
   &.focus{
     border-color: $input-border-color-focus;
   }
