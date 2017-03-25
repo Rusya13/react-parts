@@ -213,6 +213,9 @@ export class Input extends React.Component {
     };
 
     focusOff(e:any) {
+        if (this.state.isSuggestOpen){
+            this.setState({isSuggestOpen:false})
+        }
         if (this.props.onBlur) this.props.onBlur();
     };
 

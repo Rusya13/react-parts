@@ -14,6 +14,19 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.1.2
+
+##### Input
+
+- close suggest obBlur
+
+
+### v0.1.1
+
+##### Select
+
+- minHeight fixed
+
 
 
 ### v0.1.0
