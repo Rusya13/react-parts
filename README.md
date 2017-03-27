@@ -14,6 +14,14 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.1.4
+
+##### Input
+
+- fixed 0 value when type number
+
+
+
 ### v0.1.3
 
 ##### Input

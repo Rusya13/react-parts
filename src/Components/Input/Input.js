@@ -319,7 +319,7 @@ export class Input extends React.Component {
                            onChange={this.onChangeHandler.bind(this)}
                            onKeyUp={this.onKeyUp.bind(this)}
                            onKeyDown={this.onKeyDown.bind(this)}
-                           value={this.props.value || ""}
+                           value={(this.props.value === null || this.props.value === undefined)?"": this.props.value}
                            onFocus={this.focusOn.bind(this)}
                            onBlur={this.focusOff.bind(this)}
                            ref={(input) => {this.input = input;}}
