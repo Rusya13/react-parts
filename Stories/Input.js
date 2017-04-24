@@ -91,11 +91,12 @@ export class InputController extends React.Component {
                     Address
                 </div>
 
-                <div className="reactParts__form-row">
+                <div className="row">
                     <div className="col-xs-3" >
                         <Input
                             type="number"
                             //autoFocus={true}
+
                             value={this.state.email}
                             name="email"
                             placeholder="Type something.."
@@ -114,6 +115,7 @@ export class InputController extends React.Component {
                         <Input
                             type="text"
                             //autoFocus={true}
+                            required
                             value={this.state.email}
                             name="email"
                             placeholder="Type something.."
@@ -132,6 +134,7 @@ export class InputController extends React.Component {
                         <Input
                             type="text"
                             //autoFocus={true}
+                            required
                             value={this.state.address}
                             name="address"
                             placeholder="Type something.."

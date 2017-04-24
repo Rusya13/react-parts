@@ -1,5 +1,6 @@
 /* @flow */
 import * as React from "react";
+import PropTypes from "prop-types";
 
 interface ReturnObject {
     [key: string]: Selected | null;
@@ -32,9 +33,10 @@ class SelectProps {
     noResultsText: ?string;
     onKeyDown: ( e: KeyboardEvent, value: string ) => void;
     tabIndex: ?number;
-    addControls:()=>Array<any>;
-    autoFocus:?boolean;
-    showFullValue:?boolean;
+    addControls: () => Array<any>;
+    autoFocus: ?boolean;
+    showFullValue: ?boolean;
+    required: ?boolean;
 }
 
 export class SelectAsync extends React.Component {
@@ -84,10 +86,12 @@ export class SelectAsync extends React.Component {
     }
 
 
-    renderControls(){
-        return this.props.addControls().map(item=>{
-            return <div className="reactParts__select-addControls-item" onClick={item.onClickHandler && item.onClickHandler.bind(this, item.name)} key={Math.random()}>{item.title}</div>
-        })
+    renderControls() {
+        return this.props.addControls().map( item => {
+            return <div className="reactParts__select-addControls-item"
+                        onClick={item.onClickHandler && item.onClickHandler.bind( this, item.name )}
+                        key={Math.random()}>{item.title}</div>
+        } )
     }
 
     openList() {
@@ -96,7 +100,7 @@ export class SelectAsync extends React.Component {
 
 
         this.props.list().then( res => {
-            console.log("SelectAsync res", res);
+            console.log( "SelectAsync res", res );
             this.setState( { list: res } )
         } );
 
@@ -119,8 +123,8 @@ export class SelectAsync extends React.Component {
     };
 
     renderList() {
-        let list          = this.state.list;
-        if (!list) return null
+        let list = this.state.list;
+        if ( !list ) return null
 
         let newList = list.map( ( selItem, i, list ) => {
             return <li key={selItem[ this.props.uniqueKey ]}
@@ -220,7 +224,8 @@ export class SelectAsync extends React.Component {
                 : (
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
-                    : ((selItem !== null && selItem !== undefined) && <div className={(this.props.showFullValue)?"":"reactParts__select-selected-span"}>{selItem[ this.props.labelKey ]}</div>)
+                    : ((selItem !== null && selItem !== undefined) && <div
+                    className={(this.props.showFullValue) ? "" : "reactParts__select-selected-span"}>{selItem[ this.props.labelKey ]}</div>)
             ) }
             {input}
         </div>
@@ -228,7 +233,7 @@ export class SelectAsync extends React.Component {
 
     onChangeInputSearch( e ) {
         //console.log( "Select onChangeInputSearch", this.searchInput.value );
-        this.setState({pointSelect:-1});
+        this.setState( { pointSelect: -1 } );
         this.props.list( this.searchInput.value ).then( res => {
             //console.log( "Select onChangeInputSearch", res );
             this.setState( { list: res } )
@@ -246,8 +251,9 @@ export class SelectAsync extends React.Component {
         }
         let placeholder, list, cancel, addControls;
 
-        if (this.props.addControls && (this.props.addControls().length> 0) ){
-            addControls = <div key="addControls" className="reactParts__select-addControls">{this.renderControls()}</div>;
+        if ( this.props.addControls && (this.props.addControls().length > 0) ) {
+            addControls =
+                <div key="addControls" className="reactParts__select-addControls">{this.renderControls()}</div>;
         }
 
 
@@ -272,7 +278,7 @@ export class SelectAsync extends React.Component {
             <div ref={( input ) => {this.input = input;}} className="reactParts__select-wrap">
                 {addControls}
                 {this.props.label &&
-                <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
+                <label className={"reactParts__label"+((this.props.required && !this.props.readOnly)?" required":"")} htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?
                     <div className="reactParts__select-selected">{this.props.selected[ this.props.labelKey ]}</div> :
                     <div className={selectClassName} onClick={this.onClickHandler.bind( this )}>
@@ -293,25 +299,26 @@ export class SelectAsync extends React.Component {
 }
 
 SelectAsync.propTypes = {
-    readOnly:       React.PropTypes.bool,
-    cancel:         React.PropTypes.bool,
-    onChange:       React.PropTypes.func,
-    disabled:       React.PropTypes.bool,
-    placeholder:    React.PropTypes.string,
-    name:           React.PropTypes.string,
-    list:           React.PropTypes.func.isRequired,
-    selected:       React.PropTypes.object,
-    label:          React.PropTypes.string,
-    uniqueKey:      React.PropTypes.string,
-    labelKey:       React.PropTypes.string,
-    listItemRender: React.PropTypes.func,
-    inputRender:    React.PropTypes.func,
-    noResultsText:  React.PropTypes.string,
-    onKeyDown:      React.PropTypes.func,
-    tabIndex:       React.PropTypes.number,
-    addControls:    React.PropTypes.func,
-    autoFocus:      React.PropTypes.bool,
-    showFullValue: React.PropTypes.bool
+    readOnly:       PropTypes.bool,
+    cancel:         PropTypes.bool,
+    onChange:       PropTypes.func,
+    disabled:       PropTypes.bool,
+    placeholder:    PropTypes.string,
+    name:           PropTypes.string,
+    list:           PropTypes.func.isRequired,
+    selected:       PropTypes.object,
+    label:          PropTypes.string,
+    uniqueKey:      PropTypes.string,
+    labelKey:       PropTypes.string,
+    listItemRender: PropTypes.func,
+    inputRender:    PropTypes.func,
+    noResultsText:  PropTypes.string,
+    onKeyDown:      PropTypes.func,
+    tabIndex:       PropTypes.number,
+    addControls:    PropTypes.func,
+    autoFocus:      PropTypes.bool,
+    showFullValue:  PropTypes.bool,
+    required:  PropTypes.bool
 }
 
 SelectAsync.defaultProps = {
@@ -332,5 +339,5 @@ SelectAsync.defaultProps = {
     onKeyDown:      null,
     addControls:    null,
     autoFocus:      false,
-    showFullValue: false
+    showFullValue:  false
 }

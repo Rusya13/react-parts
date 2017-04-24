@@ -2,7 +2,7 @@
 
 
 import * as React from "react";
-
+import PropTypes from "prop-types";
 
 export interface IconProps {
     hidden: ?boolean;
@@ -11,43 +11,43 @@ export interface IconProps {
     width: number;
     height: number;
     className: ?string;
-    onClick: ?(event: Event) => void;
+    onClick: ?( event: Event ) => void;
 }
 
 class Icon extends React.Component {
 
-    props:IconProps;
+    props: IconProps;
 
-    constructor(props: IconProps) {
-        super(props);
+    constructor( props: IconProps ) {
+        super( props );
     }
 
 
-    onClick(e: Event) {
-        if (this.props.onClick) this.props.onClick(e);
+    onClick( e: Event ) {
+        if ( this.props.onClick ) this.props.onClick( e );
     };
 
     render() {
-        if (this.props.hidden) {
+        if ( this.props.hidden ) {
             return null
         }
 
         let svgPath;
 
-        switch (this.props.name) {
+        switch ( this.props.name ) {
 
             case "long_minus":
-                svgPath = <rect style={{fill: this.props.fill}} y="20" width="20" height="2"/>
+                svgPath = <rect style={{ fill: this.props.fill }} y="20" width="20" height="2"/>
                 break;
 
             case "arrow_left":
-                svgPath =<path fill={this.props.fill}
-                               d="M21.2999966,13.9001104 L10.3899206,13.9001104 L14.0950379,10.1949931 C14.3683892,9.92164182 14.3682142,9.47853974 14.0950379,9.20501346 C13.8216866,8.93166218 13.3785846,8.93166218 13.1050583,9.20501346 L8.20503534,14.1050364 C7.93168406,14.3783877 7.93168406,14.8216648 8.20486034,15.094841 L13.1048833,19.994864 C13.2415589,20.1315396 13.4207598,20.1999649 13.5999606,20.1999649 C13.7789864,20.1999649 13.9581873,20.1315396 14.0950379,19.994689 C14.3683892,19.7215127 14.3682142,19.2782356 14.0950379,19.0050593 L10.3897456,15.300117 L21.2999966,15.300117 C21.6865735,15.300117 22.0001749,14.9865155 21.9999999,14.6001137 C21.9999999,14.2135369 21.6865735,13.9001104 21.2999966,13.9001104 Z"/>
+                svgPath = <path fill={this.props.fill}
+                                d="M21.2999966,13.9001104 L10.3899206,13.9001104 L14.0950379,10.1949931 C14.3683892,9.92164182 14.3682142,9.47853974 14.0950379,9.20501346 C13.8216866,8.93166218 13.3785846,8.93166218 13.1050583,9.20501346 L8.20503534,14.1050364 C7.93168406,14.3783877 7.93168406,14.8216648 8.20486034,15.094841 L13.1048833,19.994864 C13.2415589,20.1315396 13.4207598,20.1999649 13.5999606,20.1999649 C13.7789864,20.1999649 13.9581873,20.1315396 14.0950379,19.994689 C14.3683892,19.7215127 14.3682142,19.2782356 14.0950379,19.0050593 L10.3897456,15.300117 L21.2999966,15.300117 C21.6865735,15.300117 22.0001749,14.9865155 21.9999999,14.6001137 C21.9999999,14.2135369 21.6865735,13.9001104 21.2999966,13.9001104 Z"/>
                 break;
 
             case "arrow_right":
-                svgPath =<path fill={this.props.fill}
-                               d="M21.205,5.007c-0.429-0.444-1.143-0.444-1.587,0c-0.429,0.429-0.429,1.143,0,1.571l8.047,8.047H1.111 C0.492,14.626,0,15.118,0,15.737c0,0.619,0.492,1.127,1.111,1.127h26.554l-8.047,8.032c-0.429,0.444-0.429,1.159,0,1.587 c0.444,0.444,1.159,0.444,1.587,0l9.952-9.952c0.444-0.429,0.444-1.143,0-1.571L21.205,5.007z"/>
+                svgPath = <path fill={this.props.fill}
+                                d="M21.205,5.007c-0.429-0.444-1.143-0.444-1.587,0c-0.429,0.429-0.429,1.143,0,1.571l8.047,8.047H1.111 C0.492,14.626,0,15.118,0,15.737c0,0.619,0.492,1.127,1.111,1.127h26.554l-8.047,8.032c-0.429,0.444-0.429,1.159,0,1.587 c0.444,0.444,1.159,0.444,1.587,0l9.952-9.952c0.444-0.429,0.444-1.143,0-1.571L21.205,5.007z"/>
                 break;
 
             case "add_file":
@@ -345,7 +345,7 @@ class Icon extends React.Component {
                 break;
 
             case "group":
-                svgPath =  <path
+                svgPath = <path
                     d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
 
                 break;
@@ -530,7 +530,7 @@ class Icon extends React.Component {
                 break;
 
             case "logotype":
-                svgPath =<path
+                svgPath = <path
                     d="M9.2 23.7L11.3 25.7C12.8 27.2 15.2 27.2 16.7 25.7L25.8 16.7C27.3 15.2 27.3 12.8 25.8 11.3L16.6 2.1C15.1 0.5 12.6 0.5 11.1 2.1L2.1 11.1C0.5 12.6 0.5 15.1 2.1 16.6L4.5 19 4.5 21.5C4.5 22.7 5.5 23.7 6.7 23.7L9.2 23.7ZM7.4 14.8C6.7 14.2 6.7 13.1 7.4 12.5L12.7 7.1C13.4 6.5 14.4 6.5 15.1 7.1L20.5 12.6C21.1 13.2 21.1 14.3 20.5 14.9L15.2 20.3C14.5 20.9 13.5 20.9 12.8 20.3L7.4 14.8Z"
                     fill={this.props.fill} fillRule="nonzero"/>;
                 break;
@@ -567,7 +567,7 @@ class Icon extends React.Component {
                 svgPath = <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>;
                 break;
             case "tune":
-                svgPath =<path
+                svgPath = <path
                     d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/>;
                 break;
 
@@ -577,7 +577,7 @@ class Icon extends React.Component {
                 break;
 
             case "super_icon":
-                svgPath =<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                svgPath = <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                     <g transform="translate(-1104.000000, -13.000000)" fill="#CCCCCC">
                         <g transform="translate(0.000000, 1.000000)">
                             <path
@@ -588,7 +588,7 @@ class Icon extends React.Component {
                 break;
 
             case "reload_page":
-                svgPath =<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                svgPath = <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                     <g transform="translate(-1243.000000, -352.000000)" fillRule="nonzero" fill="#637282">
                         <g transform="translate(1.000000, 340.000000)">
                             <g transform="translate(1236.962963, 5.000000)">
@@ -601,19 +601,19 @@ class Icon extends React.Component {
                 break;
 
             case "autorenew":
-                svgPath =<path
+                svgPath = <path
                     d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>;
                 break;
         }
 
-        if (!svgPath) return null;
+        if ( !svgPath ) return null;
 
         return (
             <svg
                 fill={ this.props.fill }
                 width={ this.props.width }
                 height={ this.props.height }
-                onClick={ this.onClick.bind(this) }
+                onClick={ this.onClick.bind( this ) }
                 viewBox="0 0 24 24"
                 className={ this.props.className ? "icon " + this.props.className : "icon" }
             >
@@ -623,14 +623,14 @@ class Icon extends React.Component {
     };
 }
 
-Icon.propTypes =  {
-    hidden: React.PropTypes.bool,
-    name: React.PropTypes.string.isRequired,
-    fill: React.PropTypes.string,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    className: React.PropTypes.string,
-    onClick: React.PropTypes.func,
+Icon.propTypes = {
+    hidden:    PropTypes.bool,
+    name:      PropTypes.string.isRequired,
+    fill:      PropTypes.string,
+    width:     PropTypes.number,
+    height:    PropTypes.number,
+    className: PropTypes.string,
+    onClick:   PropTypes.func,
 };
 
-export {Icon};
+export { Icon };

@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-
+import PropTypes from "prop-types";
 
 interface ReturnObject {
     [key: string]: Selected;
@@ -35,6 +35,7 @@ class MultiSelectProps {
     listItemRender: ( obj: Object, i: number, list: Array<any> ) => any;
     inputItemRender: () => any;
     autoFocus: ?boolean;
+    required: ?boolean;
 }
 
 export class MultiSelectAsync extends React.Component {
@@ -181,7 +182,7 @@ export class MultiSelectAsync extends React.Component {
     }
 
     onChangeInputSearch() {
-        this.setState({pointSelect:-1});
+        this.setState( { pointSelect: -1 } );
         this.props.list( this.searchInput.value ).then( res => {
 
             this.setState( { list: res } )
@@ -336,7 +337,7 @@ export class MultiSelectAsync extends React.Component {
             <div className="reactParts__multi-select-wrap">
                 {addControls}
                 {this.props.label &&
-                <label className="reactParts__multi-select-label" htmlFor={this.props.name}>{this.props.label}</label>}
+                <label className={"reactParts__label"+((this.props.required && !this.props.readOnly)?" required":"")} htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?
                     <div className={selectClassName}>{this.renderItems()}</div> :
                     <div className={selectClassName} onClick={this.onClickHandler.bind( this )}>
@@ -359,23 +360,24 @@ export class MultiSelectAsync extends React.Component {
 
 
 MultiSelectAsync.propTypes = {
-    readOnly:        React.PropTypes.bool,
-    cancel:          React.PropTypes.bool,
-    onChange:        React.PropTypes.func,
-    disabled:        React.PropTypes.bool,
-    placeholder:     React.PropTypes.string,
-    name:            React.PropTypes.string,
-    list:            React.PropTypes.func,
-    selected:        React.PropTypes.array,
-    label:           React.PropTypes.string,
-    tabIndex:        React.PropTypes.number,
-    onKeyDown:       React.PropTypes.func,
-    uniqueKey:       React.PropTypes.string,
-    labelKey:        React.PropTypes.string,
-    addControls:     React.PropTypes.func,
-    listItemRender:  React.PropTypes.func,
-    inputItemRender: React.PropTypes.func,
-    autoFocus:       React.PropTypes.bool
+    readOnly:        PropTypes.bool,
+    cancel:          PropTypes.bool,
+    onChange:        PropTypes.func,
+    disabled:        PropTypes.bool,
+    placeholder:     PropTypes.string,
+    name:            PropTypes.string,
+    list:            PropTypes.func,
+    selected:        PropTypes.array,
+    label:           PropTypes.string,
+    tabIndex:        PropTypes.number,
+    onKeyDown:       PropTypes.func,
+    uniqueKey:       PropTypes.string,
+    labelKey:        PropTypes.string,
+    addControls:     PropTypes.func,
+    listItemRender:  PropTypes.func,
+    inputItemRender: PropTypes.func,
+    autoFocus:       PropTypes.bool,
+    required:  PropTypes.bool
 };
 
 MultiSelectAsync.defaultProps = {

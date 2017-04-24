@@ -20,6 +20,8 @@ export class CheckBoxController extends React.Component {
         return (
             <div>
                 <CheckBoxGroup
+                    label="Gender"
+                    required
                     direction="horizontal"
                     options={
                         [

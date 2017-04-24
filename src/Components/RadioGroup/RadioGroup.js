@@ -1,17 +1,19 @@
 /* @flow */
 import { Radio } from "../Radio/Radio";
 import React from "react";
+import PropTypes from "prop-types";
 
 export class RadioGroup extends React.Component {
 
     props: {
         direction: ?"vertical" | ?"horizontal",
-        readOnly?:boolean,
+        readOnly: ?boolean,
         name: ?string,
         options: Array<any>,
         onChange: () => void,
         checked: ?(number | string),
-        label: ?string
+        label: ?string,
+        required: ?boolean
     };
 
     onChange( value: string | number ) {
@@ -34,26 +36,26 @@ export class RadioGroup extends React.Component {
 
     }
 
-    getChecked(){
-        return this.props.options.filter(item=>item.value === this.props.checked).pop().label
+    getChecked() {
+        return this.props.options.filter( item => item.value === this.props.checked ).pop().label
     }
 
     render() {
         //console.log( "RadioGroup render" );
-        let className="reactParts__radio-group";
-        if (this.props.direction === "vertical"){
+        let className = "reactParts__radio-group";
+        if ( this.props.direction === "vertical" ) {
             className += " vertical"
         }
 
         return (
             <div className="reactParts__radio-group-wrap">
                 {this.props.label &&
-                <label className="reactParts__label" >{this.props.label}</label>}
+                <label className={"reactParts__label"+((this.props.required && !this.props.readOnly)?" required":"")} >{this.props.label}</label>}
                 <div className={className}>
-                {(this.props.readOnly)
-                    ?this.getChecked()
-                    :this.renderOptions()
-                }
+                    {(this.props.readOnly)
+                        ? this.getChecked()
+                        : this.renderOptions()
+                    }
                 </div>
 
             </div>
@@ -62,11 +64,12 @@ export class RadioGroup extends React.Component {
 }
 
 RadioGroup.propTypes = {
-    direction: React.PropTypes.oneOf(["vertical", "horizontal"]),
-    readOnly: React.PropTypes.bool,
-    label:    React.PropTypes.string,
-    name:     React.PropTypes.string.isRequired,
-    options:  React.PropTypes.array.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    checked:  React.PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string ] )
+    direction: PropTypes.oneOf( [ "vertical", "horizontal" ] ),
+    readOnly:  PropTypes.bool,
+    label:     PropTypes.string,
+    name:      PropTypes.string.isRequired,
+    options:   PropTypes.array.isRequired,
+    onChange:  PropTypes.func.isRequired,
+    checked:   PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
+    required:  PropTypes.bool
 };

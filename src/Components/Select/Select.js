@@ -1,6 +1,6 @@
 /* @flow */
-import * as React from "react";
-
+import React from "react";
+import PropTypes from "prop-types";
 interface ReturnObject {
     [key: string]: Selected | null;
 }
@@ -33,8 +33,9 @@ class SelectProps {
     onKeyDown: ( e: KeyboardEvent, value: string ) => void;
     tabIndex: ?number;
     addControls: () => Array<any>;
-    autoFocus:?boolean;
-    showFullValue:?boolean;
+    autoFocus: ?boolean;
+    showFullValue: ?boolean;
+    required: ?boolean;
 }
 
 export class Select extends React.Component {
@@ -229,21 +230,22 @@ export class Select extends React.Component {
                 : (
                 (this.props.inputRender)
                     ? this.props.inputRender( selItem )
-                    :((selItem !== null && selItem !== undefined) && <div className={(this.props.showFullValue)?"":"reactParts__select-selected-span"}>{this.getSelected()}</div>)
+                    : ((selItem !== null && selItem !== undefined) && <div
+                    className={(this.props.showFullValue) ? "" : "reactParts__select-selected-span"}>{this.getSelected()}</div>)
             ) }
             {input}
         </div>
     }
 
     onChangeInputSearch() {
-        this.setState({pointSelect:-1});
+        this.setState( { pointSelect: -1 } );
     }
 
     getSelected() {
-        let item = undefined;
+        let item          = undefined;
         let filteredItems = this.props.list.filter( item => item[ this.props.uniqueKey ] === this.props.selected );
-        if (filteredItems.length>0){
-            item = filteredItems[0];
+        if ( filteredItems.length > 0 ) {
+            item = filteredItems[ 0 ];
             return item[ this.props.labelKey ]
         } else {
             return item
@@ -286,7 +288,7 @@ export class Select extends React.Component {
             <div ref={( input ) => {this.input = input;}} className="reactParts__select-wrap">
                 {addControls}
                 {this.props.label &&
-                <label className="reactParts__label" htmlFor={this.props.name}>{this.props.label}</label>}
+                <label className={"reactParts__label"+((this.props.required && !this.props.readOnly)?" required":"")} htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?
                     <div className="reactParts__select-selected">{this.getSelected()}</div> :
                     <div className={selectClassName} onClick={this.onClickHandler.bind( this )}>
@@ -307,25 +309,26 @@ export class Select extends React.Component {
 }
 
 Select.propTypes = {
-    readOnly:       React.PropTypes.bool,
-    cancel:         React.PropTypes.bool,
-    onChange:       React.PropTypes.func,
-    disabled:       React.PropTypes.bool,
-    placeholder:    React.PropTypes.string,
-    name:           React.PropTypes.string,
-    list:           React.PropTypes.array.isRequired,
-    selected:       React.PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string, React.PropTypes.bool ] ),
-    label:          React.PropTypes.string,
-    uniqueKey:      React.PropTypes.string,
-    labelKey:       React.PropTypes.string,
-    listItemRender: React.PropTypes.func,
-    inputRender:    React.PropTypes.func,
-    noResultsText:  React.PropTypes.string,
-    onKeyDown:      React.PropTypes.func,
-    tabIndex:       React.PropTypes.number,
-    addControls:    React.PropTypes.func,
-    autoFocus:      React.PropTypes.bool,
-    showFullValue: React.PropTypes.bool
+    readOnly:       PropTypes.bool,
+    cancel:         PropTypes.bool,
+    onChange:       PropTypes.func,
+    disabled:       PropTypes.bool,
+    placeholder:    PropTypes.string,
+    name:           PropTypes.string,
+    list:           PropTypes.array.isRequired,
+    selected:       PropTypes.oneOfType( [ PropTypes.number, PropTypes.string, PropTypes.bool ] ),
+    label:          PropTypes.string,
+    uniqueKey:      PropTypes.string,
+    labelKey:       PropTypes.string,
+    listItemRender: PropTypes.func,
+    inputRender:    PropTypes.func,
+    noResultsText:  PropTypes.string,
+    onKeyDown:      PropTypes.func,
+    tabIndex:       PropTypes.number,
+    addControls:    PropTypes.func,
+    autoFocus:      PropTypes.bool,
+    showFullValue:  PropTypes.bool,
+    required:  PropTypes.bool
 }
 
 Select.defaultProps = {
@@ -346,5 +349,5 @@ Select.defaultProps = {
     onKeyDown:      null,
     addControls:    null,
     autoFocus:      false,
-    showFullValue: false
+    showFullValue:  false
 }

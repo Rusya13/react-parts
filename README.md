@@ -14,6 +14,15 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.2.0
+
+#### All Components
+
+- new props "required" (?boolean)
+
+- PropTypes from library
+
+
 ### v0.1.4
 
 ##### Input

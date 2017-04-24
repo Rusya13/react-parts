@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from "react";
+import PropTypes from "prop-types";
 
 export class CheckBox extends React.Component {
 
@@ -24,7 +25,7 @@ export class CheckBox extends React.Component {
         //console.log("CheckBox render", this.props.type);
         return (
             <label
-                className={"reactParts__checkbox-wrap " + ((this.props.checked) ? " checked " : "")+ ((this.props.type === "button") ? " button" : "") + ((this.props.disabled) ? " disabled" : "")}>
+                className={"reactParts__checkbox-wrap " + ((this.props.checked) ? " checked " : "") + ((this.props.type === "button") ? " button" : "") + ((this.props.disabled) ? " disabled" : "")}>
                 <div className={"reactParts__checkbox-input-new" }>
                     <input
                         type="checkbox"
@@ -42,12 +43,11 @@ export class CheckBox extends React.Component {
         )
     }
 }
-
 CheckBox.propTypes = {
-    name:           React.PropTypes.oneOfType( [ React.PropTypes.string, React.PropTypes.number ] ),
-    label:          React.PropTypes.string,
-    checked:        React.PropTypes.bool,
-    disabled:       React.PropTypes.bool,
-    onClickHandler: React.PropTypes.func.isRequired,
-    type:           React.PropTypes.oneOf( [ "normal", "button" ] )
+    name:           PropTypes.oneOfType( [ React.PropTypes.string, React.PropTypes.number ] ),
+    label:          PropTypes.string,
+    checked:        PropTypes.bool,
+    disabled:       PropTypes.bool,
+    onClickHandler: PropTypes.func.isRequired,
+    type:           PropTypes.oneOf( [ "normal", "button" ] )
 };

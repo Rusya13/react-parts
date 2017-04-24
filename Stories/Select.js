@@ -156,6 +156,7 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-1">
                         <Select
+                            required
                             label="Select"
                             list={list}
                             placeholder="select"
@@ -179,7 +180,7 @@ export class SelectController extends React.Component {
                             placeholder="select"
                             name="testSelectAsync"
                             cancel={true}
-
+                            required
                             selected={this.state.testSelectAsync}
                             onChange={this.onChange.bind( this )}
                             labelKey="firstName"
@@ -191,6 +192,7 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-4">
                         <MultiSelect
+                            required
                             label="Multiselect"
                             list={list}
                             placeholder="multiselect"
@@ -206,23 +208,23 @@ export class SelectController extends React.Component {
                         />
                     </div>
                 </div>
-                {/*<div className="row">*/}
-                    {/*<div className="col-xs-2">*/}
-                        {/*<MultiSelectAsync*/}
-                            {/*label="MultiselectAsync"*/}
-                            {/*list={this.listProvider}*/}
-                            {/*placeholder="multiselect"*/}
-                            {/*name="testMultiSelectAsync"*/}
-                            {/*cancel={true}*/}
-
-                            {/*onChange={this.onChange.bind( this )}*/}
-                            {/*selected={this.state.testMultiSelectAsync}*/}
-                            {/*labelKey="firstName"*/}
-                            {/*listItemRender={this.listItemRender.bind( this )}*/}
-                            {/*tabIndex={5}*/}
-                        {/*/>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
+                <div className="row">
+                    <div className="col-xs-2">
+                        <MultiSelectAsync
+                            label="MultiselectAsync"
+                            list={this.listProvider}
+                            placeholder="multiselect"
+                            name="testMultiSelectAsync"
+                            cancel={true}
+                            required
+                            onChange={this.onChange.bind( this )}
+                            selected={this.state.testMultiSelectAsync}
+                            labelKey="firstName"
+                            listItemRender={this.listItemRender.bind( this )}
+                            tabIndex={5}
+                        />
+                    </div>
+                </div>
             </div>
         )
     }

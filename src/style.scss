@@ -149,7 +149,21 @@ $input-border-color-focus: 	$brand-primary;
 
 
 
-
+.reactParts__label {
+  height: 18px;
+  color: #637282;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  text-align: left;
+  &.required{
+    &:after{
+      content: " *";
+      color: red;
+    }
+  }
+}
 
 
 

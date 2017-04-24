@@ -1,12 +1,14 @@
 /* @flow */
 import { CheckBox } from "../CheckBox/CheckBox";
 import React from "react";
+import PropTypes from "prop-types";
 
 export class CheckBoxGroup extends React.Component {
 
     props: {
         direction: ?("vertical" | "horizontal"),
-        readOnly?: boolean,
+        readOnly: ?boolean,
+        required: ?boolean,
         options: Array<any>,
         onChange: () => void,
         checked: ?Array<any>,
@@ -55,7 +57,7 @@ export class CheckBoxGroup extends React.Component {
 
             }>
                 {this.props.label &&
-                <label className="reactParts__label">{this.props.label}</label>}
+                <label className={"reactParts__label"+((this.props.required && !this.props.readOnly)?" required":"")}>{this.props.label}</label>}
                 <div className={className}>
                     {(this.props.readOnly)
                         ? this.getChecked()
@@ -69,11 +71,12 @@ export class CheckBoxGroup extends React.Component {
 }
 
 CheckBoxGroup.propTypes = {
-    direction: React.PropTypes.oneOf( [ "vertical", "horizontal" ] ),
-    readOnly:  React.PropTypes.bool,
-    label:     React.PropTypes.string,
-    options:   React.PropTypes.array.isRequired,
-    onChange:  React.PropTypes.func.isRequired,
-    checked:   React.PropTypes.array,
-    type:      React.PropTypes.oneOf( [ "normal", "button" ] )
+    direction: PropTypes.oneOf( [ "vertical", "horizontal" ] ),
+    readOnly:  PropTypes.bool,
+    required:  PropTypes.bool,
+    label:     PropTypes.string,
+    options:   PropTypes.array.isRequired,
+    onChange:  PropTypes.func.isRequired,
+    checked:   PropTypes.array,
+    type:      PropTypes.oneOf( [ "normal", "button" ] )
 };

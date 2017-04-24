@@ -1,6 +1,6 @@
 {
   "name": "react-parts",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "React parts for apps",
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "ghp": "build-storybook -c .storybook -o docs"
   },
   "dependencies": {
+    "prop-types": "^15.5.8",
     "react": "^15.0.0",
     "react-dom": "^15.0.0"
   },
