@@ -9,3 +9,4 @@ export {Radio} from './Components/Radio/Radio';
 export {RadioGroup} from './Components/RadioGroup/RadioGroup';
 export {CheckBox} from './Components/CheckBox/CheckBox';
 export {CheckBoxGroup} from './Components/CheckBoxGroup/CheckBoxGroup';
+export {Tree} from './Components/Tree/Tree';

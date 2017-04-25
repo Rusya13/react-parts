@@ -1,0 +1,73 @@
+.reactParts__tree--node {
+  position: relative;
+
+  &.checkable{
+    .reactParts__checkbox-wrap{
+      margin-bottom: 4px;
+      margin-right: 4px;
+      margin-top: 0;
+      &.checked{
+        .reactParts__checkbox-input-new:after {
+          width: 8px;
+          height: 4px;
+        }
+      }
+      .reactParts__checkbox-input-new{
+        width:18px;
+        height: 18px;
+      }
+      .reactParts__checkbox-label{
+        display: none;
+      }
+
+    }
+
+  }
+
+}
+
+.reactParts__tree--arrow {
+  transform: rotate(-90deg);
+  cursor: pointer;
+  &.expanded {
+    transform: rotate(0);
+  }
+}
+
+.reactParts__tree--title-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.reactParts__tree--title {
+  max-width: 100px;
+  font-weight: 400;
+  padding: 0 6px 1px;
+  cursor: default;
+  //margin: 0 0 4px;
+  border-radius: 3px;
+  &:hover {
+    background-color: #ecf6fd;
+  }
+  &.selected {
+    background-color: #d2eafb;
+
+  }
+
+  &.unselectable {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+.tree-no-children {
+  padding-left: 24px;
+}
+
+.reactParts__tree--children {
+  margin-left: 22px;
+}
+

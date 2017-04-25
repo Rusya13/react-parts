@@ -14,6 +14,13 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.3.0
+
+#### New component Tree
+
+
+
+
 ### v0.2.0
 
 #### All Components

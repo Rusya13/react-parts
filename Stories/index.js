@@ -13,8 +13,10 @@ import {CheckBoxController} from './CheckBox';
 import {AuthForm} from './AuthForm'
 import {UserProfileForm} from './UserProfileForm'
 import {TodoList} from './TodoList'
+import {TreeEx} from './TreeEx'
 
 import './Styles/flexboxgrid.css';
+
 
 
 const stories = storiesOf('React-parts', module);
@@ -71,7 +73,11 @@ stories.add('TodoList', () => {
 });
 
 
-
+stories.add('Tree', () => {
+    return (
+        <TreeEx/>
+    )
+});
 
 
 
