@@ -24,9 +24,9 @@ export class Tree extends React.Component {
             s4() + '-' + s4() + s4() + s4();
     }
 
-    componentWillReceiveProps(props){
-        this.data          = this._setAttributes( props.data );
-        this.selectedNode  = null;
+    componentWillReceiveProps( props ) {
+        this.data         = this._setAttributes( props.data );
+        this.selectedNode = null;
     }
 
     // Public method  get all selected id from the tree
@@ -48,6 +48,22 @@ export class Tree extends React.Component {
         this.forceUpdate();
     }
 
+
+    replaceNode( node, data ) {
+        data.forEach( item => {
+            if ( item.t_id === node.t_id ) {
+                item = node
+            }
+        } )
+    }
+
+
+    addChildren = ( node ) => {
+        // готовим детей
+        node.children = this._setAttributes( node.children )
+        this.replaceNode( node, this.data )
+        this.forceUpdate()
+    };
 
     _removeFromTree( data, isSelected, isExpanded, isChecked, showTreeId ) {
         let d = [];
@@ -96,20 +112,34 @@ export class Tree extends React.Component {
             } else {
                 item.t_id = this._uuid();
             }
-
             d.push( item )
         } );
         return d
     }
 
-    _expandTriggerHandler( t_id, isExpanded ) {
-        this._triggerNode( this.data, t_id, "expanded" );
-        if ( isExpanded ) {
-            this.props.onUnExpand && this.props.onUnExpand( t_id, this.data )
-        } else {
-            this.props.onExpand && this.props.onExpand( t_id, this.data )
+    async _expandTriggerHandler( node ) {
+        let isExpanded = node.expanded;
+        let t_id       = node.t_id;
+        try {
+            if ( this.props.onExpandAsync && !isExpanded ) {
+                node.loading = true;
+                this.forceUpdate();
+                await this.props.onExpandAsync( node ).then( item => {
+                    node.loading = false;
+                    this.addChildren( item );
+                } )
+            }
+            this._triggerNode( this.data, t_id, "expanded" );
+            if ( isExpanded ) {
+                this.props.onUnExpand && this.props.onUnExpand( t_id, this.data )
+            } else {
+                this.props.onExpand && this.props.onExpand( t_id, this.data )
+            }
+
+            this.forceUpdate();
+        } catch ( e ) {
+            console.log( "Tree _expandTriggerHandler", e );
         }
-        this.forceUpdate();
     };
 
     selectNode( node ) {
@@ -154,7 +184,6 @@ export class Tree extends React.Component {
         } )
     }
 
-
     _triggerNode( data, t_id, field ) {
         data.forEach( node => {
             if ( node.t_id === t_id ) {
@@ -174,6 +203,7 @@ export class Tree extends React.Component {
     }
 
     renderTree( data ) {
+        console.log( "Tree renderTree", data );
         if ( !data ) return null;
         let nodes = [];
         data.forEach( ( node, i ) => {
@@ -189,7 +219,7 @@ export class Tree extends React.Component {
                     <div className="reactParts__tree--title-wrap">
                         {(node.children) &&
                         <svg xmlns="http://www.w3.org/2000/svg"
-                             onClick={this._expandTriggerHandler.bind( this, node.t_id, node.expanded )}
+                             onClick={this._expandTriggerHandler.bind( this, node )}
                              className={"reactParts__tree--arrow" + ((node.expanded) ? " expanded" : "")}
                              fill="#000000"
                              height="24" viewBox="0 0 24 24" width="24">
@@ -212,8 +242,8 @@ export class Tree extends React.Component {
                                       onClick={this.selectNode.bind( this, node )}>{node.title}
                               </span>
                         }
-
                     </div>
+                    {node.loading && <span className="reactParts__tree--loading">loading..</span>}
                     {(node.children && node.expanded) ?
                         this._renderChildren( node.children )
                         : null}
@@ -243,7 +273,9 @@ Tree.propTypes = {
     onUnCheck:        PropTypes.func,
     idKey:            PropTypes.string,
     getTree:          PropTypes.func,
-    customNodeRender: PropTypes.func
+    customNodeRender: PropTypes.func,
+    onExpandAsync:    PropTypes.func
+
 };
 
 Tree.defaultProps = {

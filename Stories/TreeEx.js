@@ -12,24 +12,7 @@ export class TreeEx extends React.Component {
                 title: "test",
 
                 children: [
-                    {
-                        title: "deep1",
 
-                        children: [
-                            {
-                                title: "deep2-1",
-
-                            },
-                            {
-                                title:    "deep2-2",
-                                children: [
-                                    {
-                                        title: "deep3-1",
-
-                                    } ]
-                            }
-                        ]
-                    }
                 ]
             }
         ];
@@ -81,6 +64,37 @@ export class TreeEx extends React.Component {
         this.tree.selectNode( node )
     }
 
+    getChildren = async (node)=>{
+
+        return new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                node.children = [{
+                    title: "deep1",
+
+                    children: [
+                        {
+                            title: "deep2-1",
+
+                        },
+                        {
+                            title:    "deep2-2",
+                            children: [
+                                {
+                                    title: "deep3-1",
+
+                                } ]
+                        }
+                    ]
+                }]
+                resolve(node)
+            }, 2000)
+        });
+
+
+
+
+    };
+
     render() {
 
 
@@ -90,12 +104,12 @@ export class TreeEx extends React.Component {
                     data={this.data}
                     //customNodeRender={this.renderNode}
                     //checkable={true}
-                    expanded={true}
+                    onExpandAsync={this.getChildren}
                     onExpand={this.onExpand}
                     onUnExpand={this.onUnExpand}
                     onCheck={this.onCheck}
                     onUnCheck={this.onUnCheck}
-                    getTree={( tree ) => {
+                    ref={( tree ) => {
                         this.tree = tree;
                         console.log( "TreeEx new tree", this.tree )
                     }}

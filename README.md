@@ -14,6 +14,12 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.4.1
+
+#### Tree
+
+- new props onExpandAsync
+
 
 ### v0.4.0
 
