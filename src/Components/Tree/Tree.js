@@ -117,29 +117,27 @@ export class Tree extends React.Component {
         return d
     }
 
-    async _expandTriggerHandler( node ) {
+    _expandTriggerHandler( node ) {
         let isExpanded = node.expanded;
         let t_id       = node.t_id;
-        try {
-            if ( this.props.onExpandAsync && !isExpanded ) {
-                node.loading = true;
-                this.forceUpdate();
-                await this.props.onExpandAsync( node ).then( item => {
-                    node.loading = false;
-                    this.addChildren( item );
-                } )
-            }
-            this._triggerNode( this.data, t_id, "expanded" );
-            if ( isExpanded ) {
-                this.props.onUnExpand && this.props.onUnExpand( t_id, this.data )
-            } else {
-                this.props.onExpand && this.props.onExpand( t_id, this.data )
-            }
 
+        if ( this.props.onExpandAsync && !isExpanded ) {
+            node.loading = true;
             this.forceUpdate();
-        } catch ( e ) {
-            console.log( "Tree _expandTriggerHandler", e );
+            this.props.onExpandAsync( node ).then( item => {
+                node.loading = false;
+                this.addChildren( item );
+            } )
         }
+        this._triggerNode( this.data, t_id, "expanded" );
+        if ( isExpanded ) {
+            this.props.onUnExpand && this.props.onUnExpand( t_id, this.data )
+        } else {
+            this.props.onExpand && this.props.onExpand( t_id, this.data )
+        }
+
+        this.forceUpdate();
+
     };
 
     selectNode( node ) {

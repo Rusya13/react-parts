@@ -14,6 +14,14 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+### v0.4.2
+
+#### Tree
+
+- remove async from function
+
+
 ### v0.4.1
 
 #### Tree
