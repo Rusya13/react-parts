@@ -1,0 +1,42 @@
+.reactParts__transfer--wrap{
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.reactParts__transfer--header{
+  border-bottom: 1px solid rgb(217, 217, 217);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+.reactParts__transfer--box{
+  width: 45%;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+}
+
+
+.reactParts__transfer--list {
+  overflow: auto;
+  max-height: 250px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reactParts__transfer--middle-box{
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reactParts__transfer--middle-box-button{
+  margin-bottom: 10px;
+}

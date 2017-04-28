@@ -15,7 +15,8 @@ gulp.task('js', () => {
     .pipe(babel({
         presets: [
             'es2015',
-            'react'
+            'react',
+            'stage-0'
         ]
     }))
     .pipe(gulp.dest('dist'));

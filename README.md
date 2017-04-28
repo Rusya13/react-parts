@@ -14,6 +14,18 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+### v0.4.0
+
+#### New component Badge
+
+#### New component Transfer
+
+#### Tree
+
+- added full update on componentWillReceiveProps
+
+
 ### v0.3.0
 
 #### New component Tree

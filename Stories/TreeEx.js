@@ -89,7 +89,7 @@ export class TreeEx extends React.Component {
                 <Tree
                     data={this.data}
                     //customNodeRender={this.renderNode}
-                    checkable={true}
+                    //checkable={true}
                     expanded={true}
                     onExpand={this.onExpand}
                     onUnExpand={this.onUnExpand}

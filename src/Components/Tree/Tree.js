@@ -24,6 +24,10 @@ export class Tree extends React.Component {
             s4() + '-' + s4() + s4() + s4();
     }
 
+    componentWillReceiveProps(props){
+        this.data          = this._setAttributes( props.data );
+        this.selectedNode  = null;
+    }
 
     // Public method  get all selected id from the tree
     getCheckedNodes( data ) {

@@ -14,6 +14,8 @@ import {AuthForm} from './AuthForm'
 import {UserProfileForm} from './UserProfileForm'
 import {TodoList} from './TodoList'
 import {TreeEx} from './TreeEx'
+import {TransferController} from './Transfer'
+import {BadgeController} from './Badge'
 
 import './Styles/flexboxgrid.css';
 
@@ -80,4 +82,13 @@ stories.add('Tree', () => {
 });
 
 
-
+stories.add('Transfer', () => {
+    return (
+        <TransferController/>
+    )
+});
+stories.add('Badge', () => {
+    return (
+        <BadgeController/>
+    )
+});
