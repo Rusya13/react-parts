@@ -14,6 +14,14 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.4.3
+
+#### Tree
+
+- new props added: contextMenuItems, contextMenuWidth, onRightClick
+
+Use "contextMenuItems(node)-> [{title, onClickHandler}]" function to make a context menu
+
 
 ### v0.4.2
 

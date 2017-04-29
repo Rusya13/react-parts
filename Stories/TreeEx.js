@@ -95,6 +95,18 @@ export class TreeEx extends React.Component {
 
     };
 
+
+
+
+    contextMenuItems=(node, e)=>{
+        //console.log("TreeEx contextMenuItems", node, e);
+        return [{title: "test", onClickHandler:this.test}, {type:"divider"}]
+    };
+
+    test=(e)=>{
+        console.log("TreeEx test", e);
+    };
+
     render() {
 
 
@@ -113,6 +125,7 @@ export class TreeEx extends React.Component {
                         this.tree = tree;
                         console.log( "TreeEx new tree", this.tree )
                     }}
+                    contextMenuItems={this.contextMenuItems}
                 />
 
                 <Button onClick={this.checkTree} caption="Check"/>
