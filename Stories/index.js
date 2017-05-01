@@ -1,94 +1,100 @@
 import React from "react";
-import {  storiesOf } from "@kadira/storybook";
-import './index.css';
+import { storiesOf } from "@kadira/storybook";
+import "./index.css";
 
-import '../dist/style.css';
+import "../dist/style.css";
 
-import {ButtonController} from './Button';
-import {InputController} from './Input';
-import {SelectController} from './Select';
-import {RadioController} from './Radio';
-import {CheckBoxController} from './CheckBox';
+import { ButtonController } from "./Button";
+import { InputController } from "./Input";
+import { SelectController } from "./Select";
+import { RadioController } from "./Radio";
+import { CheckBoxController } from "./CheckBox";
 
-import {AuthForm} from './AuthForm'
-import {UserProfileForm} from './UserProfileForm'
-import {TodoList} from './TodoList'
-import {TreeEx} from './TreeEx'
-import {TransferController} from './Transfer'
-import {BadgeController} from './Badge'
+import { AuthForm } from "./AuthForm";
+import { UserProfileForm } from "./UserProfileForm";
+import { TodoList } from "./TodoList";
+import { TreeEx } from "./TreeEx";
+import { TransferController } from "./Transfer";
+import { BadgeController } from "./Badge";
+import { UploadController } from "./Upload";
 
-import './Styles/flexboxgrid.css';
-
-
-
-const stories = storiesOf('React-parts', module);
+import "./Styles/flexboxgrid.css";
 
 
+const stories = storiesOf( 'React-parts', module );
 
-stories.add('Button', () => {
+
+stories.add( 'Button', () => {
     return (
         <ButtonController/>
     )
-});
+} );
 
-stories.add('Input', () => {
+stories.add( 'Input', () => {
     return (
         <InputController/>
     )
-});
+} );
 
-stories.add('Select', () => {
+stories.add( 'Select', () => {
     return (
         <SelectController/>
     )
-});
+} );
 
 
-stories.add('Radio', () => {
+stories.add( 'Radio', () => {
     return (
         <RadioController/>
     )
-});
+} );
 
-stories.add('CheckBox', () => {
+stories.add( 'CheckBox', () => {
     return (
         <CheckBoxController/>
     )
-});
+} );
 
-stories.add('AuthForm', () => {
+stories.add( 'AuthForm', () => {
     return (
         <AuthForm/>
     )
-});
+} );
 
-stories.add('UserProfileForm', () => {
+stories.add( 'UserProfileForm', () => {
     return (
         <UserProfileForm/>
     )
-});
+} );
 
-stories.add('TodoList', () => {
+stories.add( 'TodoList', () => {
     return (
         <TodoList/>
     )
-});
+} );
 
 
-stories.add('Tree', () => {
+stories.add( 'Tree', () => {
     return (
         <TreeEx/>
     )
-});
+} );
 
 
-stories.add('Transfer', () => {
+stories.add( 'Transfer', () => {
     return (
         <TransferController/>
     )
-});
-stories.add('Badge', () => {
+} );
+
+stories.add( 'Badge', () => {
     return (
         <BadgeController/>
     )
-});
+} );
+
+stories.add( 'Upload', () => {
+    return (
+        <UploadController/>
+    )
+} );

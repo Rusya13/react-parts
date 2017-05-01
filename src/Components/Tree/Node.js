@@ -95,10 +95,10 @@ export default class Node extends React.Component {
         this._triggerNode( this.props.data, t_id, "selected" );
         if ( isSelected ) {
             this.props.selectNode( null );
-            this.props.onUnSelect && this.props.onUnSelect( this.props.data )
+            this.props.onUnSelect && this.props.onUnSelect( node )
         } else {
             this.props.selectNode( t_id );
-            this.props.onSelect && this.props.onSelect( this.props.data )
+            this.props.onSelect && this.props.onSelect( node )
         }
         this.props.reloadTree()
     }

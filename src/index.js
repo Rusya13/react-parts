@@ -12,3 +12,4 @@ export {CheckBoxGroup} from './Components/CheckBoxGroup/CheckBoxGroup';
 export {Tree} from './Components/Tree/Tree';
 export {Transfer} from './Components/Transfer/Transfer';
 export {Badge} from './Components/Badge/Badge';
+export {Upload} from './Components/Upload/Upload';

@@ -14,6 +14,18 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+### v0.4.4
+
+#### Tree
+
+- onSelect, onUnSelect now return Node
+
+#### Upload
+
+- new component
+
+
 ### v0.4.3
 
 #### Tree

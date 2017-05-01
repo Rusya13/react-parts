@@ -1,0 +1,19 @@
+.reactParts__upload--fileList{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  max-width: 150px;
+}
+
+.reactParts__upload--file{
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: #4c9ce7;
+
+
+}
+.reactParts__upload--file-icon{
+  transform: rotate(45deg);
+  margin-right: 3px;
+}
