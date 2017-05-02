@@ -14,6 +14,17 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+
+
+### v0.4.6
+
+#### Tree
+
+- add getNodeParents function in the Tree
+
+
+
+
 ### v0.4.5
 
 #### Tree

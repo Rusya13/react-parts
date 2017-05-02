@@ -131,6 +131,19 @@ export class Tree extends React.Component {
         this.forceUpdate()
     };
 
+
+    getNodeParents=(node, array = [])=>{
+
+        if (node && node.parent){
+            array.unshift(node.parent);
+            if (node.parent.parent) {
+                this.getNodeParents(node.parent, array)
+            }
+        }
+        return array
+
+    };
+
     render() {
         console.log("Tree render", this);
         return (

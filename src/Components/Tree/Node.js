@@ -58,7 +58,7 @@ export default class Node extends React.Component {
 
     addChildren = ( node ) => {
         // готовим детей
-        node.children = this.props.setAttributes( node.children );
+        node.children = this.props.setAttributes( node.children, node );
         this.replaceNode( node, this.props.data );
         this.forceUpdate()
     };
@@ -195,6 +195,9 @@ export default class Node extends React.Component {
         }
         return false
     };
+
+
+
 
 
     render() {
