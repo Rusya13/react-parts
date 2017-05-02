@@ -1,15 +1,14 @@
 /* @flow */
 import React from "react";
 import PropTypes from "prop-types";
-import { CheckBox } from "../CheckBox/CheckBox";
-import Node from './Node';
+import Node from "./Node";
 
 export class Tree extends React.Component {
 
     constructor( props ) {
         super( props );
-        this.data          = this._setAttributes( props.data );
-        this.selectedNode  = null;
+        this.data         = this._setAttributes( props.data, null );
+        this.selectedNode = null;
         this.props.getTree && this.props.getTree( this )
     }
 
@@ -25,7 +24,7 @@ export class Tree extends React.Component {
     }
 
     componentWillReceiveProps( props ) {
-        this.data         = this._setAttributes( props.data );
+        this.data         = this._setAttributes( props.data, null );
         this.selectedNode = null;
     }
 
@@ -48,14 +47,14 @@ export class Tree extends React.Component {
         this.reloadTree();
     }
 
-    _setAttributes=( data )=> {
+    _setAttributes = ( data, parent ) => {
         let d = [];
         data.forEach( item => {
+            item.parent_id = parent && parent.t_id;
+            item.parent    = parent;
+
             if ( item.children && item.expanded === undefined ) {
                 item.expanded = this.props.expanded;
-            }
-            if ( item.selected === undefined ) {
-                item.selected = false;
             }
             if ( item.selectable === undefined ) {
                 item.selectable = true;
@@ -64,7 +63,7 @@ export class Tree extends React.Component {
                 item.checked = false;
             }
             if ( item.children ) {
-                item.children = this._setAttributes( item.children )
+                item.children = this._setAttributes( item.children, item )
             }
             if ( this.props.idKey ) {
                 item.t_id = item.id || this._uuid()
@@ -88,7 +87,7 @@ export class Tree extends React.Component {
         } )
     }
 
-    renderTree=( data )=> {
+    renderTree = ( data ) => {
         //console.log( "Tree renderTree", data );
         if ( !data ) return null;
         let nodes = [];
@@ -119,20 +118,21 @@ export class Tree extends React.Component {
                     setAttributes={this._setAttributes}
                     contextMenuItems={this.props.contextMenuItems}
                 />
-               )
+            )
         } );
         return nodes
     };
 
-    selectNode=(t_id)=>{
-        this.selectedNode = t_id
+    selectNode = ( node ) => {
+        this.selectedNode = node
     };
 
-    reloadTree=()=>{
+    reloadTree = () => {
         this.forceUpdate()
     };
 
     render() {
+        console.log("Tree render", this);
         return (
             <div>
                 {this.renderTree( this.data )}

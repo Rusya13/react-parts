@@ -6,8 +6,8 @@ import { CheckBox } from "../CheckBox/CheckBox";
 
 export default class Node extends React.Component {
 
-    constructor(props){
-        super(props)
+    constructor( props ) {
+        super( props )
 
         this.isContextMenuOpen = false;
     }
@@ -46,7 +46,7 @@ export default class Node extends React.Component {
         //console.log( "Node _triggerNode", data );
         data.forEach( node => {
             if ( node.t_id === t_id ) {
-                node[ field ] = !(node[ field ])
+                node[ field ] = !(node[ field ]);
             } else {
                 if ( node.children ) {
                     this._triggerNode( node.children, t_id, field )
@@ -84,20 +84,14 @@ export default class Node extends React.Component {
     }
 
     selectNode( node ) {
-        let t_id       = node.t_id;
         let isSelected = node.selected;
         if ( !node.selectable ) return;
-
-        if ( this.props.selectedNode && this.props.selectedNode !== t_id ) {
-            // деселект предыдущей ноды
-            this._triggerNode( this.props.data, this.props.selectedNode, "selected" );
-        }
-        this._triggerNode( this.props.data, t_id, "selected" );
         if ( isSelected ) {
             this.props.selectNode( null );
             this.props.onUnSelect && this.props.onUnSelect( node )
         } else {
-            this.props.selectNode( t_id );
+            this.props.selectNode( node );
+
             this.props.onSelect && this.props.onSelect( node )
         }
         this.props.reloadTree()
@@ -109,7 +103,7 @@ export default class Node extends React.Component {
         if ( this.props.onRightClick ) {
             this.props.onRightClick( node, e )
         } else {
-            if (this.props.contextMenuItems){
+            if ( this.props.contextMenuItems ) {
                 this._contextClick( node, e )
             }
         }
@@ -119,12 +113,12 @@ export default class Node extends React.Component {
     _contextClick( node, e ) {
         //console.log( "Tree _contextClick", node, e );
         e.preventDefault();
-        if (!node.selected){
-            this.selectNode(node);
+        if ( !node.selected ) {
+            this.selectNode( node );
         }
 
         let contextMenuWidth = this.props.contextMenuWidth;
-        let contextMenu = this.domNode.getElementsByClassName('reactParts__tree--node--context-wrapper')[0];
+        let contextMenu      = this.domNode.getElementsByClassName( 'reactParts__tree--node--context-wrapper' )[ 0 ];
         let menuList         = this.props.contextMenuItems( node, e );
         if ( !menuList || menuList.length < 1 ) return;
         let renderList = this._renderContextMenuItems( menuList );
@@ -155,8 +149,8 @@ export default class Node extends React.Component {
         this.isContextMenuOpen = true;
     }
 
-    nextClickHandler=()=> {
-        let contextMenu = this.domNode.getElementsByClassName('reactParts__tree--node--context-wrapper')[0];
+    nextClickHandler = () => {
+        let contextMenu = this.domNode.getElementsByClassName( 'reactParts__tree--node--context-wrapper' )[ 0 ];
         if ( contextMenu.style.display === "block" ) {
             contextMenu.style.display = "none";
             this.isContextMenuOpen    = false;
@@ -189,20 +183,35 @@ export default class Node extends React.Component {
         </div>
     }
 
+    checkParent = ( current_node, selectedNode ) => {
+        console.log("Node checkParent", current_node, selectedNode);
+        if ( selectedNode && current_node === selectedNode.parent ) {
+            return true
+        } else {
+            if (selectedNode && selectedNode.parent && selectedNode.parent.parent ) {
+                console.log("Node checkParent parent exist" );
+                return this.checkParent( current_node, selectedNode.parent )
+            }
+        }
+        return false
+    };
+
 
     render() {
 
         let node             = this.props.node;
         let checkable        = this.props.checkable;
         let customNodeRender = this.props.customNodeRender;
-
+        let selectedNode     = this.props.selectedNode;
+        let containSelected  = this.checkParent( node, selectedNode );
+        console.log("Node render", containSelected);
         return (
             <div
                 className={"reactParts__tree--node"
                 + ((!node.children) ? " tree-no-children" : "")
                 + ((checkable) ? " checkable" : "")
                 }
-                ref={(domNode)=>this.domNode = domNode}
+                ref={( domNode ) => this.domNode = domNode}
             >
                 <div className="reactParts__tree--title-wrap">
                     {(node.children) &&
@@ -223,7 +232,8 @@ export default class Node extends React.Component {
                         (customNodeRender) ? customNodeRender( node ) :
                             <span className={
                                 "reactParts__tree--title"
-                                + ((node.selected) ? " selected" : "")
+                                + ((containSelected) ? " contain-selected" : "")
+                                + ((node === this.props.selectedNode) ? " selected" : "")
                                 + ((!node.selectable) ? " unselectable" : "")
                             }
                                   onClick={this.selectNode.bind( this, node )}

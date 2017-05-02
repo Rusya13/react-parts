@@ -12,7 +12,48 @@ export class TreeEx extends React.Component {
                 title: "test",
 
                 children: [
+                    {
+                        title: "deep1",
 
+                        children: [
+                            {
+                                title: "deep2-1",
+
+                            },
+                            {
+                                title:    "deep2-2",
+                                children: [
+                                    {
+                                        title: "deep3-1",
+
+                                    } ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                title: "test",
+
+                children: [
+                    {
+                        title: "deep1",
+
+                        children: [
+                            {
+                                title: "deep2-1",
+
+                            },
+                            {
+                                title:    "deep2-2",
+                                children: [
+                                    {
+                                        title: "deep3-1",
+
+                                    } ]
+                            }
+                        ]
+                    }
                 ]
             }
         ];
@@ -85,7 +126,7 @@ export class TreeEx extends React.Component {
                                 } ]
                         }
                     ]
-                }]
+                }];
                 resolve(node)
             }, 2000)
         });
@@ -116,7 +157,7 @@ export class TreeEx extends React.Component {
                     data={this.data}
                     //customNodeRender={this.renderNode}
                     //checkable={true}
-                    onExpandAsync={this.getChildren}
+                    //onExpandAsync={this.getChildren}
                     onExpand={this.onExpand}
                     onUnExpand={this.onUnExpand}
                     onCheck={this.onCheck}

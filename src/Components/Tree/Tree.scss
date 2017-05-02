@@ -55,6 +55,9 @@
     background-color: #d2eafb;
 
   }
+  &.contain-selected{
+    border: 1px dashed black;
+  }
 
   &.unselectable {
     &:hover {
