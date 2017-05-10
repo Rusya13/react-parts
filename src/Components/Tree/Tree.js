@@ -145,7 +145,7 @@ export class Tree extends React.Component {
     };
 
     render() {
-        console.log("Tree render", this);
+        //console.log("Tree render", this);
         return (
             <div>
                 {this.renderTree( this.data )}

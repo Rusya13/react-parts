@@ -31,7 +31,7 @@ export class SelectController extends React.Component {
     }
 
 
-    list( searchValue ) {
+    async list( searchValue ) {
         console.log("Select list");
         let matchesFilter = new RegExp( searchValue, "i" );
         let list =[
@@ -56,9 +56,12 @@ export class SelectController extends React.Component {
         return list
     }
 
-    async listProvider( searchValue ) {
+    listProvider( searchValue ) {
+        if (!searchValue || searchValue && searchValue.length  < 2){
+            return null
+        }
         console.log( "Select listProvider", searchValue );
-        return await this.list( searchValue )
+        return this.list( searchValue )
 
 
     }
@@ -173,7 +176,7 @@ export class SelectController extends React.Component {
 
                 </div>
                 <div className="row">
-                    <div className="col-xs-1">
+                    <div className="col-xs-3">
                         <SelectAsync
                             label="SelectAsync"
                             list={this.listProvider}

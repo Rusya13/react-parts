@@ -94,11 +94,15 @@ export class UploadController extends React.Component{
         return(
             <div>
                 <Upload
+                    ref={(upload)=>this.upload = upload}
                     onChange={this.onChange}
                     accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 
                 />
-                {(this.state.buffer)?<Button caption="Download" onClick={this.download}/>:null}
+                {(this.state.buffer)?<div>
+                    <Button caption="Download" onClick={this.download}/>
+                    </div>
+                    :null}
             </div>
 
         )

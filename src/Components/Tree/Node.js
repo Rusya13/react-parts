@@ -184,12 +184,12 @@ export default class Node extends React.Component {
     }
 
     checkParent = ( current_node, selectedNode ) => {
-        console.log("Node checkParent", current_node, selectedNode);
+        //console.log("Node checkParent", current_node, selectedNode);
         if ( selectedNode && current_node === selectedNode.parent ) {
             return true
         } else {
             if (selectedNode && selectedNode.parent && selectedNode.parent.parent ) {
-                console.log("Node checkParent parent exist" );
+                //console.log("Node checkParent parent exist" );
                 return this.checkParent( current_node, selectedNode.parent )
             }
         }
@@ -207,7 +207,7 @@ export default class Node extends React.Component {
         let customNodeRender = this.props.customNodeRender;
         let selectedNode     = this.props.selectedNode;
         let containSelected  = this.checkParent( node, selectedNode );
-        console.log("Node render", containSelected);
+        //console.log("Node render", containSelected);
         return (
             <div
                 className={"reactParts__tree--node"

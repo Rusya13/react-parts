@@ -10,10 +10,33 @@
   display: flex;
   align-items: center;
   color: #4c9ce7;
-
+  &:hover{
+    .reactParts__delete--file-icon-wrap{
+      display: flex;
+    }
+  }
 
 }
 .reactParts__upload--file-icon{
   transform: rotate(45deg);
   margin-right: 3px;
+}
+.reactParts__delete--file-icon{
+
+}
+
+.reactParts__upload--file-name{
+  height: 19px;
+}
+
+.reactParts__delete--file-icon-wrap{
+  background-color: lightgrey;
+  height: 19px;
+  width: 19px;
+  border-radius: 10px;
+  margin-left: 5px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

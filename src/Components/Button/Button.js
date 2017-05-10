@@ -7,15 +7,15 @@ export type ButtonBrand = 'success' | 'warning' | 'danger' | 'primary' | 'defaul
 export type ButtonType = 'button' | 'submit';
 
 export interface ButtonProps {
-    brand?: ButtonBrand;
-    type?: ButtonType;
+    brand: ?ButtonBrand;
+    type: ?ButtonType;
     caption: string;
-    onClick: ( id?: string ) => void;
-    disabled?: boolean;
-    hidden?: boolean;
-    id?: string;
-    size?: string;
-    className?: string;
+    onClick: ( id: ?string ) => void;
+    disabled: ?boolean;
+    hidden: ?boolean;
+    id: ?string;
+    size: ?string;
+    className: ?string;
 }
 
 
@@ -32,6 +32,14 @@ export class Button extends React.Component {
         if ( this.props.onClick ) this.props.onClick( this.props.id );
     };
 
+    blur=()=>{
+        this.button.blur()
+    };
+
+    focus=()=>{
+        this.button.focus()
+    };
+
     render() {
         let props: ButtonProps = this.props;
         if ( props.hidden ) return null;
@@ -41,7 +49,7 @@ export class Button extends React.Component {
         if ( props.className ) className += ` ${props.className}`;
 
         return (
-            <button type={this.props.type}
+            <button ref={(button)=>this.button=button} type={this.props.type}
                     className={className}
                     onClick={this.onClick.bind( this )}
                     disabled={props.disabled}
@@ -61,5 +69,5 @@ Button.propTypes = {
     hidden:    PropTypes.bool,
     id:        PropTypes.string,
     size:      PropTypes.string,
-    className: PropTypes.string,
+    className: PropTypes.string
 }

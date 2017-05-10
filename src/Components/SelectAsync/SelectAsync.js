@@ -95,22 +95,21 @@ export class SelectAsync extends React.Component {
     }
 
     openList() {
-        if ( this.state.stateList ) return;
+        let list = this.props.list();
+        if ( this.state.stateList || !list ) {
+            this.state.list = [];
+            return;
+        }
         if ( this.props.disabled ) return;
 
-
-        this.props.list().then( res => {
-            console.log( "SelectAsync res", res );
+        list.then( res => {
             this.setState( { list: res } )
         } );
-
         this.setState( { stateList: true } );
-
     };
 
 
     closeList() {
-
         if ( this.searchInput ) this.searchInput.value = "";
         this.searchInput.blur();
         this.setState( { stateList: false } );
@@ -231,12 +230,15 @@ export class SelectAsync extends React.Component {
         </div>
     }
 
-    onChangeInputSearch( e ) {
-        //console.log( "Select onChangeInputSearch", this.searchInput.value );
+    onChangeInputSearch() {
+        let list = this.props.list( this.searchInput.value );
+        if ( !list ) {
+            this.setState( { list: [] } );
+            return;
+        }
         this.setState( { pointSelect: -1 } );
-        this.props.list( this.searchInput.value ).then( res => {
-            //console.log( "Select onChangeInputSearch", res );
-            this.setState( { list: res } )
+        list.then( res => {
+            this.setState( { list: res, stateList: true } )
         } )
 
     }
@@ -278,7 +280,9 @@ export class SelectAsync extends React.Component {
             <div ref={( input ) => {this.input = input;}} className="reactParts__select-wrap">
                 {addControls}
                 {this.props.label &&
-                <label className={"reactParts__label"+((this.props.required && !this.props.readOnly)?" required":"")} htmlFor={this.props.name}>{this.props.label}</label>}
+                <label
+                    className={"reactParts__label" + ((this.props.required && !this.props.readOnly) ? " required" : "")}
+                    htmlFor={this.props.name}>{this.props.label}</label>}
                 {(this.props.readOnly) ?
                     <div className="reactParts__select-selected">{this.props.selected[ this.props.labelKey ]}</div> :
                     <div className={selectClassName} onClick={this.onClickHandler.bind( this )}>
@@ -318,7 +322,7 @@ SelectAsync.propTypes = {
     addControls:    PropTypes.func,
     autoFocus:      PropTypes.bool,
     showFullValue:  PropTypes.bool,
-    required:  PropTypes.bool
+    required:       PropTypes.bool
 }
 
 SelectAsync.defaultProps = {

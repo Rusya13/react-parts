@@ -15,6 +15,28 @@ Open localhost:9001 and Enjoy
 ## Last releases
 
 
+### v0.4.8
+
+#### SelectAsync
+
+- list can be null
+
+#### Input
+
+- fixed input width
+
+
+
+### v0.4.7
+
+
+#### Button
+
+- public methods added :
+
+    - blur
+    - focus
+
 
 ### v0.4.6
 
