@@ -119,15 +119,26 @@ export class Transfer extends React.Component {
                     <div className="reactParts__transfer--middle-box-button">
                         <div
                             className={"reactParts__transfer--middle-box-button-icon " + (!this.isSourceNotEmpty() ? "disabled" : "")}
-                            onClick={this.transferToTargetHandler}>
-                            {(this.props.direction === "vertical") ?
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" height="24" viewBox="0 0 24 24"
-                                     width="24">
+                            onClick={this.transferToTargetHandler}
+                        >
+                            {direction === "vertical" ?
+                                <svg
+                                    fill    = "#d9d9d9"
+                                    xmlns   = "http://www.w3.org/2000/svg"
+                                    width   = "24"
+                                    height  = "24"
+                                    viewBox = "0 0 24 24"
+                                >
                                     <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
                                     <path d="M0-.75h24v24H0z" fill="none"/>
                                 </svg> :
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" height="24" viewBox="0 0 24 24"
-                                     width="24">
+                                <svg
+                                    fill    = "#d9d9d9"
+                                    xmlns   = "http://www.w3.org/2000/svg"
+                                    width   = "24"
+                                    height  = "24"
+                                    viewBox = "0 0 24 24"
+                                >
                                     <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
                                     <path d="M0-.25h24v24H0z" fill="none"/>
                                 </svg>
@@ -136,22 +147,31 @@ export class Transfer extends React.Component {
                     </div>
 
                     <div className="reactParts__transfer--middle-box-button">
-                        <div                            className={"reactParts__transfer--middle-box-button-icon " + (!this.isTargetNotEmpty() ? "disabled" : "")}
-                            onClick={this.transferToTargetHandler}>
-                            {
-                                (this.props.direction === "vertical") ?
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" height="24"
-                                         viewBox="0 0 24 24" width="24"
-                                         onClick={this.transferToSourceHandler}
-                                    >
-                                        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
-                                        <path d="M0 0h24v24H0z" fill="none"/>
-                                    </svg> :
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" height="24"
-                                         viewBox="0 0 24 24" width="24">
-                                        <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
-                                        <path d="M0-.5h24v24H0z" fill="none"/>
-                                    </svg>
+                        <div
+                            className={"reactParts__transfer--middle-box-button-icon " + (!this.isTargetNotEmpty() ? "disabled" : "")}
+                            onClick={this.transferToSourceHandler}
+                        >
+                            {direction === "vertical" ?
+                                <svg
+                                    fill    = "#d9d9d9"
+                                    xmlns   = "http://www.w3.org/2000/svg"
+                                    width   = "24"
+                                    height  = "24"
+                                    viewBox = "0 0 24 24"
+                                >
+                                    <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+                                    <path d="M0 0h24v24H0z" fill="none"/>
+                                </svg> :
+                                <svg
+                                    fill    = "#d9d9d9"
+                                    xmlns   = "http://www.w3.org/2000/svg"
+                                    width   = "24"
+                                    height  = "24"
+                                    viewBox = "0 0 24 24"
+                                >
+                                    <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
+                                    <path d="M0-.5h24v24H0z" fill="none"/>
+                                </svg>
                             }
                         </div>
                     </div>

@@ -25,7 +25,7 @@ export class TransferController extends React.Component{
     }
 
 
-    onChange = e => {
+    onChange = e => {console.log("onChange", e)
         this.setState({ target: e.test })
     }
 
