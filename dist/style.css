@@ -1,0 +1,1123 @@
+ul, menu, dir {
+  padding: 0;
+  margin: 0; }
+
+.reactParts__label {
+  height: 18px;
+  color: #637282;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  text-align: left; }
+  .reactParts__label.required:after {
+    content: " *";
+    color: red; }
+
+/* Buttons */
+.btn {
+  border-radius: 2px;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #74848d;
+  background: #e4eaec;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  border: 1px solid transparent; }
+  .btn[disabled] {
+    background-color: #f3f7f9;
+    border-color: #f3f7f9;
+    color: #a3afb7; }
+    .btn[disabled]:hover {
+      background-color: #f3f7f9;
+      border-color: #f3f7f9;
+      color: #a3afb7; }
+    .btn[disabled]:active {
+      background-color: #f3f7f9;
+      border-color: #f3f7f9;
+      color: #a3afb7; }
+
+.btn-new-blue {
+  background-color: #3279F7;
+  color: #fff; }
+
+.btn-icon svg {
+  margin-bottom: -8px; }
+
+.btn-small {
+  padding: 4px 8px; }
+
+.btn-primary {
+  border-color: #62a8ea;
+  background: #62a8ea;
+  color: #fff; }
+  .btn-primary:hover {
+    background: #78b4ed;
+    border-color: #78b4ed; }
+  .btn-primary:focus {
+    background: #81b9ee;
+    border-color: #4397e6; }
+  .btn-primary:active {
+    background: #4c9ce7;
+    border-color: #4c9ce7; }
+
+.btn-success {
+  border-color: #42bf89;
+  background: #42bf89;
+  color: #fff; }
+  .btn-success:hover {
+    background: #55c595;
+    border-color: #55c595; }
+  .btn-success:focus {
+    background: #5dc89a;
+    border-color: #38a576; }
+  .btn-success:active {
+    background: #3bad7c;
+    border-color: #3bad7c; }
+
+.btn-danger {
+  border-color: #f96868;
+  background: #f96868;
+  color: #fff; }
+  .btn-danger:hover {
+    background: #fa8181;
+    border-color: #fa8181; }
+  .btn-danger:focus {
+    background: #fa8a8a;
+    border-color: #f84646; }
+  .btn-danger:active {
+    background: #f84f4f;
+    border-color: #f84f4f; }
+
+.btn-warning {
+  border-color: #f2a654;
+  background: #f2a654;
+  color: #fff; }
+  .btn-warning:hover {
+    background: #f4b26c;
+    border-color: #f4b26c; }
+  .btn-warning:focus {
+    background: #f5b775;
+    border-color: #ef9533; }
+  .btn-warning:active {
+    background: #f09a3c;
+    border-color: #f09a3c; }
+
+.btn-light {
+  border-color: #e6e8eb;
+  background: #fff;
+  color: #526069; }
+  .btn-light:hover {
+    background: white;
+    border-color: #f4f5f6; }
+  .btn-light:focus {
+    background: white;
+    border-color: #d2d6db; }
+  .btn-light:active {
+    background: #f2f2f2;
+    border-color: #d8dbe0; }
+
+.btn-dark {
+  border-color: #263238;
+  background: #263238;
+  color: #fff; }
+  .btn-dark:hover {
+    background: #304047;
+    border-color: #304047; }
+  .btn-dark:focus {
+    background: #34454d;
+    border-color: #181f23; }
+  .btn-dark:active {
+    background: #1c2429;
+    border-color: #1c2429; }
+
+.btn-intab {
+  padding-top: 10px; }
+
+@media screen and (max-width: 1024px) {
+  .btn {
+    padding: 5px 10px; } }
+
+.reactParts__select-wrap {
+  text-align: left;
+  position: relative;
+  display: block;
+  vertical-align: baseline;
+  font-size: 100%;
+  box-sizing: border-box;
+  margin: 10px 0;
+  width: 100%; }
+
+.reactParts__select {
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: #1b2733;
+  margin: 0;
+  width: 100%;
+  display: block;
+  outline: none;
+  padding: 7px 54px 8px 8px;
+  box-sizing: border-box;
+  border: 1px solid #E6E8EB;
+  border-radius: 2px;
+  position: relative;
+  min-height: 34px; }
+  .reactParts__select.focus {
+    border-color: #62a8ea; }
+  .reactParts__select.disabled {
+    text-align: left;
+    padding: 8px 0 8px 0;
+    border-color: transparent; }
+    .reactParts__select.disabled svg {
+      display: none; }
+
+.reactParts__select-placeholder {
+  color: #B3C3C7; }
+
+.reactParts__select-box-item {
+  display: inline-block;
+  background: #F4F8F9;
+  border: 1px solid #e6e8eb;
+  border-radius: 3px;
+  font-size: 0.750rem;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  padding: 4px; }
+  .reactParts__select-box-item div {
+    display: inline-block; }
+  .reactParts__select-box-item-remove {
+    margin-left: 5px;
+    margin-bottom: -4px;
+    fill: #878f92;
+    cursor: pointer; }
+
+.reactParts__select__cancel {
+  position: absolute;
+  right: 28px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  bottom: 50%;
+  top: 50%;
+  fill: #B3C3C7; }
+
+.reactParts__select__arrow {
+  position: absolute;
+  right: 4px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  bottom: 50%;
+  top: 50%;
+  fill: #B3C3C7; }
+
+.reactParts__select-list {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 195px;
+  /* 5 items */
+  margin-top: 5px;
+  list-style: none;
+  background: #fff;
+  border-top: 1px solid #e6e8eb;
+  border-bottom: 1px solid #e6e8eb;
+  border-radius: 3px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); }
+
+.reactParts__select-list-item {
+  font-size: 0.813rem;
+  padding: 8px 8px;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  border-left: 1px solid #e6e8eb;
+  border-right: 1px solid #e6e8eb;
+  border-bottom: 1px solid #e6e8eb; }
+  .reactParts__select-list-item:hover {
+    background: #e6e8eb; }
+  .reactParts__select-list-item:last-child {
+    border-bottom: none; }
+  .reactParts__select-list-item.empty {
+    text-align: center;
+    cursor: auto; }
+    .reactParts__select-list-item.empty:hover {
+      background: none; }
+  .reactParts__select-list-item.selected {
+    border-color: #62a8ea;
+    border-top-color: #e6e8eb;
+    background: #62a8ea;
+    color: #fff;
+    height: 100%; }
+  .reactParts__select-list-item.pointed {
+    height: 100%;
+    background: #c9e0eb; }
+    .reactParts__select-list-item.pointed.selected {
+      background: #6097d7;
+      height: 100%; }
+
+.reactParts__select-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: #1b2733;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding-left: 8px;
+  width: 100%;
+  padding-right: 54px; }
+
+.reactParts__select-addControls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #377df3;
+  font-size: 12px;
+  font-weight: 400;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+  .reactParts__select-addControls-item {
+    margin-left: 10px;
+    cursor: pointer; }
+
+.reactParts__select-selected-span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.reactParts__multi-select-wrap {
+  text-align: left;
+  position: relative;
+  display: block;
+  vertical-align: baseline;
+  font-size: 100%;
+  box-sizing: border-box;
+  margin: 10px 0;
+  width: 100%; }
+
+.reactParts__multi-select-label {
+  height: 18px;
+  color: #637282;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  letter-spacing: 0.3px; }
+
+.reactParts__multi-select {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: #1b2733;
+  margin: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  outline: none;
+  box-sizing: border-box;
+  border: 1px solid #E6E8EB;
+  border-radius: 2px;
+  padding: 3px 50px 2px 8px; }
+  .reactParts__multi-select .reactParts__multi-select-placeholder {
+    padding: 4px 0 6px 0; }
+  .reactParts__multi-select.disabled {
+    padding: 0 0 8px 0;
+    border-color: transparent; }
+    .reactParts__multi-select.disabled svg {
+      display: none; }
+  .reactParts__multi-select.focus {
+    border-color: #62a8ea; }
+
+.reactParts__multi-select-placeholder {
+  color: #B3C3C7; }
+
+.reactParts__multi-select-box-item {
+  display: inline-block;
+  background: #F4F8F9;
+  border: 1px solid #e6e8eb;
+  border-radius: 3px;
+  font-size: 0.750rem;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  padding: 4px; }
+  .reactParts__multi-select-box-item div {
+    display: inline-block; }
+  .reactParts__multi-select-box-item-remove {
+    margin-left: 5px;
+    margin-bottom: -4px;
+    fill: #878f92;
+    cursor: pointer; }
+
+.reactParts__multi-select__cancel {
+  position: absolute;
+  right: 28px;
+  fill: #B3C3C7;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  bottom: 50%;
+  top: 50%; }
+
+.reactParts__multi-select__arrow {
+  position: absolute;
+  right: 4px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  bottom: 50%;
+  top: 50%;
+  fill: #B3C3C7; }
+
+.reactParts__multi-select-list {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 195px;
+  /* 5 items */
+  margin-top: 5px;
+  list-style: none;
+  background: #fff;
+  border-top: 1px solid #e6e8eb;
+  border-bottom: 1px solid #e6e8eb;
+  border-radius: 3px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); }
+
+.reactParts__multi-select-list-item {
+  font-size: 0.813rem;
+  padding: 8px 8px;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  border-left: 1px solid #e6e8eb;
+  border-right: 1px solid #e6e8eb;
+  border-bottom: 1px solid #e6e8eb; }
+  .reactParts__multi-select-list-item:hover {
+    background: #e6e8eb; }
+  .reactParts__multi-select-list-item:last-child {
+    border-bottom: none; }
+  .reactParts__multi-select-list-item.empty {
+    text-align: center;
+    cursor: auto; }
+    .reactParts__multi-select-list-item.empty:hover {
+      background: none; }
+  .reactParts__multi-select-list-item.selected {
+    border-color: #42bf89;
+    border-top-color: #e6e8eb;
+    background: #42bf89;
+    color: #fff;
+    height: 100%; }
+  .reactParts__multi-select-list-item.pointed {
+    background: #c9e0eb;
+    height: 100%; }
+    .reactParts__multi-select-list-item.pointed.selected {
+      background: #6097d7;
+      height: 100%; }
+
+.reactParts__multi-select-input {
+  display: inline-block;
+  /* left: 0; */
+  /* top: 0; */
+  /* bottom: 0; */
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: #1b2733;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 5px 8px 5px 0;
+  margin-left: 3px; }
+
+.reactParts__multi-select-addControls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #377df3;
+  font-size: 12px;
+  font-weight: 400;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+  .reactParts__multi-select-addControls-item {
+    margin-left: 10px;
+    cursor: pointer; }
+
+.reactParts__input-wrap {
+  text-align: left;
+  position: relative;
+  display: block;
+  vertical-align: baseline;
+  font-size: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 10px 0; }
+  .reactParts__input-wrap.prefix {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+
+.reactParts__input {
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  color: #1b2733;
+  margin: 0;
+  width: 100%;
+  display: block;
+  outline: none;
+  padding: 7px 18px 8px 8px;
+  box-sizing: border-box;
+  border: 1px solid #E6E8EB;
+  border-radius: 2px;
+  position: relative; }
+  .reactParts__input.valid:before {
+    content: "*";
+    position: absolute;
+    top: 10px;
+    right: 10px; }
+  .reactParts__input.cancel {
+    padding: 7px 28px 8px 8px; }
+  .reactParts__input.prefix {
+    border-radius: 0 2px 2px 0; }
+
+.reactParts__input::-webkit-input-placeholder {
+  font-size: 0.9rem; }
+
+.reactParts__input::-moz-placeholder {
+  font-size: 0.9rem; }
+
+.reactParts__input:-ms-input-placeholder {
+  font-size: 0.9rem; }
+
+.reactParts__input::placeholder {
+  font-size: 0.9rem; }
+
+.reactParts__input:focus {
+  border-color: #62a8ea; }
+
+.reactParts__input:disabled {
+  border-color: transparent;
+  padding: 8px 18px 8px 0; }
+
+.reactParts__input:disabled::-webkit-input-placeholder {
+  color: transparent; }
+
+.reactParts__input:disabled::-moz-placeholder {
+  color: transparent; }
+
+.reactParts__input:disabled:-ms-input-placeholder {
+  color: transparent; }
+
+.reactParts__input:disabled::placeholder {
+  color: transparent; }
+
+.reactParts__input-valid {
+  position: absolute;
+  right: 6px;
+  bottom: 22px;
+  width: 4px;
+  height: 4px;
+  border-radius: 2px;
+  background: green; }
+
+.reactParts__input-valid.false {
+  background: red; }
+
+.reactParts__input-suggest-list {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 195px;
+  margin-top: -2px;
+  list-style: none;
+  background: #fff;
+  border-top: 1px solid #e6e8eb;
+  border-bottom: 1px solid #62a8ea;
+  border-left: 1px solid #62a8ea;
+  border-right: 1px solid #62a8ea;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); }
+
+.reactParts__input-addControls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #377df3;
+  font-size: 12px;
+  font-weight: 400;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+  .reactParts__input-addControls-item {
+    margin-left: 10px;
+    cursor: pointer; }
+
+.reactParts__input-suggest-list-system-item {
+  font-size: 0.813rem;
+  background: #d2d6db;
+  padding: 5px 8px; }
+
+.reactParts__input-suggest-list-item {
+  font-size: 0.813rem;
+  padding: 8px 8px;
+  cursor: pointer;
+  overflow-wrap: break-word;
+  border-bottom: 1px solid #e6e8eb; }
+  .reactParts__input-suggest-list-item:hover {
+    background: #e6e8eb; }
+  .reactParts__input-suggest-list-item:last-child {
+    border-bottom: none; }
+  .reactParts__input-suggest-list-item.empty {
+    text-align: center;
+    cursor: auto; }
+    .reactParts__input-suggest-list-item.empty:hover {
+      background: none; }
+  .reactParts__input-suggest-list-item.selected {
+    background: #62a8ea;
+    color: #fff;
+    height: 100%; }
+
+.reactParts__input__cancel {
+  position: absolute;
+  right: 9px;
+  bottom: 9px;
+  fill: #B3C3C7; }
+
+.reactParts__input-prefix {
+  font-weight: 200;
+  border: 1px solid #E6E8EB;
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  padding: 6px;
+  color: #97a8be;
+  background-color: #fbfdff; }
+
+.reactParts__radio-wrap {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 7px;
+  margin-right: 20px;
+  margin-bottom: 7px;
+  position: relative;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.23;
+  letter-spacing: 0.3px; }
+
+.reactParts__radio-input-wrapper {
+  cursor: pointer;
+  height: 20px;
+  position: relative;
+  width: 20px; }
+  .reactParts__radio-input-wrapper.checked > span {
+    background: #e4f2fc;
+    border: solid 1px #a6d3f4; }
+  .reactParts__radio-input-wrapper.checked > span:last-child {
+    background: #3279f7;
+    opacity: 1; }
+
+.reactParts__radio-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: 1px;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  outline: none;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 1px; }
+
+.reactParts__radio-focus-ring {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  height: 2.625rem;
+  left: -.6875rem;
+  opacity: 0;
+  position: absolute;
+  top: -.6875rem;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: background-color .2s ease,opacity .15s ease,-webkit-transform .15s ease;
+  transition: background-color .2s ease,opacity .15s ease,-webkit-transform .15s ease;
+  transition: background-color .2s ease,transform .15s ease,opacity .15s ease;
+  transition: background-color .2s ease,transform .15s ease,opacity .15s ease,-webkit-transform .15s ease;
+  width: 2.625rem;
+  z-index: -1; }
+
+.reactParts__radio-outer-circle {
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border: solid 1px #e6e8eb;
+  height: 20px;
+  width: 20px;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  -webkit-transition: border-color .2s;
+  transition: border-color .2s; }
+
+.reactParts__radio-inner-circle {
+  box-sizing: border-box;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background-color: rgba(0, 0, 0, 0.38);
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-transition-duration: .2s;
+          transition-duration: .2s;
+  -webkit-transition-property: opacity,background-color,-webkit-transform;
+  transition-property: opacity,background-color,-webkit-transform;
+  transition-property: transform,opacity,background-color;
+  transition-property: transform,opacity,background-color,-webkit-transform;
+  z-index: 1; }
+
+.reactParts__radio-input-label {
+  color: #1b2733;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.23;
+  letter-spacing: 0.3px; }
+
+.reactParts__radio-group-wrap {
+  margin: 10px 0;
+  width: 100%;
+  text-align: left; }
+
+.reactParts__radio-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start; }
+  .reactParts__radio-group.vertical {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+
+.reactParts__checkbox-wrap {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 6px;
+  margin-right: 10px;
+  margin-bottom: 6px;
+  position: relative;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.23;
+  letter-spacing: 0.3px; }
+  .reactParts__checkbox-wrap.checked .reactParts__checkbox-input-new {
+    background-color: #e4f2fc;
+    border: solid 1px #a6d3f4; }
+    .reactParts__checkbox-wrap.checked .reactParts__checkbox-input-new:after {
+      content: '';
+      position: absolute;
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid #377df3;
+      border-bottom: 2px solid #377df3;
+      -webkit-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+      left: 5px;
+      top: 5px;
+      color: #377df3; }
+  .reactParts__checkbox-wrap.disabled {
+    cursor: not-allowed; }
+    .reactParts__checkbox-wrap.disabled .reactParts__checkbox-input-new {
+      cursor: not-allowed; }
+    .reactParts__checkbox-wrap.disabled .reactParts__checkbox-label {
+      color: gray; }
+  .reactParts__checkbox-wrap.disabled.checked .reactParts__checkbox-input-new {
+    background-color: #e6e8eb;
+    border: 1px solid #e6e8eb; }
+    .reactParts__checkbox-wrap.disabled.checked .reactParts__checkbox-input-new:after {
+      border-left: 2px solid gray;
+      border-bottom: 2px solid gray; }
+  .reactParts__checkbox-wrap.button.checked {
+    border: solid 1px #e6e8eb;
+    border-left: 1px solid #e6e8eb;
+    background-color: #377df3; }
+    .reactParts__checkbox-wrap.button.checked .reactParts__checkbox-label {
+      color: #fff; }
+  .reactParts__checkbox-wrap.button.checked.disabled {
+    border: solid 1px #e6e8eb;
+    background-color: #377df3;
+    opacity: 0.6; }
+    .reactParts__checkbox-wrap.button.checked.disabled .reactParts__checkbox-label {
+      color: #fff;
+      opacity: 0.8; }
+  .reactParts__checkbox-wrap.button.disabled {
+    cursor: not-allowed;
+    border: solid 1px #e6e8eb;
+    background-color: #fff; }
+    .reactParts__checkbox-wrap.button.disabled .reactParts__checkbox-label {
+      opacity: 0.5; }
+  .reactParts__checkbox-wrap.button {
+    border-radius: 2px;
+    padding: 7px 10px 8px 10px;
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+    border: 1px solid #e6e8eb;
+    display: inline-block; }
+    .reactParts__checkbox-wrap.button .reactParts__checkbox-input-new {
+      opacity: 0;
+      position: absolute; }
+    .reactParts__checkbox-wrap.button .reactParts__checkbox-label {
+      margin: 0;
+      color: #212121; }
+
+.reactParts__checkbox-input-new {
+  background-color: #fff;
+  border: solid 1px #e6e8eb;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer; }
+  .reactParts__checkbox-input-new .reactParts__checkbox-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    opacity: 0;
+    width: 0;
+    height: 0; }
+
+.reactParts__checkbox-label {
+  margin-left: 10px; }
+
+.reactParts__checkbox-group-wrap {
+  margin: 10px 0;
+  text-align: left;
+  width: 100%; }
+  .reactParts__checkbox-group-wrap.button .reactParts__checkbox-group label {
+    margin-right: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+    border-right: 0; }
+  .reactParts__checkbox-group-wrap.button .reactParts__checkbox-group label:first-child {
+    border-radius: 2px 0 0 2px; }
+  .reactParts__checkbox-group-wrap.button .reactParts__checkbox-group label:last-child {
+    border-radius: 0 2px 2px 0;
+    border-right: 1px solid #e6e8eb; }
+  .reactParts__checkbox-group-wrap.vertical .reactParts__checkbox-group {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+
+.reactParts__checkbox-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start; }
+
+.reactParts__tree--node {
+  position: relative; }
+  .reactParts__tree--node.checkable .reactParts__checkbox-wrap {
+    margin-bottom: 4px;
+    margin-right: 4px;
+    margin-top: 0; }
+    .reactParts__tree--node.checkable .reactParts__checkbox-wrap.checked .reactParts__checkbox-input-new:after {
+      width: 8px;
+      height: 4px; }
+    .reactParts__tree--node.checkable .reactParts__checkbox-wrap .reactParts__checkbox-input-new {
+      width: 18px;
+      height: 18px; }
+    .reactParts__tree--node.checkable .reactParts__checkbox-wrap .reactParts__checkbox-label {
+      display: none; }
+
+.reactParts__tree--arrow {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  cursor: pointer; }
+  .reactParts__tree--arrow.expanded {
+    -webkit-transform: rotate(0);
+            transform: rotate(0); }
+
+.reactParts__tree--title-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start; }
+
+.reactParts__tree--title {
+  max-width: 100px;
+  font-weight: 400;
+  padding: 0 6px 1px;
+  cursor: default;
+  border-radius: 3px; }
+  .reactParts__tree--title:hover {
+    background-color: #ecf6fd; }
+  .reactParts__tree--title.selected {
+    background-color: #d2eafb; }
+  .reactParts__tree--title.contain-selected {
+    border: 1px dashed black; }
+  .reactParts__tree--title.unselectable:hover {
+    background-color: transparent; }
+
+.tree-no-children {
+  padding-left: 24px; }
+
+.reactParts__tree--children {
+  margin-left: 22px; }
+
+.reactParts__tree--loading {
+  margin-left: 22px; }
+
+.reactParts__tree--node--context-wrapper {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
+
+.reactParts__tree--node--context-menu-item {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap; }
+  .reactParts__tree--node--context-menu-item:hover {
+    cursor: default;
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5; }
+
+.reactParts__tree--node--context-menu-item-divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5; }
+
+.reactParts__transfer--wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch; }
+
+.horizontal {
+  height: 300px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
+.vertical {
+  width: 100%;
+  height: 550px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.reactParts__transfer--header {
+  border-bottom: 1px solid #d9d9d9;
+  padding: 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.reactParts__transfer--box {
+  border: 1px solid #d9d9d9;
+  border-radius: 5px; }
+
+.reactParts__transfer--box-horizontal {
+  width: 45%; }
+
+.reactParts__transfer--box-vertical {
+  width: 100%;
+  height: 250px; }
+
+.reactParts__transfer--list {
+  overflow: auto;
+  padding: 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.reactParts__transfer--list-horizontal {
+  height: 250px; }
+
+.reactParts__transfer--list-vertical {
+  height: 200px; }
+
+.reactParts__transfer--middle-box {
+  -ms-flex-item-align: center;
+      align-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.reactParts__transfer--middle-box-horizontal {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.reactParts__transfer--middle-box-vertical {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
+.reactParts__transfer--middle-box-button {
+  margin: 5px; }
+
+.reactParts__badge--wrap {
+  top: -10px;
+  height: 20px;
+  border-radius: 10px;
+  min-width: 20px;
+  max-width: 40px;
+  background: #f04134;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+  padding: 0 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  box-shadow: 0 0 0 1px #fff; }
+
+.reactParts__upload--fileList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 10px 0;
+  max-width: 150px; }
+
+.reactParts__upload--file {
+  font-size: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #4c9ce7; }
+  .reactParts__upload--file:hover .reactParts__delete--file-icon-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+
+.reactParts__upload--file-icon {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  margin-right: 3px; }
+
+.reactParts__upload--file-name {
+  height: 19px; }
+
+.reactParts__delete--file-icon-wrap {
+  background-color: lightgrey;
+  height: 19px;
+  width: 19px;
+  border-radius: 10px;
+  margin-left: 5px;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer; }
