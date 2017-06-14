@@ -19,8 +19,6 @@ var _CheckBox = require("../CheckBox/CheckBox");
 
 var _Badge = require("../Badge/Badge");
 
-var _Button = require("../Button/Button");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -136,7 +134,18 @@ var Transfer = exports.Transfer = function (_React$Component) {
         };
 
         _this.singleCheckboxRender = function (onChangeHandler, checked, item, i) {
-            return _react2.default.createElement(_CheckBox.CheckBox, { checked: checked, onClickHandler: onChangeHandler, label: item.value, key: i });
+            var customRecordRenderer = _this.props.customRecordRenderer;
+
+
+            if (typeof customRecordRenderer === "function") {
+                return customRecordRenderer(onChangeHandler, checked, item, i);
+            } else {
+                return _react2.default.createElement(
+                    "div",
+                    { style: { margin: "5px 0px" }, key: i },
+                    _react2.default.createElement(_CheckBox.CheckBox, { checked: checked, onClickHandler: onChangeHandler, label: item.value })
+                );
+            }
         };
 
         _this.isSourceNotEmpty = function () {
@@ -161,7 +170,8 @@ var Transfer = exports.Transfer = function (_React$Component) {
 
             var _props = this.props,
                 source = _props.source,
-                target = _props.target;
+                target = _props.target,
+                direction = _props.direction;
 
             var sourceWithoutTarget = source.filter(function (s) {
                 return target.every(function (t) {
@@ -169,24 +179,31 @@ var Transfer = exports.Transfer = function (_React$Component) {
                 });
             });
 
+            var targetCheckbox = this.props.target && this.props.target.length > 0 && this.props.target.every(function (t) {
+                return _this2.state.sTarget.some(function (st) {
+                    return st === t;
+                });
+            });
+            var sourceCheckbox = sourceWithoutTarget && sourceWithoutTarget.length > 0 && sourceWithoutTarget.every(function (s) {
+                return _this2.state.sSource.some(function (ss) {
+                    return ss === s.id;
+                });
+            });
+
             return _react2.default.createElement(
                 "div",
-                { className: "reactParts__transfer--wrap" },
+                { className: "reactParts__transfer--wrap " + direction },
                 _react2.default.createElement(
                     "div",
-                    { className: "reactParts__transfer--box" },
+                    { className: "reactParts__transfer--box reactParts__transfer--box-" + direction },
                     _react2.default.createElement(
                         "div",
                         { className: "reactParts__transfer--header" },
                         _react2.default.createElement(_CheckBox.CheckBox, {
+                            label: this.props.sourceName,
+                            checked: sourceCheckbox,
                             disabled: sourceWithoutTarget.length === 0,
-                            onClickHandler: this.selectAllSourses,
-                            checked: Boolean(sourceWithoutTarget.length && sourceWithoutTarget.every(function (s) {
-                                return _this2.state.sSource.some(function (ss) {
-                                    return ss === s.id;
-                                });
-                            })),
-                            label: this.props.sourceName
+                            onClickHandler: this.selectAllSourses
                         }),
                         _react2.default.createElement(_Badge.Badge, {
                             count: this.state.sSource.length,
@@ -196,49 +213,82 @@ var Transfer = exports.Transfer = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         "div",
-                        { className: "reactParts__transfer--list" },
+                        { className: "reactParts__transfer--list reactParts__transfer--list-" + direction },
                         this.sourceRender()
                     )
                 ),
                 _react2.default.createElement(
                     "div",
-                    { className: "reactParts__transfer--middle-box" },
+                    { className: "reactParts__transfer--middle-box reactParts__transfer--middle-box-" + direction },
                     _react2.default.createElement(
                         "div",
                         { className: "reactParts__transfer--middle-box-button" },
-                        _react2.default.createElement(_Button.Button, { onClick: this.transferToTargetHandler, brand: "primary", caption: ">", disabled: !this.isSourceNotEmpty() })
+                        _react2.default.createElement(
+                            "div",
+                            {
+                                className: "reactParts__transfer--middle-box-button-icon " + (!this.isSourceNotEmpty() ? "disabled" : ""),
+                                onClick: this.transferToTargetHandler },
+                            this.props.direction === "vertical" ? _react2.default.createElement(
+                                "svg",
+                                { xmlns: "http://www.w3.org/2000/svg", fill: "#d9d9d9", height: "24", viewBox: "0 0 24 24",
+                                    width: "24" },
+                                _react2.default.createElement("path", { d: "M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" }),
+                                _react2.default.createElement("path", { d: "M0-.75h24v24H0z", fill: "none" })
+                            ) : _react2.default.createElement(
+                                "svg",
+                                { xmlns: "http://www.w3.org/2000/svg", fill: "#d9d9d9", height: "24", viewBox: "0 0 24 24",
+                                    width: "24" },
+                                _react2.default.createElement("path", { d: "M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z" }),
+                                _react2.default.createElement("path", { d: "M0-.25h24v24H0z", fill: "none" })
+                            )
+                        )
                     ),
                     _react2.default.createElement(
                         "div",
-                        null,
-                        _react2.default.createElement(_Button.Button, { onClick: this.transferToTargetHandler, brand: "primary", caption: "<", disabled: !this.isTargetNotEmpty() })
+                        { className: "reactParts__transfer--middle-box-button" },
+                        _react2.default.createElement(
+                            "div",
+                            { className: "reactParts__transfer--middle-box-button-icon " + (!this.isTargetNotEmpty() ? "disabled" : ""),
+                                onClick: this.transferToTargetHandler },
+                            this.props.direction === "vertical" ? _react2.default.createElement(
+                                "svg",
+                                { xmlns: "http://www.w3.org/2000/svg", fill: "#d9d9d9", height: "24",
+                                    viewBox: "0 0 24 24", width: "24",
+                                    onClick: this.transferToSourceHandler
+                                },
+                                _react2.default.createElement("path", { d: "M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" }),
+                                _react2.default.createElement("path", { d: "M0 0h24v24H0z", fill: "none" })
+                            ) : _react2.default.createElement(
+                                "svg",
+                                { xmlns: "http://www.w3.org/2000/svg", fill: "#d9d9d9", height: "24",
+                                    viewBox: "0 0 24 24", width: "24" },
+                                _react2.default.createElement("path", { d: "M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" }),
+                                _react2.default.createElement("path", { d: "M0-.5h24v24H0z", fill: "none" })
+                            )
+                        )
                     )
                 ),
                 _react2.default.createElement(
                     "div",
-                    { className: "reactParts__transfer--box" },
+                    { className: "reactParts__transfer--box reactParts__transfer--box-" + direction },
                     _react2.default.createElement(
                         "div",
                         { className: "reactParts__transfer--header" },
                         _react2.default.createElement(_CheckBox.CheckBox, {
-                            disabled: this.props.target.length === 0,
-                            onClickHandler: this.selectAllTargets,
-                            checked: Boolean(this.props.target.length && this.props.target.every(function (t) {
-                                return _this2.state.sTarget.some(function (st) {
-                                    return st === t;
-                                });
-                            })),
-                            label: this.props.targetName
+                            label: this.props.targetName,
+                            checked: targetCheckbox,
+                            disabled: target.length === 0,
+                            onClickHandler: this.selectAllTargets
                         }),
                         _react2.default.createElement(_Badge.Badge, {
                             count: this.state.sTarget.length,
-                            ofCount: this.props.target.length,
+                            ofCount: target.length,
                             showZero: true
                         })
                     ),
                     _react2.default.createElement(
                         "div",
-                        { className: "reactParts__transfer--list" },
+                        { className: "reactParts__transfer--list reactParts__transfer--list-" + direction },
                         this.targetRender()
                     )
                 )
@@ -250,8 +300,10 @@ var Transfer = exports.Transfer = function (_React$Component) {
 }(_react2.default.Component);
 
 Transfer.propTypes = {
-    onChange: _propTypes2.default.func,
+    customRecordRenderer: _propTypes2.default.func,
     targetName: _propTypes2.default.string,
+    direction: _propTypes2.default.oneOf(["vertical", "horizontal"]),
+    onChange: _propTypes2.default.func,
     target: _propTypes2.default.array,
     source: _propTypes2.default.array,
     name: _propTypes2.default.string
@@ -259,5 +311,6 @@ Transfer.propTypes = {
 
 Transfer.defaultProps = {
     source: [],
-    target: []
+    target: [],
+    direction: "horizontal"
 };

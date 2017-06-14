@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { CheckBox } from "../CheckBox/CheckBox";
 import { Badge } from "../Badge/Badge";
-import {Button} from "../Button/Button";
 
 export class Transfer extends React.Component {
 
@@ -15,7 +14,7 @@ export class Transfer extends React.Component {
     }
 
     onChangeHandler = ( value ) => {
-        if (typeof this.props.onChange === "function") this.props.onChange(value)
+        if ( typeof this.props.onChange === "function" ) this.props.onChange( value )
     };
 
     selectAllSourses = () => {
@@ -30,12 +29,12 @@ export class Transfer extends React.Component {
 
     selectSourceHandler = id => {
         const source = this.state.sSource;
-        this.setState({ sSource: source.some(s => s === id) ? source.filter(s => s !== id) : source.concat([id])} )
+        this.setState( { sSource: source.some( s => s === id ) ? source.filter( s => s !== id ) : source.concat( [ id ] ) } )
     };
 
     selectTargetHandler = id => {
         const target = this.state.sTarget;
-        this.setState({ sTarget: target.some(t => t === id) ? target.filter(t => t !== id) : target.concat([id]) })
+        this.setState( { sTarget: target.some( t => t === id ) ? target.filter( t => t !== id ) : target.concat( [ id ] ) } )
     };
 
     transferToTargetHandler = () => {
@@ -69,11 +68,11 @@ export class Transfer extends React.Component {
     singleCheckboxRender = ( onChangeHandler, checked, item, i ) => {
         const { customRecordRenderer } = this.props;
 
-        if (typeof customRecordRenderer === "function") {
-            return customRecordRenderer(onChangeHandler, checked, item, i)
+        if ( typeof customRecordRenderer === "function" ) {
+            return customRecordRenderer( onChangeHandler, checked, item, i )
         } else {
-            return <div style={{margin: "5px 0px"}}>
-                <CheckBox checked={checked} onClickHandler={onChangeHandler} label={item.value} key={i}/>
+            return <div style={{ margin: "5px 0px" }}  key={i}>
+                <CheckBox checked={checked} onClickHandler={onChangeHandler} label={item.value}/>
             </div>
         }
     };
@@ -87,27 +86,27 @@ export class Transfer extends React.Component {
     };
 
     render() {
-        const { source, target, direction }  = this.props;
-        const sourceWithoutTarget = source.filter( s => target.every( t => s.id !== t ) );
+        const { source, target, direction } = this.props;
+        const sourceWithoutTarget           = source.filter( s => target.every( t => s.id !== t ) );
 
-        const targetCheckbox = (this.props.target || []).every(t => this.state.sTarget.some(st => st === t));
-        const sourceCheckbox = (sourceWithoutTarget || []).every(s => this.state.sSource.some(ss => ss === s.id));
+        const targetCheckbox = this.props.target && this.props.target.length > 0 && this.props.target.every( t => this.state.sTarget.some( st => st === t ) );
+        const sourceCheckbox = sourceWithoutTarget && sourceWithoutTarget.length > 0 && sourceWithoutTarget.every( s => this.state.sSource.some( ss => ss === s.id ) );
 
         return (
             <div className={`reactParts__transfer--wrap ${direction}`}>
                 <div className={`reactParts__transfer--box reactParts__transfer--box-${direction}`}>
                     <div className="reactParts__transfer--header">
                         <CheckBox
-                            label          = {this.props.sourceName}
-                            checked        = {sourceCheckbox}
-                            disabled       = {sourceWithoutTarget.length === 0}
-                            onClickHandler = {this.selectAllSourses}
+                            label={this.props.sourceName}
+                            checked={sourceCheckbox}
+                            disabled={sourceWithoutTarget.length === 0}
+                            onClickHandler={this.selectAllSourses}
                         />
 
                         <Badge
-                            count    = {this.state.sSource.length}
-                            ofCount  = {sourceWithoutTarget.length}
-                            showZero = {true}
+                            count={this.state.sSource.length}
+                            ofCount={sourceWithoutTarget.length}
+                            showZero={true}
                         />
                     </div>
 
@@ -117,44 +116,60 @@ export class Transfer extends React.Component {
                 </div>
 
                 <div className={`reactParts__transfer--middle-box reactParts__transfer--middle-box-${direction}`}>
-                    {/*<div*/}
-                        {/*onClick={this.transferToTargetHandler}*/}
-                        {/*className={"reactParts__transfer--middle-box-right" + ((this.isSourceNotEmpty() ? " not-empty" : ""))}>*/}
-                        {/*{">>"}*/}
-                    {/*</div>*/}
-
                     <div className="reactParts__transfer--middle-box-button">
-                        <Button
-                            brand    = "primary"
-                            caption  = {direction === "horizontal" ? "⮞" : "⮟"}
-                            onClick  = {this.transferToTargetHandler}
-                            disabled = {!this.isSourceNotEmpty()}
-                        />
+                        <div
+                            className={"reactParts__transfer--middle-box-button-icon " + (!this.isSourceNotEmpty() ? "disabled" : "")}
+                            onClick={this.transferToTargetHandler}>
+                            {(this.props.direction === "vertical") ?
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" height="24" viewBox="0 0 24 24"
+                                     width="24">
+                                    <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
+                                    <path d="M0-.75h24v24H0z" fill="none"/>
+                                </svg> :
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" height="24" viewBox="0 0 24 24"
+                                     width="24">
+                                    <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
+                                    <path d="M0-.25h24v24H0z" fill="none"/>
+                                </svg>
+                            }
+                        </div>
                     </div>
 
                     <div className="reactParts__transfer--middle-box-button">
-                        <Button
-                            brand    = "primary"
-                            caption  = {direction === "horizontal" ? "⮜" : "⮝"}
-                            onClick  = {this.transferToSourceHandler}
-                            disabled = {!this.isTargetNotEmpty()}
-                        />
+                        <div                            className={"reactParts__transfer--middle-box-button-icon " + (!this.isTargetNotEmpty() ? "disabled" : "")}
+                            onClick={this.transferToTargetHandler}>
+                            {
+                                (this.props.direction === "vertical") ?
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" height="24"
+                                         viewBox="0 0 24 24" width="24"
+                                         onClick={this.transferToSourceHandler}
+                                    >
+                                        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+                                        <path d="M0 0h24v24H0z" fill="none"/>
+                                    </svg> :
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#d9d9d9" height="24"
+                                         viewBox="0 0 24 24" width="24">
+                                        <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
+                                        <path d="M0-.5h24v24H0z" fill="none"/>
+                                    </svg>
+                            }
+                        </div>
                     </div>
                 </div>
 
                 <div className={`reactParts__transfer--box reactParts__transfer--box-${direction}`}>
                     <div className="reactParts__transfer--header">
                         <CheckBox
-                            label          = {this.props.targetName}
-                            checked        = {targetCheckbox}
-                            disabled       = {target.length === 0}
-                            onClickHandler = {this.selectAllTargets}
+                            label={this.props.targetName}
+                            checked={targetCheckbox}
+                            disabled={target.length === 0}
+                            onClickHandler={this.selectAllTargets}
                         />
 
                         <Badge
-                            count    = {this.state.sTarget.length}
-                            ofCount  = {target.length}
-                            showZero = {true}
+                            count={this.state.sTarget.length}
+                            ofCount={target.length}
+                            showZero={true}
                         />
                     </div>
 
@@ -168,18 +183,19 @@ export class Transfer extends React.Component {
 }
 
 Transfer.propTypes = {
-    customRecordRenderer : PropTypes.func,
-    targetName           : PropTypes.string,
-    direction            : PropTypes.oneOf(["vertical", "horizontal"]),
-    onChange             : PropTypes.func,
-    target               : PropTypes.array,
-    source               : PropTypes.array,
-    name                 : PropTypes.string
+    customRecordRenderer: PropTypes.func,
+    targetName:           PropTypes.string,
+    direction:            PropTypes.oneOf( [ "vertical", "horizontal" ] ),
+    onChange:             PropTypes.func,
+    target:               PropTypes.array,
+    source:               PropTypes.array,
+    name:                 PropTypes.string
 };
 
 
 Transfer.defaultProps = {
-    source: [],
-    target: [],
+    source:    [],
+    target:    [],
+    direction: "horizontal"
 };
 
