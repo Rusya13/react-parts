@@ -136,18 +136,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
         };
 
         _this.singleCheckboxRender = function (onChangeHandler, checked, item, i) {
-            var customRecordRenderer = _this.props.customRecordRenderer;
-
-
-            if (typeof customRecordRenderer === "function") {
-                return customRecordRenderer(onChangeHandler, checked, item, i);
-            } else {
-                return _react2.default.createElement(
-                    "div",
-                    { style: { margin: "5px 0px" } },
-                    _react2.default.createElement(_CheckBox.CheckBox, { checked: checked, onClickHandler: onChangeHandler, label: item.value, key: i })
-                );
-            }
+            return _react2.default.createElement(_CheckBox.CheckBox, { checked: checked, onClickHandler: onChangeHandler, label: item.value, key: i });
         };
 
         _this.isSourceNotEmpty = function () {
@@ -172,8 +161,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
 
             var _props = this.props,
                 source = _props.source,
-                target = _props.target,
-                direction = _props.direction;
+                target = _props.target;
 
             var sourceWithoutTarget = source.filter(function (s) {
                 return target.every(function (t) {
@@ -181,31 +169,24 @@ var Transfer = exports.Transfer = function (_React$Component) {
                 });
             });
 
-            var targetCheckbox = (this.props.target || []).every(function (t) {
-                return _this2.state.sTarget.some(function (st) {
-                    return st === t;
-                });
-            });
-            var sourceCheckbox = (sourceWithoutTarget || []).every(function (s) {
-                return _this2.state.sSource.some(function (ss) {
-                    return ss === s.id;
-                });
-            });
-
             return _react2.default.createElement(
                 "div",
-                { className: "reactParts__transfer--wrap " + direction },
+                { className: "reactParts__transfer--wrap" },
                 _react2.default.createElement(
                     "div",
-                    { className: "reactParts__transfer--box reactParts__transfer--box-" + direction },
+                    { className: "reactParts__transfer--box" },
                     _react2.default.createElement(
                         "div",
                         { className: "reactParts__transfer--header" },
                         _react2.default.createElement(_CheckBox.CheckBox, {
-                            label: this.props.sourceName,
-                            checked: sourceCheckbox,
                             disabled: sourceWithoutTarget.length === 0,
-                            onClickHandler: this.selectAllSourses
+                            onClickHandler: this.selectAllSourses,
+                            checked: Boolean(sourceWithoutTarget.length && sourceWithoutTarget.every(function (s) {
+                                return _this2.state.sSource.some(function (ss) {
+                                    return ss === s.id;
+                                });
+                            })),
+                            label: this.props.sourceName
                         }),
                         _react2.default.createElement(_Badge.Badge, {
                             count: this.state.sSource.length,
@@ -215,55 +196,49 @@ var Transfer = exports.Transfer = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         "div",
-                        { className: "reactParts__transfer--list reactParts__transfer--list-" + direction },
+                        { className: "reactParts__transfer--list" },
                         this.sourceRender()
                     )
                 ),
                 _react2.default.createElement(
                     "div",
-                    { className: "reactParts__transfer--middle-box reactParts__transfer--middle-box-" + direction },
+                    { className: "reactParts__transfer--middle-box" },
                     _react2.default.createElement(
                         "div",
                         { className: "reactParts__transfer--middle-box-button" },
-                        _react2.default.createElement(_Button.Button, {
-                            brand: "primary",
-                            caption: direction === "horizontal" ? "⮞" : "⮟",
-                            onClick: this.transferToTargetHandler,
-                            disabled: !this.isSourceNotEmpty()
-                        })
+                        _react2.default.createElement(_Button.Button, { onClick: this.transferToTargetHandler, brand: "primary", caption: ">", disabled: !this.isSourceNotEmpty() })
                     ),
                     _react2.default.createElement(
                         "div",
-                        { className: "reactParts__transfer--middle-box-button" },
-                        _react2.default.createElement(_Button.Button, {
-                            brand: "primary",
-                            caption: direction === "horizontal" ? "⮜" : "⮝",
-                            onClick: this.transferToSourceHandler,
-                            disabled: !this.isTargetNotEmpty()
-                        })
+                        null,
+                        _react2.default.createElement(_Button.Button, { onClick: this.transferToTargetHandler, brand: "primary", caption: "<", disabled: !this.isTargetNotEmpty() })
                     )
                 ),
                 _react2.default.createElement(
                     "div",
-                    { className: "reactParts__transfer--box reactParts__transfer--box-" + direction },
+                    { className: "reactParts__transfer--box" },
                     _react2.default.createElement(
                         "div",
                         { className: "reactParts__transfer--header" },
                         _react2.default.createElement(_CheckBox.CheckBox, {
-                            label: this.props.targetName,
-                            checked: targetCheckbox,
-                            disabled: target.length === 0,
-                            onClickHandler: this.selectAllTargets
+                            disabled: this.props.target.length === 0,
+                            onClickHandler: this.selectAllTargets,
+                            checked: Boolean(this.props.target.length && this.props.target.every(function (t) {
+                                return _this2.state.sTarget.some(function (st) {
+                                    return st === t;
+                                });
+                            })),
+                            label: this.props.targetName
                         }),
                         _react2.default.createElement(_Badge.Badge, {
                             count: this.state.sTarget.length,
-                            ofCount: target.length,
+                            ofCount: this.props.target.length,
                             showZero: true
                         })
                     ),
                     _react2.default.createElement(
                         "div",
-                        { className: "reactParts__transfer--list reactParts__transfer--list-" + direction },
+                        { className: "reactParts__transfer--list" },
                         this.targetRender()
                     )
                 )
@@ -275,10 +250,8 @@ var Transfer = exports.Transfer = function (_React$Component) {
 }(_react2.default.Component);
 
 Transfer.propTypes = {
-    customRecordRenderer: _propTypes2.default.func,
-    targetName: _propTypes2.default.string,
-    direction: _propTypes2.default.oneOf(["vertical", "horizontal"]),
     onChange: _propTypes2.default.func,
+    targetName: _propTypes2.default.string,
     target: _propTypes2.default.array,
     source: _propTypes2.default.array,
     name: _propTypes2.default.string
