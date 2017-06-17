@@ -49,8 +49,40 @@ export class Transfer extends React.Component {
         this.state.sTarget = []
     };
 
-    sourceRender = () => {
-        const { source, target } = this.props;
+    sourceRender = ( checkedAll, disabledAll ) => {
+        const { source, target, tableView, columns } = this.props;
+
+        if ( tableView && columns ) {
+            return <div style={{overflow:"hidden",flex:1}}>
+                <table style={{width:"100%", borderBottom:"1px solid #d9d9d9"}}>
+                    <thead>
+                    <tr>
+                        {[
+                            <th key={Math.random()} style={{width:"10%"}}>
+                                <CheckBox
+                                    checked={checkedAll}
+                                    disabled={disabledAll}
+                                    onClickHandler={this.selectAllSourses}
+                                />
+                            </th>,
+
+                            columns.map( item => {
+                                return this.tableHeaderRowRender( item )
+                            } ) ]}
+                    </tr>
+                    </thead>
+                </table>
+                <div style={{overflow:"scroll",height:"209px"}}>
+                    <table style={{width:"100%"}}>
+                        <tbody>
+                        {this.tableRowRender(source,target)}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        }
+
         return source.filter( s => target.every( t => s.id !== t ) ).map( ( item, i ) => {
             const checked = this.state.sSource.some( s => s === item.id )
             return this.singleCheckboxRender( this.selectSourceHandler.bind( this, item.id ), checked, item, i )
@@ -59,19 +91,46 @@ export class Transfer extends React.Component {
 
     targetRender = () => {
         const { source, target } = this.props;
+
+
         return source.filter( s => target.some( t => s.id === t ) ).map( ( item, i ) => {
             const checked = this.state.sTarget.some( t => t === item.id )
             return this.singleCheckboxRender( this.selectTargetHandler.bind( this, item.id ), checked, item, i )
         } )
     };
 
+
+    tableHeaderRowRender = ( item ) => {
+        return <th key={Math.random()} style={{width:item.width +"%", textAlign:item.align || "center", padding:"0 10px"}}>{item.label}</th>
+    }
+
+    tableRowRender = ( source, target ) => {
+        return source.filter( s => target.every( t => s.id !== t ) ).map( ( item, i ) => {
+            const checked = this.state.sSource.some( s => s === item.id )
+
+            return  <tr key={i}>
+                {[
+                    <td style={{ margin: "5px 0px", width:"10%" }} key={Math.random()}>
+                        <CheckBox checked={checked} onClickHandler={this.selectSourceHandler.bind( this, item.id )}/>
+                    </td>,
+                    this.props.columns.map(col=>{
+                        return  <td key={Math.random()} style={{width:col.width + "%", textAlign:col.align || "center", padding:"0 10px"}}>
+                            {item[col.key]}
+                        </td>
+                    })
+                ]}
+            </tr>
+
+        } )
+    }
+
+
     singleCheckboxRender = ( onChangeHandler, checked, item, i ) => {
         const { customRecordRenderer } = this.props;
-
         if ( typeof customRecordRenderer === "function" ) {
             return customRecordRenderer( onChangeHandler, checked, item, i )
         } else {
-            return <div style={{ margin: "5px 0px" }}  key={i}>
+            return <div style={{ margin: "5px 0px" }} key={i}>
                 <CheckBox checked={checked} onClickHandler={onChangeHandler} label={item.value}/>
             </div>
         }
@@ -86,16 +145,21 @@ export class Transfer extends React.Component {
     };
 
     render() {
-        const { source, target, direction } = this.props;
-        const sourceWithoutTarget           = source.filter( s => target.every( t => s.id !== t ) );
+        const { source, target, direction, tableView, sourceName } = this.props;
+        const sourceWithoutTarget                      = source.filter( s => target.every( t => s.id !== t ) );
 
         const targetCheckbox = this.props.target && this.props.target.length > 0 && this.props.target.every( t => this.state.sTarget.some( st => st === t ) );
         const sourceCheckbox = sourceWithoutTarget && sourceWithoutTarget.length > 0 && sourceWithoutTarget.every( s => this.state.sSource.some( ss => ss === s.id ) );
 
         return (
             <div className={`reactParts__transfer--wrap ${direction}`}>
+                {tableView && <div>{sourceName} <Badge
+                    count={this.state.sSource.length}
+                    ofCount={sourceWithoutTarget.length}
+                    showZero={true}
+                /></div> }
                 <div className={`reactParts__transfer--box reactParts__transfer--box-${direction}`}>
-                    <div className="reactParts__transfer--header">
+                    {!tableView && <div className="reactParts__transfer--header">
                         <CheckBox
                             label={this.props.sourceName}
                             checked={sourceCheckbox}
@@ -108,10 +172,10 @@ export class Transfer extends React.Component {
                             ofCount={sourceWithoutTarget.length}
                             showZero={true}
                         />
-                    </div>
+                    </div>}
 
                     <div className={`reactParts__transfer--list reactParts__transfer--list-${direction}`}>
-                        {this.sourceRender()}
+                        {this.sourceRender( sourceCheckbox, sourceWithoutTarget.length === 0 )}
                     </div>
                 </div>
 
@@ -123,21 +187,21 @@ export class Transfer extends React.Component {
                         >
                             {direction === "vertical" ?
                                 <svg
-                                    fill    = "#d9d9d9"
-                                    xmlns   = "http://www.w3.org/2000/svg"
-                                    width   = "24"
-                                    height  = "24"
-                                    viewBox = "0 0 24 24"
+                                    fill="#d9d9d9"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
                                 >
                                     <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
                                     <path d="M0-.75h24v24H0z" fill="none"/>
                                 </svg> :
                                 <svg
-                                    fill    = "#d9d9d9"
-                                    xmlns   = "http://www.w3.org/2000/svg"
-                                    width   = "24"
-                                    height  = "24"
-                                    viewBox = "0 0 24 24"
+                                    fill="#d9d9d9"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
                                 >
                                     <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
                                     <path d="M0-.25h24v24H0z" fill="none"/>
@@ -153,21 +217,21 @@ export class Transfer extends React.Component {
                         >
                             {direction === "vertical" ?
                                 <svg
-                                    fill    = "#d9d9d9"
-                                    xmlns   = "http://www.w3.org/2000/svg"
-                                    width   = "24"
-                                    height  = "24"
-                                    viewBox = "0 0 24 24"
+                                    fill="#d9d9d9"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
                                 >
                                     <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
                                     <path d="M0 0h24v24H0z" fill="none"/>
                                 </svg> :
                                 <svg
-                                    fill    = "#d9d9d9"
-                                    xmlns   = "http://www.w3.org/2000/svg"
-                                    width   = "24"
-                                    height  = "24"
-                                    viewBox = "0 0 24 24"
+                                    fill="#d9d9d9"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
                                 >
                                     <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
                                     <path d="M0-.5h24v24H0z" fill="none"/>
@@ -205,17 +269,24 @@ export class Transfer extends React.Component {
 Transfer.propTypes = {
     customRecordRenderer: PropTypes.func,
     targetName:           PropTypes.string,
+    sourceName:           PropTypes.string,
     direction:            PropTypes.oneOf( [ "vertical", "horizontal" ] ),
     onChange:             PropTypes.func,
     target:               PropTypes.array,
     source:               PropTypes.array,
-    name:                 PropTypes.string
+    name:                 PropTypes.string,
+    tableView:            PropTypes.bool,
+    columns:              PropTypes.array,
+    footer:               PropTypes.bool
 };
 
 
 Transfer.defaultProps = {
     source:    [],
     target:    [],
-    direction: "horizontal"
+    direction: "horizontal",
+    tableView: false,
+    columns:   null,
+    footer:    false
 };
 
