@@ -493,9 +493,6 @@ ul, menu, dir {
 .reactParts__input::-webkit-input-placeholder {
   font-size: 0.9rem; }
 
-.reactParts__input::-moz-placeholder {
-  font-size: 0.9rem; }
-
 .reactParts__input:-ms-input-placeholder {
   font-size: 0.9rem; }
 
@@ -510,9 +507,6 @@ ul, menu, dir {
   padding: 8px 18px 8px 0; }
 
 .reactParts__input:disabled::-webkit-input-placeholder {
-  color: transparent; }
-
-.reactParts__input:disabled::-moz-placeholder {
   color: transparent; }
 
 .reactParts__input:disabled:-ms-input-placeholder {
@@ -661,7 +655,6 @@ ul, menu, dir {
   top: -.6875rem;
   -webkit-transform: scale(0);
           transform: scale(0);
-  -webkit-transition: background-color .2s ease,opacity .15s ease,-webkit-transform .15s ease;
   transition: background-color .2s ease,opacity .15s ease,-webkit-transform .15s ease;
   transition: background-color .2s ease,transform .15s ease,opacity .15s ease;
   transition: background-color .2s ease,transform .15s ease,opacity .15s ease,-webkit-transform .15s ease;
@@ -680,7 +673,6 @@ ul, menu, dir {
   top: 50%;
   left: 50%;
   border-radius: 50%;
-  -webkit-transition: border-color .2s;
   transition: border-color .2s; }
 
 .reactParts__radio-inner-circle {
@@ -695,9 +687,7 @@ ul, menu, dir {
   background-color: rgba(0, 0, 0, 0.38);
   border-radius: 50%;
   opacity: 0;
-  -webkit-transition-duration: .2s;
-          transition-duration: .2s;
-  -webkit-transition-property: opacity,background-color,-webkit-transform;
+  transition-duration: .2s;
   transition-property: opacity,background-color,-webkit-transform;
   transition-property: transform,opacity,background-color;
   transition-property: transform,opacity,background-color,-webkit-transform;
@@ -963,58 +953,7 @@ ul, menu, dir {
   overflow: hidden;
   background-color: #e5e5e5; }
 
-.reactParts__transfer--wrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch; }
-
-.horizontal {
-  height: 300px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row; }
-
-.vertical {
-  width: 100%;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column; }
-
-.reactParts__transfer--header {
-  border-bottom: 1px solid #d9d9d9;
-  padding: 0 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between; }
-
-.reactParts__transfer--box {
-  border: 1px solid #d9d9d9;
-  border-radius: 5px; }
-
-.reactParts__transfer--box-horizontal {
-  width: 45%; }
-
-.reactParts__transfer--box-vertical {
-  width: 100%;
-  height: 250px; }
-
-.reactParts__transfer--list {
-  overflow: auto;
-  padding: 0 10px;
+.rp-transfer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1022,53 +961,135 @@ ul, menu, dir {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column; }
-
-.reactParts__transfer--list-horizontal {
-  height: 250px; }
-
-.reactParts__transfer--list-vertical {
-  height: 250px; }
-
-.reactParts__transfer--middle-box {
-  -ms-flex-item-align: center;
-      align-self: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center; }
-
-.reactParts__transfer--middle-box-horizontal {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column; }
-
-.reactParts__transfer--middle-box-vertical {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row; }
-
-.reactParts__transfer--middle-box-button {
-  margin: 5px; }
-
-.reactParts__transfer--middle-box-button-icon {
-  border: 1px solid #3279F7;
-  padding: 5px;
-  height: 24px;
-  border-radius: 3px;
-  cursor: pointer;
-  background: #3279F7; }
-
-.reactParts__transfer--middle-box-button-icon.disabled {
-  border: 1px solid #d9d9d9;
-  background: #ffffff; }
+  .rp-transfer__header {
+    margin-bottom: 10px; }
+  .rp-transfer__wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1; }
+    .rp-transfer__wrap--horizontal {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row; }
+    .rp-transfer__wrap--vertical {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column; }
+  .rp-transfer__controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .rp-transfer__controls--horizontal {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column; }
+    .rp-transfer__controls--vertical {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: row;
+              flex-direction: row; }
+  .rp-transfer__control {
+    border: 1px solid #3279F7;
+    background: #3279F7;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px;
+    height: 24px;
+    width: 25px;
+    margin: 5px; }
+    .rp-transfer__control--disabled {
+      border: 1px solid #d9d9d9;
+      background: #ffffff; }
+  .rp-transfer__box {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .rp-transfer__box-header {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center; }
+    .rp-transfer__box-content {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      border: 1px solid #d9d9d9;
+      box-sizing: border-box; }
+  .rp-transfer__list {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    overflow: auto;
+    border-radius: 5px; }
+  .rp-transfer__table {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    box-sizing: border-box; }
+    .rp-transfer__table-header {
+      width: 100%;
+      border-bottom: 1px solid #d9d9d9;
+      box-sizing: border-box;
+      padding: 0 5px; }
+      .rp-transfer__table-header table {
+        width: 100%; }
+    .rp-transfer__table-footer {
+      width: 100%;
+      border-top: 1px solid #d9d9d9;
+      box-sizing: border-box;
+      padding: 0 5px; }
+      .rp-transfer__table-footer table {
+        width: 100%; }
+    .rp-transfer__table-body {
+      -webkit-box-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+      width: 100%;
+      overflow: auto;
+      box-sizing: border-box;
+      padding: 0 5px; }
+      .rp-transfer__table-body table {
+        width: 100%; }
 
 .reactParts__badge--wrap {
   top: -10px;

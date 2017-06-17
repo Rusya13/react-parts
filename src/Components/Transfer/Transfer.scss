@@ -1,85 +1,1 @@
-.reactParts__transfer--wrap{
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-}
-
-.horizontal {
-  height: 300px;
-  flex-direction: row;
-}
-
-.vertical {
-  width: 100%;
-  //height: 550px;
-  flex-direction: column;
-}
-
-.reactParts__transfer--header{
-  border-bottom: 1px solid rgb(217, 217, 217);
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.reactParts__transfer--box{
-  border: 1px solid #d9d9d9;
-  border-radius: 5px;
-}
-
-.reactParts__transfer--box-horizontal {
-  width: 45%;
-}
-
-.reactParts__transfer--box-vertical {
-  width: 100%;
-  height: 250px;
-}
-
-.reactParts__transfer--list {
-  overflow: auto;
-  padding: 0 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.reactParts__transfer--list-horizontal {
-  height: 250px;
-}
-
-.reactParts__transfer--list-vertical {
-  height: 250px;
-}
-
-.reactParts__transfer--middle-box{
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.reactParts__transfer--middle-box-horizontal {
-  flex-direction: column;
-}
-
-.reactParts__transfer--middle-box-vertical {
-  flex-direction: row;
-}
-
-.reactParts__transfer--middle-box-button{
-  margin: 5px;
-}
-.reactParts__transfer--middle-box-button-icon{
-  border:1px solid #3279F7;
-  padding: 5px;
-  height: 24px;
-  border-radius: 3px;
-  cursor: pointer;
-  background: #3279F7;
-}
-
-.reactParts__transfer--middle-box-button-icon.disabled{
-  border:1px solid #d9d9d9;
-  background: #ffffff;
-}
+.rp-transfer{  	display: flex;  	flex-direction: column;	&__header{		margin-bottom: 10px;	}	&__wrap{		display: flex;	  	flex: 1;	  	&--horizontal{			flex-direction: row;		}		&--vertical{			flex-direction: column;		}	}	&__controls{		display: flex;		justify-content: center;		&--horizontal{			flex-direction: column;		}		&--vertical{			flex-direction: row;		}	}	&__control{		border: 1px solid #3279F7;		background: #3279F7;		border-radius: 3px;		cursor: pointer;		padding: 5px;		height: 24px;		width: 25px;		margin: 5px;		&--disabled{			border:1px solid #d9d9d9;			background: #ffffff;		}	}	&__box{		flex: 1;		display: flex;		flex-direction: column;		&-header{			display: flex;			align-items: center;		}		&-content{			flex: 1;			display: flex;			flex-direction: column;			border: 1px solid #d9d9d9;			box-sizing: border-box;		}	}	&__list{		flex: 1;		width: 100%;		display: flex;		flex-direction: column;		overflow: auto;		border-radius: 5px;	}	&__table{		flex: 1;		display: flex;		flex-direction: column;		box-sizing: border-box;		&-header{			width: 100%;			border-bottom: 1px solid #d9d9d9;			box-sizing: border-box;			padding: 0 5px;			table{				width: 100%;			}		}		&-footer{			width: 100%;			border-top: 1px solid #d9d9d9;			box-sizing: border-box;			padding: 0 5px;			table{				width: 100%;			}		}		&-body{			flex: 1;			width: 100%;			overflow: auto;			box-sizing: border-box;			padding: 0 5px;			table{				width: 100%;			}		}	}}

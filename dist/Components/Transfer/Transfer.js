@@ -104,80 +104,193 @@ var Transfer = exports.Transfer = function (_React$Component) {
                 source = _this$props.source,
                 target = _this$props.target,
                 tableView = _this$props.tableView,
-                columns = _this$props.columns;
+                columns = _this$props.columns,
+                footer = _this$props.footer;
 
 
             if (tableView && columns) {
+                var sourceFilter = source.filter(function (s) {
+                    return !target.some(function (t) {
+                        return s.id === t;
+                    });
+                });
+
                 return _react2.default.createElement(
                     "div",
-                    { style: { overflow: "hidden", flex: 1 } },
+                    { className: "rp-transfer__table" },
                     _react2.default.createElement(
-                        "table",
-                        { style: { width: "100%", borderBottom: "1px solid #d9d9d9" } },
+                        "div",
+                        { className: "rp-transfer__table-header" },
                         _react2.default.createElement(
-                            "thead",
+                            "table",
                             null,
                             _react2.default.createElement(
-                                "tr",
+                                "thead",
                                 null,
-                                [_react2.default.createElement(
-                                    "th",
-                                    { key: Math.random(), style: { width: "10%" } },
-                                    _react2.default.createElement(_CheckBox.CheckBox, {
-                                        checked: checkedAll,
-                                        disabled: disabledAll,
-                                        onClickHandler: _this.selectAllSourses
-                                    })
-                                ), columns.map(function (item) {
-                                    return _this.tableHeaderRowRender(item);
-                                })]
+                                _react2.default.createElement(
+                                    "tr",
+                                    null,
+                                    [_react2.default.createElement(
+                                        "th",
+                                        { key: Math.random(), style: { width: "10%" } },
+                                        _react2.default.createElement(_CheckBox.CheckBox, { checked: checkedAll, disabled: disabledAll, onClickHandler: _this.selectAllSourses })
+                                    ), columns.map(function (item) {
+                                        return _this.tableHeaderRowRender(item);
+                                    })]
+                                )
                             )
                         )
                     ),
                     _react2.default.createElement(
                         "div",
-                        { style: { overflow: "scroll", height: "209px" } },
+                        { className: "rp-transfer__table-body" },
                         _react2.default.createElement(
                             "table",
-                            { style: { width: "100%" } },
+                            null,
                             _react2.default.createElement(
                                 "tbody",
                                 null,
-                                _this.tableRowRender(source, target)
+                                _this.tableSourceRowRender(source, target)
+                            )
+                        )
+                    ),
+                    footer && _react2.default.createElement(
+                        "div",
+                        { className: "rp-transfer__table-footer" },
+                        _react2.default.createElement(
+                            "table",
+                            null,
+                            _react2.default.createElement(
+                                "tfoot",
+                                null,
+                                _react2.default.createElement(
+                                    "tr",
+                                    null,
+                                    [_react2.default.createElement(
+                                        "th",
+                                        { key: Math.random(), style: { width: "10%", textAlign: 'left' } },
+                                        _this.state.sSource.length
+                                    ), columns.map(function (item) {
+                                        return _this.tableFooterCellRender(item, sourceFilter);
+                                    })]
+                                )
                             )
                         )
                     )
                 );
             }
 
-            return source.filter(function (s) {
-                return target.every(function (t) {
-                    return s.id !== t;
-                });
-            }).map(function (item, i) {
-                var checked = _this.state.sSource.some(function (s) {
-                    return s === item.id;
-                });
-                return _this.singleCheckboxRender(_this.selectSourceHandler.bind(_this, item.id), checked, item, i);
-            });
+            return _react2.default.createElement(
+                "div",
+                { className: "rp-transfer__list" },
+                source.filter(function (s) {
+                    return target.every(function (t) {
+                        return s.id !== t;
+                    });
+                }).map(function (item, i) {
+                    var checked = _this.state.sSource.some(function (s) {
+                        return s === item.id;
+                    });
+                    return _this.singleCheckboxRender(_this.selectSourceHandler.bind(_this, item.id), checked, item, i);
+                })
+            );
         };
 
-        _this.targetRender = function () {
+        _this.targetRender = function (checkedAll, disabledAll) {
             var _this$props2 = _this.props,
                 source = _this$props2.source,
-                target = _this$props2.target;
+                target = _this$props2.target,
+                tableView = _this$props2.tableView,
+                columns = _this$props2.columns,
+                footer = _this$props2.footer;
 
 
-            return source.filter(function (s) {
-                return target.some(function (t) {
-                    return s.id === t;
+            if (tableView && columns) {
+                var sourceFilter = source.filter(function (s) {
+                    return target.some(function (t) {
+                        return s.id === t;
+                    });
                 });
-            }).map(function (item, i) {
-                var checked = _this.state.sTarget.some(function (t) {
-                    return t === item.id;
-                });
-                return _this.singleCheckboxRender(_this.selectTargetHandler.bind(_this, item.id), checked, item, i);
-            });
+
+                return _react2.default.createElement(
+                    "div",
+                    { className: "rp-transfer__table" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "rp-transfer__table-header" },
+                        _react2.default.createElement(
+                            "table",
+                            null,
+                            _react2.default.createElement(
+                                "thead",
+                                null,
+                                _react2.default.createElement(
+                                    "tr",
+                                    null,
+                                    [_react2.default.createElement(
+                                        "th",
+                                        { key: Math.random(), style: { width: "10%" } },
+                                        _react2.default.createElement(_CheckBox.CheckBox, { checked: checkedAll, disabled: disabledAll, onClickHandler: _this.selectAllTargets })
+                                    ), columns.map(function (item) {
+                                        return _this.tableHeaderRowRender(item);
+                                    })]
+                                )
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "rp-transfer__table-body" },
+                        _react2.default.createElement(
+                            "table",
+                            null,
+                            _react2.default.createElement(
+                                "tbody",
+                                null,
+                                _this.tableTargetRowRender(source, target)
+                            )
+                        )
+                    ),
+                    footer && _react2.default.createElement(
+                        "div",
+                        { className: "rp-transfer__table-footer" },
+                        _react2.default.createElement(
+                            "table",
+                            null,
+                            _react2.default.createElement(
+                                "tfoot",
+                                null,
+                                _react2.default.createElement(
+                                    "tr",
+                                    null,
+                                    [_react2.default.createElement(
+                                        "th",
+                                        { key: Math.random(), style: { width: "10%" } },
+                                        _this.state.sTarget.length
+                                    ), columns.map(function (item) {
+                                        return _this.tableFooterCellRender(item, sourceFilter);
+                                    })]
+                                )
+                            )
+                        )
+                    )
+                );
+            }
+
+            return _react2.default.createElement(
+                "div",
+                { className: "rp-transfer__list" },
+                source.filter(function (s) {
+                    return target.some(function (t) {
+                        return s.id === t;
+                    });
+                }).map(function (item, i) {
+                    var checked = _this.state.sTarget.some(function (t) {
+                        return t === item.id;
+                    });
+                    return _this.singleCheckboxRender(_this.selectTargetHandler.bind(_this, item.id), checked, item, i);
+                })
+            );
         };
 
         _this.tableHeaderRowRender = function (item) {
@@ -188,7 +301,59 @@ var Transfer = exports.Transfer = function (_React$Component) {
             );
         };
 
-        _this.tableRowRender = function (source, target) {
+        _this.tableFooterCellRender = function (item, items) {
+            var content = void 0;
+
+            if (item.footerType === 'sum') {
+                content = items.reduce(function (value, it) {
+                    if (typeof it[item.key] === 'string') return;
+                    return value + it[item.key];
+                }, 0);
+            }
+
+            if (item.footerType === 'avg') {
+                content = items.reduce(function (value, it) {
+                    if (typeof it[item.key] === 'string') return;
+                    return value + it[item.key];
+                }, 0);
+
+                if (content) {
+                    content = (content / items.length).toFixed(2);
+                }
+            }
+
+            if (item.footerType === 'min') {
+                var ids = items.map(function (it) {
+                    return it[item.key];
+                }).filter(function (it) {
+                    return typeof it === 'number';
+                });
+
+                content = ids && ids.length ? Math.min.apply(Math, ids) : null;
+            }
+
+            if (item.footerType === 'max') {
+                var _ids = items.map(function (it) {
+                    return it[item.key];
+                }).filter(function (it) {
+                    return typeof it === 'number';
+                });
+
+                content = _ids && _ids.length ? Math.max.apply(Math, _ids) : null;
+            }
+
+            if (item.footerType === 'count') {
+                content = items && items.length;
+            }
+
+            return _react2.default.createElement(
+                "th",
+                { key: Math.random(), style: { width: item.width + "%", textAlign: item.align || "center", padding: "0 10px" } },
+                content
+            );
+        };
+
+        _this.tableSourceRowRender = function (source, target) {
             return source.filter(function (s) {
                 return target.every(function (t) {
                     return s.id !== t;
@@ -216,6 +381,34 @@ var Transfer = exports.Transfer = function (_React$Component) {
             });
         };
 
+        _this.tableTargetRowRender = function (source, target) {
+            return source.filter(function (s) {
+                return target.some(function (t) {
+                    return s.id === t;
+                });
+            }).map(function (item, i) {
+                var checked = _this.state.sTarget.some(function (t) {
+                    return t === item.id;
+                });
+
+                return _react2.default.createElement(
+                    "tr",
+                    { key: i },
+                    [_react2.default.createElement(
+                        "td",
+                        { style: { margin: "5px 0", width: "10%" }, key: Math.random() },
+                        _react2.default.createElement(_CheckBox.CheckBox, { checked: checked, onClickHandler: _this.selectTargetHandler.bind(_this, item.id) })
+                    ), _this.props.columns.map(function (col) {
+                        return _react2.default.createElement(
+                            "td",
+                            { key: Math.random(), style: { width: col.width + "%", textAlign: col.align || "center", padding: "0 10px" } },
+                            item[col.key]
+                        );
+                    })]
+                );
+            });
+        };
+
         _this.singleCheckboxRender = function (onChangeHandler, checked, item, i) {
             var customRecordRenderer = _this.props.customRecordRenderer;
 
@@ -224,7 +417,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
             } else {
                 return _react2.default.createElement(
                     "div",
-                    { style: { margin: "5px 0px" }, key: i },
+                    { style: { margin: "5px 5px" }, key: i },
                     _react2.default.createElement(_CheckBox.CheckBox, { checked: checked, onClickHandler: onChangeHandler, label: item.value })
                 );
             }
@@ -262,6 +455,11 @@ var Transfer = exports.Transfer = function (_React$Component) {
                     return s.id !== t;
                 });
             });
+            var targetWithoutSource = source.filter(function (s) {
+                return !target.every(function (t) {
+                    return s.id == t;
+                });
+            });
 
             var targetCheckbox = this.props.target && this.props.target.length > 0 && this.props.target.every(function (t) {
                 return _this2.state.sTarget.some(function (st) {
@@ -276,136 +474,96 @@ var Transfer = exports.Transfer = function (_React$Component) {
 
             return _react2.default.createElement(
                 "div",
-                { className: "reactParts__transfer--wrap " + direction },
-                tableView && _react2.default.createElement(
+                { className: "rp-transfer" },
+                _react2.default.createElement(
                     "div",
-                    null,
-                    sourceName,
-                    " ",
-                    _react2.default.createElement(_Badge.Badge, {
-                        count: this.state.sSource.length,
-                        ofCount: sourceWithoutTarget.length,
-                        showZero: true
-                    })
+                    { className: "rp-transfer__header" },
+                    sourceName
                 ),
                 _react2.default.createElement(
                     "div",
-                    { className: "reactParts__transfer--box reactParts__transfer--box-" + direction },
-                    !tableView && _react2.default.createElement(
+                    { className: "rp-transfer__wrap rp-transfer__wrap--" + direction },
+                    _react2.default.createElement(
                         "div",
-                        { className: "reactParts__transfer--header" },
-                        _react2.default.createElement(_CheckBox.CheckBox, {
-                            label: this.props.sourceName,
-                            checked: sourceCheckbox,
-                            disabled: sourceWithoutTarget.length === 0,
-                            onClickHandler: this.selectAllSourses
-                        }),
-                        _react2.default.createElement(_Badge.Badge, {
-                            count: this.state.sSource.length,
-                            ofCount: sourceWithoutTarget.length,
-                            showZero: true
-                        })
+                        { className: "rp-transfer__box rp-transfer__box--" + direction },
+                        !tableView && _react2.default.createElement(
+                            "div",
+                            { className: "rp-transfer__box-header" },
+                            _react2.default.createElement(_CheckBox.CheckBox, {
+                                disabled: sourceWithoutTarget.length === 0,
+                                onClickHandler: this.selectAllSourses,
+                                label: this.props.sourceName,
+                                checked: sourceCheckbox }),
+                            _react2.default.createElement(_Badge.Badge, {
+                                count: this.state.sSource.length,
+                                ofCount: sourceWithoutTarget.length,
+                                showZero: true })
+                        ),
+                        _react2.default.createElement(
+                            "div",
+                            { className: "rp-transfer__box-content" },
+                            this.sourceRender(sourceCheckbox, sourceWithoutTarget.length === 0)
+                        )
                     ),
                     _react2.default.createElement(
                         "div",
-                        { className: "reactParts__transfer--list reactParts__transfer--list-" + direction },
-                        this.sourceRender(sourceCheckbox, sourceWithoutTarget.length === 0)
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "reactParts__transfer--middle-box reactParts__transfer--middle-box-" + direction },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "reactParts__transfer--middle-box-button" },
+                        { className: "rp-transfer__controls rp-transfer__controls--" + direction },
                         _react2.default.createElement(
                             "div",
                             {
-                                className: "reactParts__transfer--middle-box-button-icon " + (!this.isSourceNotEmpty() ? "disabled" : ""),
-                                onClick: this.transferToTargetHandler
-                            },
+                                className: "rp-transfer__control " + (!this.isSourceNotEmpty() ? ' rp-transfer__control--disabled' : ''),
+                                onClick: this.transferToTargetHandler },
                             direction === "vertical" ? _react2.default.createElement(
                                 "svg",
-                                {
-                                    fill: "#d9d9d9",
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    width: "24",
-                                    height: "24",
-                                    viewBox: "0 0 24 24"
-                                },
+                                { fill: "#d9d9d9", xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
                                 _react2.default.createElement("path", { d: "M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" }),
                                 _react2.default.createElement("path", { d: "M0-.75h24v24H0z", fill: "none" })
                             ) : _react2.default.createElement(
                                 "svg",
-                                {
-                                    fill: "#d9d9d9",
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    width: "24",
-                                    height: "24",
-                                    viewBox: "0 0 24 24"
-                                },
+                                { fill: "#d9d9d9", xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
                                 _react2.default.createElement("path", { d: "M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z" }),
                                 _react2.default.createElement("path", { d: "M0-.25h24v24H0z", fill: "none" })
                             )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "reactParts__transfer--middle-box-button" },
+                        ),
                         _react2.default.createElement(
                             "div",
                             {
-                                className: "reactParts__transfer--middle-box-button-icon " + (!this.isTargetNotEmpty() ? "disabled" : ""),
-                                onClick: this.transferToSourceHandler
-                            },
+                                className: "rp-transfer__control " + (!this.isTargetNotEmpty() ? ' rp-transfer__control--disabled' : ''),
+                                onClick: this.transferToSourceHandler },
                             direction === "vertical" ? _react2.default.createElement(
                                 "svg",
-                                {
-                                    fill: "#d9d9d9",
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    width: "24",
-                                    height: "24",
-                                    viewBox: "0 0 24 24"
-                                },
+                                { fill: "#d9d9d9", xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
                                 _react2.default.createElement("path", { d: "M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" }),
                                 _react2.default.createElement("path", { d: "M0 0h24v24H0z", fill: "none" })
                             ) : _react2.default.createElement(
                                 "svg",
-                                {
-                                    fill: "#d9d9d9",
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    width: "24",
-                                    height: "24",
-                                    viewBox: "0 0 24 24"
-                                },
+                                { fill: "#d9d9d9", xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", viewBox: "0 0 24 24" },
                                 _react2.default.createElement("path", { d: "M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" }),
                                 _react2.default.createElement("path", { d: "M0-.5h24v24H0z", fill: "none" })
                             )
                         )
-                    )
-                ),
-                _react2.default.createElement(
-                    "div",
-                    { className: "reactParts__transfer--box reactParts__transfer--box-" + direction },
-                    _react2.default.createElement(
-                        "div",
-                        { className: "reactParts__transfer--header" },
-                        _react2.default.createElement(_CheckBox.CheckBox, {
-                            label: this.props.targetName,
-                            checked: targetCheckbox,
-                            disabled: target.length === 0,
-                            onClickHandler: this.selectAllTargets
-                        }),
-                        _react2.default.createElement(_Badge.Badge, {
-                            count: this.state.sTarget.length,
-                            ofCount: target.length,
-                            showZero: true
-                        })
                     ),
                     _react2.default.createElement(
                         "div",
-                        { className: "reactParts__transfer--list reactParts__transfer--list-" + direction },
-                        this.targetRender()
+                        { className: "rp-transfer__box rp-transfer__box--" + direction },
+                        !tableView && _react2.default.createElement(
+                            "div",
+                            { className: "rp-transfer__box-header" },
+                            _react2.default.createElement(_CheckBox.CheckBox, {
+                                onClickHandler: this.selectAllTargets,
+                                disabled: target.length === 0,
+                                label: this.props.targetName,
+                                checked: targetCheckbox }),
+                            _react2.default.createElement(_Badge.Badge, {
+                                count: this.state.sTarget.length,
+                                ofCount: target.length,
+                                showZero: true })
+                        ),
+                        _react2.default.createElement(
+                            "div",
+                            { className: "rp-transfer__box-content" },
+                            this.targetRender(targetCheckbox, targetWithoutSource.length === 0)
+                        )
                     )
                 )
             );
