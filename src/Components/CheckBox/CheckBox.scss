@@ -11,6 +11,7 @@
   font-stretch: normal;
   line-height: 1.23;
   letter-spacing: 0.3px;
+  box-sizing: border-box;
 
   &.checked{
     .reactParts__checkbox-input-new {
@@ -19,14 +20,14 @@
       &:after {
         content: '';
         position: absolute;
-        width: 9px;
-        height: 5px;
+        width: 8px;
+        height: 4px;
         border-left: 2px solid #377df3;
         border-bottom: 2px solid #377df3;
         transform: rotate(-45deg);
 
-        left: 5px;
-        top: 5px;
+        left: 3px;
+        top: 3px;
         //transform: translate(-50%, -50%);
         color: #377df3;
       }
@@ -125,8 +126,9 @@
   background-color: #fff;
   border: solid 1px #e6e8eb;
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
   border-radius: 2px;
   outline: none;
   cursor: pointer;

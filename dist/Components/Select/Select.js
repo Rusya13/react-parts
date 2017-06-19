@@ -269,7 +269,7 @@ var Select = exports.Select = function (_React$Component) {
         value: function render() {
             var _this7 = this;
 
-            var selectClassName = 'reactParts__select';
+            var selectClassName = 'rp-select reactParts__select';
             if (this.state.stateList) {
                 selectClassName += ' focus';
             }
@@ -284,6 +284,10 @@ var Select = exports.Select = function (_React$Component) {
                     { key: "addControls", className: "reactParts__select-addControls" },
                     this.renderControls()
                 );
+            }
+
+            if (this.props.size) {
+                selectClassName += " rp-select--" + this.props.size;
             }
 
             if (this.getSelected() === undefined && (!this.searchInput || this.searchInput && this.searchInput.value.length === 0)) {

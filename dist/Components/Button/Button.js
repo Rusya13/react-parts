@@ -54,19 +54,21 @@ var Button = exports.Button = function (_React$Component) {
 
             var props = this.props;
             if (props.hidden) return null;
-            var className = 'btn';
-            if (props.brand) className += " btn-" + props.brand;
-            if (props.size) className += " btn-" + props.size;
+
+            var className = 'rp-btn';
+            if (props.brand) className += " rp-btn--" + props.brand;
             if (props.className) className += " " + props.className;
+            if (props.size) className += " rp-btn--" + props.size;
 
             return _react2.default.createElement(
                 "button",
-                { ref: function ref(button) {
+                {
+                    ref: function ref(button) {
                         return _this2.button = button;
                     }, type: this.props.type,
-                    className: className,
                     onClick: this.onClick.bind(this),
                     disabled: props.disabled,
+                    className: className,
                     id: props.id },
                 props.caption
             );

@@ -263,7 +263,7 @@ var Input = exports.Input = function (_React$Component) {
         value: function render() {
             var _this5 = this;
 
-            var InputSimpleClassName = "reactParts__input";
+            var InputSimpleClassName = "rp-input reactParts__input";
             if (this.props.cancel) InputSimpleClassName += " cancel";
             var valid = this.props.valid;
             if (valid !== undefined && valid !== null) {
@@ -283,6 +283,8 @@ var Input = exports.Input = function (_React$Component) {
 
             if (this.props.className) InputSimpleClassName += " " + this.props.className;
             if (this.props.prefix) InputSimpleClassName += " prefix";
+            if (this.props.size) InputSimpleClassName += " rp-input--" + this.props.size;
+
             return _react2.default.createElement(
                 "div",
                 { className: "reactParts__input-wrap" + (this.props.prefix ? " prefix" : "") },
@@ -352,6 +354,7 @@ Input.propTypes = {
     disabled: _propTypes2.default.bool,
     type: _propTypes2.default.string,
     valid: _propTypes2.default.bool,
+    size: _propTypes2.default.string,
     limit: _propTypes2.default.number,
     className: _propTypes2.default.string,
     value: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),

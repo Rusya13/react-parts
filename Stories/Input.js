@@ -3,10 +3,6 @@ import React from "react";
 import { Button, Input, MultiSelect, Select } from "../dist";
 import {DadataProvider} from './DadataProvider';
 
-
-
-
-
 export class InputController extends React.Component {
     state: {
         email: string,
@@ -42,7 +38,6 @@ export class InputController extends React.Component {
 
 
     onChangeHandler( obj: Object, item ) {
-        console.log( "onChange", obj, item );
         this.setState( obj )
     }
 
@@ -79,7 +74,7 @@ export class InputController extends React.Component {
     }
 
     selectFromSuggest(o, item){
-        console.log("Input selectFromSuggest", o, item);
+
     }
 
 
@@ -94,16 +89,12 @@ export class InputController extends React.Component {
                 <div className="row">
                     <div className="col-xs-3" >
                         <Input
-                            type="number"
-                            //autoFocus={true}
-
                             value={this.state.email}
                             name="email"
                             placeholder="Type something.."
                             readOnly={!this.state.editMode}
                             valid={false}
                             prefix="From"
-                            //autocomplete={true}
                             onChange={this.onChangeHandler.bind( this )}
                             tabIndex={3}
                         />
@@ -133,7 +124,6 @@ export class InputController extends React.Component {
                     <div className="col" >
                         <Input
                             type="text"
-                            //autoFocus={true}
                             required
                             value={this.state.address}
                             name="address"
@@ -142,7 +132,6 @@ export class InputController extends React.Component {
                             valid={false}
                             label="Address (with async suggest Russian only)"
                             suggest={this.requestDadataProvider.bind( this )}
-                            //autocomplete={true}
                             onChange={this.onChangeHandler.bind( this )}
                             suggestText="Select address or continue typing"
                             tabIndex={1}
@@ -153,14 +142,34 @@ export class InputController extends React.Component {
                     </div>
                 </div>
 
+                <div className="reactParts__form-row">
+                    <div className="col" >
+                        <Input
+                            size="small"
+                            value={this.state.email}
+                            name="email"
+                            placeholder="Type something.."
+                            readOnly={!this.state.editMode}
+                            valid={false}
+                            onChange={this.onChangeHandler.bind( this )}
+                            tabIndex={3}
+                        />
+                        <Input
+                            size="mini"
+                            value={this.state.email}
+                            name="email"
+                            placeholder="Type something.."
+                            readOnly={!this.state.editMode}
+                            valid={false}
+                            onChange={this.onChangeHandler.bind( this )}
+                            tabIndex={3}
+                        />
+                    </div>
+                </div>
+
                 <div className="reactParts__form-footer">
-
                     <Button caption="Cancel" brand="default" onClick={this.cancelHandler.bind( this )}/>
-
-
                     <Button caption="Submit" brand="primary" onClick={this.submitHandler.bind( this )}/>
-
-
                 </div>
             </div>
         )

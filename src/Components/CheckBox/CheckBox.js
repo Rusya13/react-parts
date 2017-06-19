@@ -22,10 +22,17 @@ export class CheckBox extends React.Component {
     }
 
     render() {
-        //console.log("CheckBox render", this.props.type);
+        const { checked, type, disabled, label, size } = this.props;
+
+        let className = 'rp-checkbox reactParts__checkbox-wrap';
+
+        if(type === 'button') className += ' button';
+        if(checked) className += ' checked';
+        if(disabled) className += ' disabled';
+        if(size) className += ` rp-checkbox--${size}`;
+
         return (
-            <label
-                className={"reactParts__checkbox-wrap " + ((this.props.checked) ? " checked " : "") + ((this.props.type === "button") ? " button" : "") + ((this.props.disabled) ? " disabled" : "")}>
+            <label className={className}>
                 <div className={"reactParts__checkbox-input-new" }>
                     <input
                         type="checkbox"
@@ -33,19 +40,18 @@ export class CheckBox extends React.Component {
                         ref={( input ) => {this.input = input}}
                         disabled={this.props.disabled}
                         className="reactParts__checkbox-input"
-                        onChange={this.onClickHandler.bind( this )}
+                        onChange={this.onClickHandler.bind(this)}
                     />
                 </div>
-
-
-                <div className="reactParts__checkbox-label">{this.props.label}</div>
+                <div className="reactParts__checkbox-label">{label}</div>
             </label>
         )
     }
 }
 CheckBox.propTypes = {
-    name:           PropTypes.oneOfType( [ React.PropTypes.string, React.PropTypes.number ] ),
+    name:           PropTypes.oneOfType( [ React.PropTypes.string, React.PropTypes.number ] ).isRequired,
     label:          PropTypes.string,
+    size:           PropTypes.string,
     checked:        PropTypes.bool,
     disabled:       PropTypes.bool,
     onClickHandler: PropTypes.func.isRequired,

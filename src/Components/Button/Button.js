@@ -5,10 +5,12 @@ import PropTypes from "prop-types";
 
 export type ButtonBrand = 'success' | 'warning' | 'danger' | 'primary' | 'default' | 'light';
 export type ButtonType = 'button' | 'submit';
+export type ButtonSize = 'large' | 'default' | 'small' | 'mini';
 
 export interface ButtonProps {
     brand: ?ButtonBrand;
     type: ?ButtonType;
+    size: ?ButtonSize;
     caption: string;
     onClick: ( id: ?string ) => void;
     disabled: ?boolean;
@@ -43,17 +45,19 @@ export class Button extends React.Component {
     render() {
         let props: ButtonProps = this.props;
         if ( props.hidden ) return null;
-        let className = 'btn';
-        if ( props.brand ) className += ` btn-${props.brand}`;
-        if ( props.size ) className += ` btn-${props.size}`;
-        if ( props.className ) className += ` ${props.className}`;
+
+        let className = 'rp-btn';
+        if(props.brand) className += ` rp-btn--${props.brand}`;
+        if(props.className) className += ` ${props.className}`;
+        if(props.size) className += ` rp-btn--${props.size}`;
 
         return (
-            <button ref={(button)=>this.button=button} type={this.props.type}
-                    className={className}
-                    onClick={this.onClick.bind( this )}
-                    disabled={props.disabled}
-                    id={props.id}>
+            <button
+                ref={(button)=>this.button=button} type={this.props.type}
+                onClick={this.onClick.bind( this )}
+                disabled={props.disabled}
+                className={className}
+                id={props.id}>
                 {props.caption}
             </button>
         )

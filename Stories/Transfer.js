@@ -53,6 +53,7 @@ export class TransferController extends React.Component {
         return (
             <div>
                 <Transfer
+                    size="small"
                     name="test"
                     source={this.state.source}
                     target={this.state.target}

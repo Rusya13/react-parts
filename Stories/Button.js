@@ -7,19 +7,37 @@ export class ButtonController extends React.Component {
         super( props );
     }
 
-    onClickHandler(){
-        console.log("Button onClickHandler");
+    onClickHandler = () => {
+        console.log('Button onClickHandler');
     }
 
     render() {
         return (
             <div className="buttons-line">
-                <div className="button-wrapper"><Button onClick={this.onClickHandler.bind(this)} brand="default" caption="Default button"/></div>
-                <div className="button-wrapper"><Button onClick={this.onClickHandler.bind(this)} brand="success" caption="success button"/></div>
-                <div className="button-wrapper"><Button onClick={this.onClickHandler.bind(this)} brand="danger" caption="danger button"/></div>
-                <div className="button-wrapper"><Button onClick={this.onClickHandler.bind(this)} brand="warning" caption="warning button"/></div>
-                <div className="button-wrapper"><Button onClick={this.onClickHandler.bind(this)} brand="primary" caption="primary button"/></div>
-                <div className="button-wrapper"><Button onClick={this.onClickHandler.bind(this)} brand="light" caption="light button"/></div>
+                <div className="button-wrapper">
+                    <Button onClick={this.onClickHandler} brand="default" caption="Default button"/>
+                </div>
+                <div className="button-wrapper">
+                    <Button onClick={this.onClickHandler} brand="success" caption="Success button"/>
+                </div>
+                <div className="button-wrapper">
+                    <Button onClick={this.onClickHandler} brand="danger" caption="Danger button"/>
+                </div>
+                <div className="button-wrapper">
+                    <Button onClick={this.onClickHandler} brand="warning" caption="Warning button"/>
+                </div>
+                <div className="button-wrapper">
+                    <Button onClick={this.onClickHandler} brand="primary" caption="Primary button"/>
+                </div>
+                <div className="button-wrapper">
+                    <Button onClick={this.onClickHandler} brand="light" caption="Light button"/>
+                </div>
+                <div className="button-wrapper">
+                    <Button onClick={this.onClickHandler} size="large" brand="light" caption="Large button"/>
+                    <Button onClick={this.onClickHandler} brand="light" caption="Default button"/>
+                    <Button onClick={this.onClickHandler} size="small" brand="light" caption="Small button"/>
+                    <Button onClick={this.onClickHandler} size="mini" brand="light" caption="Mini button"/>
+                </div>
             </div>
         )
     }

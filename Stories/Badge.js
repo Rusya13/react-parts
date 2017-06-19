@@ -19,6 +19,13 @@ export class BadgeController extends React.Component {
                     ofCount={30}
                     showZero={false}
                 />
+
+                <div>
+                    <span className="badge-example">
+                        Little red dot
+                        <Badge isDot isFixed/>
+                    </span>
+                </div>
             </div>
         )
     }

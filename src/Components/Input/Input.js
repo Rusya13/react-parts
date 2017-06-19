@@ -269,7 +269,7 @@ export class Input extends React.Component {
     };
 
     render() {
-        let InputSimpleClassName = "reactParts__input";
+        let InputSimpleClassName = "rp-input reactParts__input";
         if ( this.props.cancel ) InputSimpleClassName += " cancel";
         let valid = this.props.valid;
         if ( valid !== undefined && valid !== null ) {
@@ -289,6 +289,10 @@ export class Input extends React.Component {
 
         if ( this.props.className ) InputSimpleClassName += ` ${this.props.className}`;
         if ( this.props.prefix ) InputSimpleClassName += ` prefix`;
+        if ( this.props.size ) InputSimpleClassName += ` rp-input--${this.props.size}`;
+
+
+
         return (
             <div className={"reactParts__input-wrap" + ((this.props.prefix) ? " prefix" : "")}>
 
@@ -352,6 +356,7 @@ Input.propTypes = {
     disabled:            PropTypes.bool,
     type:                PropTypes.string,
     valid:               PropTypes.bool,
+    size:                PropTypes.string,
     limit:               PropTypes.number,
     className:           PropTypes.string,
     value:               PropTypes.oneOfType( [ PropTypes.string, PropTypes.number ] ),

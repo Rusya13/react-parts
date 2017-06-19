@@ -1,107 +1,122 @@
-/* Buttons */
+/* Brand Mixin */
 @mixin btn($bg, $border-color, $color){
-  border-color: $border-color;
-  background: $bg;
-  color: $color;
+	border-color: $border-color;
+	background: $bg;
+	color: $color;
 
-  &:hover{
-    background: lighten($bg, 5%);
-    border-color: lighten($border-color, 5%);
-  }
+	&:hover{
+		background: lighten($bg, 5%);
+		border-color: lighten($border-color, 5%);
+	}
 
-  &:focus{
-    background: lighten($bg, 7%);
-    border-color: darken($border-color, 7%);
-  }
+	&:focus{
+		background: lighten($bg, 7%);
+		border-color: darken($border-color, 7%);
+	}
 
-  &:active{
-    background: darken($bg, 5%);
-    border-color: darken($border-color, 5%);
-  }
+	&:active{
+		background: darken($bg, 5%);
+		border-color: darken($border-color, 5%);
+	}
 }
 
-
-
-$btn-font-size:				0.813rem;
-$btn-padding:				10px 20px !default;
-$btn-small-padding:			4px 8px;
+$btn-padding:				10px 15px !default;
+$btn-font-size:				14px;
 $btn-border-radius:			2px;
 
-.btn{
-  border-radius: $btn-border-radius;
-  padding: 8px 10px;
-  font-size: 14px;
-  color: $gray;
-  background: $brand-default;
-  cursor: pointer;
-  outline: none;
-  white-space: nowrap;
+.rp-btn{
+	border-radius: $btn-border-radius;
+	border: 1px solid transparent;
+	background: $brand-default;
+	padding: $btn-padding;
+	outline: none;
+	cursor: pointer;
+	line-height: 1;
 
-  border: 1px solid transparent;
+	font-size: $btn-font-size;
+	white-space: nowrap;
+	color: $gray;
 
-  &[disabled]{
-    background-color: #f3f7f9;
-    border-color: #f3f7f9;
-    color: #a3afb7;
 
-    &:hover{
-      background-color: #f3f7f9;
-      border-color: #f3f7f9;
-      color: #a3afb7;
-    }
+	// Brand
 
-    &:active{
-      background-color: #f3f7f9;
-      border-color: #f3f7f9;
-      color: #a3afb7;
-    }
-  }
-}
+	&--primary{
+		@include btn($brand-primary, $brand-primary, #fff);
+	}
 
-.btn-new-blue{
-  background-color: #3279F7;
-  color: #fff;
+	&--success{
+		@include btn($brand-success, $brand-success, #fff);
+	}
 
-}
+	&--danger{
+		@include btn($brand-danger, $brand-danger, #fff);
+	}
 
-.btn-icon{
-  svg{ margin-bottom: -8px; }
-}
+	&--warning{
+		@include btn($brand-warning, $brand-warning, #fff);
+	}
 
-.btn-small{
-  padding: $btn-small-padding;
-}
+	&--ight{
+		@include btn(#fff, $control-gray, $control-label);
+	}
 
-.btn-primary{
-  @include btn($brand-primary, $brand-primary, #fff);
-}
+	&--dark {
+		@include btn($brand-dark, $brand-dark, #fff);
+	}
 
-.btn-success{
-  @include btn($brand-success, $brand-success, #fff);
-}
+  	// Size
 
-.btn-danger{
-  @include btn($brand-danger, $brand-danger, #fff);
-}
+	&--large{
+		padding: 11px 19px;
+		font-size: 16px;
+	}
 
-.btn-warning{
-  @include btn($brand-warning, $brand-warning, #fff);
-}
+	&--small{
+		padding: 7px 9px;
+		font-size: 12px;
+	}
 
-.btn-light{
-  @include btn(#fff, $control-gray, $control-label);
-}
+	&--mini{
+		padding: 4px;
+		font-size: 12px;
+	}
 
-.btn-dark {
-  @include btn($brand-dark, $brand-dark, #fff);
-}
+	&[disabled]{
+		background-color: #f3f7f9;
+		border-color: #f3f7f9;
+		color: #a3afb7;
 
-.btn-intab{
-  padding-top: 10px;
+		&:hover{
+			background-color: #f3f7f9;
+			border-color: #f3f7f9;
+			color: #a3afb7;
+		}
+
+		&:active{
+			background-color: #f3f7f9;
+			border-color: #f3f7f9;
+			color: #a3afb7;
+		}
+	}
 }
 
 @media screen and (max-width: 1024px) {
-  .btn{
-    padding: 5px 10px;
-  }
+	.btn{
+		padding: 5px 10px;
+	}
+}
+
+// Custom (deprecated)
+
+.btn-icon{
+	svg{ margin-bottom: -8px; }
+}
+
+.btn-new-blue{
+	background-color: #3279F7;
+	color: #fff;
+}
+
+.btn-intab{
+	padding-top: 10px;
 }

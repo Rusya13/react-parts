@@ -11,7 +11,13 @@ export class Badge extends React.Component {
         let style     = this.props.style;
         let className = this.props.className;
         let ofCount   = this.props.ofCount;
-        if ( !showZero && count === 0 ) return null;
+        let isDot     = this.props.isDot;
+        let isFixed   = this.props.isFixed;
+
+        if ( !showZero && count === 0 && !isDot ) return null;
+        if(isDot)   className += ' rp-badge--is-dot';
+        if(isFixed) className += ' rp-badge--is-fixed';
+
         return (
             <span className={className} style={style}>
                 {
@@ -27,15 +33,19 @@ export class Badge extends React.Component {
 
 
 Badge.defaultProps = {
-    className: "reactParts__badge--wrap"
+    className: "rp-badge",
+    isFixed: false,
+    isDot: false
 }
 
 Badge.propTypes = {
     count:     PropTypes.number,
     status:    PropTypes.bool,
     showZero:  PropTypes.bool,
+    isDot:     PropTypes.bool,
+    isFixed:   PropTypes.bool,
     maxCount:  PropTypes.number,
     style:     PropTypes.object,
     className: PropTypes.string,
-    ofCount:   PropTypes.number
+    ofCount:   PropTypes.number,
 };

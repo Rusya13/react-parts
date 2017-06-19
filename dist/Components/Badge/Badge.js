@@ -41,7 +41,13 @@ var Badge = exports.Badge = function (_React$Component) {
             var style = this.props.style;
             var className = this.props.className;
             var ofCount = this.props.ofCount;
-            if (!showZero && count === 0) return null;
+            var isDot = this.props.isDot;
+            var isFixed = this.props.isFixed;
+
+            if (!showZero && count === 0 && !isDot) return null;
+            if (isDot) className += ' rp-badge--is-dot';
+            if (isFixed) className += ' rp-badge--is-fixed';
+
             return _react2.default.createElement(
                 "span",
                 { className: className, style: style },
@@ -54,13 +60,17 @@ var Badge = exports.Badge = function (_React$Component) {
 }(_react2.default.Component);
 
 Badge.defaultProps = {
-    className: "reactParts__badge--wrap"
+    className: "rp-badge",
+    isFixed: false,
+    isDot: false
 };
 
 Badge.propTypes = {
     count: _propTypes2.default.number,
     status: _propTypes2.default.bool,
     showZero: _propTypes2.default.bool,
+    isDot: _propTypes2.default.bool,
+    isFixed: _propTypes2.default.bool,
     maxCount: _propTypes2.default.number,
     style: _propTypes2.default.object,
     className: _propTypes2.default.string,

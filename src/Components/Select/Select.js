@@ -255,7 +255,7 @@ export class Select extends React.Component {
 
 
     render() {
-        let selectClassName = 'reactParts__select';
+        let selectClassName = 'rp-select reactParts__select';
         if ( this.state.stateList ) {
             selectClassName += ' focus';
         }
@@ -264,6 +264,10 @@ export class Select extends React.Component {
         if ( this.props.addControls && (this.props.addControls().length > 0) ) {
             addControls =
                 <div key="addControls" className="reactParts__select-addControls">{this.renderControls()}</div>;
+        }
+
+        if(this.props.size){
+            selectClassName += ` rp-select--${this.props.size}`;
         }
 
 

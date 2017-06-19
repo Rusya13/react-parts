@@ -55,9 +55,7 @@ export class AuthForm extends React.Component {
 
 
     onChangeHandler( obj: Object ) {
-        //console.log( "onChange", obj );
         this.model.set(obj);
-        //console.log("AuthForm onChangeHandler", this.model);
     }
 
     submitHandler() {
@@ -73,7 +71,6 @@ export class AuthForm extends React.Component {
     }
 
     render() {
-        console.log("AuthForm render", this.model);
         return (
             <div className="row center-xs middle-xs">
                 <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">

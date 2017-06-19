@@ -1,3 +1,8 @@
+::-webkit-input-placeholder { color:#97a8be; }
+::-moz-placeholder          { color:#97a8be; }
+:-moz-placeholder           { color:#97a8be; }
+:-ms-input-placeholder      { color:#97a8be; }
+
 .reactParts__input-wrap {
   text-align: left;
   position: relative;
@@ -12,6 +17,20 @@
   }
 }
 
+.rp-input{
+	&--small{
+		height: 30px !important;
+		font-size: 13px !important;
+		line-height: 1;
+	}
+
+	&--mini{
+		height: 22px !important;
+		font-size: 12px !important;
+		line-height: 1;
+	}
+}
+
 
 
 .reactParts__input {
@@ -22,7 +41,8 @@
   width: 100%;
   display: block;
   outline: none;
-  padding: 7px 18px 8px 8px;
+  padding: 2px 18px 2px 8px;
+	height: 36px;
   box-sizing: border-box;
   border: 1px solid #E6E8EB;
   border-radius: 2px;
@@ -160,7 +180,7 @@
 }
 
 .reactParts__input-prefix {
-  font-weight: 200;
+  font-weight: 300;
   border: 1px solid #E6E8EB;
   border-right: none;
   border-radius: 2px 0 0 2px;

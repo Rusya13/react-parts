@@ -1,4 +1,4 @@
-.reactParts__badge--wrap{
+.rp-badge{
   top: -10px;
   height: 20px;
   border-radius: 10px;
@@ -12,4 +12,22 @@
   font-size: 12px;
   white-space: nowrap;
   box-shadow: 0 0 0 1px #fff;
+
+  &--is-dot{
+    min-width: 8px;
+    min-height: 8px;
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    right: 0;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  &--is-fixed{
+    top: 0;
+    right: 5px;
+    position: absolute;
+    transform: translateY(-50%) translateX(100%)
+  }
 }

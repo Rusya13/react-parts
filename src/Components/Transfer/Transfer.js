@@ -62,7 +62,7 @@ export class Transfer extends React.Component {
                             <thead>
                                 <tr>
                                     {[
-                                        <th key={Math.random()} style={{width: "10%"}}>
+                                        <th key={Math.random()} style={{width: "10%"}} className="rp-transfer__table-cell">
                                             <CheckBox checked={checkedAll} disabled={disabledAll} onClickHandler={this.selectAllSourses}/>
                                         </th>,
                                         columns.map(item=> {
@@ -150,7 +150,7 @@ export class Transfer extends React.Component {
                                 <tfoot>
                                 <tr>
                                     {[
-                                        <th key={Math.random()} style={{width: "10%"}}>
+                                        <th key={Math.random()} style={{width: "10%", textAlign: 'left'}}>
                                             {this.state.sTarget.length}
                                         </th>,
                                         columns.map(item=> {
@@ -178,7 +178,7 @@ export class Transfer extends React.Component {
 
 
     tableHeaderRowRender = ( item ) => {
-        return <th key={Math.random()} style={{width:item.width +"%", textAlign:item.align || "center", padding:"0 10px"}}>{item.label}</th>
+        return <th className="rp-transfer__table-cell" key={Math.random()} style={{width:item.width +"%", textAlign:item.align || "center"}}>{item.label}</th>
     }
 
     tableFooterCellRender = (item, items) => {
@@ -235,11 +235,11 @@ export class Transfer extends React.Component {
 
             return  <tr key={i}>
                 {[
-                    <td style={{ margin: "5px 0px", width:"10%" }} key={Math.random()}>
+                    <td className="rp-transfer__table-cell" style={{ width:"10%" }} key={Math.random()}>
                         <CheckBox checked={checked} onClickHandler={this.selectSourceHandler.bind( this, item.id )}/>
                     </td>,
                     this.props.columns.map(col=>{
-                        return  <td key={Math.random()} style={{width:col.width + "%", textAlign:col.align || "center", padding:"0 10px"}}>
+                        return  <td className="rp-transfer__table-cell" key={Math.random()} style={{width:col.width + "%", textAlign:col.align || "center" }}>
                             {item[col.key]}
                         </td>
                     })
@@ -291,15 +291,18 @@ export class Transfer extends React.Component {
     };
 
     render() {
-        const { source, target, direction, tableView, sourceName } = this.props;
+        const { source, target, direction, tableView, sourceName, size } = this.props;
         const sourceWithoutTarget = source.filter( s => target.every( t => s.id !== t ) );
         const targetWithoutSource = source.filter( s => !target.every( t => s.id == t ) );
 
         const targetCheckbox = this.props.target && this.props.target.length > 0 && this.props.target.every( t => this.state.sTarget.some( st => st === t ) );
         const sourceCheckbox = sourceWithoutTarget && sourceWithoutTarget.length > 0 && sourceWithoutTarget.every( s => this.state.sSource.some( ss => ss === s.id ) );
 
+        let transferClassName = 'rp-transfer';
+        if(size) transferClassName += ` rp-transfer--${size}`;
+
         return (
-            <div className="rp-transfer">
+            <div className={transferClassName}>
                 <div className="rp-transfer__header">
                     {sourceName}
                 </div>
@@ -379,6 +382,7 @@ export class Transfer extends React.Component {
 Transfer.propTypes = {
     customRecordRenderer: PropTypes.func,
     targetName:           PropTypes.string,
+    size:                 PropTypes.string,
     sourceName:           PropTypes.string,
     direction:            PropTypes.oneOf( [ "vertical", "horizontal" ] ),
     onChange:             PropTypes.func,

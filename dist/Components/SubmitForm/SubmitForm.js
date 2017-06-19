@@ -42,14 +42,12 @@ var SubmitForm = exports.SubmitForm = function (_React$Component) {
             try {
                 this.props.onSubmit && (await this.props.onSubmit());
             } catch (e) {
-                console.log("error in submit form", e);
                 this.setState({ error: e.message });
             }
         }
     }, {
         key: "onCancelHandler",
         value: function onCancelHandler(e) {
-            console.log("SubmitForm onCancelHandler", e);
             this.props.onCancel && this.props.onCancel();
         }
     }, {

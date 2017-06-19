@@ -132,7 +132,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
                                     null,
                                     [_react2.default.createElement(
                                         "th",
-                                        { key: Math.random(), style: { width: "10%" } },
+                                        { key: Math.random(), style: { width: "10%" }, className: "rp-transfer__table-cell" },
                                         _react2.default.createElement(_CheckBox.CheckBox, { checked: checkedAll, disabled: disabledAll, onClickHandler: _this.selectAllSourses })
                                     ), columns.map(function (item) {
                                         return _this.tableHeaderRowRender(item);
@@ -265,7 +265,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
                                     null,
                                     [_react2.default.createElement(
                                         "th",
-                                        { key: Math.random(), style: { width: "10%" } },
+                                        { key: Math.random(), style: { width: "10%", textAlign: 'left' } },
                                         _this.state.sTarget.length
                                     ), columns.map(function (item) {
                                         return _this.tableFooterCellRender(item, sourceFilter);
@@ -296,7 +296,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
         _this.tableHeaderRowRender = function (item) {
             return _react2.default.createElement(
                 "th",
-                { key: Math.random(), style: { width: item.width + "%", textAlign: item.align || "center", padding: "0 10px" } },
+                { className: "rp-transfer__table-cell", key: Math.random(), style: { width: item.width + "%", textAlign: item.align || "center" } },
                 item.label
             );
         };
@@ -368,12 +368,12 @@ var Transfer = exports.Transfer = function (_React$Component) {
                     { key: i },
                     [_react2.default.createElement(
                         "td",
-                        { style: { margin: "5px 0px", width: "10%" }, key: Math.random() },
+                        { className: "rp-transfer__table-cell", style: { width: "10%" }, key: Math.random() },
                         _react2.default.createElement(_CheckBox.CheckBox, { checked: checked, onClickHandler: _this.selectSourceHandler.bind(_this, item.id) })
                     ), _this.props.columns.map(function (col) {
                         return _react2.default.createElement(
                             "td",
-                            { key: Math.random(), style: { width: col.width + "%", textAlign: col.align || "center", padding: "0 10px" } },
+                            { className: "rp-transfer__table-cell", key: Math.random(), style: { width: col.width + "%", textAlign: col.align || "center" } },
                             item[col.key]
                         );
                     })]
@@ -448,7 +448,8 @@ var Transfer = exports.Transfer = function (_React$Component) {
                 target = _props.target,
                 direction = _props.direction,
                 tableView = _props.tableView,
-                sourceName = _props.sourceName;
+                sourceName = _props.sourceName,
+                size = _props.size;
 
             var sourceWithoutTarget = source.filter(function (s) {
                 return target.every(function (t) {
@@ -472,9 +473,12 @@ var Transfer = exports.Transfer = function (_React$Component) {
                 });
             });
 
+            var transferClassName = 'rp-transfer';
+            if (size) transferClassName += " rp-transfer--" + size;
+
             return _react2.default.createElement(
                 "div",
-                { className: "rp-transfer" },
+                { className: transferClassName },
                 _react2.default.createElement(
                     "div",
                     { className: "rp-transfer__header" },
@@ -576,6 +580,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
 Transfer.propTypes = {
     customRecordRenderer: _propTypes2.default.func,
     targetName: _propTypes2.default.string,
+    size: _propTypes2.default.string,
     sourceName: _propTypes2.default.string,
     direction: _propTypes2.default.oneOf(["vertical", "horizontal"]),
     onChange: _propTypes2.default.func,

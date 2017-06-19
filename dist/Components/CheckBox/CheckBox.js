@@ -44,11 +44,24 @@ var CheckBox = exports.CheckBox = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            //console.log("CheckBox render", this.props.type);
+            var _props = this.props,
+                checked = _props.checked,
+                type = _props.type,
+                disabled = _props.disabled,
+                label = _props.label,
+                size = _props.size;
+
+
+            var className = 'rp-checkbox reactParts__checkbox-wrap';
+
+            if (type === 'button') className += ' button';
+            if (checked) className += ' checked';
+            if (disabled) className += ' disabled';
+            if (size) className += " rp-checkbox--" + size;
+
             return _react2.default.createElement(
                 "label",
-                {
-                    className: "reactParts__checkbox-wrap " + (this.props.checked ? " checked " : "") + (this.props.type === "button" ? " button" : "") + (this.props.disabled ? " disabled" : "") },
+                { className: className },
                 _react2.default.createElement(
                     "div",
                     { className: "reactParts__checkbox-input-new" },
@@ -66,7 +79,7 @@ var CheckBox = exports.CheckBox = function (_React$Component) {
                 _react2.default.createElement(
                     "div",
                     { className: "reactParts__checkbox-label" },
-                    this.props.label
+                    label
                 )
             );
         }
@@ -76,8 +89,9 @@ var CheckBox = exports.CheckBox = function (_React$Component) {
 }(_react2.default.Component);
 
 CheckBox.propTypes = {
-    name: _propTypes2.default.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
+    name: _propTypes2.default.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]).isRequired,
     label: _propTypes2.default.string,
+    size: _propTypes2.default.string,
     checked: _propTypes2.default.bool,
     disabled: _propTypes2.default.bool,
     onClickHandler: _propTypes2.default.func.isRequired,
