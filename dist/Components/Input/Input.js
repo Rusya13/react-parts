@@ -287,7 +287,7 @@ var Input = exports.Input = function (_React$Component) {
 
             return _react2.default.createElement(
                 "div",
-                { className: "reactParts__input-wrap" + (this.props.readOnly ? " readOnly" : "") + (this.props.prefix ? " prefix" : "") },
+                { className: "reactParts__input-wrap" + (this.props.readOnly ? " readOnly" : "") + (this.props.size && this.props.readOnly ? " readOnly--" + this.props.size : "") + (this.props.prefix ? " prefix" : "") },
                 this.props.label && _react2.default.createElement(
                     "label",
                     { className: "reactParts__label" + (this.props.required && !this.props.readOnly ? " required" : ""), htmlFor: this.props.name },

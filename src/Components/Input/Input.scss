@@ -193,4 +193,16 @@
 	height: 36px;
 	font-size: 14px;
 	padding: 4px 0;
+
+	&--small{
+		height: 30px !important;
+		font-size: 13px !important;
+		line-height: 1;
+	}
+
+	&--mini{
+		height: 22px !important;
+		font-size: 12px !important;
+		line-height: 1;
+	}
 }
