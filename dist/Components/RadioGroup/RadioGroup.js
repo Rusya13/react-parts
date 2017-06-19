@@ -99,7 +99,7 @@ RadioGroup.propTypes = {
     direction: _propTypes2.default.oneOf(["vertical", "horizontal"]),
     readOnly: _propTypes2.default.bool,
     label: _propTypes2.default.string,
-    name: _propTypes2.default.string.isRequired,
+    name: _propTypes2.default.string,
     options: _propTypes2.default.array.isRequired,
     onChange: _propTypes2.default.func.isRequired,
     checked: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]),

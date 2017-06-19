@@ -625,7 +625,7 @@ class Icon extends React.Component {
 
 Icon.propTypes = {
     hidden:    PropTypes.bool,
-    name:      PropTypes.string.isRequired,
+    name:      PropTypes.string,
     fill:      PropTypes.string,
     width:     PropTypes.number,
     height:    PropTypes.number,

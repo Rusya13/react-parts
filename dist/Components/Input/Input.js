@@ -347,7 +347,7 @@ Input.propTypes = {
     onFocus: _propTypes2.default.func,
     onBlur: _propTypes2.default.func,
     keypress: _propTypes2.default.func,
-    name: _propTypes2.default.string.isRequired,
+    name: _propTypes2.default.string,
     placeholder: _propTypes2.default.string,
     autoFocus: _propTypes2.default.bool,
     readOnly: _propTypes2.default.bool,

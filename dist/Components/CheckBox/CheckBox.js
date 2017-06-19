@@ -89,7 +89,7 @@ var CheckBox = exports.CheckBox = function (_React$Component) {
 }(_react2.default.Component);
 
 CheckBox.propTypes = {
-    name: _propTypes2.default.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]).isRequired,
+    name: _propTypes2.default.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
     label: _propTypes2.default.string,
     size: _propTypes2.default.string,
     checked: _propTypes2.default.bool,

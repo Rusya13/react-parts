@@ -349,7 +349,7 @@ Input.propTypes = {
     onFocus:             PropTypes.func,
     onBlur:              PropTypes.func,
     keypress:            PropTypes.func,
-    name:                PropTypes.string.isRequired,
+    name:                PropTypes.string,
     placeholder:         PropTypes.string,
     autoFocus:           PropTypes.bool,
     readOnly:            PropTypes.bool,

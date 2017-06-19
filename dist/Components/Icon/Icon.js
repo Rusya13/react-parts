@@ -655,7 +655,7 @@ var Icon = function (_React$Component) {
 
 Icon.propTypes = {
     hidden: _propTypes2.default.bool,
-    name: _propTypes2.default.string.isRequired,
+    name: _propTypes2.default.string,
     fill: _propTypes2.default.string,
     width: _propTypes2.default.number,
     height: _propTypes2.default.number,
