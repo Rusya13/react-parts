@@ -145,11 +145,20 @@ export class InputController extends React.Component {
                 <div className="reactParts__form-row">
                     <div className="col" >
                         <Input
+                            readOnly
                             size="small"
                             value={this.state.email}
                             name="email"
                             placeholder="Type something.."
-                            readOnly={!this.state.editMode}
+                            valid={false}
+                            onChange={this.onChangeHandler.bind( this )}
+                            tabIndex={3}
+                        />
+                        <Input
+                            size="small"
+                            value={this.state.email}
+                            name="email"
+                            placeholder="Type something.."
                             valid={false}
                             onChange={this.onChangeHandler.bind( this )}
                             tabIndex={3}

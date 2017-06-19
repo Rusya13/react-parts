@@ -42,7 +42,7 @@
   display: block;
   outline: none;
   padding: 2px 18px 2px 8px;
-	height: 36px;
+  height: 36px;
   box-sizing: border-box;
   border: 1px solid #E6E8EB;
   border-radius: 2px;
@@ -187,4 +187,10 @@
   padding: 6px;
   color: #97a8be;
   background-color: #fbfdff;
+}
+
+.readOnly{
+	height: 36px;
+	font-size: 14px;
+	padding: 4px 0;
 }
