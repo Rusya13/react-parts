@@ -70,7 +70,7 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
     }, {
         key: "selectItem",
         value: function selectItem(item) {
-            console.log("MultiSelectAsync selectItem", this.props.selected);
+            // console.log( "MultiSelectAsync selectItem", this.props.selected );
             var selected = this.props.selected;
             if (!Array.isArray(selected)) {
                 selected = [];
@@ -78,7 +78,7 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
             var newSelected = selected.slice();
             newSelected.push(item);
             var c = this._createReturnObject(this.props.name, newSelected);
-            console.log("MultiSelect selectItem", c);
+            // console.log( "MultiSelect selectItem", c );
             this.searchInput.value = "";
             this.onChangeInputSearch();
             this.props.onChange && this.props.onChange(c);
@@ -88,7 +88,7 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
         value: function removeItem(item) {
             var _this3 = this;
 
-            console.log("Select removeItem", item);
+            // console.log( "Select removeItem", item );
             if (Array.isArray(this.props.selected)) {
                 var newSelected = this.props.selected.filter(function (selItem) {
                     return selItem[_this3.props.uniqueKey] !== item[_this3.props.uniqueKey];
@@ -100,7 +100,7 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
     }, {
         key: "onGlobalClick",
         value: function onGlobalClick(e) {
-            console.log("Select onGlobalClick", e);
+            // console.log( "Select onGlobalClick", e );
             if (this.state.stateList) {
                 this.closeList();
             }
@@ -110,7 +110,7 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
         value: function openList(event) {
             var _this4 = this;
 
-            console.log("Select openList");
+            // console.log( "Select openList" );
             if (event && event.target && (event.target.classList.contains("break") || event.target.parentNode.classList.contains("break"))) return;
             if (this.props.disabled) return;
 
@@ -124,9 +124,9 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
     }, {
         key: "closeList",
         value: function closeList(event) {
-            console.log("MultiSelect closeList", event && event.target);
+            // console.log( "MultiSelect closeList", event && event.target );
             if (event && event.target && event.target.classList && (event.target.classList.contains("break") || event.target.parentNode && event.target.parentNode.classList && event.target.parentNode.classList.contains("break"))) return;
-            console.log("Select closeList");
+            // console.log( "Select closeList" );
             this.searchInput.blur();
             this.setState({ stateList: false });
             //document.removeEventListener( "click", this.closeList, false );
@@ -252,9 +252,9 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
                     break;
                 case 'Enter':
                     if (this.state.pointSelect !== -1) {
-                        console.log("MultiSelectAsync onKeyDown", this.state.pointSelect);
+                        // console.log( "MultiSelectAsync onKeyDown", this.state.pointSelect );
                         var item = this.clearedList()[this.state.pointSelect];
-                        console.log("MultiSelectAsync onKeyDown", item);
+                        // console.log( "MultiSelectAsync onKeyDown", item );
                         this.state.pointSelect = -1;
                         this.selectItem(item);
                     }

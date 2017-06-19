@@ -74,7 +74,7 @@ export class MultiSelectAsync extends React.Component {
     }
 
     selectItem( item: ListObject ) {
-        console.log( "MultiSelectAsync selectItem", this.props.selected );
+        // console.log( "MultiSelectAsync selectItem", this.props.selected );
         let selected = this.props.selected;
         if ( !Array.isArray( selected ) ) {
             selected = []
@@ -82,7 +82,7 @@ export class MultiSelectAsync extends React.Component {
         let newSelected: Selected = selected.slice();
         newSelected.push( item );
         let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
-        console.log( "MultiSelect selectItem", c );
+        // console.log( "MultiSelect selectItem", c );
         this.searchInput.value = "";
         this.onChangeInputSearch();
         this.props.onChange && this.props.onChange( c );
@@ -90,7 +90,7 @@ export class MultiSelectAsync extends React.Component {
     };
 
     removeItem( item: Object ) {
-        console.log( "Select removeItem", item );
+        // console.log( "Select removeItem", item );
         if ( Array.isArray( this.props.selected ) ) {
             let newSelected             = this.props.selected.filter( selItem => selItem[ this.props.uniqueKey ] !== item[ this.props.uniqueKey ] );
             let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
@@ -100,14 +100,14 @@ export class MultiSelectAsync extends React.Component {
     };
 
     onGlobalClick( e: any ) {
-        console.log( "Select onGlobalClick", e );
+        // console.log( "Select onGlobalClick", e );
         if ( this.state.stateList ) {
             this.closeList();
         }
     };
 
     openList( event: any ) {
-        console.log( "Select openList" );
+        // console.log( "Select openList" );
         if ( event && event.target && (event.target.classList.contains( "break" ) || event.target.parentNode.classList.contains( "break" ) ) ) return;
         if ( this.props.disabled ) return;
 
@@ -121,9 +121,9 @@ export class MultiSelectAsync extends React.Component {
     };
 
     closeList( event: any ) {
-        console.log( "MultiSelect closeList", event && event.target );
+        // console.log( "MultiSelect closeList", event && event.target );
         if ( event && event.target && event.target.classList && (event.target.classList.contains( "break" ) || event.target.parentNode && event.target.parentNode.classList && event.target.parentNode.classList.contains( "break" )) ) return;
-        console.log( "Select closeList" );
+        // console.log( "Select closeList" );
         this.searchInput.blur();
         this.setState( { stateList: false } );
         //document.removeEventListener( "click", this.closeList, false );
@@ -233,9 +233,9 @@ export class MultiSelectAsync extends React.Component {
                 break;
             case 'Enter':
                 if ( this.state.pointSelect !== -1 ) {
-                    console.log( "MultiSelectAsync onKeyDown", this.state.pointSelect );
+                    // console.log( "MultiSelectAsync onKeyDown", this.state.pointSelect );
                     let item = this.clearedList()[ this.state.pointSelect ];
-                    console.log( "MultiSelectAsync onKeyDown", item );
+                    // console.log( "MultiSelectAsync onKeyDown", item );
                     this.state.pointSelect = -1;
                     this.selectItem( item );
 

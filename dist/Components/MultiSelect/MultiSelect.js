@@ -75,7 +75,6 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
                 var newSelected = this.props.selected.slice();
                 newSelected.push(item[this.props.uniqueKey]);
                 var c = this._createReturnObject(this.props.name, newSelected);
-                console.log("MultiSelect selectItem", c);
                 this.searchInput.value = "";
                 this.props.onChange && this.props.onChange(c);
             }
@@ -95,7 +94,6 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
     }, {
         key: "onGlobalClick",
         value: function onGlobalClick(e) {
-            console.log("Select onGlobalClick", e);
             if (this.state.stateList) {
                 this.closeList();
             }
@@ -113,9 +111,7 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
     }, {
         key: "closeList",
         value: function closeList(event) {
-            console.log("MultiSelect closeList", event && event.target);
             if (event && event.target && event.target.classList && (event.target.classList.contains("break") || event.target.parentNode && event.target.parentNode.classList && event.target.parentNode.classList.contains("break"))) return;
-            console.log("Select closeList");
             this.searchInput.blur();
             this.setState({ stateList: false });
             //document.removeEventListener( "click", this.closeList, false );
