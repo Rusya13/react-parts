@@ -318,7 +318,11 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
         value: function render() {
             var _this9 = this;
 
-            var selectClassName = 'reactParts__multi-select';
+            var selectClassName = 'rp-select-multi reactParts__multi-select';
+
+            if (this.props.size) {
+                selectClassName += " rp-select-multi--" + this.props.size;
+            }
 
             if (this.state.stateList) {
                 selectClassName += ' focus';
@@ -410,6 +414,7 @@ MultiSelectAsync.propTypes = {
     disabled: _propTypes2.default.bool,
     placeholder: _propTypes2.default.string,
     name: _propTypes2.default.string,
+    size: _propTypes2.default.string,
     list: _propTypes2.default.func,
     selected: _propTypes2.default.array,
     label: _propTypes2.default.string,

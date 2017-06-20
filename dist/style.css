@@ -307,6 +307,28 @@ ul, menu, dir {
   overflow: hidden;
   text-overflow: ellipsis; }
 
+.rp-select-multi {
+  padding: 2px 50px 2px 8px !important; }
+  .rp-select-multi--small .reactParts__multi-select-input {
+    padding: 0px 8px 0px 0; }
+  .rp-select-multi--small .reactParts__multi-select-box-item {
+    padding: 3px 4px; }
+  .rp-select-multi--mini {
+    padding: 1px 50px 2px 8px !important; }
+    .rp-select-multi--mini .reactParts__multi-select-input {
+      padding: 0px 8px 0px 0; }
+    .rp-select-multi--mini .reactParts__multi-select-box-item {
+      padding: 0px 3px; }
+    .rp-select-multi--mini .reactParts__multi-select-box-item-value {
+      font-size: 12px; }
+    .rp-select-multi--mini .reactParts__multi-select-box-item-remove {
+      width: 12px;
+      height: 12px;
+      margin-bottom: -2px; }
+    .rp-select-multi--mini .reactParts__multi-select-input {
+      font-size: 12px;
+      margin: 0; }
+
 .reactParts__multi-select-wrap {
   text-align: left;
   position: relative;
@@ -362,7 +384,6 @@ ul, menu, dir {
   border-radius: 3px;
   font-size: 0.750rem;
   margin-right: 5px;
-  margin-bottom: 2px;
   padding: 4px; }
   .reactParts__multi-select-box-item div {
     display: inline-block; }
@@ -447,7 +468,7 @@ ul, menu, dir {
   background: transparent;
   outline: none;
   border: none;
-  padding: 5px 8px 5px 0;
+  padding: 4px 8px 4px 0;
   margin-left: 3px; }
 
 .reactParts__multi-select-addControls {

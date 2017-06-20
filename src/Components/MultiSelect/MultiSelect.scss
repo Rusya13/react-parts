@@ -1,3 +1,39 @@
+.rp-select-multi{
+	padding: 2px 50px 2px 8px !important;
+
+  &--small{
+	.reactParts__multi-select-input{
+		padding: 0px 8px 0px 0;
+	}
+	  .reactParts__multi-select-box-item{
+		padding: 3px 4px;
+	  }
+  }
+
+  &--mini{
+	  padding: 1px 50px 2px 8px !important;
+
+	  .reactParts__multi-select-input{
+		  padding: 0px 8px 0px 0;
+	  }
+	  .reactParts__multi-select-box-item{
+		  padding: 0px 3px;
+	  }
+	  .reactParts__multi-select-box-item-value{
+		  font-size: 12px;
+	  }
+	  .reactParts__multi-select-box-item-remove{
+		  width: 12px;
+		  height: 12px;
+		  margin-bottom: -2px;
+	  }
+	  .reactParts__multi-select-input{
+		  font-size: 12px;
+		  margin: 0;
+	  }
+  }
+}
+
 .reactParts__multi-select-wrap{
   text-align: left;
   position: relative;
@@ -64,9 +100,7 @@
   border-radius: 3px;
   font-size: 0.750rem;
 
-  //margin: 2px 24px 2px 2px;
   margin-right: 5px;
-  margin-bottom: 2px;
   padding: 4px;
 
   div {
@@ -172,7 +206,7 @@
   background: transparent;
   outline: none;
   border: none;
-  padding: 5px 8px 5px 0;
+  padding: 4px 8px 4px 0;
   margin-left: 3px;
 }
 

@@ -301,7 +301,11 @@ export class MultiSelect extends React.Component {
     }
 
     render() {
-        let selectClassName = 'reactParts__multi-select';
+        let selectClassName = 'rp-select-multi reactParts__multi-select';
+
+        if(this.props.size){
+            selectClassName += ` rp-select-multi--${this.props.size}`;
+        }
 
         if ( this.state.stateList ) {
             selectClassName += ' focus';
@@ -375,6 +379,7 @@ MultiSelect.propTypes = {
     disabled:        PropTypes.bool,
     placeholder:     PropTypes.string,
     name:            PropTypes.string,
+    size:            PropTypes.string,
     list:            PropTypes.array,
     selected:        PropTypes.array,
     label:           PropTypes.string,
