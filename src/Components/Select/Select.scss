@@ -1,3 +1,23 @@
+.rp-select{
+  &--small{
+    padding: 4px 54px 4px 8px !important;
+  }
+
+  &--mini{
+    padding: 1px 54px 2px 8px !important;
+  }
+}
+
+.rp-select-async{
+  &--small{
+    padding: 5px 54px 6px 8px !important;
+  }
+
+  &--mini{
+    padding: 1px 54px 2px 8px !important;
+  }
+}
+
 .reactParts__select-wrap{
   text-align: left;
   position: relative;
@@ -17,12 +37,12 @@
   width: 100%;
   display: block;
   outline: none;
-  padding: 7px 54px 8px 8px;
+  padding: 8px 54px 9px 8px;
   box-sizing: border-box;
   border: 1px solid #E6E8EB;
   border-radius: 2px;
   position: relative;
-  min-height: 34px;
+  min-height: 22px;
   &.focus{
     border-color: $input-border-color-focus;
   }
@@ -160,6 +180,7 @@
   outline: none;
   border: none;
   padding-left: 8px;
+  line-height: 1;
   width: 100%;
   padding-right: 54px;
 }

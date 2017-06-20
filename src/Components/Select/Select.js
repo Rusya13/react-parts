@@ -256,6 +256,7 @@ export class Select extends React.Component {
 
     render() {
         let selectClassName = 'rp-select reactParts__select';
+
         if ( this.state.stateList ) {
             selectClassName += ' focus';
         }

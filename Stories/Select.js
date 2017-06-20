@@ -140,26 +140,11 @@ export class SelectController extends React.Component {
 
         return (
             <div className="reactParts__form">
-                {/*<div className="row">*/}
-                    {/*<div className="col-xs-1">*/}
-                        {/*<Select*/}
-                            {/*autoFocus={true}*/}
-                            {/*label="Select boolean"*/}
-                            {/*list={boolList}*/}
-                            {/*placeholder="select"*/}
-                            {/*name="testBool"*/}
-                            {/*cancel={true}*/}
-                            {/*selected={this.state.testBool}*/}
-                            {/*onChange={this.onChange.bind( this )}*/}
-                            {/*tabIndex={1}*/}
-                        {/*/>*/}
-                    {/*</div>*/}
-
-                {/*</div>*/}
                 <div className="row">
-                    <div className="col-xs-1">
+                    <div className="col-xs-6">
                         <Select
                             required
+                            size="mini"
                             label="Select"
                             list={list}
                             placeholder="select"
@@ -178,6 +163,7 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-3">
                         <SelectAsync
+                            size="mini"
                             label="SelectAsync"
                             list={this.listProvider}
                             placeholder="select"

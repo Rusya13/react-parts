@@ -270,6 +270,7 @@ var Select = exports.Select = function (_React$Component) {
             var _this7 = this;
 
             var selectClassName = 'rp-select reactParts__select';
+
             if (this.state.stateList) {
                 selectClassName += ' focus';
             }

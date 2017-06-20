@@ -247,7 +247,13 @@ export class SelectAsync extends React.Component {
     render() {
 
 
-        let selectClassName = 'reactParts__select';
+        let selectClassName = 'rp-select-async reactParts__select';
+
+
+        if(this.props.size){
+            selectClassName += ` rp-select-async--${this.props.size}`;
+        }
+
         if ( this.state.stateList ) {
             selectClassName += ' focus';
         }
@@ -309,6 +315,7 @@ SelectAsync.propTypes = {
     disabled:       PropTypes.bool,
     placeholder:    PropTypes.string,
     name:           PropTypes.string,
+    size:           PropTypes.string,
     list:           PropTypes.func.isRequired,
     selected:       PropTypes.object,
     label:          PropTypes.string,
