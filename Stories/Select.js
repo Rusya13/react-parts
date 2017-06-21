@@ -144,7 +144,6 @@ export class SelectController extends React.Component {
                     <div className="col-xs-6">
                         <Select
                             required
-                            size="mini"
                             label="Select"
                             list={list}
                             placeholder="select"
@@ -201,7 +200,6 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-8">
                         <MultiSelectAsync
-                            size="small"
                             label="MultiselectAsync"
                             list={this.listProvider}
                             placeholder="multiselect"

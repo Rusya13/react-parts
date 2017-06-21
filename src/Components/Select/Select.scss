@@ -1,19 +1,27 @@
 .rp-select{
+  min-height: 36px !important;
+
   &--small{
+    min-height: 30px !important;
     padding: 4px 54px 4px 8px !important;
   }
 
   &--mini{
+    min-height: 22px !important;
     padding: 1px 54px 2px 8px !important;
   }
 }
 
 .rp-select-async{
+  min-height: 36px !important;
+
   &--small{
+    min-height: 30px !important;
     padding: 5px 54px 6px 8px !important;
   }
 
   &--mini{
+    min-height: 22px !important;
     padding: 1px 54px 2px 8px !important;
   }
 }

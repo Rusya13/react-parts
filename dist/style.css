@@ -26,6 +26,8 @@ ul, menu, dir {
   font-size: 14px;
   white-space: nowrap;
   color: #74848d; }
+  .rp-btn + .rp-btn {
+    margin-left: 10px; }
   .rp-btn--primary {
     border-color: #62a8ea;
     background: #62a8ea;
@@ -140,17 +142,23 @@ ul, menu, dir {
 .btn-intab {
   padding-top: 10px; }
 
-.rp-select--small {
-  padding: 4px 54px 4px 8px !important; }
+.rp-select {
+  min-height: 36px !important; }
+  .rp-select--small {
+    min-height: 30px !important;
+    padding: 4px 54px 4px 8px !important; }
+  .rp-select--mini {
+    min-height: 22px !important;
+    padding: 1px 54px 2px 8px !important; }
 
-.rp-select--mini {
-  padding: 1px 54px 2px 8px !important; }
-
-.rp-select-async--small {
-  padding: 5px 54px 6px 8px !important; }
-
-.rp-select-async--mini {
-  padding: 1px 54px 2px 8px !important; }
+.rp-select-async {
+  min-height: 36px !important; }
+  .rp-select-async--small {
+    min-height: 30px !important;
+    padding: 5px 54px 6px 8px !important; }
+  .rp-select-async--mini {
+    min-height: 22px !important;
+    padding: 1px 54px 2px 8px !important; }
 
 .reactParts__select-wrap {
   text-align: left;

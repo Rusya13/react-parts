@@ -37,6 +37,10 @@ $btn-border-radius:			2px;
 	white-space: nowrap;
 	color: $gray;
 
+	& + &{
+		margin-left: 10px;
+	}
+
 
 	// Brand
 
