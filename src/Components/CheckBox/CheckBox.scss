@@ -25,6 +25,7 @@
         border-left: 2px solid #377df3;
         border-bottom: 2px solid #377df3;
         transform: rotate(-45deg);
+        box-sizing: content-box !important;
 
         left: 3px;
         top: 3px;

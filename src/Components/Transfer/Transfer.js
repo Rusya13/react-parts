@@ -303,9 +303,11 @@ export class Transfer extends React.Component {
 
         return (
             <div className={transferClassName}>
-                <div className="rp-transfer__header">
-                    {sourceName}
-                </div>
+                { tableView &&
+                    <div className="rp-transfer__header">
+                        {sourceName}
+                    </div>
+                }
                 <div className={`rp-transfer__wrap rp-transfer__wrap--${direction}`}>
                     <div className={`rp-transfer__box rp-transfer__box--${direction}`}>
                         { !tableView &&

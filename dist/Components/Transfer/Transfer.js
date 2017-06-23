@@ -479,7 +479,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
             return _react2.default.createElement(
                 "div",
                 { className: transferClassName },
-                _react2.default.createElement(
+                tableView && _react2.default.createElement(
                     "div",
                     { className: "rp-transfer__header" },
                     sourceName

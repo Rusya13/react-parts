@@ -833,6 +833,7 @@ ul, menu, dir {
       border-bottom: 2px solid #377df3;
       -webkit-transform: rotate(-45deg);
               transform: rotate(-45deg);
+      box-sizing: content-box !important;
       left: 3px;
       top: 3px;
       color: #377df3; }
