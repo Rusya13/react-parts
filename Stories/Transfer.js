@@ -37,6 +37,7 @@ export class TransferController extends React.Component {
         }
     }
 
+
     getColumns=()=>{
         return [
             {key: "id", label:"ID", width: 10, align:"right", footerType: 'avg' },
@@ -51,7 +52,7 @@ export class TransferController extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{display:"flex", height:"100%"}}>
                 <Transfer
                     size="small"
                     name="test"
