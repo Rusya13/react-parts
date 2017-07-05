@@ -115,10 +115,10 @@ export class Transfer extends React.Component {
 
     targetRender = (checkedAll, disabledAll) => {
         const { source, target, tableView, columns, footer } = this.props;
+        const sourceFilter = target.map(t => source.filter(s => s.id === t).pop());
 
         if ( tableView && columns ) {
             //const sourceFilter = source.filter((s) => target.some(t => s.id === t));
-            const sourceFilter = target.map(t => source.filter(s => s.id === t).pop());
 
             return (
                 <div className="rp-transfer__table">
@@ -169,7 +169,7 @@ export class Transfer extends React.Component {
 
         return (
             <div className="rp-transfer__list">
-                {source.filter((s) => target.some(t => s.id === t)).map((item, i) => {
+                {sourceFilter.map((item, i) => {
                     const checked = this.state.sTarget.some((t) => t === item.id)
                     return this.singleCheckboxRender( this.selectTargetHandler.bind(this, item.id), checked, item, i)
                 })}
