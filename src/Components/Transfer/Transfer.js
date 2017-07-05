@@ -18,7 +18,7 @@ export class Transfer extends React.Component {
     };
 
     selectAllSourses = () => {
-        const sourses = this.props.source.filter( s => this.props.target.every( t => t !== s ) ).map( s => s.id );
+        const sourses = this.props.source.filter( s => this.props.target.every( t => t !== s.id ) ).map( s => s.id );
         this.setState( { sSource: sourses.every( s => this.state.sSource.some( ss => ss === s ) ) ? [] : sourses } )
     };
 
@@ -117,7 +117,8 @@ export class Transfer extends React.Component {
         const { source, target, tableView, columns, footer } = this.props;
 
         if ( tableView && columns ) {
-            const sourceFilter = source.filter((s) => target.some(t => s.id === t));
+            //const sourceFilter = source.filter((s) => target.some(t => s.id === t));
+            const sourceFilter = target.map(t => source.filter(s => s.id === t).pop());
 
             return (
                 <div className="rp-transfer__table">

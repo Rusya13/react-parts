@@ -52,7 +52,7 @@ export class TransferController extends React.Component {
 
     render() {
         return (
-            <div style={{display:"flex", height:"100%"}}>
+            <div style={{display:"flex", height:"300px"}}>
                 <Transfer
                     size="small"
                     name="test"
@@ -60,11 +60,8 @@ export class TransferController extends React.Component {
                     target={this.state.target}
                     onChange={this.onChange}
                     direction="horizontal"
-                    tableView
-                    footer
                     sourceName="Список прав"
                     targetName="Права группы"
-                    columns={this.getColumns()}
                 />
             </div>
         )

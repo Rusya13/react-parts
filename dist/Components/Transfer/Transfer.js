@@ -44,7 +44,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
         _this.selectAllSourses = function () {
             var sourses = _this.props.source.filter(function (s) {
                 return _this.props.target.every(function (t) {
-                    return t !== s;
+                    return t !== s.id;
                 });
             }).map(function (s) {
                 return s.id;
@@ -206,10 +206,11 @@ var Transfer = exports.Transfer = function (_React$Component) {
 
 
             if (tableView && columns) {
-                var sourceFilter = source.filter(function (s) {
-                    return target.some(function (t) {
+                //const sourceFilter = source.filter((s) => target.some(t => s.id === t));
+                var sourceFilter = target.map(function (t) {
+                    return source.filter(function (s) {
                         return s.id === t;
-                    });
+                    }).pop();
                 });
 
                 return _react2.default.createElement(
