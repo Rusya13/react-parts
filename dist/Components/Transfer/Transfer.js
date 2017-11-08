@@ -204,14 +204,14 @@ var Transfer = exports.Transfer = function (_React$Component) {
                 columns = _this$props2.columns,
                 footer = _this$props2.footer;
 
+            var sourceFilter = target.map(function (t) {
+                return source.filter(function (s) {
+                    return s.id === t;
+                }).pop();
+            });
 
             if (tableView && columns) {
                 //const sourceFilter = source.filter((s) => target.some(t => s.id === t));
-                var sourceFilter = target.map(function (t) {
-                    return source.filter(function (s) {
-                        return s.id === t;
-                    }).pop();
-                });
 
                 return _react2.default.createElement(
                     "div",
@@ -281,11 +281,7 @@ var Transfer = exports.Transfer = function (_React$Component) {
             return _react2.default.createElement(
                 "div",
                 { className: "rp-transfer__list" },
-                source.filter(function (s) {
-                    return target.some(function (t) {
-                        return s.id === t;
-                    });
-                }).map(function (item, i) {
+                sourceFilter.map(function (item, i) {
                     var checked = _this.state.sTarget.some(function (t) {
                         return t === item.id;
                     });

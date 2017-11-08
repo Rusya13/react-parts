@@ -14,6 +14,10 @@ Open localhost:9001 and Enjoy
 
 ## Last releases
 
+### v0.5.6
+
+- fixed styles
+
 
 ### v0.4.8
 
