@@ -123,9 +123,9 @@ export class SelectAsync extends React.Component {
 
     renderList() {
         let list = this.state.list;
-        if ( !list ) return null
+        if ( !list || !list.length ) return null;
 
-        let newList = list.map( ( selItem, i, list ) => {
+        let newList = list.filter(el=>el).map( ( selItem, i, list ) => {
             return <li key={selItem[ this.props.uniqueKey ]}
                        className={"reactParts__select-list-item" + (( selItem[ this.props.uniqueKey ] === (this.props.selected && this.props.selected[ this.props.uniqueKey ] )) ? " selected" : "")
                        + ((i === this.state.pointSelect) ? " pointed" : "")

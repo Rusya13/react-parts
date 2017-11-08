@@ -360,7 +360,7 @@ Input.propTypes = {
     limit:               PropTypes.number,
     className:           PropTypes.string,
     value:               PropTypes.oneOfType( [ PropTypes.string, PropTypes.number ] ),
-    label:               PropTypes.string,
+    label:               PropTypes.oneOfType( [PropTypes.string, PropTypes.number, PropTypes.element] ),
     autocomplete:        PropTypes.bool,
     tabIndex:            PropTypes.number,
     cancel:              PropTypes.bool,
