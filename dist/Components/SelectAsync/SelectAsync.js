@@ -123,9 +123,11 @@ var SelectAsync = exports.SelectAsync = function (_React$Component) {
             var _this4 = this;
 
             var list = this.state.list;
-            if (!list) return null;
+            if (!list || !list.length) return null;
 
-            var newList = list.map(function (selItem, i, list) {
+            var newList = list.filter(function (el) {
+                return el;
+            }).map(function (selItem, i, list) {
                 return React.createElement(
                     "li",
                     { key: selItem[_this4.props.uniqueKey],

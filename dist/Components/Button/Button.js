@@ -59,7 +59,7 @@ var Button = exports.Button = function (_React$Component) {
             if (props.brand) className += " rp-btn--" + props.brand;
             if (props.className) className += " " + props.className;
             if (props.size) className += " rp-btn--" + props.size;
-
+            var caption = this.props.children || this.props.caption;
             return _react2.default.createElement(
                 "button",
                 {
@@ -70,7 +70,7 @@ var Button = exports.Button = function (_React$Component) {
                     disabled: props.disabled,
                     className: className,
                     id: props.id },
-                props.caption
+                caption
             );
         }
     }]);
@@ -81,7 +81,7 @@ var Button = exports.Button = function (_React$Component) {
 Button.propTypes = {
     brand: _propTypes2.default.string,
     type: _propTypes2.default.string,
-    caption: _propTypes2.default.string.isRequired,
+    caption: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number, _propTypes2.default.element]),
     onClick: _propTypes2.default.func.isRequired,
     disabled: _propTypes2.default.bool,
     hidden: _propTypes2.default.bool,

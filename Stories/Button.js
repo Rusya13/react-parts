@@ -9,13 +9,15 @@ export class ButtonController extends React.Component {
 
     onClickHandler = () => {
         console.log('Button onClickHandler');
-    }
+    };
 
     render() {
         return (
             <div className="buttons-line">
                 <div className="button-wrapper">
-                    <Button onClick={this.onClickHandler} brand="default" caption="Default button"/>
+                  <Button onClick={this.onClickHandler} brand="default">
+                    <div>Test</div>
+                  </Button>
                 </div>
                 <div className="button-wrapper">
                     <Button onClick={this.onClickHandler} brand="success" caption="Success button"/>

@@ -656,7 +656,7 @@ ul, menu, dir {
 .reactParts__input__cancel {
   position: absolute;
   right: 9px;
-  bottom: 9px;
+  top: 54%;
   fill: #B3C3C7; }
 
 .reactParts__input-prefix {

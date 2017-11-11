@@ -50,7 +50,7 @@ export class Button extends React.Component {
         if(props.brand) className += ` rp-btn--${props.brand}`;
         if(props.className) className += ` ${props.className}`;
         if(props.size) className += ` rp-btn--${props.size}`;
-
+        let caption = this.props.children || this.props.caption;
         return (
             <button
                 ref={(button)=>this.button=button} type={this.props.type}
@@ -58,7 +58,7 @@ export class Button extends React.Component {
                 disabled={props.disabled}
                 className={className}
                 id={props.id}>
-                {props.caption}
+                {caption}
             </button>
         )
     };
@@ -67,7 +67,7 @@ export class Button extends React.Component {
 Button.propTypes = {
     brand:     PropTypes.string,
     type:      PropTypes.string,
-    caption:   PropTypes.string.isRequired,
+    caption:   PropTypes.oneOfType( [PropTypes.string, PropTypes.number, PropTypes.element] ),
     onClick:   PropTypes.func.isRequired,
     disabled:  PropTypes.bool,
     hidden:    PropTypes.bool,
