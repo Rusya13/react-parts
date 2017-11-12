@@ -76,7 +76,7 @@ CheckBoxGroup.propTypes = {
     required:  PropTypes.bool,
     label:     PropTypes.string,
     options:   PropTypes.array.isRequired,
-    onChange:  PropTypes.func.isRequired,
+    onChange:  PropTypes.func,
     checked:   PropTypes.array,
     type:      PropTypes.oneOf( [ "normal", "button" ] )
 };

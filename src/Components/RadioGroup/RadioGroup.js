@@ -69,7 +69,7 @@ RadioGroup.propTypes = {
     label:     PropTypes.string,
     name:      PropTypes.string,
     options:   PropTypes.array.isRequired,
-    onChange:  PropTypes.func.isRequired,
+    onChange:  PropTypes.func,
     checked:   PropTypes.oneOfType( [ PropTypes.number, PropTypes.string ] ),
     required:  PropTypes.bool
 };

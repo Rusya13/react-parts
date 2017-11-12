@@ -304,7 +304,7 @@ var SelectAsync = exports.SelectAsync = function (_React$Component) {
                     "ul",
                     { ref: function ref(ul) {
                             _this7.ul = ul;
-                        }, className: "reactParts__select-list" },
+                        }, className: "reactParts__select-list", style: this.props.showUp ? { bottom: this.props.size === "mini" ? 26 : 40 } : {} },
                     this.renderList()
                 );
             }
@@ -367,7 +367,8 @@ SelectAsync.propTypes = {
     addControls: _propTypes2.default.func,
     autoFocus: _propTypes2.default.bool,
     showFullValue: _propTypes2.default.bool,
-    required: _propTypes2.default.bool
+    required: _propTypes2.default.bool,
+    showUp: _propTypes2.default.bool
 };
 
 SelectAsync.defaultProps = {
@@ -388,5 +389,6 @@ SelectAsync.defaultProps = {
     onKeyDown: null,
     addControls: null,
     autoFocus: false,
-    showFullValue: false
+    showFullValue: false,
+    showUp: false
 };

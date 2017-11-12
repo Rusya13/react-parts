@@ -343,7 +343,7 @@ export class MultiSelect extends React.Component {
         }
         if ( this.state.stateList ) {
             list =
-                <ul ref={( ul ) => {this.ul = ul}} className="reactParts__multi-select-list">{this.renderList()}</ul>;
+                <ul ref={( ul ) => {this.ul = ul}} className="reactParts__multi-select-list" style={(this.props.showUp)?{bottom: this.props.size==="mini"?26:40}:{}}>{this.renderList()}</ul>;
         }
 
         return (
@@ -391,11 +391,13 @@ MultiSelect.propTypes = {
     listItemRender:  PropTypes.func,
     inputItemRender: PropTypes.func,
     autoFocus:       PropTypes.bool,
-    required:  PropTypes.bool
+    required:  PropTypes.bool,
+    showUp: PropTypes.bool
 };
 
 MultiSelect.defaultProps = {
     uniqueKey: "id",
     labelKey:  "value",
-    autoFocus: false
-}
+    autoFocus: false,
+    showUp: false
+};

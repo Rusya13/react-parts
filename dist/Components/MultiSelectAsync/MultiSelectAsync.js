@@ -368,7 +368,7 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
                     "ul",
                     { ref: function ref(ul) {
                             _this9.ul = ul;
-                        }, className: "reactParts__multi-select-list" },
+                        }, className: "reactParts__multi-select-list", style: this.props.showUp ? { bottom: this.props.size === "mini" ? 26 : 40 } : {} },
                     this.renderList()
                 );
             }
@@ -426,12 +426,14 @@ MultiSelectAsync.propTypes = {
     listItemRender: _propTypes2.default.func,
     inputItemRender: _propTypes2.default.func,
     autoFocus: _propTypes2.default.bool,
-    required: _propTypes2.default.bool
+    required: _propTypes2.default.bool,
+    showUp: _propTypes2.default.bool
 };
 
 MultiSelectAsync.defaultProps = {
     uniqueKey: "id",
     labelKey: "value",
     selected: [],
-    autoFocus: false
+    autoFocus: false,
+    showUp: _propTypes2.default.bool
 };

@@ -54,6 +54,6 @@ CheckBox.propTypes = {
     size:           PropTypes.string,
     checked:        PropTypes.bool,
     disabled:       PropTypes.bool,
-    onClickHandler: PropTypes.func.isRequired,
+    onClickHandler: PropTypes.func,
     type:           PropTypes.oneOf( [ "normal", "button" ] )
 };

@@ -279,7 +279,7 @@ export class SelectAsync extends React.Component {
                 </svg>;
         }
         if ( this.state.stateList ) {
-            list = <ul ref={( ul ) => {this.ul = ul}} className="reactParts__select-list">{this.renderList()}</ul>;
+            list = <ul ref={( ul ) => {this.ul = ul}} className="reactParts__select-list" style={(this.props.showUp)?{bottom: this.props.size==="mini"?26:40}:{}}>{this.renderList()}</ul>;
         }
 
         return (
@@ -329,7 +329,8 @@ SelectAsync.propTypes = {
     addControls:    PropTypes.func,
     autoFocus:      PropTypes.bool,
     showFullValue:  PropTypes.bool,
-    required:       PropTypes.bool
+    required:       PropTypes.bool,
+    showUp: PropTypes.bool
 }
 
 SelectAsync.defaultProps = {
@@ -350,5 +351,6 @@ SelectAsync.defaultProps = {
     onKeyDown:      null,
     addControls:    null,
     autoFocus:      false,
-    showFullValue:  false
-}
+    showFullValue:  false,
+    showUp: false
+};

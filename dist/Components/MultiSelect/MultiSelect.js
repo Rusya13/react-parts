@@ -372,7 +372,7 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
                     "ul",
                     { ref: function ref(ul) {
                             _this7.ul = ul;
-                        }, className: "reactParts__multi-select-list" },
+                        }, className: "reactParts__multi-select-list", style: this.props.showUp ? { bottom: this.props.size === "mini" ? 26 : 40 } : {} },
                     this.renderList()
                 );
             }
@@ -430,11 +430,13 @@ MultiSelect.propTypes = {
     listItemRender: _propTypes2.default.func,
     inputItemRender: _propTypes2.default.func,
     autoFocus: _propTypes2.default.bool,
-    required: _propTypes2.default.bool
+    required: _propTypes2.default.bool,
+    showUp: _propTypes2.default.bool
 };
 
 MultiSelect.defaultProps = {
     uniqueKey: "id",
     labelKey: "value",
-    autoFocus: false
+    autoFocus: false,
+    showUp: false
 };

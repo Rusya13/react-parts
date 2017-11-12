@@ -55,8 +55,8 @@ export class SelectController extends React.Component {
         console.log("Select list", list);
         return list
     }
-
-    listProvider( searchValue ) {
+  
+    async listProvider  ( searchValue ) {
         if (!searchValue || searchValue && searchValue.length  < 2){
             return null
         }
@@ -162,7 +162,7 @@ export class SelectController extends React.Component {
                 <div className="row">
                     <div className="col-xs-3">
                         <SelectAsync
-                            size="mini"
+                            // size="mini"
                             label="SelectAsync"
                             list={this.listProvider}
                             placeholder="select"
@@ -194,6 +194,7 @@ export class SelectController extends React.Component {
                             uniqueKey="key"
                             listItemRender={this.listItemRender.bind( this )}
                             tabIndex={4}
+                            showUp
                         />
                     </div>
                 </div>
@@ -211,6 +212,8 @@ export class SelectController extends React.Component {
                             labelKey="firstName"
                             listItemRender={this.listItemRender.bind( this )}
                             tabIndex={5}
+                            showUp
+                            size="mini"
                         />
                     </div>
                 </div>

@@ -334,7 +334,7 @@ export class MultiSelectAsync extends React.Component {
         }
         if ( this.state.stateList ) {
             list =
-                <ul ref={( ul ) => {this.ul = ul}} className="reactParts__multi-select-list">{this.renderList()}</ul>;
+                <ul ref={( ul ) => {this.ul = ul}} className="reactParts__multi-select-list" style={(this.props.showUp)?{bottom: this.props.size==="mini"?26:40}:{}}>{this.renderList()}</ul>;
         }
 
         return (
@@ -382,12 +382,14 @@ MultiSelectAsync.propTypes = {
     listItemRender:  PropTypes.func,
     inputItemRender: PropTypes.func,
     autoFocus:       PropTypes.bool,
-    required:  PropTypes.bool
+    required:  PropTypes.bool,
+    showUp: PropTypes.bool
 };
 
 MultiSelectAsync.defaultProps = {
     uniqueKey: "id",
     labelKey:  "value",
     selected:  [],
-    autoFocus: false
+    autoFocus: false,
+    showUp: PropTypes.bool
 }

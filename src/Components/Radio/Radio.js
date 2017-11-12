@@ -43,5 +43,5 @@ Radio.propTypes = {
     label:          PropTypes.string,
     checked:        PropTypes.bool,
     disabled:       PropTypes.bool,
-    onClickHandler: PropTypes.func.isRequired
+    onClickHandler: PropTypes.func
 };
