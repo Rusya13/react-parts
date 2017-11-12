@@ -101,7 +101,7 @@ RadioGroup.propTypes = {
     label: _propTypes2.default.string,
     name: _propTypes2.default.string,
     options: _propTypes2.default.array.isRequired,
-    onChange: _propTypes2.default.func.isRequired,
+    onChange: _propTypes2.default.func,
     checked: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string]),
     required: _propTypes2.default.bool
 };

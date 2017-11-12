@@ -94,6 +94,6 @@ CheckBox.propTypes = {
     size: _propTypes2.default.string,
     checked: _propTypes2.default.bool,
     disabled: _propTypes2.default.bool,
-    onClickHandler: _propTypes2.default.func.isRequired,
+    onClickHandler: _propTypes2.default.func,
     type: _propTypes2.default.oneOf(["normal", "button"])
 };

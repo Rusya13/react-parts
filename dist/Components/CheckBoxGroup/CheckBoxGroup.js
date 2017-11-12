@@ -106,7 +106,7 @@ CheckBoxGroup.propTypes = {
     required: _propTypes2.default.bool,
     label: _propTypes2.default.string,
     options: _propTypes2.default.array.isRequired,
-    onChange: _propTypes2.default.func.isRequired,
+    onChange: _propTypes2.default.func,
     checked: _propTypes2.default.array,
     type: _propTypes2.default.oneOf(["normal", "button"])
 };
