@@ -118,7 +118,6 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
                 //console.log("SelectAsync res", res);
                 _this4.setState({ list: res });
             });
-            //document.addEventListener( "click", this.closeList, false );
             this.setState({ stateList: !this.state.stateList });
         }
     }, {
@@ -129,7 +128,6 @@ var MultiSelectAsync = exports.MultiSelectAsync = function (_React$Component) {
             // console.log( "Select closeList" );
             this.searchInput.blur();
             this.setState({ stateList: false });
-            //document.removeEventListener( "click", this.closeList, false );
         }
     }, {
         key: "cancelSelected",

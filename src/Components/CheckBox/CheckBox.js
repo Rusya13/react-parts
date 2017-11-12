@@ -13,7 +13,7 @@ export class CheckBox extends React.Component {
         disabled: boolean,
         type: ?string,
         label: ? string
-    }
+    };
 
     onClickHandler( e: Event ) {
         let o: Object        = {};

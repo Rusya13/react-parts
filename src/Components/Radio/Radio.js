@@ -39,7 +39,7 @@ export class Radio extends React.Component {
 }
 
 Radio.propTypes = {
-    value:          PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string ] ),
+    value:          PropTypes.oneOfType( [ React.PropTypes.number, React.PropTypes.string, React.PropTypes.bool ] ),
     label:          PropTypes.string,
     checked:        PropTypes.bool,
     disabled:       PropTypes.bool,

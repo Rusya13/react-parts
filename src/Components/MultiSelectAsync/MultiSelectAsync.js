@@ -115,7 +115,6 @@ export class MultiSelectAsync extends React.Component {
             //console.log("SelectAsync res", res);
             this.setState( { list: res } )
         } );
-        //document.addEventListener( "click", this.closeList, false );
         this.setState( { stateList: !this.state.stateList } );
 
     };
@@ -126,7 +125,6 @@ export class MultiSelectAsync extends React.Component {
         // console.log( "Select closeList" );
         this.searchInput.blur();
         this.setState( { stateList: false } );
-        //document.removeEventListener( "click", this.closeList, false );
     };
 
     cancelSelected() {

@@ -77,7 +77,7 @@ var Radio = exports.Radio = function (_React$Component) {
 }(_react2.default.Component);
 
 Radio.propTypes = {
-    value: _propTypes2.default.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string]),
+    value: _propTypes2.default.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.string, _react2.default.PropTypes.bool]),
     label: _propTypes2.default.string,
     checked: _propTypes2.default.bool,
     disabled: _propTypes2.default.bool,

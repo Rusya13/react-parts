@@ -104,8 +104,6 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
             console.log("Select openList");
             if (event && event.target && (event.target.classList.contains("break") || event.target.parentNode.classList.contains("break"))) return;
             if (this.props.disabled) return;
-
-            //document.addEventListener( "click", this.closeList, false );
             this.setState({ stateList: !this.state.stateList });
         }
     }, {
@@ -114,7 +112,6 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
             if (event && event.target && event.target.classList && (event.target.classList.contains("break") || event.target.parentNode && event.target.parentNode.classList && event.target.parentNode.classList.contains("break"))) return;
             this.searchInput.blur();
             this.setState({ stateList: false });
-            //document.removeEventListener( "click", this.closeList, false );
         }
     }, {
         key: "cancelSelected",
