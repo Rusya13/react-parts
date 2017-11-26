@@ -82,7 +82,7 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
     }, {
         key: "removeItem",
         value: function removeItem(item) {
-            console.log("Select removeItem", item);
+            // console.log( "Select removeItem", item );
             if (Array.isArray(this.props.selected)) {
                 var newSelected = this.props.selected.filter(function (selItem) {
                     return selItem !== item;
@@ -101,7 +101,7 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
     }, {
         key: "openList",
         value: function openList(event) {
-            console.log("Select openList");
+            // console.log( "Select openList" );
             if (event && event.target && (event.target.classList.contains("break") || event.target.parentNode.classList.contains("break"))) return;
             if (this.props.disabled) return;
             this.setState({ stateList: !this.state.stateList });
@@ -158,7 +158,7 @@ var MultiSelect = exports.MultiSelect = function (_React$Component) {
             var item = this.props.list.filter(function (item) {
                 return item[_this4.props.uniqueKey] === i;
             })[0];
-            console.log("Select getSelected", item);
+            // console.log( "Select getSelected", item );
             return item[this.props.labelKey];
         }
     }, {

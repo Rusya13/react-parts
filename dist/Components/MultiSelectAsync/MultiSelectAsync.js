@@ -433,5 +433,5 @@ MultiSelectAsync.defaultProps = {
     labelKey: "value",
     selected: [],
     autoFocus: false,
-    showUp: _propTypes2.default.bool
+    showUp: false
 };
