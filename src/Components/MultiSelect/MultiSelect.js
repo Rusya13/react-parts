@@ -85,7 +85,7 @@ export class MultiSelect extends React.Component {
     };
 
     removeItem( item: Object ) {
-        console.log( "Select removeItem", item );
+        // console.log( "Select removeItem", item );
         if ( Array.isArray( this.props.selected ) ) {
             let newSelected             = this.props.selected.filter( selItem => selItem !== item );
             let c: OnChangeReturnObject = this._createReturnObject( this.props.name, newSelected );
@@ -101,7 +101,7 @@ export class MultiSelect extends React.Component {
     };
 
     openList( event: any ) {
-        console.log( "Select openList" );
+        // console.log( "Select openList" );
         if ( event && event.target && (event.target.classList.contains( "break" ) || event.target.parentNode.classList.contains( "break" ) ) ) return;
         if ( this.props.disabled ) return;
         this.setState( { stateList: !this.state.stateList } );
@@ -147,7 +147,7 @@ export class MultiSelect extends React.Component {
 
     getSelected( i ) {
         let item = this.props.list.filter( item => item[ this.props.uniqueKey ] === i )[ 0 ];
-        console.log( "Select getSelected", item );
+        // console.log( "Select getSelected", item );
         return item[ this.props.labelKey ]
     }
 

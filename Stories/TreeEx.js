@@ -79,7 +79,7 @@ export class TreeEx extends React.Component {
 
 
     checkTree = () => {
-        console.log("TreeEx checkTree",this.tree.getNodeParents(this.tree.selectedNode).map(item=>item.title));
+        // console.log("TreeEx checkTree",this.tree.getNodeParents(this.tree.selectedNode).map(item=>item.title));
         //console.log( "TreeEx checkTree original", this.tree.data );
         //console.log( "TreeEx selected", this.tree.selectedNode );
         //console.log("TreeEx getCheckedNodes", this.tree.getCheckedNodes());
