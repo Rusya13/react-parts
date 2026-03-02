@@ -19,8 +19,8 @@
     "build": "gulp build",
     "dev": "gulp dev",
     "dev_story": "npm run build && (npm run storybook & npm run dev)",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "ghp": "build-storybook -c .storybook -o docs"
+    "storybook": "storybook dev -p 9001",
+    "ghp": "storybook build -o docs"
   },
   "dependencies": {
     "prop-types": "^15.8.1",
@@ -35,7 +35,9 @@
     "@babel/preset-env": "^7.29.0",
     "@babel/preset-flow": "^7.25.9",
     "@babel/preset-react": "^7.26.3",
-    "@storybook/react": "^6.5.16",
+    "@storybook/react": "^10.2.14",
+    "@storybook/react-webpack5": "^10.2.14",
+    "storybook": "^10.2.14",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "autoprefixer": "^10.4.0",
@@ -52,7 +54,6 @@
   },
   "overrides": {
     "braces": ">=3.0.3",
-    "ip": ">=2.0.1",
     "micromatch": ">=4.0.8",
     "postcss": ">=8.4.31",
     "serialize-javascript": ">=7.0.3",
