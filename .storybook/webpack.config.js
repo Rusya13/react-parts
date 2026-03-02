@@ -2,15 +2,12 @@ const path = require('path');
 
 module.exports = {
     module: {
-        loaders: [{
+        rules: [{
             test: /\.md$/,
-            loader: "raw"
-        }, {
-            test: /\.json$/,
-            loader: 'json'
+            loader: "raw-loader"
         }, {
             test: /\.css$/,
-            loader: 'style!css'
+            use: ['style-loader', 'css-loader']
         }]
     }
 };
