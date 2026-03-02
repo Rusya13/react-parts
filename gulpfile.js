@@ -1,27 +1,23 @@
 const gulp = require('gulp');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const babel = require('gulp-babel');
-const watch = require('gulp-watch');
 const autoprefixer = require('gulp-autoprefixer');
-
-
-
-
-gulp.task('build', ['js', 'scss']);
-
 
 gulp.task('js', () => {
     return gulp.src('src/**/*.js')
     .pipe(babel({
         presets: [
-            'es2015',
-            'react',
-            'stage-0'
+            ['@babel/preset-env', { targets: '> 0.25%, not dead' }],
+            '@babel/preset-flow',
+            '@babel/preset-react'
+        ],
+        plugins: [
+            ['@babel/plugin-proposal-decorators', { legacy: true }],
+            '@babel/plugin-proposal-class-properties'
         ]
     }))
     .pipe(gulp.dest('dist'));
 });
-
 
 gulp.task('scss', () => {
     return gulp.src('src/style.scss')
@@ -30,7 +26,9 @@ gulp.task('scss', () => {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('dev', ['js', 'scss'], () => {
-    gulp.watch('src/**/*.js', ['js']);
-    gulp.watch('src/**/*.scss', ['scss']);
-});
+gulp.task('build', gulp.parallel('js', 'scss'));
+
+gulp.task('dev', gulp.series('build', () => {
+    gulp.watch('src/**/*.js', gulp.series('js'));
+    gulp.watch('src/**/*.scss', gulp.series('scss'));
+}));
